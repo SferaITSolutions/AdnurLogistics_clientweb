@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +12,19 @@ body {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
+}
+.bg-primary-blue-color {
+  background-color: #004f98 !important;
+}
+.bg-secondary-blue-color {
+  background-color: #0d6cec !important;
+}
+.text-primary-red-color {
+  color: #EE2E31 !important;
+}
+.text-secondary-black-color {
+  color: #0B0B0B !important;
 }
