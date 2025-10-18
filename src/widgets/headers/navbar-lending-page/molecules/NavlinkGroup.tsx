@@ -12,7 +12,7 @@ export const NavLinksGroup = ({ onClick }: { onClick?: () => void }) => {
   return (
     <div className="flex flex-col md:flex-row md:items-center gap-5">
       {links.map((link) => (
-        <div className="mb-3 " key={link.href} onClick={onClick}>
+        <div className="p-1" key={link.href} onClick={onClick}>
           <NavLink {...link} />
         </div>
       ))}

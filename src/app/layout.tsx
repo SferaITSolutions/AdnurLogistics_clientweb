@@ -1,9 +1,11 @@
 // src/app/layout.tsx
 "use client";
-
+import "@splidejs/react-splide/css/sea-green"; 
+import "@splidejs/react-splide/css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/shared/api/queryClient";
 import "./globals.css";
+import '@splidejs/splide/css';
 
 export default function RootLayout({
   children,
@@ -12,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body >
+      <body>
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>
