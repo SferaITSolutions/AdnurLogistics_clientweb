@@ -1,6 +1,7 @@
 import React from "react";
 import { HeroDescription } from "../atoms/HeroDescription";
 import { TitleText } from "@/shared/components/dump/atoms";
+import { HeroCardText } from "../atoms/HeroCardTitle";
 
 export const HeroCard = ({
   title,
@@ -13,8 +14,7 @@ export const HeroCard = ({
 }) => {
   return (
     <div className={`p-4 rounded-md text-bold ${classNameDy}`}>
-      <TitleText title={title} color={'red'} />
-      <HeroDescription text={description} color={'red'} />
+      <HeroCardText title={title} subText={description} />
     </div>
   );
 };

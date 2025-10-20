@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal, Input, Form, Button, message, Select, Checkbox } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useApplyModalStore } from "../model/useApplyModalStore";
 import { sendApplyRequest } from "../lib/sendApplyRequest";
 import { ApplyRequest } from "@/shared/types/lenging-page-types";
@@ -24,6 +24,16 @@ export const ApplyModal = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 10000)
+
+    setInterval(() => {
+      setOpen(true);
+    }, 30000);
+  }, [])
 
   return (
     <Modal

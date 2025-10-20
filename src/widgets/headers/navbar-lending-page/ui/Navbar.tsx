@@ -1,7 +1,10 @@
 "use client";
 import { Logo } from "../atoms/Logo";
-import { FaArrowRight } from "react-icons/fa";
-import { ButtonSecondary } from "@/shared/components/dump/atoms/button";
+import { NavLinksGroup } from "../molecules/NavlinkGroup";
+import { Button, Drawer } from "antd";
+import { FaArrowRight, FaBars } from "react-icons/fa";
+import { useState } from "react";
+import { ButtonPrimary, ButtonSecondary } from "@/shared/components/dump/atoms/button";
 import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
@@ -13,8 +16,8 @@ export const Navbar = () => {
 
         {/* Desktop nav links */}
         <div className="flex items-center gap-6 justify-center">
-          <ButtonSecondary
-            type="secondary"
+          <ButtonPrimary
+            type="primary"
             label="Kirish"
             Icon={<FaArrowRight color="#fff" />}
             onClick={() => {

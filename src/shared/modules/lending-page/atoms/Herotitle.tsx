@@ -9,7 +9,7 @@ export const HeroText = ({
   classnameDy?: string;
 }) => {
   return (
-    <div className={`${classnameDy} text-7xl`}>
+    <div className={`${classnameDy} md:text-7xl text-5xl`}>
       <span>{title}</span>
     </div>
   );
