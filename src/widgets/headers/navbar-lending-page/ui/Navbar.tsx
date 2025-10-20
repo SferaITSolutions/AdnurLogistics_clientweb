@@ -1,17 +1,13 @@
 "use client";
 import { Logo } from "../atoms/Logo";
-import { NavLinksGroup } from "../molecules/NavlinkGroup";
-import { Button, Drawer } from "antd";
-import { FaArrowRight, FaBars } from "react-icons/fa";
-import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 import { ButtonSecondary } from "@/shared/components/dump/atoms/button";
 import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const navigate = useRouter();
   return (
-    <header className="fixed  flex justify-between items-center  top-0 left-0 w-full bg-white shadow-sm" style={{ zIndex: -1 }}>
+    <header className="fixed  flex justify-between items-center  top-0 left-0 w-full bg-white shadow-sm z-50">
       <nav className=" flex justify-between items-center  container mx-auto w-full">
         <Logo />
 

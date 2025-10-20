@@ -9,7 +9,10 @@ const Navbar: React.FC = () => {
   const { isOpen, toggleSidebar } = useSidebarStore();
 
   return (
-    <header className="fixed top-0 right-0 flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 md:px-10 w-full z-20">
+    <header
+      className="fixed top-0 right-0 flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 md:px-10 w-full z-40"
+      style={{ zIndex: 0 }}
+    >
       <div className="flex items-center gap-3">
         {!isOpen && (
           <button onClick={toggleSidebar}>
