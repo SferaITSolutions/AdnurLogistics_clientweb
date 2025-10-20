@@ -1,0 +1,7 @@
+.ant-tabs-ink-bar {
+    transform: rotate(90deg);
+    transform-origin: left center;
+    height: 2px !important;
+    background-color: #1677ff !important; /* Primary blue */
+}
+  

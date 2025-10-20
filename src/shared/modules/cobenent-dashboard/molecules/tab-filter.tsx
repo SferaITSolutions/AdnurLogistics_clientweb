@@ -1,6 +1,7 @@
 'use client'
 import { Tabs } from 'antd'
 import React, { useState } from 'react'
+import { items } from '@/shared/constants'
 
 export default function TabFilter() {
     const [activeKey, setActiveKey] = useState("1");
@@ -10,24 +11,7 @@ export default function TabFilter() {
       // You can use activeKey elsewhere for filtering logic
     };
 
-    const items = [
-        {
-            key: "ALL",
-            label: "Barchasi",
-        },
-        {
-            key: "INTRANSIT",
-            label: "Yetkazib berish jarayonida",
-        },
-        {
-            key: "DELAVERED",
-            label: "Yetkazib berish kutilmoqda",
-        },
-        {
-            key: "PAYMENT_WAITING",
-            label: "To'lov kutilmoqda",
-        }
-    ];
+
 
     return (
       <div>

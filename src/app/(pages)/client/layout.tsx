@@ -8,7 +8,7 @@ const ClientPage = ({ children }: { children: React.ReactNode }) => {
     <div className="flex min-h-screen">
       <Sidebar />
       <Navbar />
-      <div className="flex-1 container mx-auto">{children}</div>
+      <div className="flex-1 container mx-auto mt-[100px]">{children}</div>
     </div>
   );
 };

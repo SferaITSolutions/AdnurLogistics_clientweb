@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "antd";
 import React from "react";
 import { useDashboardFilters } from "../api/store";

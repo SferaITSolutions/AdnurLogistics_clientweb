@@ -1,3 +1,4 @@
+'use client'
 import { Drawer } from "antd";
 import Logo from "@/shared/components/dump/atoms/Logo";
 import MenuItem from "./menu-item";
@@ -17,12 +18,6 @@ export const DrawerSidebar = ({
       open={isOpen}
       width={300}
       className="md:hidden bg-secondary-blue-color"
-      bodyStyle={{
-        padding: "24px",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-      }}
       headerStyle={{ display: "none" }}
     >
       <div className="flex flex-col h-full text-white">

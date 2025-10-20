@@ -4,3 +4,8 @@ export interface MenuItemProps {
     icon?: React.ReactNode;
     currentPath?: string;
 }
+export type QuantityOrderProps = {
+    Quantity: number;
+    Weight: string | number;
+    Volume: number;
+  };
