@@ -55,7 +55,7 @@ export const RegisterStepIndicator = ({
             <div
               className={clsx(
                 "w-8 h-[2px] rounded transition-all duration-300",
-                step > s.id ? "bg-blue-600" : "bg-gray-300"
+                step > s.id ? "bg-green-600" : "bg-gray-300"
               )}
             />
           )}

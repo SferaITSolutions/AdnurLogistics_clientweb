@@ -6,9 +6,7 @@ import SignInUI from "@/features/auth/sign-in/ui";
 export default function LoginPage() {
   return (
     <div>
-      <div className="flex flex- justify-center items-center">
       <SignInUI />
-      </div>
     </div>
   );
 }

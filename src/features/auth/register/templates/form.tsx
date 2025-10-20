@@ -2,6 +2,7 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
 import { useRegisterStore } from "../store/registerStore";
+import { ButtonOutline, ButtonPrimary } from "@/shared/components/dump/atoms";
 
 export default function RegisterForm() {
   const [form] = Form.useForm();
@@ -28,14 +29,14 @@ export default function RegisterForm() {
           name="name"
           rules={[{ required: true, message: "Ismingizni kiriting!" }]}
         >
-          <Input placeholder="Ismingiz" />
+          <Input className="!h-12 !rounded-2xl" placeholder="Ismingiz" />
         </Form.Item>
         <Form.Item
           label="Familyangiz"
           name="surname"
           rules={[{ required: true, message: "Familyangizni kiriting!" }]}
         >
-          <Input placeholder="Familyangiz" />
+          <Input className="!h-12 !rounded-2xl" placeholder="Familyangiz" />
         </Form.Item>
         <Form.Item
           label="Telefon raqamingiz"
@@ -49,22 +50,17 @@ export default function RegisterForm() {
             },
           ]}
         >
-          <Input placeholder="+998901234567" maxLength={13} />
+          <Input className="!h-12 !rounded-2xl" placeholder="+998901234567" maxLength={13} />
         </Form.Item>
         <Form.Item
           label="Parol"
           name="password"
           rules={[{ required: true, message: "Parolni kiriting!" }]}
         >
-          <Input.Password placeholder="Parol" />
+          <Input.Password className="!h-12 !rounded-2xl" placeholder="Parol" />
         </Form.Item>
         <div className="flex gap-3 mt-2">
-          <Button onClick={prevStep} className="w-1/2">
-            Orqaga
-          </Button>
-          <Button type="primary" htmlType="submit" className="w-1/2">
-            Ro'yxatdan o'tish
-          </Button>
+          <ButtonPrimary type="primary" label="Shaxsiy raqam olish" onClick={prevStep} classNameDy="w-full justify-center" />
         </div>
       </Form>
     </div>

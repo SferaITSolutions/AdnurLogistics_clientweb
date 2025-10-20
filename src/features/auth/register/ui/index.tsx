@@ -59,7 +59,7 @@ export default function RegisterUI() {
                   animate="animate"
                   exit="exit"
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="w-full flex justify-start items-center"
+                  className="w-full flex items-center justify-center"
                 >
                   {s.component}
                 </motion.div>
