@@ -28,5 +28,5 @@ body {
   color: #0b0b0b !important;
 }
 .border-primary-blue-color {
-  border-color: #004f98 !important;
+  border: 1px solid #004f98 !important;
 }
