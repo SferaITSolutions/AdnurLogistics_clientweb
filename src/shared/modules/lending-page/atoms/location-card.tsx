@@ -7,10 +7,10 @@ export const LocationCard: React.FC<{ location: LocationTypes }> = ({
   location,
 }) => {
   return (
-    <div className="mt-3 bg-gray-100 rounded-lg p-4">
-        <h1 className="text-2xl font-bold">{location.title}</h1>
-      <div className="p-6 rounded-lg shadow  flex flex-col gap-6 bg-[#fff]">
-        <div>
+    <div className="">
+      <h1 className="text-2xl font-bold text-center">{location.title}</h1>
+      <div className="p-6 rounded-2xl flex flex-col gap-6 bg-[#fff]">
+        <div className="flex flex-col">
           <div className="font-semibold mb-1">To'liq manzil:</div>
           <CopyText text={location.fullLocation} />
         </div>

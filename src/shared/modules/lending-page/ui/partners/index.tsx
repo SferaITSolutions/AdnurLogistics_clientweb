@@ -41,9 +41,8 @@ export const Partners = () => {
   }, []);
 
   return (
-    <section id="about" className="w-full px-4 md:px-12 py-6 rounded-2xl bg-primary-blue-color overflow-hidden">
-      <TitleText title="Bizning hamkorlarimiz" color="white" />
-      <div className="splide mt-10">
+    <>
+      <div className="splide !p-0">
         <div className="splide__track">
           <ul className="splide__list">
             {partners.map((partner, index) => (
@@ -54,6 +53,6 @@ export const Partners = () => {
           </ul>
         </div>
       </div>
-    </section>
+    </>
   );
 };

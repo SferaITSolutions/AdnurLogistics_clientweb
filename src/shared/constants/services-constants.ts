@@ -14,11 +14,6 @@ const servicesConstants = [
     title: "03",
     description: "Vaqtinchalik saqlash ombori",
   },
-  {
-    id: 4,
-    title: "04",
-    description: "Transport va logistika",
-  },
 ];
 
 const locationConstants = [

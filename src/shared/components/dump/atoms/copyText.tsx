@@ -22,10 +22,10 @@ export const CopyText: React.FC<CopyTextProps> = ({ text }) => {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <span className="break-all">{text}</span>
+    <div className="gap-2">
+      <span className="break-all inline">{text}</span>
       <button
-        className="px-3 py-1 rounded text-sm bg-transparent"
+        className="px-3 py-1 rounded text-sm bg-transparent inline"
         onClick={handleCopy}
         type="button"
       >
