@@ -7,12 +7,10 @@ export default function LanguageSwitcher() {
 
   const handleChange = (value: string) => {
     setSelectedLang(value);
-    // Place to trigger actual language change, e.g., i18n.changeLanguage(value);
   };
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm">Language:</span>
       <Select
         value={selectedLang}
         onChange={handleChange}

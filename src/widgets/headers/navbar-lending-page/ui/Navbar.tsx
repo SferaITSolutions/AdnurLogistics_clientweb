@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useRouter();
   return (
-    <header className="fixed  flex justify-between items-center  top-0 left-0 w-full bg-white shadow-sm z-50">
+    <header className="fixed  flex justify-between items-center  top-0 left-0 w-full bg-white shadow-sm" style={{ zIndex: -1 }}>
       <nav className=" flex justify-between items-center  container mx-auto w-full">
         <Logo />
 

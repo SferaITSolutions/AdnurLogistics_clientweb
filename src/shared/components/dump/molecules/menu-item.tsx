@@ -20,12 +20,12 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
         "group flex items-center gap-3 px-4 py-3 rounded-r-xl text-sm font-medium transition-all duration-100",
         "text-gray-300 hover:text-white",
         isActive
-          ? "bg-primary-blue-color shadow-md scale-[1.02] text-white rounded-r-xl"
+          ? "bg-[#104AE4E3] shadow-md scale-[1.02] text-white rounded-r-xl"
           : "hover:bg-primary-blue-color/40 hover:scale-[1.02]"
       )}
     >
       {/* Icon qismi */}
-      {icon && (  
+      {icon && (
         <span
           className={clsx(
             "transition-transform duration-300",
@@ -38,12 +38,7 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
       )}
 
       {/* Label qismi */}
-      <span
-        className={clsx(
-          "transition-all duration-300",
-          isActive ? "font-semibold text-white" : "text-gray-300"
-        )}
-      >
+      <span className={clsx("transition-all duration-300 text-white")}>
         {label}
       </span>
 

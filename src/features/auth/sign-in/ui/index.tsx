@@ -53,7 +53,12 @@ export default function SignInUI() {
               <Input.Password placeholder="Parol" />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="w-full" onClick={() => navigate.push("/client/dashboard")}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full"
+                onClick={() => navigate.push("/client/dashboard")}
+              >
                 Kirish
               </Button>
             </Form.Item>
