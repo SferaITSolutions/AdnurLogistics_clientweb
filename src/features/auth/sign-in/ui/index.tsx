@@ -3,7 +3,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import { ButtonPrimary } from "@/shared/components/dump/atoms";
 import { useLoginMutation } from "@/services/auth/hook";
 import { loginSchema } from "@/shared/schemas/loginSchema";
@@ -27,7 +27,7 @@ export default function SignInUI() {
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      number: '+998',
+      phone: '998',
       password: "",
     },
   });
@@ -35,7 +35,7 @@ export default function SignInUI() {
   const onSubmit = (values: z.infer<typeof schema>) => {
     loginMutation.mutate(values, {
       onSuccess: () => navigate.push("/client/dashboard"),
-      onError: (err) => console.error(err),
+      onError: (err) => message.error(err.message), 
     });
   };
 
@@ -49,17 +49,17 @@ export default function SignInUI() {
       />
       <div className="flex flex-col justify-center items-center w-1/2 p-10 relative overflow-hidden">
         <h1 className="text-2xl font-bold mb-4">Kirish</h1>
-
+        <h1></h1>
         {/* ✅ React Hook Form + AntD */}
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
           {/* Telefon */}
           <Form.Item
             label="Telefon raqamingiz"
-            validateStatus={errors.number ? "error" : ""}
-            help={errors.number?.message}
+            validateStatus={errors.phone ? "error" : ""}
+            help={errors.phone?.message}
           >
             <Controller
-              name="number"
+              name="phone"
               control={control}
               render={({ field }) => (
                 <Input

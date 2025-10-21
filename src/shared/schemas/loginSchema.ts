@@ -2,9 +2,9 @@ import { z } from "zod";
 import { TranslationsType } from "../types/locales";
 
 export const loginSchema = (t: TranslationsType) => {
-  const phoneRegex = /^\+998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
+  const phoneRegex = /^998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
   return z.object({
-    number: z
+    phone: z
       .string({
         error: t("Schemas.number"),
       })
