@@ -5,10 +5,10 @@ import { useOrderDetailsStore } from "../lib/store";
 import dynamic from "next/dynamic";
 
 // SSRda map yuklanmasligi uchun dynamic import
-const MapWithRoute = dynamic(() => import("../molecules/MapWithRoute"), {
-  ssr: false,
-});
-
+const YandexMapWithMovingCar = dynamic(
+  () => import("../molecules/MapWithRoute"),
+  { ssr: false }
+);
 const OrderDetailsModal: React.FC = () => {
   const { isModalOpen, closeModal, orderId } = useOrderDetailsStore();
 
@@ -29,7 +29,7 @@ const OrderDetailsModal: React.FC = () => {
             <div className="text-gray-800 mb-2">
               Details for order: <span className="font-mono">{orderId}</span>
             </div>
-            <MapWithRoute
+            <YandexMapWithMovingCar
               origin="Tashkent, Uzbekistan"
               destination="Samarkand, Uzbekistan"
             />

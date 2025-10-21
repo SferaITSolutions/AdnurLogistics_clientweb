@@ -13,7 +13,7 @@ interface DashboardCardProps {
   Volume: number;
   Weight: string;
   Status: string;
-  onClick: () => void,
+  onClick: () => void;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -23,10 +23,13 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   Volume,
   Weight,
   Status,
-  onClick
+  onClick,
 }) => {
   return (
-    <div onClick={onClick} className="relative cursor-pointer flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:-translate-y-[2px] transition-all duration-200">
+    <div
+      onClick={onClick}
+      className="relative w-full cursor-pointer flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:-translate-y-[2px] transition-all duration-200"
+    >
       {/* Chapdagi rasm */}
       <div className="flex items-center gap-4 p-4">
         <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gray-100">

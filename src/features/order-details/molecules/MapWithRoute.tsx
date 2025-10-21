@@ -1,27 +1,72 @@
 "use client";
-
-import React, { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useEffect, useRef } from "react";
 import { YMaps, Map } from "@pbe/react-yandex-maps";
 
-interface MapWithRouteProps {
+interface Props {
   origin: string;
   destination: string;
+  height?: number | string;
 }
 
-const MapWithRoute: React.FC<MapWithRouteProps> = ({ origin, destination }) => {
+const YandexMapWithMovingCar: React.FC<Props> = ({
+  origin,
+  destination,
+  height = 400,
+}) => {
   const mapRef = useRef<any>(null);
-  const [isReady, setIsReady] = useState(false);
+  const ymapsRef = useRef<any>(null);
+  const carRef = useRef<any>(null);
+  const animationRef = useRef<number | null>(null);
+  const coordsRef = useRef<number[][]>([]);
 
-  useEffect(() => {
-    if (!isReady || !window.ymaps || !mapRef.current) return;
+  const interpolate = (c1: number[], c2: number[], t: number) => {
+    return [c1[0] + (c2[0] - c1[0]) * t, c1[1] + (c2[1] - c1[1]) * t];
+  };
 
-    const { ymaps } = window as any;
+  const startAnimation = () => {
+    const coords = coordsRef.current;
+    if (!coords.length || !carRef.current) return;
 
-    ymaps.ready(() => {
-      mapRef.current.geoObjects.removeAll();
+    let segIndex = 0;
+    let frac = 0;
+    const step = () => {
+      if (!carRef.current) return;
 
-      const route = new ymaps.multiRouter.MultiRoute(
+      const from = coords[segIndex];
+      const to = coords[segIndex + 1] || coords[0];
+      frac += 0.02;
+      if (frac > 1) {
+        frac = 0;
+        segIndex++;
+        if (segIndex >= coords.length - 1) {
+          segIndex = 0; // loop
+        }
+      }
+
+      const pos = interpolate(from, to, frac);
+      carRef.current.geometry.setCoordinates(pos);
+
+      animationRef.current = requestAnimationFrame(step);
+    };
+
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    animationRef.current = requestAnimationFrame(step);
+  };
+
+  const stopAnimation = () => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+  };
+
+  const createRouteAndCar = async () => {
+    const ymaps = ymapsRef.current;
+    const map = mapRef.current;
+    if (!ymaps || !map) return;
+
+    try {
+      const multiRoute = new ymaps.multiRouter.MultiRoute(
         {
           referencePoints: [origin, destination],
           params: { routingMode: "auto" },
@@ -29,45 +74,120 @@ const MapWithRoute: React.FC<MapWithRouteProps> = ({ origin, destination }) => {
         {
           boundsAutoApply: true,
           routeActiveStrokeWidth: 5,
-          routeActiveStrokeColor: "#007BFF",
-          wayPointStartIconColor: "#1E90FF",
-          wayPointFinishIconColor: "#FF4500",
+          routeActiveStrokeColor: "#1976d2",
         }
       );
 
-      mapRef.current.geoObjects.add(route);
-    });
-  }, [isReady, origin, destination]);
+      map.geoObjects.removeAll();
+      map.geoObjects.add(multiRoute);
+
+      multiRoute.model.events.add("requestsuccess", () => {
+        const activeRoute = multiRoute.getActiveRoute();
+        if (!activeRoute) return;
+        const paths = activeRoute.getPaths().toArray();
+        let routeCoords: number[][] = [];
+        paths.forEach((p: any) => {
+          const segments = p.getSegments();
+          segments.forEach((s: any) => {
+            const segCoords = s.geometry.getCoordinates();
+            routeCoords = routeCoords.concat(segCoords);
+          });
+        });
+
+        if (!routeCoords.length) {
+          console.warn("No route coordinates found");
+          return;
+        }
+
+        coordsRef.current = routeCoords;
+
+        if (carRef.current) {
+          try {
+            map.geoObjects.remove(carRef.current);
+          } catch {}
+          carRef.current = null;
+        }
+
+        const start = routeCoords[0];
+        const carPlacemark = new ymaps.Placemark(
+          start,
+          {},
+          {
+            iconLayout: "default#image",
+            iconImageHref:
+              "https://cdn-icons-png.flaticon.com/512/61/61112.png",
+            iconImageSize: [40, 40],
+            iconImageOffset: [-20, -20],
+          }
+        );
+
+        carRef.current = carPlacemark;
+        map.geoObjects.add(carPlacemark);
+
+        try {
+          map.setBounds(activeRoute.getBounds(), { checkZoomRange: true });
+        } catch {}
+
+        stopAnimation();
+        startAnimation();
+      });
+
+      setTimeout(() => {
+        try {
+          multiRoute.model.events.fire("requestsuccess");
+        } catch {}
+      }, 500);
+    } catch (err) {
+      console.error("createRouteAndCar error:", err);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopAnimation();
+      try {
+        if (mapRef.current && carRef.current) {
+          mapRef.current.geoObjects.remove(carRef.current);
+        }
+      } catch {}
+    };
+  }, []);
 
   return (
-    <div className="relative rounded-xl overflow-hidden border border-gray-200">
+    <div className="rounded-xl overflow-hidden border border-gray-200">
       <YMaps
         query={{
-          lang: "en_US",
-          load: "package.full", // muhim! multiRoute yuklanadi
+          load: "package.full",
+          lang: "en_RU",
+          apikey: process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY,
         }}
       >
         <Map
+          instanceRef={(ref) => {
+            mapRef.current = ref;
+            if (ymapsRef.current) {
+              setTimeout(() => {
+                createRouteAndCar();
+              }, 300);
+            }
+          }}
+          onLoad={(ymaps: any) => {
+            ymapsRef.current = ymaps;
+            if (mapRef.current) {
+              createRouteAndCar();
+            }
+          }}
           defaultState={{
             center: [41.2995, 69.2401],
             zoom: 6,
-            controls: ["zoomControl", "fullscreenControl"],
           }}
-          modules={["multiRouter.MultiRoute", "control.ZoomControl"]}
-          instanceRef={mapRef}
           width="100%"
-          height="400px"
-          onLoad={() => setIsReady(true)}
+          height={height}
+          modules={["multiRouter.MultiRoute", "control.ZoomControl"]}
         />
       </YMaps>
-      {!isReady && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/70 text-gray-500 text-sm">
-          Loading map...
-        </div>
-      )}
     </div>
   );
 };
 
-// SSR xatolarni oldini olish uchun dynamic export
-export default dynamic(() => Promise.resolve(MapWithRoute), { ssr: false });
+export default YandexMapWithMovingCar;

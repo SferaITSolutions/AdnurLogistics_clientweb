@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="w-[300px] h-screen bg-secondary-blue-color text-white hidden md:flex flex-col p-6 z-50">
+      <aside className="min-w-[300px] min-h-screen bg-secondary-blue-color text-white hidden md:flex flex-col p-6 z-50">
         <Logo />
         <SidebarItems />
       </aside>
