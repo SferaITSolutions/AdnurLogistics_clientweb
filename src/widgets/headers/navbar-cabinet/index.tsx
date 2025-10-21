@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
   const { openModal, closeModal } = useUpdateProfileModalStore();
   return (
     <header
-      className="fixed top-0 right-0 md:!pl-[320px] flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 md:px-10 w-full z-40"
+      className="fixed top-0 right-0 md:!pl-[320px] flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 md:px-10 w-full !z-30"
       style={{ zIndex: 0 }}
     >
       <div className="flex items-center gap-3">

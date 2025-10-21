@@ -24,7 +24,6 @@ const UpdateProfileModal: React.FC = () => {
       onCancel={handleCancel}
       okText="Saqlash"
       cancelText="Bekor qilish"
-      destroyOnClose
     >
       <Input
         placeholder="Ismni kiriting"

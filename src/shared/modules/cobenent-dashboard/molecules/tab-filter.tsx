@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { items } from '@/shared/constants'
 
 export default function TabFilter() {
-    const [activeKey, setActiveKey] = useState("1");
+    const [activeKey, setActiveKey] = useState("ALL");
 
     const onChange = (key: string) => {
       setActiveKey(key);
@@ -16,7 +16,7 @@ export default function TabFilter() {
     return (
       <div>
         <Tabs
-          defaultActiveKey="1"
+          defaultActiveKey="ALL"
           activeKey={activeKey}
           onChange={onChange}
           items={items}

@@ -18,7 +18,7 @@ export const DrawerSidebar = ({
       open={isOpen}
       width={300}
       className="md:hidden bg-secondary-blue-color"
-      headerStyle={{ display: "none" }}
+      // headerStyle={{ display: "none" }}
     >
       <div className="flex flex-col h-full text-white">
         <Logo />
