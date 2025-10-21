@@ -109,6 +109,8 @@
   },
   "Schemas": {
     "email": "Enter a valid email address",
+    "number": "Enter a valid number",
+    "numberFormat": "Enter a valid number Format",
     "region_not_allowed": "Unfortunately, participation from your region is not available. To participate, you must select one of the permitted regions.",
     "verify": "Please verify your email",
     "required": "This field is required",
