@@ -134,6 +134,10 @@
       "min": "Name must be at least 2 characters long.",
       "required": "Name is required."
     },
+    "surname": {
+      "min": "Name must be at least 2 characters long.",
+      "required": "Name is required."
+    },
     "investor_type": {
       "invalid": "Invalid investor type selected."
     },

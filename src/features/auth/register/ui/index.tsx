@@ -13,6 +13,7 @@ import { RegisterStepIndicator } from "../molecules/RegisterStepIndicator";
 
 export default function RegisterUI() {
   const { step } = useRegisterStore();
+  
 
   // Step list
   const steps = [
