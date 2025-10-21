@@ -1,9 +1,10 @@
 import React from "react";
-
+import CalculationUI from "@/shared/modules/calculation/ui";
+  
 export default function CalculationPage() {
   return (
     <div>
-      <h1>Calculation Page</h1>
+      <CalculationUI />
     </div>
   );
 }
