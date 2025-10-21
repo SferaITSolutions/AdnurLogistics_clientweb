@@ -1,12 +1,20 @@
 import { z } from "zod";
 import { TranslationsType } from "../types/locales";
 
-export const foreignRegisterSchema = (t: TranslationsType) => {
+export const registerSchema = (t: TranslationsType) => {
+  const phoneRegex = /^998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
+
   return z
     .object({
-      email: z.string({ error: t("Schemas.email") }).email({
-        message: t("Schemas.email"),
+      fullname: z.string({ error: t("Schemas.name.required") }).email({
+        message: t("Schemas.name.required"),
       }),
+      phone: z
+        .string({
+          error: t("Schemas.number"),
+        })
+        .regex(phoneRegex, { message: t("Schemas.numberFormat") })
+        .min(1, { message: t("Schemas.numberRequired") }),
       password: z
         .string({ error: t("Schemas.required") })
         .min(1, {
@@ -29,4 +37,4 @@ export const foreignRegisterSchema = (t: TranslationsType) => {
     });
 };
 
-export type ForeignRegisterSchemaType = z.infer<ReturnType<typeof foreignRegisterSchema>>;
+export type RegisterSchemaType = z.infer<ReturnType<typeof registerSchema>>;

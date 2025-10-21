@@ -28,7 +28,7 @@ export const LoginErrorlabel: React.FC<LoginErrorlabelProps> = ({
   onClose,
 }) => {
   const base =
-    "w-full rounded-lg border px-4 py-3 flex items-start gap-3 text-sm sm:text-base";
+    "w-full rounded-lg border px-4 py-2 gap-3 text-sm sm:text-base";
   const variantMap: Record<
     Variant,
     { border: string; text: string; bg?: string; iconColor?: string }
@@ -42,7 +42,7 @@ export const LoginErrorlabel: React.FC<LoginErrorlabelProps> = ({
   const v = variantMap[variant];
 
   return (
-    <div className={`${base} ${v.border} ${v.text} bg-white ${className} relative`} >
+    <div className={`${base} ${v.border} ${v.text} bg-white ${className} relative flex items-center fade`} >
       {icon ? (
         <div className={`${v.iconColor} mt-[2px]`}>{icon}</div>
       ) : (

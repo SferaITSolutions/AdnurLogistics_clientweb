@@ -1,6 +1,7 @@
 import { axiosInstace, axiosWithAuth } from "@/api/interceptors";
 import { ComunityMemberRegisterSchema } from "@/shared/schemas/comunityMemberRegisterSchema";
 import { LoginSchemaType } from "@/shared/schemas/loginSchema";
+import { RegisterSchemaType } from "@/shared/schemas/RegisterSchema";
 import { IForeignRegisterData } from "@/shared/types/auth";
 
 export const authService = {
@@ -25,7 +26,13 @@ export const authService = {
 
     return response;
   },
+  
+  async register(data: RegisterSchemaType) {
+    const response = await axiosWithAuth.post("/register/", data);
 
+    return response;
+  },
+  
   async registerComunityMember(data: ComunityMemberRegisterSchema) {
     const response = await axiosWithAuth.patch("/comunity_member/", data, {
       headers: {

@@ -14,6 +14,8 @@ import BgImage from "@/assets/images/auth/Group 48097120.png";
 import { toast } from "sonner";
 import { extractErrorMessage } from "@/shared/utils";
 import LoginErrorlabel from "../templates/errorLabel";
+import { FaInfo, FaInfoCircle } from "react-icons/fa";
+import Link from "next/link";
 
 export default function SignInUI() {
   const t = useTranslations();
@@ -52,7 +54,7 @@ export default function SignInUI() {
         priority
       />
       <div className="flex flex-col justify-center items-center w-1/2 p-10 relative overflow-hidden">
-        <h1 className="text-2xl font-bold mb-4">Kirish</h1>
+        <h1 className="text-5xl font-bold mb-4">Kirish</h1>
         {/* ✅ React Hook Form + AntD */}
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
           {/* Telefon */}
@@ -93,7 +95,7 @@ export default function SignInUI() {
             />
           </Form.Item>
           {loginErrorMessage && <div className="mb-5">
-            <LoginErrorlabel variant='error' text={extractErrorMessage(loginErrorMessage)} onClose={() => setLoginErrorMessage('')} closable />
+            <LoginErrorlabel icon={<FaInfoCircle/>} variant='error' text={extractErrorMessage(loginErrorMessage)} onClose={() => setLoginErrorMessage('')} closable />
           </div>}
 
           {/* Tugma */}
@@ -106,6 +108,7 @@ export default function SignInUI() {
             />
           </Form.Item>
         </Form>
+        <p className="hover:underline text-sm"><Link href='/auth/register'>Ro'yhatdan o'tish</Link></p>
       </div>
     </div>
   );
