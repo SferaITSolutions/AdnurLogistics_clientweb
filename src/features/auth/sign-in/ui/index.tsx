@@ -1,13 +1,44 @@
 "use client";
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Form, Input } from "antd";
+import { ButtonPrimary } from "@/shared/components/dump/atoms";
+import { useLoginMutation } from "@/services/auth/hook";
+import { loginSchema } from "@/shared/schemas/loginSchema";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import BgImage from "@/assets/images/auth/Group 48097120.png";
-import { Form, Input, Button } from "antd";
-import { useRouter } from "next/navigation";
-import { ButtonPrimary, ButtonSecondary } from "@/shared/components/dump/atoms";
 
 export default function SignInUI() {
+  const t = useTranslations();
   const navigate = useRouter();
+  const loginMutation = useLoginMutation();
+
+  // Zod schema orqali validatsiya
+  const schema = loginSchema(t);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      number: '+998',
+      password: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof schema>) => {
+    loginMutation.mutate(values, {
+      onSuccess: () => navigate.push("/client/dashboard"),
+      onError: (err) => console.error(err),
+    });
+  };
+
   return (
     <div className="flex justify-between gap-10 min-h-screen">
       <Image
@@ -18,55 +49,55 @@ export default function SignInUI() {
       />
       <div className="flex flex-col justify-center items-center w-1/2 p-10 relative overflow-hidden">
         <h1 className="text-2xl font-bold mb-4">Kirish</h1>
-        <Form
-          name="sign-in"
-          layout="vertical"
-          className="w-full max-w-[350px]"
-          autoComplete="off"
-        >
-          <Form.Item
 
+        {/* ✅ React Hook Form + AntD */}
+        <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
+          {/* Telefon */}
+          <Form.Item
             label="Telefon raqamingiz"
-            name="phone"
-            rules={[
-              {
-                required: true,
-                message: "Iltimos, telefon raqamingizni kiriting!",
-              },
-              {
-                pattern: /^[A-Za-z\u0400-\u04FF\s]+$/,
-                message: "Faqat harflar kiritilishi mumkin",
-              },
-            ]}
+            validateStatus={errors.number ? "error" : ""}
+            help={errors.number?.message}
           >
-            <Input
-              className="!h-12 !rounded-2xl"
-              placeholder="Telefon raqamingiz"
-              onKeyPress={(e) => {
-                const char = e.key;
-                if (!/^[A-Za-z\u0400-\u04FF\s]$/.test(char)) {
-                  e.preventDefault();
-                }
-              }}
+            <Controller
+              name="number"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="+998901234567"
+                  className="!h-12 !rounded-2xl"
+                />
+              )}
             />
           </Form.Item>
+
+          {/* Parol */}
           <Form.Item
             label="Parol"
-            name="password"
-            rules={[
-              { required: true, message: "Iltimos, parolni kiriting!" },
-            ]}
+            validateStatus={errors.password ? "error" : ""}
+            help={errors.password?.message}
           >
-            <Input.Password className="!h-12 !rounded-2xl" placeholder="Parol" />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input.Password
+                  {...field}
+                  placeholder="Parol"
+                  className="!h-12 !rounded-2xl"
+                />
+              )}
+            />
           </Form.Item>
+
+          {/* Tugma */}
           <Form.Item>
             <ButtonPrimary
               classNameDy="w-full justify-center"
               type="primary"
-              onClick={() => { navigate.push("/client/dashboard") }}
-              label={'Kirish'}
-            >
-            </ButtonPrimary>
+              label={loginMutation.isPending ? "Kirish..." : "Kirish"}
+              // htmlType="submit"
+            />
           </Form.Item>
         </Form>
       </div>

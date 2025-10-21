@@ -5,13 +5,12 @@ import { IForeignRegisterData } from "@/shared/types/auth";
 
 export const authService = {
   async login(data: LoginSchemaType) {
-    const response = await axiosInstace.post("/token/", data);
-
+    const response = await axiosInstace.post("/auth/login", data);
     return response;
   },
 
   async refresh() {
-    const response = await axiosInstace.post("/token/refresh/");
+    const response = await axiosInstace.post("/auth/login");
     return response;
   },
 
