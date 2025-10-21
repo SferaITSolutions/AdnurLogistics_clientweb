@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,15 +11,19 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import BgImage from "@/assets/images/auth/Group 48097120.png";
+import { toast } from "sonner";
+import { extractErrorMessage } from "@/shared/utils";
+import LoginErrorlabel from "../templates/errorLabel";
 
 export default function SignInUI() {
   const t = useTranslations();
   const navigate = useRouter();
   const loginMutation = useLoginMutation();
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
 
   // Zod schema orqali validatsiya
   const schema = loginSchema(t);
-
+  message.success('hello')
   const {
     handleSubmit,
     control,
@@ -35,7 +39,7 @@ export default function SignInUI() {
   const onSubmit = (values: z.infer<typeof schema>) => {
     loginMutation.mutate(values, {
       onSuccess: () => navigate.push("/client/dashboard"),
-      onError: (err) => message.error(err.message), 
+      onError: (err) => setLoginErrorMessage(err),
     });
   };
 
@@ -49,7 +53,6 @@ export default function SignInUI() {
       />
       <div className="flex flex-col justify-center items-center w-1/2 p-10 relative overflow-hidden">
         <h1 className="text-2xl font-bold mb-4">Kirish</h1>
-        <h1></h1>
         {/* ✅ React Hook Form + AntD */}
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
           {/* Telefon */}
@@ -89,6 +92,9 @@ export default function SignInUI() {
               )}
             />
           </Form.Item>
+          {loginErrorMessage && <div className="mb-5">
+            <LoginErrorlabel variant='error' text={extractErrorMessage(loginErrorMessage)} onClose={() => setLoginErrorMessage('')} closable />
+          </div>}
 
           {/* Tugma */}
           <Form.Item>
@@ -96,7 +102,7 @@ export default function SignInUI() {
               classNameDy="w-full justify-center"
               type="primary"
               label={loginMutation.isPending ? "Kirish..." : "Kirish"}
-              // htmlType="submit"
+            // htmlType="submit"
             />
           </Form.Item>
         </Form>
