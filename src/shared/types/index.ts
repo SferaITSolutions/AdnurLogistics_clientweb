@@ -88,6 +88,7 @@ export interface IError401 {
 export type FieldErrorMessages = Record<string, string[]>;
 
 export interface IError400 extends FieldErrorMessages { }
+export interface IError404 extends FieldErrorMessages {}
 
 export interface SearchParamsProps<T> {
   searchParams: T | { [key: string]: string | undefined };
