@@ -5,13 +5,13 @@ export const ButtonPrimary = ({
   onClick,
   label,
   Icon,
-  classNameDy
+  classNameDy,
 }: {
   type: "primary" | "secondary";
   onClick?: () => void;
   label: string;
   Icon?: React.ReactNode;
-  classNameDy?: string
+  classNameDy?: string;
 }) => {
   return (
     <button
@@ -48,7 +48,7 @@ export const ButtonOutline = ({
   onClick,
   label,
   Icon,
-  classNameDy
+  classNameDy,
 }: {
   onClick?: () => void;
   label: string;
@@ -63,7 +63,7 @@ export const ButtonOutline = ({
         text-white
         hover:text-white
         transition-all duration-200
-        cursor-pointer px-6 py-2 rounded-full
+        cursor-pointer px-6 py-4 rounded-full
         w-fit flex items-center gap-2
       `}
     >
@@ -72,7 +72,6 @@ export const ButtonOutline = ({
     </button>
   );
 };
-
 
 export const ButtonLight = ({
   onClick,

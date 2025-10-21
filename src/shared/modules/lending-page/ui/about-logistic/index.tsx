@@ -15,12 +15,16 @@ export const AboutLogistic = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   return (
     <div>
-      <div className="flex justify-between items-center gap-5 pt-6">
+      <div className="flex justify-between flex-col lg:flex-row  items-start lg:items-center gap-5 pt-6">
         <Image src={AboutSectionImage} alt="Container" width={500} />
-        <div className="flex flex-col gap-10 pl-6">
-          <AboutTitle classNameDy=''/>
-          <HeroDescription classNameDy='leading-6' color="gray-300" text="Biz xalqaro miqyosda faoliyat yurituvchi, dunyo bo‘ylab 4 tadan oshiq davlatda ishonch qozongan kompaniyamiz. Bizning xizmatimiz orqali yuklaringizni tez va ishonchli yetkazib keling!" />
-          <div className="flex gap-2">
+        <div className="flex flex-col gap-10 p-0 lg:p-6">
+          <AboutTitle classNameDy="" />
+          <HeroDescription
+            classNameDy="leading-6"
+            color="gray-300"
+            text="Biz xalqaro miqyosda faoliyat yurituvchi, dunyo bo‘ylab 4 tadan oshiq davlatda ishonch qozongan kompaniyamiz. Bizning xizmatimiz orqali yuklaringizni tez va ishonchli yetkazib keling!"
+          />
+          <div className="flex sm:flex-row flex-col   gap-2">
             <ButtonOutline
               label="Ariza qoldirish"
               Icon={<FaWpforms color="#fff" />}
