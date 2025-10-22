@@ -14,6 +14,7 @@ export const useLoginMutation = () => {
     return useMutation({
         mutationFn: (data: z.infer<typeof formSchema>) => authService.login(data), // asosiy API call
         onSuccess: (data) => {
+            localStorage.setItem('access_token', data.data.accessToken)
             message.success("Tizimga muvaffaqiyatli kirdingiz ✅");
         },
         onError: (error: any) => {

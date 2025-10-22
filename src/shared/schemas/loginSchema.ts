@@ -17,9 +17,9 @@ export const loginSchema = (t: TranslationsType) => {
       .min(5, {
         message: t("Schemas.minString", { min: 5 }),
       })
-      .regex(/[a-z]/, { message: t("Schemas.passwordLowercase") })
-      .regex(/[0-9]/, { message: t("Schemas.passwordNumber") })
-      .regex(/[@$!%*?&]/, { message: t("Schemas.passwordSpecial") }),
+      // .regex(/[a-z]/, { message: t("Schemas.passwordLowercase") })
+      // .regex(/[0-9]/, { message: t("Schemas.passwordNumber") })
+      // .regex(/[@$!%*?&]/, { message: t("Schemas.passwordSpecial") }),
   });
 };
 
