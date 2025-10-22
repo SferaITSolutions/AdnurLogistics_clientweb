@@ -1,13 +1,13 @@
 import { getLocalItem, setLocalItem } from '@/shared/utils/storage';
 
-import { useError } from '@/shared/hooks/useError';
+import { authService } from './auth.service';
 import { loginSchema } from '@/shared/schemas/loginSchema';
-import { registerSchema } from '@/shared/schemas/registerSchema';
-import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
+import { registerSchema } from '@/shared/schemas/registerSchema';
+import { useError } from '@/shared/hooks/useError';
+import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
-import { authService } from './auth.service';
 
 export const useLoginMutation = () => {
   const t = useTranslations();
@@ -17,6 +17,7 @@ export const useLoginMutation = () => {
     mutationFn: (data: z.infer<typeof formSchema>) => authService.login(data), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
+      setLocalItem('refresh_token', data.data.refreshToken);
       message.success('Tizimga muvaffaqiyatli kirdingiz ✅');
     },
     onError: (error: any) => {
@@ -48,6 +49,7 @@ export const useCheckIdentityMutation = () => {
     mutationFn: (code: string) => authService.verifyCode({ code, identity: identity || '' }), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
+      setLocalItem('refresh_token', data.data.refreshToken);
       message.success('Tizimga muvaffaqiyatli kirdingiz ✅');
     },
     onError: (error: any) => {

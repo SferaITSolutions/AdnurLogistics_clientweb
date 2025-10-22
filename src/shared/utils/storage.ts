@@ -8,3 +8,7 @@ export const getLocalItem = (key: string) => {
     return val;
   } else return null;
 };
+
+export const removeLocalItem = (key: string) => {
+  if (typeof window !== 'undefined') localStorage.removeItem(key);
+};

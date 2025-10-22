@@ -1,3 +1,4 @@
+import { authService } from '@/services/auth/auth.service';
 import { getLocalItem } from '@/shared/utils/storage';
 import axios, { type CreateAxiosDefaults } from 'axios';
 
@@ -32,20 +33,30 @@ axiosWithAuth.interceptors.request.use(
 );
 
 axiosWithAuth.interceptors.response.use(
-  (config) => config,
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      (error?.response?.status === 401 ||
-        error?.response?.data?.code?.toLowerCase() === 'token_not_valid' ||
-        error?.response?.data?.detail === 'Token is invalid or expired') &&
-      originalRequest &&
-      !originalRequest._isRetry
-    ) {
-      window.localStorage.removeItem('access_token');
-      window.location.href = '/';
+    // Agar token eskirgan bo‘lsa
+    if (error?.response?.status === 401 && originalRequest && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = getLocalItem('refresh_token');
+        const newToken = await authService.refresh(refreshToken || '');
+
+        // ✅ Headerni yangilaymiz
+        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+
+        // ✅ Eski requestni qayta yuboramiz
+        return axiosWithAuth(originalRequest);
+      } catch (refreshError) {
+        authService.clearStorage();
+        return Promise.reject(refreshError);
+      }
     }
+
+    return Promise.reject(error);
   },
 );
 

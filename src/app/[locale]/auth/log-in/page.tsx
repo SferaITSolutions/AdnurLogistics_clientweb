@@ -1,9 +1,5 @@
-import SignInUI from "@/features/auth/sign-in/ui";
+import SignInUI from '@/features/auth/sign-in/ui';
 
 export default function LoginPage() {
-  return (
-    <div>
-      <SignInUI />
-    </div>
-  );
+  return <SignInUI />;
 }
