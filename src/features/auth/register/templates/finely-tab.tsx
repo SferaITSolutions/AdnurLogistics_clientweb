@@ -1,15 +1,17 @@
 'use client';
 
-import { useRegisterStore } from '@/features/auth/register/store/registerStore';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import { useRouter } from 'next/navigation';
 import { FaCheckCircle } from 'react-icons/fa';
+import { setLocalItem } from '@/shared/utils/storage';
+import { useRegisterStore } from '@/features/auth/register/store/registerStore';
+import { useRouter } from 'next/navigation';
 
 export default function FinelyTab() {
   const { reset } = useRegisterStore();
   const navigate = useRouter();
   const handleReset = () => {
     navigate.push('/client/dashboard');
+    setLocalItem('stepKey', 1);
     reset();
   };
   return (

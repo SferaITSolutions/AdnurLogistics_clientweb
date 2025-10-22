@@ -16,7 +16,7 @@ export const RegisterStepIndicator = ({ steps }: RegisterStepIndicatorProps) => 
   const { step } = useRegisterStore();
 
   return (
-    <div className="flex items-center justify-center gap-6 mb-5">
+    <div className="flex items-center justify-center gap-4 mb-5">
       {steps.map((s, index) => (
         <div key={s.id} className="flex items-center gap-2">
           {/* Step number */}

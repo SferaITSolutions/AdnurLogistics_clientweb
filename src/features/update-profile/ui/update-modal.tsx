@@ -1,19 +1,27 @@
-import React, { useState } from "react";
-import { Modal, Input, Button } from "antd";
-import { useUpdateProfileModalStore } from "../lib/store";
+import { Input, Modal } from 'antd';
+import React, { useEffect, useState } from 'react';
+
+import { useUpdateMe } from '@/widgets/headers/navbar-cabinet/hook/hook';
+import { useUpdateProfileModalStore } from '@/features/update-profile/lib/store';
 
 const UpdateProfileModal: React.FC = () => {
-  const { isModalOpen, closeModal, userId } = useUpdateProfileModalStore();
-  const [inputValue, setInputValue] = useState("John Doe");
+  const updateData = useUpdateMe();
+  const { isModalOpen, closeModal, fullname } = useUpdateProfileModalStore();
+  const [inputValue, setInputValue] = useState('');
 
-  const handleOk = () => {
+  useEffect(() => {
+    setInputValue(fullname);
+  }, [fullname]);
+
+  const handleOk = async () => {
+    await updateData.mutateAsync(inputValue);
     closeModal();
-    setInputValue("");
+    setInputValue('');
   };
 
   const handleCancel = () => {
     closeModal();
-    setInputValue("");
+    setInputValue('');
   };
 
   return (
@@ -24,6 +32,7 @@ const UpdateProfileModal: React.FC = () => {
       onCancel={handleCancel}
       okText="Saqlash"
       cancelText="Bekor qilish"
+      confirmLoading={updateData.isPending}
     >
       <Input
         placeholder="Ismni kiriting"

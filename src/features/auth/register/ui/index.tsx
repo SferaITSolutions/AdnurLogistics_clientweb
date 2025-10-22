@@ -3,13 +3,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
 import BgImage from '@/assets/images/auth/Group 48097120.png';
-import RegisterBackStep from '@/features/auth/register/molecules/RegisterBackStep';
+import FinelyTab from '../templates/finely-tab';
 import Image from 'next/image';
+import PersonalNumber from '../templates/personal-number';
+import RegisterBackStep from '@/features/auth/register/molecules/RegisterBackStep';
+import RegisterForm from '../templates/form';
 import { RegisterStepIndicator } from '../molecules/RegisterStepIndicator';
 import { useRegisterStore } from '../store/registerStore';
-import FinelyTab from '../templates/finely-tab';
-import RegisterForm from '../templates/form';
-import PersonalNumber from '../templates/personal-number';
 
 export default function RegisterUI() {
   const { step } = useRegisterStore();
@@ -31,10 +31,15 @@ export default function RegisterUI() {
   return (
     <div className="flex justify-between gap-10 min-h-screen">
       {/* Chap tomondagi fon rasmi */}
-      <Image src={BgImage} alt="bg" className="max-h-screen w-1/2 object-cover" priority />
+      <Image
+        src={BgImage}
+        alt="bg"
+        className="max-h-screen hidden lg:block lg:w-1/2 object-cover"
+        priority
+      />
 
       {/* O‘ng tomondagi form step */}
-      <div className="flex flex-col justify-center w-1/2 p-10 relative overflow-hidden">
+      <div className="flex flex-col justify-center w-full lg:w-1/2 p-10 relative overflow-hidden">
         {/* Step indicator */}
         <div className="mb-10 justify-start items-start w-full">
           <RegisterStepIndicator steps={steps.map(({ id, label }) => ({ id, label }))} />

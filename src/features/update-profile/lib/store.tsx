@@ -1,17 +1,15 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface UpdateProfileModalState {
   isModalOpen: boolean;
-  userId: string | null;
-  openModal: (userId: string) => void;
+  fullname: string;
+  openModal: (fullname: string) => void;
   closeModal: () => void;
 }
 
-export const useUpdateProfileModalStore = create<UpdateProfileModalState>(
-  (set) => ({
-    isModalOpen: false,
-    userId: null,
-    openModal: (userId: string) => set({ isModalOpen: true, userId }),
-    closeModal: () => set({ isModalOpen: false, userId: null }),
-  })
-);
+export const useUpdateProfileModalStore = create<UpdateProfileModalState>((set) => ({
+  isModalOpen: false,
+  fullname: '',
+  openModal: (fullname: string) => set({ isModalOpen: true, fullname }),
+  closeModal: () => set({ isModalOpen: false, fullname: '' }),
+}));

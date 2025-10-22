@@ -1,9 +1,11 @@
-"use client";
-import { Button, Drawer } from "antd";
-import Logo from "@/shared/components/dump/atoms/Logo";
-import MenuItem from "./menu-item";
-import { FaCalculator, FaHome, FaSignOutAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+'use client';
+
+import { FaCalculator, FaHome, FaSignOutAlt } from 'react-icons/fa';
+
+import { Drawer } from 'antd';
+import Logo from '@/shared/components/dump/atoms/Logo';
+import MenuItem from './menu-item';
+import { useRouter } from 'next/navigation';
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -14,8 +16,8 @@ export const DrawerSidebar = ({
 }) => {
   const router = useRouter();
   const logout = () => {
-    localStorage.removeItem("access_token");
-    router.push("/");
+    localStorage.removeItem('access_token');
+    router.push('/');
   };
   return (
     <Drawer
@@ -23,17 +25,13 @@ export const DrawerSidebar = ({
       onClose={closeSidebar}
       open={isOpen}
       width={300}
-      className="md:hidden bg-secondary-blue-color"
+      className="lg:hidden bg-secondary-blue-color"
       // headerStyle={{ display: "none" }}
     >
       <div className="flex flex-col h-full text-white">
         <Logo />
         <nav className="flex flex-col gap-3 mt-10">
-          <MenuItem
-            label="Dashboard"
-            path="/client/dashboard"
-            icon={<FaHome color="white" />}
-          />
+          <MenuItem label="Dashboard" path="/client/dashboard" icon={<FaHome color="white" />} />
           <MenuItem
             label="Calculation"
             path="/client/calculation"

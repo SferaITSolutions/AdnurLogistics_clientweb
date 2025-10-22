@@ -1,22 +1,23 @@
 'use client';
 
-import { Form, Input } from 'antd';
-import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { FaInfoCircle } from 'react-icons/fa';
+import { Form, Input } from 'antd';
 
 import BgImage from '@/assets/images/auth/Group 48097120.png';
-import { useLoginMutation } from '@/services/auth/hook';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import { loginSchema } from '@/shared/schemas/loginSchema';
-import { extractErrorMessage } from '@/shared/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { FaInfoCircle } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
 import LoginErrorlabel from '../molecules/errorLabel';
+import { extractErrorMessage } from '@/shared/utils';
+import { logger } from '@/shared/utils/logger';
+import { loginSchema } from '@/shared/schemas/loginSchema';
+import { useLoginMutation } from '@/services/auth/hook';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function SignInUI() {
   const t = useTranslations();
@@ -40,7 +41,7 @@ export default function SignInUI() {
   });
 
   const onSubmit = (values: z.infer<typeof schema>) => {
-    console.log(values);
+    logger.log(values);
 
     loginMutation.mutate(values, {
       onSuccess: () => navigate.push('/client/dashboard'),
@@ -50,8 +51,13 @@ export default function SignInUI() {
 
   return (
     <div className="flex justify-between gap-10 min-h-screen">
-      <Image src={BgImage} alt="bg" className="max-h-screen w-1/2 object-cover" priority />
-      <div className="flex flex-col justify-center items-center w-1/2 p-10 relative overflow-hidden">
+      <Image
+        src={BgImage}
+        alt="bg"
+        className="max-h-screen hidden lg:block lg:w-1/2 object-cover"
+        priority
+      />
+      <div className="flex flex-col justify-center items-center w-full lg:w-1/2 p-10 relative overflow-hidden">
         <h1 className="text-5xl font-bold mb-4">Kirish</h1>
         {/* ✅ React Hook Form + AntD */}
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
