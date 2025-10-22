@@ -1,32 +1,28 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Form, Input } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
 
-import { ButtonPrimary } from "@/shared/components/dump/atoms";
-import { useRegisterStore } from "../store/registerStore";
-import { useError } from "@/shared/hooks/useError";
-import { useTranslations } from "next-intl";
-import { useRegisterMutation } from "@/services/auth/hook";
-import { registerSchema, RegisterSchemaType } from "@/shared/schemas/registerSchema";
-import { useRouter } from "next/navigation";
-import { Form, Input } from "antd";
-import RegisterErrorlabel from "../molecules/errorLabel";
-import { FaInfoCircle } from "react-icons/fa";
-import { extractErrorMessage } from "@/shared/utils";
-import Link from "next/link";
-
-
-
+import { useRegisterMutation } from '@/services/auth/hook';
+import { ButtonPrimary } from '@/shared/components/dump/atoms';
+import { registerSchema } from '@/shared/schemas/registerSchema';
+import { extractErrorMessage } from '@/shared/utils';
+import { setLocalItem } from '@/shared/utils/storage';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
+import { FaInfoCircle } from 'react-icons/fa';
+import { z } from 'zod';
+import RegisterErrorlabel from '../molecules/errorLabel';
+import { useRegisterStore } from '../store/registerStore';
 
 export default function RegisterForm() {
   const t = useTranslations();
-  const { nextStep } = useRegisterStore();
+  const { nextStep, step } = useRegisterStore();
 
-  const registerMutation = useRegisterMutation()
-  const [registerErrorMessage, setRegisterErrorMessage] = useState('')
+  const registerMutation = useRegisterMutation();
+  const [registerErrorMessage, setRegisterErrorMessage] = useState('');
 
   const schema = registerSchema(t);
 
@@ -37,18 +33,22 @@ export default function RegisterForm() {
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      phone: '998',
+      phone: '',
       fullname: '',
-      password: "",
-      repeatedPassword: "",
+      password: '',
+      repeatedPassword: '',
     },
   });
 
+  const handleNext = () => {
+    nextStep();
+    setLocalItem('stepKey', step + 1);
+  };
 
   // ✅ Submit
   const onSubmit = (values: z.infer<typeof schema>) => {
     registerMutation.mutate(values, {
-      onSuccess: () => nextStep(),
+      onSuccess: () => handleNext(),
       onError: (err) => setRegisterErrorMessage(err),
     });
   };
@@ -57,80 +57,74 @@ export default function RegisterForm() {
     <div className="flex flex-col items-center justify-center w-full max-w-md">
       <h1 className="text-2xl font-semibold mb-4">Hush kelibsiz 😊</h1>
 
-      {registerErrorMessage && <div className="mb-5">
-        <RegisterErrorlabel icon={<FaInfoCircle />} variant='error' text={extractErrorMessage(registerErrorMessage)} onClose={() => setRegisterErrorMessage('')} closable />
-      </div>}
+      {registerErrorMessage && (
+        <div className="mb-5">
+          <RegisterErrorlabel
+            icon={<FaInfoCircle />}
+            variant="error"
+            text={extractErrorMessage(registerErrorMessage)}
+            onClose={() => setRegisterErrorMessage('')}
+            closable
+          />
+        </div>
+      )}
 
-      <Form layout="vertical" onFinish={handleSubmit(onSubmit)}
+      <Form
+        layout="vertical"
+        onFinish={handleSubmit(onSubmit)}
         className="flex flex-col gap-1 w-full"
       >
         <Form.Item
           label="Ism Familyangiz"
-          validateStatus={errors.fullname ? "error" : ""}
+          validateStatus={errors.fullname ? 'error' : ''}
           help={errors.fullname?.message}
         >
           <Controller
             name="fullname"
             control={control}
             render={({ field }) => (
-              <Input
-                {...field}
-                placeholder="fullname"
-                className="!h-12 !rounded-2xl"
-              />
+              <Input {...field} placeholder="To'liq ismingiz" className="!h-12 !rounded-2xl" />
             )}
           />
         </Form.Item>
         <Form.Item
           label="Telefon raqamingiz"
-          validateStatus={errors.phone ? "error" : ""}
+          validateStatus={errors.phone ? 'error' : ''}
           help={errors.phone?.message}
         >
           <Controller
             name="phone"
             control={control}
             render={({ field }) => (
-              <Input
-                {...field}
-                placeholder="+998901234567"
-                className="!h-12 !rounded-2xl"
-              />
+              <Input {...field} placeholder="+998 90 123 45 67" className="!h-12 !rounded-2xl" />
             )}
           />
         </Form.Item>
 
         <Form.Item
           label="Parol"
-          validateStatus={errors.password ? "error" : ""}
+          validateStatus={errors.password ? 'error' : ''}
           help={errors.password?.message}
         >
           <Controller
             name="password"
             control={control}
             render={({ field }) => (
-              <Input.Password
-                {...field}
-                placeholder="Parol"
-                className="!h-12 !rounded-2xl"
-              />
+              <Input.Password {...field} placeholder="Parol" className="!h-12 !rounded-2xl" />
             )}
           />
         </Form.Item>
 
         <Form.Item
           label="Takroriy parol"
-          validateStatus={errors.repeatedPassword ? "error" : ""}
+          validateStatus={errors.repeatedPassword ? 'error' : ''}
           help={errors.repeatedPassword?.message}
         >
           <Controller
             name="repeatedPassword"
             control={control}
             render={({ field }) => (
-              <Input.Password
-                {...field}
-                placeholder="Parol"
-                className="!h-12 !rounded-2xl"
-              />
+              <Input.Password {...field} placeholder="Parol" className="!h-12 !rounded-2xl" />
             )}
           />
         </Form.Item>
@@ -138,13 +132,14 @@ export default function RegisterForm() {
         <Form.Item>
           <ButtonPrimary
             type="primary"
-            label={registerMutation.isPending ? "Yuborilmoqda..." : "Shaxsiy raqam olish"}
+            label={registerMutation.isPending ? 'Yuborilmoqda...' : 'Shaxsiy raqam olish'}
             classNameDy="w-full justify-center"
           />
         </Form.Item>
       </Form>
-      <p className="hover:underline text-sm"><Link href='/auth/log-in'>Avval ro'yhatdan o'tganman</Link></p>
-
+      <p className="hover:underline text-sm">
+        <Link href="/auth/log-in">Avval ro'yhatdan o'tganman</Link>
+      </p>
     </div>
   );
 }

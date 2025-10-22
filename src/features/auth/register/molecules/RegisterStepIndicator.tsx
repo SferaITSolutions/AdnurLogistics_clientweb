@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRegisterStore } from "../store/registerStore";
-import clsx from "clsx";
+import clsx from 'clsx';
+import { useRegisterStore } from '../store/registerStore';
 
 interface Step {
   id: number;
@@ -13,24 +12,22 @@ interface RegisterStepIndicatorProps {
   steps: Step[];
 }
 
-export const RegisterStepIndicator = ({
-  steps,
-}: RegisterStepIndicatorProps) => {
+export const RegisterStepIndicator = ({ steps }: RegisterStepIndicatorProps) => {
   const { step } = useRegisterStore();
 
   return (
-    <div className="flex items-center justify-center gap-6 mb-8">
+    <div className="flex items-center justify-center gap-6 mb-5">
       {steps.map((s, index) => (
         <div key={s.id} className="flex items-center gap-2">
           {/* Step number */}
           <div
             className={clsx(
-              "w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold transition-all duration-300",
+              'w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold transition-all duration-300',
               step === s.id
-                ? "bg-blue-600 shadow-lg scale-110"
+                ? 'bg-blue-600 shadow-lg scale-110'
                 : step > s.id
-                ? "bg-green-500"
-                : "bg-gray-300 text-gray-700"
+                ? 'bg-green-500'
+                : 'bg-gray-300 text-gray-700',
             )}
           >
             {s.id}
@@ -39,12 +36,12 @@ export const RegisterStepIndicator = ({
           {/* Step label */}
           <span
             className={clsx(
-              "text-sm transition-all duration-300",
+              'text-sm transition-all duration-300',
               step === s.id
-                ? "text-blue-600 font-medium"
+                ? 'text-blue-600 font-medium'
                 : step > s.id
-                ? "text-green-600"
-                : "text-gray-500"
+                ? 'text-green-600'
+                : 'text-gray-500',
             )}
           >
             {s.label}
@@ -54,8 +51,8 @@ export const RegisterStepIndicator = ({
           {index < steps.length - 1 && (
             <div
               className={clsx(
-                "w-8 h-[2px] rounded transition-all duration-300",
-                step > s.id ? "bg-green-600" : "bg-gray-300"
+                'w-8 h-[2px] rounded transition-all duration-300',
+                step > s.id ? 'bg-green-600' : 'bg-gray-300',
               )}
             />
           )}

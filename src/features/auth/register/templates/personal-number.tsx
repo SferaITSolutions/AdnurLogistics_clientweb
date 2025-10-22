@@ -1,24 +1,27 @@
-"use client";
-import { Form, InputNumber, Button, Input } from "antd";
-import { useRegisterStore } from "../store/registerStore";
-import { ButtonPrimary } from "@/shared/components/dump/atoms";
-import { useCheckIdentityMutation } from "@/services/auth/hook";
-import { useState } from "react";
-import { extractErrorMessage } from "@/shared/utils";
-import { FaInfoCircle } from "react-icons/fa";
-import RegisterErrorlabel from "../molecules/errorLabel";
-import { Controller, useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
-import { identitySchema } from "@/shared/schemas/identitySchema";
-import z from "zod";
+'use client';
+
+import { Form, Input } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
+
+import { useCheckIdentityMutation } from '@/services/auth/hook';
+import { ButtonPrimary } from '@/shared/components/dump/atoms';
+import { identitySchema } from '@/shared/schemas/identitySchema';
+import { extractErrorMessage } from '@/shared/utils';
+import { setLocalItem } from '@/shared/utils/storage';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { FaInfoCircle } from 'react-icons/fa';
+import z from 'zod';
+import RegisterErrorlabel from '../molecules/errorLabel';
+import { useRegisterStore } from '../store/registerStore';
 
 export default function PersonalNumber() {
   const t = useTranslations();
 
-  const { nextStep } = useRegisterStore();
-  const checkCheckIdentity = useCheckIdentityMutation()
-  const [checkintertityErrorMessage, setCheckintertityErrorMessage] = useState('')
-  const schema = identitySchema(t)
+  const { nextStep, step } = useRegisterStore();
+  const checkCheckIdentity = useCheckIdentityMutation();
+  const [checkintertityErrorMessage, setCheckintertityErrorMessage] = useState('');
+  const schema = identitySchema(t);
 
   const {
     handleSubmit,
@@ -26,17 +29,22 @@ export default function PersonalNumber() {
     formState: { errors },
   } = useForm<z.infer<typeof schema>>({
     defaultValues: {
-      code: "",
+      code: '',
     },
   });
+
+  const handleNext = () => {
+    nextStep();
+    setLocalItem('stepKey', step + 1);
+  };
 
   const onFinish = (value: { code: string }) => {
     console.log(value);
 
     checkCheckIdentity.mutate(value.code, {
-      onSuccess: () => nextStep(),
+      onSuccess: () => handleNext(),
       onError: (err) => setCheckintertityErrorMessage(err),
-    })
+    });
   };
 
   return (
@@ -45,27 +53,30 @@ export default function PersonalNumber() {
         <Form.Item
           label="Shaxsiy raqamingiz"
           name="code"
-          validateStatus={errors.code ? "error" : ""}
+          validateStatus={errors.code ? 'error' : ''}
           help={errors.code?.message}
         >
           <Controller
             name="code"
             control={control}
             render={({ field }) => (
-              <Input
-                {...field}
-                placeholder="fullname"
-                className="!h-12 !rounded-2xl"
-              />
+              <Input {...field} placeholder="Raqamni kiriting..." className="!h-12 !rounded-2xl" />
             )}
           />
 
-          {checkintertityErrorMessage && <div className="mb-5">
-            <RegisterErrorlabel icon={<FaInfoCircle />} variant='error' text={extractErrorMessage(checkintertityErrorMessage)} onClose={() => setCheckintertityErrorMessage('')} closable />
-          </div>}
-
+          {checkintertityErrorMessage && (
+            <div className="my-5">
+              <RegisterErrorlabel
+                icon={<FaInfoCircle />}
+                variant="error"
+                text={extractErrorMessage(checkintertityErrorMessage)}
+                onClose={() => setCheckintertityErrorMessage('')}
+                closable
+              />
+            </div>
+          )}
         </Form.Item>
-        <ButtonPrimary type="primary" label={' Davom etish'} classNameDy="w-full justify-center" />
+        <ButtonPrimary type="primary" label={'Davom etish'} classNameDy="w-full justify-center" />
       </Form>
     </div>
   );
