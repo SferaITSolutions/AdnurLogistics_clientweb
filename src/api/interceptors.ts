@@ -2,7 +2,7 @@ import { authService } from "@/services/auth/auth.service";
 import axios, { type CreateAxiosDefaults } from "axios";
 
 const options: CreateAxiosDefaults = {
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://147.182.192.232:10000/",
   headers: {
     "Content-Type": "application/json",
   },

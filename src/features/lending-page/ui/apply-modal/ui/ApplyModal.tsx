@@ -3,37 +3,34 @@
 import { Modal, Input, Form, Button, message, Select, Checkbox } from "antd";
 import { useEffect, useState } from "react";
 import { useApplyModalStore } from "../model/useApplyModalStore";
-import { sendApplyRequest } from "../lib/sendApplyRequest";
 import { ApplyRequest } from "@/shared/types/lenging-page-types";
 import { TitleText } from "@/shared/modules/lending-page";
+import { useApplyRequest } from "../lib/hooks/hooks";
 
 export const ApplyModal = () => {
   const { open, setOpen } = useApplyModalStore();
-  const [loading, setLoading] = useState(false);
+  const applyRequest = useApplyRequest();
   const [form] = Form.useForm();
   const handleSubmit = async (values: ApplyRequest) => {
-    setLoading(true);
     try {
-      await sendApplyRequest(values);
+      await applyRequest.mutateAsync(values);
       message.success("Arizangiz muvaffaqiyatli yuborildi ✅");
       form.resetFields();
       setOpen(false);
     } catch {
       message.error("Xatolik yuz berdi. Qayta urinib ko‘ring ❌");
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
     setTimeout(() => {
       setOpen(true);
-    }, 10000)
+    }, 10000);
 
     setInterval(() => {
       setOpen(true);
     }, 30000);
-  }, [])
+  }, []);
 
   return (
     <Modal
@@ -52,7 +49,7 @@ export const ApplyModal = () => {
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
             label="Ismingiz"
-            name="name"
+            name="fullname"
             className="flex-1"
             rules={[
               { required: true, message: "Ismni kiriting!" },
@@ -88,58 +85,27 @@ export const ApplyModal = () => {
             <Input placeholder="+998 90 123 45 67" maxLength={13} />
           </Form.Item>
         </div>
-        {/* From & To - second row */}
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
             label="Qayerdan"
-            name="from"
+            name="fromLocation"
             className="flex-1"
             rules={[{ required: true, message: "Qayerdan!" }]}
           >
             <Select
               placeholder="Qayerdan"
-              options={[
-                { label: "Toshkent", value: "Toshkent" },
-                { label: "Samarqand", value: "Samarqand" },
-                { label: "Bukhara", value: "Bukhara" },
-                { label: "Navoiy", value: "Navoiy" },
-                { label: "Namangan", value: "Namangan" },
-                { label: "Fergana", value: "Fergana" },
-                { label: "Andijon", value: "Andijon" },
-                { label: "Jizzax", value: "Jizzax" },
-                { label: "Qashqadaryo", value: "Qashqadaryo" },
-                { label: "Surxandaryo", value: "Surxandaryo" },
-                { label: "Sirdaryo", value: "Sirdaryo" },
-                { label: "Tashkent", value: "Tashkent" },
-                { label: "Xorazm", value: "Xorazm" },
-                { label: "Qoraqalpog'iston", value: "Qoraqalpog'iston" },
-              ]}
+              options={[{ label: "Yiwu", value: "YIWU" }]}
             />
           </Form.Item>
           <Form.Item
             label="Qayergacha"
-            name="to"
+            name="toLocation"
             className="flex-1"
             rules={[{ required: true, message: "Qayergacha!" }]}
           >
             <Select
               placeholder="Qayergacha"
-              options={[
-                { label: "Toshkent", value: "Toshkent" },
-                { label: "Samarqand", value: "Samarqand" },
-                { label: "Bukhara", value: "Bukhara" },
-                { label: "Navoiy", value: "Navoiy" },
-                { label: "Namangan", value: "Namangan" },
-                { label: "Fergana", value: "Fergana" },
-                { label: "Andijon", value: "Andijon" },
-                { label: "Jizzax", value: "Jizzax" },
-                { label: "Qashqadaryo", value: "Qashqadaryo" },
-                { label: "Surxandaryo", value: "Surxandaryo" },
-                { label: "Sirdaryo", value: "Sirdaryo" },
-                { label: "Tashkent", value: "Tashkent" },
-                { label: "Xorazm", value: "Xorazm" },
-                { label: "Qoraqalpog'iston", value: "Qoraqalpog'iston" },
-              ]}
+              options={[{ label: "Toshkent", value: "TASHKENT" }]}
             />
           </Form.Item>
         </div>
@@ -147,7 +113,7 @@ export const ApplyModal = () => {
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
             label="Hajmi  (m3)"
-            name="volume"
+            name="bulk"
             className="flex-1"
             rules={[{ required: true, message: "Hajmi (m3)!" }]}
           >
@@ -155,7 +121,7 @@ export const ApplyModal = () => {
           </Form.Item>
           <Form.Item
             label="Ogirligi (KG)"
-            name="weight"
+            name="density"
             className="flex-1"
             rules={[{ required: true, message: "Ogirligi (KG)!" }]}
           >
@@ -165,7 +131,7 @@ export const ApplyModal = () => {
         {/* Message */}
         <Form.Item
           label="Zichlik  (Kg/m3)"
-          name="density"
+          name="weight"
           rules={[{ required: true, message: "Zichlik (Kg/m3)!" }]}
         >
           <Input placeholder="Zichlik  (Kg/m3)" />
@@ -173,22 +139,22 @@ export const ApplyModal = () => {
 
         <Form.Item
           label="Xabar"
-          name="message"
+          name="description"
           rules={[{ required: true, message: "Xabar matnini kiriting!" }]}
         >
           <Input.TextArea rows={3} placeholder="Xabaringiz..." />
         </Form.Item>
         <Form.Item
-          //   label="Shaxsiy ma'lumotlarimni qayta ishlashga roziman"
-          name="isAgree"
-          rules={[{ required: true, message: "Rozi bo'lish shart" }]}
+        //   label="Shaxsiy ma'lumotlarimni qayta ishlashga roziman"
+        // name="isAgree"
+        // rules={[{ required: true, message: "Rozi bo'lish shart" }]}
         >
           <Checkbox>Shaxsiy ma'lumotlarimni qayta ishlashga roziman</Checkbox>
         </Form.Item>
         <Button
           htmlType="submit"
           type="primary"
-          loading={loading}
+          loading={applyRequest.isPending}
           className="w-full bg-blue-600 hover:bg-blue-700 mt-2"
         >
           Yuborish
