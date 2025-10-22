@@ -21,13 +21,13 @@ export const authService = {
   },
 
   async foreignRegister(data: IForeignRegisterData) {
-    const response = await axiosWithAuth.post("/register/", data);
+    const response = await axiosWithAuth.post("/auth/register", data);
 
     return response;
   },
 
   async register(data: RegisterSchemaType) {
-    const response = await axiosWithAuth.post("/register/", data);
+    const response = await axiosWithAuth.post("/auth/register", data);
 
     return response;
   },

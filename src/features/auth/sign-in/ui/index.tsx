@@ -13,9 +13,9 @@ import Image from "next/image";
 import BgImage from "@/assets/images/auth/Group 48097120.png";
 import { toast } from "sonner";
 import { extractErrorMessage } from "@/shared/utils";
-import LoginErrorlabel from "../templates/errorLabel";
 import { FaInfo, FaInfoCircle } from "react-icons/fa";
 import Link from "next/link";
+import LoginErrorlabel from "../molecules/errorLabel";
 
 export default function SignInUI() {
   const t = useTranslations();
@@ -25,7 +25,7 @@ export default function SignInUI() {
 
   // Zod schema orqali validatsiya
   const schema = loginSchema(t);
-  message.success('hello')
+  
   const {
     handleSubmit,
     control,
@@ -39,6 +39,8 @@ export default function SignInUI() {
   });
 
   const onSubmit = (values: z.infer<typeof schema>) => {
+    console.log(values);
+    
     loginMutation.mutate(values, {
       onSuccess: () => navigate.push("/client/dashboard"),
       onError: (err) => setLoginErrorMessage(err),

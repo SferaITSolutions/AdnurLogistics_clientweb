@@ -6,9 +6,10 @@ export const registerSchema = (t: TranslationsType) => {
 
   return z
     .object({
-      fullname: z.string({ error: t("Schemas.name.required") }).email({
-        message: t("Schemas.name.required"),
-      }),
+      fullname: z.string({ error: t("Schemas.name.required") })
+        .min(5, {
+          message: t("Schemas.minString", { min: 5 }),
+        }),
       phone: z
         .string({
           error: t("Schemas.number"),
@@ -24,16 +25,15 @@ export const registerSchema = (t: TranslationsType) => {
         .regex(/[a-z]/, { message: t("Schemas.passwordLowercase") })
         .regex(/[0-9]/, { message: t("Schemas.passwordNumber") })
         .regex(/[@$!%*?&]/, { message: t("Schemas.passwordSpecial") }),
-      confirmPassword: z
+      repeatedPassword: z
         .string({ error: t("Schemas.required") })
         .min(1, {
           message: t("Schemas.minString", { min: 8 }),
         }),
-      role: z.string({ error: t("Schemas.required") }),
     })
-    .refine((data) => data.password === data.confirmPassword, {
+    .refine((data) => data.password === data.repeatedPassword, {
       message: t("Schemas.passwordMismatch"),
-      path: ["confirmPassword"], // Указывает, где показать ошибку
+      path: ["repeatedPassword"], // Указывает, где показать ошибку
     });
 };
 

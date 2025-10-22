@@ -6,17 +6,20 @@ export const ButtonPrimary = ({
   label,
   Icon,
   classNameDy,
+  ...props
 }: {
   type: "primary" | "secondary";
   onClick?: () => void;
   label: string;
   Icon?: React.ReactNode;
   classNameDy?: string;
+  props?: any
 }) => {
   return (
     <button
       className={`bg-primary-blue-color cursor-pointer  px-6 py-4 rounded-full hover:bg-secondary-blue-color w-fit flex items-center gap-2 text-[#fff] ${classNameDy}`}
       onClick={onClick}
+      {...props}
     >
       {Icon}
       <span className="text-[#fff]"> {label}</span>
