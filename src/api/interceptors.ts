@@ -22,7 +22,7 @@ axiosWithAuth.interceptors.request.use(
     }
     const token = window.localStorage.getItem('access_token')
     if (token) {
-      config.headers["X-token"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;
