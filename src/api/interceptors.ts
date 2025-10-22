@@ -2,7 +2,7 @@ import { authService } from "@/services/auth/auth.service";
 import axios, { type CreateAxiosDefaults } from "axios";
 
 const options: CreateAxiosDefaults = {
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://147.182.192.232:10000/",
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -22,7 +22,7 @@ axiosWithAuth.interceptors.request.use(
     }
     const token = window.localStorage.getItem('access_token')
     if (token) {
-      config.headers["X-token"] = token;
+      config.headers["X-token"] = `Bearer ${token}`;
     }
 
     return config;
