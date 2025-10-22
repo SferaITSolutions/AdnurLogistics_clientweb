@@ -30,6 +30,22 @@ export const useRegisterMutation = () => {
     return useMutation({
         mutationFn: (data: z.infer<typeof formSchema>) => authService.register(data), // asosiy API call
         onSuccess: (data) => {
+            localStorage.setItem('identity', data.data.identity)
+            message.success("Tizimga muvaffaqiyatli kirdingiz ✅");
+        },
+        onError: (error: any) => {
+            handleError(error)
+        },
+    });
+};
+
+export const useCheckIdentityMutation = () => {
+    const handleError = useError()
+    const identity = localStorage.getItem('identity')
+    return useMutation({
+        mutationFn: (code: string) => authService.verifyCode({ code, identity: identity || '' }), // asosiy API call
+        onSuccess: (data) => {
+            localStorage.setItem('access_token', data.data.accessToken)
             message.success("Tizimga muvaffaqiyatli kirdingiz ✅");
         },
         onError: (error: any) => {

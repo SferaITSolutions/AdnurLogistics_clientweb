@@ -44,20 +44,9 @@ axiosWithAuth.interceptors.response.use(
       originalRequest &&
       !originalRequest._isRetry
     ) {
-      originalRequest._isRetry = true;
-
-      try {
-        await authService.refresh();
-        return axiosWithAuth.request(originalRequest);
-      } catch (refreshError) {
-        // @ts-ignore
-        if (refreshError?.response?.status === 401) {
-          await authService.logout();
-        }
-        return Promise.reject(refreshError);
-      }
+      window.localStorage.removeItem('access_token')
+      window.location.href = '/'
     }
-    return Promise.reject(error);
   }
 );
 

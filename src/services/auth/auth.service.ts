@@ -19,6 +19,12 @@ export const authService = {
 
     return response;
   },
+  async verifyCode(data: { identity: string, code: string }) {
+    const res = await axiosWithAuth.post("/auth/verify/code", data);
+    
+    return res;
+  },
+
 
   async foreignRegister(data: IForeignRegisterData) {
     const response = await axiosWithAuth.post("/auth/register", data);
