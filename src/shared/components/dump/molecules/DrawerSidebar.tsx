@@ -1,8 +1,9 @@
-'use client'
-import { Drawer } from "antd";
+"use client";
+import { Button, Drawer } from "antd";
 import Logo from "@/shared/components/dump/atoms/Logo";
 import MenuItem from "./menu-item";
-import { FaCalculator, FaHome } from "react-icons/fa";
+import { FaCalculator, FaHome, FaSignOutAlt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -11,6 +12,11 @@ export const DrawerSidebar = ({
   closeSidebar: () => void;
   isOpen: boolean;
 }) => {
+  const router = useRouter();
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    router.push("/");
+  };
   return (
     <Drawer
       placement="left"
@@ -34,6 +40,17 @@ export const DrawerSidebar = ({
             icon={<FaCalculator color="white" />}
           />
         </nav>
+        <div className="flex flex-col justify-end gap-3 mt-auto items-start">
+          <button
+            onClick={() => {
+              logout();
+            }}
+            className="!mb-3 flex items-center gap-2 text-xl"
+          >
+            <FaSignOutAlt color="red" />
+            Logout
+          </button>
+        </div>
       </div>
     </Drawer>
   );

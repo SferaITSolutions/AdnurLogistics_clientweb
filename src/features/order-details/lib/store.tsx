@@ -12,17 +12,21 @@ interface OrderDetailsStoreState {
   setType: (type: string) => void;
   page: number;
   setPage: (page: number) => void;
+  orderIdFilter: string | null;
+  setOrderIdFilter: (id: string | null) => void;
 }
 
 export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
   orderId: null,
-  isModalOpen: false,
   setOrderId: (id) => set({ orderId: id }),
+  isModalOpen: false,
+  orderIdFilter: null,
+  setOrderIdFilter: (id) => set({ orderIdFilter: id }),
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
   searchfilters: {},
   setSearchFilters: (filters) => set({ searchfilters: filters }),
-  type: 'all',
+  type: "0",
   setType: (type) => set({ type }),
   page: 0,
   setPage: (page) => set({ page }),

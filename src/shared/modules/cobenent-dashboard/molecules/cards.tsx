@@ -7,13 +7,13 @@ import OrderId from "../atoms/order-id";
 import ETA from "../atoms/ETA";
 
 interface DashboardCardProps {
-  ETAdata: string;
-  OrderIdprops: string;
-  Quantity: number;
-  Volume: number;
-  Weight: string;
-  Status: string;
-  onClick: () => void;
+  ETAdata?: number | string;
+  OrderIdprops?: number | string;
+  Quantity?: number | string;
+  Volume?: number | string;
+  Weight?: number | string;
+  Status?: number | string;
+  onClick?: () => void;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -32,19 +32,22 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
     >
       {/* Chapdagi rasm */}
       <div className="flex items-center gap-4 p-4">
-        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gray-100">
+        <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-gray-100">
           <FaTruck className="text-gray-700 text-xl" />
         </div>
 
         {/* Ma'lumotlar */}
         <div className="flex flex-col text-sm text-gray-700 leading-6">
-          <ETA ETA={ETAdata} />
-          <OrderId OrderId={OrderIdprops} />
-          <QuantityOrder Quantity={Quantity} Volume={Volume} Weight={Weight} />
+          <ETA ETA={String(ETAdata)} />
+          <OrderId OrderId={String(OrderIdprops)} />
+          <QuantityOrder
+            Volume={Number(Volume)}
+            Weight={Number(Weight)}
+          />
         </div>
       </div>
 
-      <StatusOrder status={Status} />
+      {/* <StatusOrder status={Status} /> */}
     </div>
   );
 };

@@ -1,31 +1,30 @@
 "use client";
 import React from "react";
-import { Form, Select, InputNumber, Radio, Checkbox, Button } from "antd";
+import { Form, Select, InputNumber, Radio, Checkbox, Button, message } from "antd";
 import { useFormStore } from "../../store/store";
 import { MdLocationOn, MdScale, MdVolumeUp } from "react-icons/md";
 import { LiaWeightSolid } from "react-icons/lia";
+import { FROM_OPTIONS, TO_OPTIONS } from "@/shared/constants";
+import { useCalculation } from "@/entities/hooks/calculation/hooks";
+import { useCalculationStore } from "@/entities/hooks/calculation/store";
 
 const { Option } = Select;
 
-const FROM_OPTIONS = [
-  { value: "Tashkent", label: "Toshkent" },
-  { value: "Shanghai", label: "Shanxay" },
-  { value: "Moscow", label: "Moskva" },
-];
-
-const TO_OPTIONS = [
-  { value: "New York", label: "Nyu-York" },
-  { value: "London", label: "London" },
-  { value: "Dubai", label: "Dubay" },
-];
-
 export default function FormCalculation() {
   const { values, setValue, resetForm } = useFormStore();
-
+  const { setResponse } = useCalculationStore();
+  const calculationMutation = useCalculation((data: any) => {
+    setResponse(data);
+  });
   const [form] = Form.useForm();
 
   const handleFinish = (data: any) => {
-    console.log("Hisoblash so'rovi:", data);
+    calculationMutation.mutate({
+      fromLocation: data.from,
+      customs: data.customsPriceCalculation,
+      weight: data.kg,
+      cub: data.m3,
+    });
     resetForm();
     form.resetFields();
   };
@@ -53,20 +52,7 @@ export default function FormCalculation() {
         rules={[{ required: true, message: "Manzilni tanlang" }]}
       >
         <Select placeholder="Qayerdan tanlang">
-          {FROM_OPTIONS.map((option) => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item
-        label="Qayerga"
-        name="to"
-        rules={[{ required: true, message: "Boriladigan manzilni tanlang" }]}
-      >
-        <Select placeholder="Qayerga tanlang">
-          {TO_OPTIONS.map((option) => (
+          {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
             </Option>
@@ -85,7 +71,11 @@ export default function FormCalculation() {
           },
         ]}
       >
-        <LiaWeightSolid color="blue" className="absolute !z-1 mt-1.5 ml-2" size={20} />
+        <LiaWeightSolid
+          color="blue"
+          className="absolute !z-1 mt-1.5 ml-2"
+          size={20}
+        />
         <InputNumber
           className="!min-w-[100%] !pl-5"
           style={{ width: "100%" }}
@@ -144,7 +134,7 @@ export default function FormCalculation() {
           min={0.01}
         />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="Turi"
         name="containerType"
         rules={[{ required: true, message: "Konteyner turini tanlang" }]}
@@ -153,7 +143,7 @@ export default function FormCalculation() {
           <Radio value="ICL">ICL (Qisman konteyner)</Radio>
           <Radio value="FCL">FCL (To‘liq konteyner)</Radio>
         </Radio.Group>
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item
         name="customsPriceCalculation"
         valuePropName="checked"

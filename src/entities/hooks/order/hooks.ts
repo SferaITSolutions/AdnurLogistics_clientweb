@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useOrder = (data: any) => {
   return useQuery({
-    queryKey: ["order"],
+    queryKey: ["order", data],
     queryFn: () => dashboardService.getOrdersData(data),
   });
 };

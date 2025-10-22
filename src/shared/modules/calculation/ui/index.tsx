@@ -5,7 +5,9 @@ import FormCalculation from "../molecules/form-calculation/form-calculation";
 import { TitleText } from "@/shared/components/dump/atoms/title";
 import ResultCalculation from "../molecules/result/result-calculation";
 import { useFormStore } from "../store/store";
+import { useCalculationStore } from "@/entities/hooks/calculation/store";
 export default function CalculationUI() {
+  const { response } = useCalculationStore();
   const { values } = useFormStore();
   return (
     <div>
@@ -19,7 +21,7 @@ export default function CalculationUI() {
           <FormCalculation />
         </div>
         <div className=" !p-4 !bg-white !rounded-lg shadow-md w-full !px-10">
-          <ResultCalculation result={values} />
+          <ResultCalculation result={values} response={response} />
         </div>
       </div>
     </div>

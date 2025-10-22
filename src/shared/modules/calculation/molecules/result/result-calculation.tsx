@@ -4,8 +4,9 @@ import { TitleText } from "@/shared/modules/lending-page";
 import { Button } from "antd";
 import React from "react";
 
-export default function ResultCalculation({ result }: { result: any }) {
+export default function ResultCalculation({ result, response }: { result: any, response: any }) {
   const { setRequestModalStatus } = useFormRequestStore();
+  // const { setResponse } = useCalculationStore();
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4">

@@ -29,19 +29,19 @@ export const cardsExampleList = [
 ];
 export const items = [
   {
-    key: "ALL",
+    key: "0",
     label: "Barchasi",
   },
   {
-    key: "INTRANSIT",
+    key: "1",
     label: "Yetkazib berish jarayonida",
   },
   {
-    key: "DELAVERED",
+    key: "2",
     label: "Yetkazib berish kutilmoqda",
   },
   {
-    key: "PAYMENT_WAITING",
+    key: "3",
     label: "To'lov kutilmoqda",
   },
 ];
