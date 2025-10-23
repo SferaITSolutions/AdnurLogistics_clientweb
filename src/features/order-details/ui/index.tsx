@@ -10,10 +10,10 @@ import DeliviryStatus from "../molecules/deliviry";
 import { StatusProductTitle } from "../atoms";
 
 // SSRda map yuklanmasligi uchun dynamic import
-const YandexMapWithMovingCar = dynamic(
-  () => import("../molecules/MapWithRoute"),
-  { ssr: false }
-);
+const YandexMapWith = dynamic(async () => {
+  return (await import("../molecules/MapWithRoute")).default;
+}, { ssr: false });
+
 const OrderDetailsModal: React.FC = () => {
   const { isModalOpen, closeModal, orderId } = useOrderDetailsStore();
   const { data, isLoading } = useOrderById(orderId || "");
@@ -38,7 +38,7 @@ const OrderDetailsModal: React.FC = () => {
             <div className="text-gray-800 mb-2">
               Details for order: <span className="font-mono">{orderId}</span>
             </div>
-            <YandexMapWithMovingCar
+            <YandexMapWith
               origin="Tashkent, Uzbekistan"
               destination="Samarkand, Uzbekistan"
             />
@@ -49,18 +49,20 @@ const OrderDetailsModal: React.FC = () => {
             <StatusProductTitle title="Mahsulot tafsilotlari" />
 
             {orderData?.products ? (
-              orderData?.products?.map((product: any) => (
-                <Products key={product.id} productData={product} />
+              orderData?.products?.map((product: any, index: number) => (
+                <Products
+                  key={`${product.documentNumber || "prod"}-${index}`}
+                  productData={product}
+                />
               ))
             ) : (
-              <>
-                <Empty description="Mahsulotlar topilmadi" />
-              </>
+              <Empty description="Mahsulotlar topilmadi" />
             )}
+
             {orderData?.invoices ? (
-              orderData?.invoices?.map((invoice: any) => (
+              orderData?.invoices?.map((invoice: any, index: number) => (
                 <InvoiceCard
-                  key={invoice.id}
+                  key={`${invoice.documentNumber || "inv"}-${index}`}
                   amountPaid={invoice.amountPaid}
                   amountRemaining={invoice.amountRemaining}
                   invoiceNumber={invoice.invoiceNumber}

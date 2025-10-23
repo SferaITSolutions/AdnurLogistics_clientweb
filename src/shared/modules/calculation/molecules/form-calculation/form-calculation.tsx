@@ -1,10 +1,17 @@
 "use client";
-import React from "react";
-import { Form, Select, InputNumber, Radio, Checkbox, Button, message } from "antd";
+import React, { useEffect } from "react";
+import {
+  Form,
+  Select,
+  InputNumber,
+  Radio,
+  Checkbox,
+  Button,
+  message,
+} from "antd";
 import { useFormStore } from "../../store/store";
-import { MdLocationOn, MdScale, MdVolumeUp } from "react-icons/md";
 import { LiaWeightSolid } from "react-icons/lia";
-import { FROM_OPTIONS, TO_OPTIONS } from "@/shared/constants";
+import { FROM_OPTIONS } from "@/shared/constants";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
 
@@ -18,17 +25,12 @@ export default function FormCalculation() {
   });
   const [form] = Form.useForm();
 
-  const handleFinish = (data: any) => {
-    calculationMutation.mutate({
-      fromLocation: data.from,
-      customs: data.customsPriceCalculation,
-      weight: data.kg,
-      cub: data.m3,
-    });
-    resetForm();
-    form.resetFields();
-  };
+  // Sync all store values into form fields when store values change
+  useEffect(() => {
+    form.setFieldsValue(values);
+  }, [values, form]);
 
+  // When the form fields change, keep the store values in sync
   const handleFieldsChange = (changedFields: any, allFields: any) => {
     if (changedFields && changedFields.length) {
       changedFields.forEach((field: any) => {
@@ -37,6 +39,17 @@ export default function FormCalculation() {
     }
   };
 
+  const handleFinish = (data: any) => {
+    Object.keys(data).forEach((key) => setValue(key, data[key]));
+    calculationMutation.mutate({
+      fromLocation: data.from?.toUpperCase(),
+      customs: data.customsPriceCalculation,
+      weight: data.kg,
+      cub: data.m3,
+    });
+    form.resetFields();
+  };
+  console.log(values);
   return (
     <Form
       form={form}
@@ -51,7 +64,7 @@ export default function FormCalculation() {
         name="from"
         rules={[{ required: true, message: "Manzilni tanlang" }]}
       >
-        <Select placeholder="Qayerdan tanlang">
+        <Select placeholder="Qayerdan tanlang" value={values.from}>
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
@@ -81,6 +94,8 @@ export default function FormCalculation() {
           style={{ width: "100%" }}
           placeholder="Og'irlikni kiriting (kg)"
           min={0.01}
+          value={values.kg}
+          onChange={(val) => setValue("kg", val)}
         />
       </Form.Item>
       <Form.Item
@@ -108,13 +123,15 @@ export default function FormCalculation() {
           style={{ width: "100%" }}
           placeholder="KG/m³ kiriting"
           min={0.01}
+          value={values.kgm3}
+          onChange={(val) => setValue("kgm3", val)}
         />
       </Form.Item>
       <Form.Item
         label="m³"
         name="m3"
         rules={[
-          { required: true, message: "Iltimos, hajmni m³ da kiriting" },
+          { required: true, message: "Iltimos, hajmni m³ ni kiriting" },
           {
             type: "number",
             min: 0.01,
@@ -132,18 +149,23 @@ export default function FormCalculation() {
           style={{ width: "100%" }}
           placeholder="Hajmni kiriting (m³)"
           min={0.01}
+          value={values.m3}
+          onChange={(val) => setValue("m3", val)}
         />
       </Form.Item>
-      {/* <Form.Item
+      <Form.Item
         label="Turi"
         name="containerType"
         rules={[{ required: true, message: "Konteyner turini tanlang" }]}
       >
-        <Radio.Group>
+        <Radio.Group
+          value={values.containerType}
+          onChange={(e) => setValue("containerType", e.target.value)}
+        >
           <Radio value="ICL">ICL (Qisman konteyner)</Radio>
           <Radio value="FCL">FCL (To‘liq konteyner)</Radio>
         </Radio.Group>
-      </Form.Item> */}
+      </Form.Item>
       <Form.Item
         name="customsPriceCalculation"
         valuePropName="checked"
@@ -158,14 +180,20 @@ export default function FormCalculation() {
           },
         ]}
       >
-        <Checkbox>Bojxona xizmat narxi bilan hisoblash</Checkbox>
+        <Checkbox
+          checked={values.customsPriceCalculation}
+          onChange={(e) =>
+            setValue("customsPriceCalculation", e.target.checked)
+          }
+        >
+          Bojxona xizmat narxi bilan hisoblash
+        </Checkbox>
       </Form.Item>
       <Form.Item>
         <Button
           type="primary"
           className="bg-secondary-blue-color !p-4 w-full"
           htmlType="submit"
-          //   style={{ width: "100%" }}
         >
           Hisoblash
         </Button>

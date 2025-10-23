@@ -16,12 +16,12 @@ export default function CalculationUI() {
       <div className="w-full flex justify-center items-center">
         <TitleText title="Buyurtmani narxini hisoblash" />
       </div>
-      <div className="flex justify-between flex-col md:flex-row gap-5 mt-10">
+      <div className="flex justify-between flex-col lg:flex-row gap-5 mt-10">
         <div className="w-full bg-white rounded-lg !p-4 !px-10 shadow-md">
           <FormCalculation />
         </div>
         <div className=" !p-4 !bg-white !rounded-lg shadow-md w-full !px-10">
-          <ResultCalculation result={values} response={response} />
+          <ResultCalculation response={response} />
         </div>
       </div>
     </div>

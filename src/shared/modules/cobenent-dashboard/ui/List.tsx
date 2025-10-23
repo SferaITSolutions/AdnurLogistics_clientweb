@@ -44,9 +44,9 @@ export default function OrdersList() {
             etadate: string | null;
             id: string;
             weight: string;
-          }) => (
+          }, index: number) => (
             <DashboardCard
-              key={card.id}
+              key={`${card.documentnumber || "card"}-${index}`}
               ETAdata={card.etadate || "-"}
               OrderIdprops={card.documentnumber}
               Quantity={Number(card.weight)}
@@ -54,7 +54,7 @@ export default function OrdersList() {
               Weight={String(card.weight)}
               // Status={card.status}
               onClick={() => {
-                setOrderId("33541");
+                setOrderId(card.id);
                 openModal();
               }}
             />
