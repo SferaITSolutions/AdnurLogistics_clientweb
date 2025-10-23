@@ -32,16 +32,16 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://t.me/">
+            <a href="https://t.me/totrans">
               <FaTelegram color="white" size={20} />
             </a>
-            <a href="mailto:info@gmail.com">
+            <a href="mailto:info@totrans.com">
               <FaEnvelope color="white" size={20} />
             </a>
-            <a href="https://www.instagram.com/">
+            <a href="https://www.instagram.com/adnur_totrans/">
               <FaInstagram color="white" size={20} />
             </a>
-            <a href="https://www.facebook.com/">
+            <a href="https://www.facebook.com/totrans.uz/">
               <FaFacebook color="white" size={20} />
             </a>
           </div>
