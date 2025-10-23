@@ -55,3 +55,20 @@ export const deformatPhoneTR = (value: string): string => {
   }
   return digits;
 };
+
+export const dateToNumber = (dateString: string): number => {
+  // Kiritilgan sana bo'sh bo'lsa 0 qaytaradi
+  if (!dateString) return 0;
+
+  // '2025/06/10' formatdagi sanani '2025-06-10' ko‘rinishiga keltiramiz
+  const normalized = dateString.replace(/\//g, '-');
+
+  // Sana obyektini yaratamiz
+  const date = new Date(normalized);
+
+  // Agar noto‘g‘ri sana bo‘lsa, 0 qaytaradi
+  if (isNaN(date.getTime())) return 0;
+
+  // getTime() millisekunddagi raqamni qaytaradi
+  return date.getTime();
+};

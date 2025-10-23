@@ -1,15 +1,16 @@
-"use client";
-import React, { useEffect } from "react";
-import { cardsExampleList } from "@/shared/constants/dasboard-client";
-import DashboardCard from "../molecules/cards";
-import { useOrderDetailsStore } from "@/features/order-details/lib/store";
-import OrderDetailsModal from "@/features/order-details/ui";
-import { useOrder } from "@/entities/hooks/order/hooks";
-import Pagination from "../molecules/pagination";
-import { Spin } from "antd";
+'use client';
+
+import React, { useEffect } from 'react';
+
+import { useOrder } from '@/entities/hooks/order/hooks';
+import { useOrderDetailsStore } from '@/features/order-details/lib/store';
+import OrderDetailsModal from '@/features/order-details/ui';
+import { Spin } from 'antd';
+import DashboardCard from '../molecules/cards';
+import Pagination from '../molecules/pagination';
 
 export default function OrdersList() {
-  const { setOrderId, openModal, orderIdFilter, page, type, setLoading } =
+  const { setOrderId, openModal, orderIdFilter, page, type, setLoading, setStartEndDate } =
     useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
@@ -34,7 +35,6 @@ export default function OrdersList() {
 
   useEffect(() => {
     setLoading(isLoading);
-    console.log(isLoading,12343);
   }, [isLoading]);
 
   return (
@@ -51,25 +51,26 @@ export default function OrdersList() {
                 density: string;
                 documentnumber: string;
                 etadate: string | null;
+                createddate: string | null;
                 id: string;
                 weight: string;
               },
-              index: number
+              index: number,
             ) => (
               <DashboardCard
-                key={`${card.documentnumber || "card"}-${index}`}
-                ETAdata={card.etadate || "-"}
+                key={`${card.documentnumber || 'card'}-${index}`}
+                ETAdata={card.etadate || '-'}
                 OrderIdprops={card.documentnumber}
                 Quantity={Number(card.weight)}
                 Volume={Number(card.density)}
                 Weight={String(card.weight)}
-                // Status={card.status}
                 onClick={() => {
                   setOrderId(card.id);
                   openModal();
+                  setStartEndDate({ start: card.createddate, end: card.etadate });
                 }}
               />
-            )
+            ),
           )
         )}
       </div>
