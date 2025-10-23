@@ -9,7 +9,7 @@ interface PartnerSlideProps {
 
 export const PartnerSlide = ({ logo, name }: PartnerSlideProps) => {
   return (
-    <div className="flex items-center justify-center rounded-xl p-8 gap-5 duration-300 hover:scale-105">
+    <div className="flex items-center justify-center gap-5 duration-300 hover:scale-105">
       <SlideImage src={logo} alt={name} />
     </div>
   );

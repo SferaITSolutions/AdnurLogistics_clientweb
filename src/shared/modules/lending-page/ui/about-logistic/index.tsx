@@ -10,9 +10,12 @@ import { Modal } from "antd";
 import "antd/dist/reset.css";
 import { ButtonOutline } from "@/shared/components/dump/atoms/button";
 import AboutTitle from "../../molecules/about-title";
+import { ApplyModal } from "@/features/lending-page/ui/apply-modal/ui/ApplyModal";
+import { useApplyModalStore } from "@/features/lending-page/ui/apply-modal/model/useApplyModalStore";
 
 export const AboutLogistic = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const { setOpen } = useApplyModalStore();
   return (
     <div>
       <div className="flex justify-between flex-col lg:flex-row  items-start lg:items-center gap-5 pt-6">
@@ -27,6 +30,9 @@ export const AboutLogistic = () => {
           <div className="flex sm:flex-row flex-col   gap-2">
             <ButtonOutline
               label="Ariza qoldirish"
+              onClick={() => {
+                setOpen(true);
+              }}
               Icon={<FaWpforms color="#fff" />}
             />
             <ButtonLight
@@ -39,6 +45,7 @@ export const AboutLogistic = () => {
           </div>
         </div>
       </div>
+      <ApplyModal />
       <Modal
         open={isVideoModalOpen}
         onCancel={() => setIsVideoModalOpen(false)}
