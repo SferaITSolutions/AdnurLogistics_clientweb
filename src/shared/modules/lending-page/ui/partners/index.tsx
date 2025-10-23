@@ -6,7 +6,6 @@ import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/css";
 import { PartnerSlide } from "../../molecules/Partners-slide";
 import { TitleText } from "@/shared/components/dump/atoms";
-import logoIMG from "@/assets/images/logo/Logo.svg";
 import AutoGlass from "@/assets/images/landing-images/Auto-glass.svg";
 import BekHomeless from "@/assets/images/landing-images/Bek-homeless.svg";
 import Ermak from "@/assets/images/landing-images/Ermak.svg";
