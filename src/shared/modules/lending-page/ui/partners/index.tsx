@@ -6,16 +6,18 @@ import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/css";
 import { PartnerSlide } from "../../molecules/Partners-slide";
 import { TitleText } from "@/shared/components/dump/atoms";
-import logoIMG from "@/assets/images/logo/Logo.svg";
+import AutoGlass from "@/assets/images/landing-images/Auto-glass.svg";
+import BekHomeless from "@/assets/images/landing-images/Bek-homeless.svg";
+import Ermak from "@/assets/images/landing-images/Ermak.svg";
+import PowerlessGym from "@/assets/images/landing-images/Powerless-gym.svg";
+import ShoxHospital from "@/assets/images/landing-images/Shox-hospital.svg";
 
 const partners = [
-  { name: "Google", logo: logoIMG },
-  { name: "Microsoft", logo: logoIMG },
-  { name: "Amazon", logo: logoIMG },
-  { name: "Netflix", logo: logoIMG },
-  { name: "Meta", logo: logoIMG },
-  { name: "Apple", logo: logoIMG },
-  { name: "Samsung", logo: logoIMG },
+  { name: "Bek Homes", logo: BekHomeless },
+  { name: "Powerless Gym", logo: PowerlessGym },
+  { name: "Auto Glass", logo: AutoGlass },
+  { name: "Shox Hospital", logo: ShoxHospital },
+  { name: "Ermak", logo: Ermak },
 ];
 
 export const Partners = () => {
@@ -26,7 +28,7 @@ export const Partners = () => {
       focus: "center",
       arrows: false,
       pagination: false,
-      perPage: 3,
+      perPage: 4,
       autoScroll: {
         speed: 0.6,
       },

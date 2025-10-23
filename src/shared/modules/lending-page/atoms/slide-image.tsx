@@ -9,11 +9,11 @@ interface SlideImageProps {
 
 export const SlideImage = ({ src, alt }: SlideImageProps) => {
   return (
-    <div className="relative   flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <Image
         src={src}
         alt={alt}
-        width={300}
+        height={120}
         className="object-contain transition-transform duration-300 hover:scale-110"
       />
     </div>

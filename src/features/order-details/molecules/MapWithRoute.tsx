@@ -1,193 +1,170 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { YMaps, Map } from "@pbe/react-yandex-maps";
 
 interface Props {
-  origin: string;
-  destination: string;
   height?: number | string;
+  origin?: string;
+  destination?: string;
+  speedKmH?: number; // Mashina tezligi (km/h)
 }
 
-const YandexMapWithMovingCar: React.FC<Props> = ({
+const DEFAULT_ORIGIN = "Yiwu, Zhejiang, China";
+const DEFAULT_DESTINATION = "Tashkent, Uzbekistan";
+
+const YandexMapWithTruck: React.FC<Props> = ({
+  height = 400,
   origin,
   destination,
-  height = 400,
+  speedKmH = 50, // km/h
 }) => {
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
-  const animationRef = useRef<number | null>(null);
-  const coordsRef = useRef<number[][]>([]);
+  const [distanceKm, setDistanceKm] = useState<number | null>(null);
+  const [etaDate, setEtaDate] = useState<string>("");
 
-  const interpolate = (c1: number[], c2: number[], t: number) => {
-    return [c1[0] + (c2[0] - c1[0]) * t, c1[1] + (c2[1] - c1[1]) * t];
-  };
+  const referencePoints = [
+    origin?.trim() ? origin : DEFAULT_ORIGIN,
+    destination?.trim() ? destination : DEFAULT_DESTINATION,
+  ];
 
-  const startAnimation = () => {
-    const coords = coordsRef.current;
-    if (!coords.length || !carRef.current) return;
-
-    let segIndex = 0;
-    let frac = 0;
-    const step = () => {
-      if (!carRef.current) return;
-
-      const from = coords[segIndex];
-      const to = coords[segIndex + 1] || coords[0];
-      frac += 0.02;
-      if (frac > 1) {
-        frac = 0;
-        segIndex++;
-        if (segIndex >= coords.length - 1) {
-          segIndex = 0; // loop
-        }
-      }
-
-      const pos = interpolate(from, to, frac);
-      carRef.current.geometry.setCoordinates(pos);
-
-      animationRef.current = requestAnimationFrame(step);
-    };
-
-    if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    animationRef.current = requestAnimationFrame(step);
-  };
-
-  const stopAnimation = () => {
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-      animationRef.current = null;
-    }
-  };
-
-  const createRouteAndCar = async () => {
+  // --- Yo‘lni yaratish ---
+  const createRoute = async () => {
     const ymaps = ymapsRef.current;
     const map = mapRef.current;
     if (!ymaps || !map) return;
 
-    try {
-      const multiRoute = new ymaps.multiRouter.MultiRoute(
-        {
-          referencePoints: [origin, destination],
-          params: { routingMode: "auto" },
-        },
-        {
-          boundsAutoApply: true,
-          routeActiveStrokeWidth: 5,
-          routeActiveStrokeColor: "#1976d2",
-        }
+    const multiRoute = new ymaps.multiRouter.MultiRoute(
+      { referencePoints },
+      {
+        boundsAutoApply: true,
+        wayPointVisible: true,
+        routeActiveStrokeWidth: 5,
+        routeActiveStrokeColor: "#1976d2",
+      }
+    );
+
+    map.geoObjects.removeAll();
+    map.geoObjects.add(multiRoute);
+
+    multiRoute.model.events.add("requestsuccess", () => {
+      const activeRoute = multiRoute.getActiveRoute();
+      if (!activeRoute) return;
+
+      const distance = activeRoute.properties.get("distance").value; // metrda
+      const distanceKm = distance / 1000;
+      setDistanceKm(distanceKm);
+
+      // Taxminiy vaqt hisoblash (soat)
+      const hours = distanceKm / speedKmH;
+      const etaMs = Date.now() + hours * 3600 * 1000;
+      const eta = new Date(etaMs);
+      setEtaDate(
+        eta.toLocaleString("uz-UZ", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        })
       );
 
-      map.geoObjects.removeAll();
-      map.geoObjects.add(multiRoute);
+      const path = activeRoute.getPaths().get(0);
+      const coords = path.geometry.getCoordinates().flat();
 
-      multiRoute.model.events.add("requestsuccess", () => {
-        const activeRoute = multiRoute.getActiveRoute();
-        if (!activeRoute) return;
-        const paths = activeRoute.getPaths().toArray();
-        let routeCoords: number[][] = [];
-        paths.forEach((p: any) => {
-          const segments = p.getSegments();
-          segments.forEach((s: any) => {
-            const segCoords = s.geometry.getCoordinates();
-            routeCoords = routeCoords.concat(segCoords);
-          });
-        });
+      if (coords.length > 0) {
+        addMovingTruck(coords, distanceKm);
+      }
+    });
+  };
 
-        if (!routeCoords.length) {
-          console.warn("No route coordinates found");
-          return;
-        }
+  // --- Yuk mashinasini harakatlantirish ---
+  const addMovingTruck = (coords: number[][], distanceKm: number) => {
+    const ymaps = ymapsRef.current;
+    const map = mapRef.current;
+    if (!ymaps || !map) return;
 
-        coordsRef.current = routeCoords;
-
-        if (carRef.current) {
-          try {
-            map.geoObjects.remove(carRef.current);
-          } catch {}
-          carRef.current = null;
-        }
-
-        const start = routeCoords[0];
-        const carPlacemark = new ymaps.Placemark(
-          start,
-          {},
-          {
-            iconLayout: "default#image",
-            iconImageHref:
-              "https://cdn-icons-png.flaticon.com/512/61/61112.png",
-            iconImageSize: [40, 40],
-            iconImageOffset: [-20, -20],
-          }
-        );
-
-        carRef.current = carPlacemark;
-        map.geoObjects.add(carPlacemark);
-
-        try {
-          map.setBounds(activeRoute.getBounds(), { checkZoomRange: true });
-        } catch {}
-
-        stopAnimation();
-        startAnimation();
-      });
-
-      setTimeout(() => {
-        try {
-          multiRoute.model.events.fire("requestsuccess");
-        } catch {}
-      }, 500);
-    } catch (err) {
-      console.error("createRouteAndCar error:", err);
+    // Avvalgi mashinani o‘chirish
+    if (carRef.current) {
+      map.geoObjects.remove(carRef.current);
     }
+
+    // Yuk mashina belgisi
+    const truck = new ymaps.Placemark(
+      coords[0],
+      {},
+      {
+        iconLayout: "default#image",
+        iconImageHref: "https://picsum.photos/500", // yuk mashina ikonkasi
+        iconImageSize: [40, 40],
+        iconImageOffset: [-20, -20],
+      }
+    );
+
+    carRef.current = truck;
+    map.geoObjects.add(truck);
+
+    let index = 0;
+    const total = coords.length;
+    const totalTimeSec = (distanceKm / speedKmH) * 3600; // harakat davomiyligi sekundda
+    const intervalMs = 1000; // har soniyada
+    const step = Math.floor(total / totalTimeSec);
+
+    const timer = setInterval(() => {
+      if (index >= total - 1) {
+        clearInterval(timer);
+        return;
+      }
+      index += step;
+      truck.geometry.setCoordinates(coords[index]);
+    }, intervalMs);
   };
 
   useEffect(() => {
     return () => {
-      stopAnimation();
-      try {
-        if (mapRef.current && carRef.current) {
-          mapRef.current.geoObjects.remove(carRef.current);
-        }
-      } catch {}
+      if (mapRef.current) mapRef.current.geoObjects.removeAll();
     };
   }, []);
 
   return (
-    <div className="rounded-xl overflow-hidden border border-gray-200">
+    <div className="rounded-xl overflow-hidden border border-gray-300 shadow-sm">
       <YMaps
         query={{
           load: "package.full",
           lang: "en_RU",
-          apikey: process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY,
+          apikey: process.env.NEXT_PUBLIC_YANDEX_API_KEY,
         }}
       >
         <Map
+          defaultState={{ center: [40.7831, 65.9667], zoom: 5 }}
+          width="100%"
+          height={height}
+          modules={["multiRouter.MultiRoute", "control.ZoomControl"]}
           instanceRef={(ref) => {
             mapRef.current = ref;
             if (ymapsRef.current) {
-              setTimeout(() => {
-                createRouteAndCar();
-              }, 300);
+              createRoute();
             }
           }}
           onLoad={(ymaps: any) => {
             ymapsRef.current = ymaps;
             if (mapRef.current) {
-              createRouteAndCar();
+              createRoute();
             }
           }}
-          defaultState={{
-            center: [41.2995, 69.2401],
-            zoom: 6,
-          }}
-          width="100%"
-          height={height}
-          modules={["multiRouter.MultiRoute", "control.ZoomControl"]}
         />
       </YMaps>
+
+      {distanceKm && (
+        <div className="p-3 text-center text-sm text-gray-700 bg-gray-50 border-t">
+          🚚 Masofa: <b>{distanceKm.toFixed(1)} km</b> <br />
+          ⏱️ Tezlik: <b>{speedKmH} km/h</b> <br />
+          📅 Yetib kelish vaqti: <b>{etaDate}</b>
+        </div>
+      )}
     </div>
   );
 };
 
-export default YandexMapWithMovingCar;
+export default YandexMapWithTruck;

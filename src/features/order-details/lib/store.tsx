@@ -14,9 +14,13 @@ interface OrderDetailsStoreState {
   setPage: (page: number) => void;
   orderIdFilter: string | null;
   setOrderIdFilter: (id: string | null) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
+  loading: false,
+  setLoading: (loading) => set({ loading }),
   orderId: null,
   setOrderId: (id) => set({ orderId: id }),
   isModalOpen: false,

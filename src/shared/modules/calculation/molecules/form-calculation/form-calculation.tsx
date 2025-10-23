@@ -14,6 +14,7 @@ import { LiaWeightSolid } from "react-icons/lia";
 import { FROM_OPTIONS } from "@/shared/constants";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
+import { FaSpinner } from "react-icons/fa";
 
 const { Option } = Select;
 
@@ -49,7 +50,13 @@ export default function FormCalculation() {
     });
     form.resetFields();
   };
-  console.log(values);
+  if (calculationMutation.isPending) {
+    return (
+      <div className="absolute top-0 left-0 w-full h-full flex items-center bg-black/50 justify-center !z-50">
+        <FaSpinner color="white" size={50} className="animate-spin" />
+      </div>
+    );
+  }
   return (
     <Form
       form={form}
@@ -84,20 +91,14 @@ export default function FormCalculation() {
           },
         ]}
       >
-        <LiaWeightSolid
-          color="blue"
-          className="absolute !z-1 mt-1.5 ml-2"
-          size={20}
-        />
         <InputNumber
-          className="!min-w-[100%] !pl-5"
+          prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
           placeholder="Og'irlikni kiriting (kg)"
           min={0.01}
-          value={values.kg}
-          onChange={(val) => setValue("kg", val)}
         />
       </Form.Item>
+
       <Form.Item
         label="KG/m³"
         name="kgm3"
@@ -113,13 +114,8 @@ export default function FormCalculation() {
           },
         ]}
       >
-        <LiaWeightSolid
-          color="blue"
-          className="absolute !z-1 mt-1.5 ml-2"
-          size={20}
-        />
         <InputNumber
-          className="!min-w-[100%] !pl-5"
+          prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
           placeholder="KG/m³ kiriting"
           min={0.01}
@@ -139,13 +135,8 @@ export default function FormCalculation() {
           },
         ]}
       >
-        <LiaWeightSolid
-          color="blue"
-          className="absolute !z-1 mt-1.5 ml-2"
-          size={20}
-        />
         <InputNumber
-          className="!min-w-[100%] !pl-5"
+          prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
           placeholder="Hajmni kiriting (m³)"
           min={0.01}
