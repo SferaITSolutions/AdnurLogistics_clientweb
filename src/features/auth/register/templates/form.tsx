@@ -1,5 +1,6 @@
 'use client';
 
+import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
 import { Form, Input } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -50,7 +51,12 @@ export default function RegisterForm() {
 
   // ✅ Submit
   const onSubmit = (values: z.infer<typeof schema>) => {
-    registerMutation.mutate(values, {
+    const { phone, ...data } = values;
+    const cleanData = {
+      ...data,
+      phone: beforePhone === '+998' ? deformatPhone(phone) : deformatPhoneTR(phone),
+    };
+    registerMutation.mutate(cleanData, {
       onSuccess: () => handleNext(),
       onError: (err) => setRegisterErrorMessage(err),
     });
