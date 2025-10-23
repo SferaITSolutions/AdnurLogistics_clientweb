@@ -5,7 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useRegisterMutation } from '@/services/auth/hook';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
+import SelectBefore from '@/shared/components/dump/atoms/select-before';
 import { registerSchema } from '@/shared/schemas/registerSchema';
+import { useGlobalStore } from '@/shared/store/globalStore';
 import { extractErrorMessage } from '@/shared/utils';
 import { setLocalItem } from '@/shared/utils/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,11 +22,12 @@ import { useRegisterStore } from '../store/registerStore';
 export default function RegisterForm() {
   const t = useTranslations();
   const { nextStep, step } = useRegisterStore();
+  const { beforePhone } = useGlobalStore();
 
   const registerMutation = useRegisterMutation();
   const [registerErrorMessage, setRegisterErrorMessage] = useState('');
 
-  const schema = registerSchema(t);
+  const schema = registerSchema(t, beforePhone);
 
   const {
     handleSubmit,
@@ -82,9 +85,7 @@ export default function RegisterForm() {
           <Controller
             name="fullname"
             control={control}
-            render={({ field }) => (
-              <Input {...field} placeholder="To'liq ismingiz" className="!h-12 !rounded-2xl" />
-            )}
+            render={({ field }) => <Input {...field} placeholder="To'liq ismingiz" size="large" />}
           />
         </Form.Item>
         <Form.Item
@@ -96,7 +97,12 @@ export default function RegisterForm() {
             name="phone"
             control={control}
             render={({ field }) => (
-              <Input {...field} placeholder="+998 90 123 45 67" className="!h-12 !rounded-2xl" />
+              <Input
+                {...field}
+                addonBefore={<SelectBefore />}
+                placeholder={beforePhone === '+998' ? '90 123 45 67' : '123 123 1234'}
+                size="large"
+              />
             )}
           />
         </Form.Item>
@@ -109,9 +115,7 @@ export default function RegisterForm() {
           <Controller
             name="password"
             control={control}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="Parol" className="!h-12 !rounded-2xl" />
-            )}
+            render={({ field }) => <Input.Password {...field} placeholder="Parol" size="large" />}
           />
         </Form.Item>
 
@@ -123,9 +127,7 @@ export default function RegisterForm() {
           <Controller
             name="repeatedPassword"
             control={control}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="Parol" className="!h-12 !rounded-2xl" />
-            )}
+            render={({ field }) => <Input.Password {...field} placeholder="Parol" size="large" />}
           />
         </Form.Item>
 

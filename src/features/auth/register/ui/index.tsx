@@ -3,13 +3,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
 import BgImage from '@/assets/images/auth/Group 48097120.png';
-import FinelyTab from '../templates/finely-tab';
-import Image from 'next/image';
-import PersonalNumber from '../templates/personal-number';
 import RegisterBackStep from '@/features/auth/register/molecules/RegisterBackStep';
-import RegisterForm from '../templates/form';
+import Image from 'next/image';
 import { RegisterStepIndicator } from '../molecules/RegisterStepIndicator';
 import { useRegisterStore } from '../store/registerStore';
+import FinelyTab from '../templates/finely-tab';
+import RegisterForm from '../templates/form';
+import PersonalNumber from '../templates/personal-number';
 
 export default function RegisterUI() {
   const { step } = useRegisterStore();

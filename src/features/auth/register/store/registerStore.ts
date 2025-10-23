@@ -1,6 +1,6 @@
 import { RegisterState } from '@/shared/types/register-type';
+import { getLocalItem } from '@/shared/utils/storage';
 import { create } from 'zustand';
-import { getLocalItem } from './../../../../shared/utils/storage';
 
 export const useRegisterStore = create<RegisterState>((set) => ({
   step: getLocalItem('stepKey') ? Number(getLocalItem('stepKey')) : 1,

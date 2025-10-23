@@ -1,49 +1,48 @@
 'use client';
 
-import { Controller, useForm } from 'react-hook-form';
+import {
+  deformatPhone,
+  deformatPhoneTR,
+  formatPhone,
+  formatPhoneTR,
+} from '@/shared/utils/formatter';
 import { Form, Input } from 'antd';
 
 import BgImage from '@/assets/images/auth/Group 48097120.png';
+import { useLoginMutation } from '@/services/auth/hook';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import { FaInfoCircle } from 'react-icons/fa';
+import SelectBefore from '@/shared/components/dump/atoms/select-before';
+import { loginSchema } from '@/shared/schemas/loginSchema';
+import { useGlobalStore } from '@/shared/store/globalStore';
+import { extractErrorMessage } from '@/shared/utils';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import LoginErrorlabel from '../molecules/errorLabel';
-import { extractErrorMessage } from '@/shared/utils';
-import { logger } from '@/shared/utils/logger';
-import { loginSchema } from '@/shared/schemas/loginSchema';
-import { useLoginMutation } from '@/services/auth/hook';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { FaInfoCircle } from 'react-icons/fa';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import LoginErrorlabel from '../molecules/errorLabel';
 
 export default function SignInUI() {
   const t = useTranslations();
   const navigate = useRouter();
   const loginMutation = useLoginMutation();
+  const { beforePhone } = useGlobalStore();
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   // Zod schema orqali validatsiya
   const schema = loginSchema(t);
-
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      phone: '998',
-      password: '',
-    },
-  });
+  const [form] = Form.useForm();
 
   const onSubmit = (values: z.infer<typeof schema>) => {
-    logger.log(values);
+    const { phone, password } = values;
+    const cleanData = {
+      password,
+      phone: beforePhone === '+998' ? deformatPhone(phone) : deformatPhoneTR(phone),
+    };
 
-    loginMutation.mutate(values, {
+    loginMutation.mutate(cleanData, {
       onSuccess: () => navigate.push('/client/dashboard'),
       onError: (err) => setLoginErrorMessage(err),
     });
@@ -60,35 +59,43 @@ export default function SignInUI() {
       <div className="flex flex-col justify-center items-center w-full lg:w-1/2 p-10 relative overflow-hidden">
         <h1 className="text-5xl font-bold mb-4">Kirish</h1>
         {/* ✅ React Hook Form + AntD */}
-        <Form layout="vertical" onFinish={handleSubmit(onSubmit)} className="w-full max-w-[350px]">
+        <Form layout="vertical" form={form} onFinish={onSubmit} className="w-full max-w-[350px]">
           {/* Telefon */}
           <Form.Item
             label="Telefon raqamingiz"
-            validateStatus={errors.phone ? 'error' : ''}
-            help={errors.phone?.message}
+            name="phone"
+            rules={[
+              { required: true, message: 'Telefon raqamni kiriting!' },
+              {
+                pattern: /^(?:\+998\s|\+90\s)?\d{2,3}\s\d{3}\s\d{2}\s\d{2}$/,
+                message: `Telefon raqam formati: ${
+                  beforePhone === '+998' ? '+998 90 123 45 67' : '+90 123 123 1234'
+                }`,
+              },
+            ]}
           >
-            <Controller
-              name="phone"
-              control={control}
-              render={({ field }) => (
-                <Input {...field} placeholder="+998901234567" className="!h-12 !rounded-2xl" />
-              )}
+            <Input
+              size="large"
+              addonBefore={<SelectBefore />}
+              onChange={(e) => {
+                form.setFieldsValue({
+                  phone:
+                    beforePhone === '+998'
+                      ? formatPhone(e.target.value, true)
+                      : formatPhoneTR(e.target.value, true),
+                });
+              }}
+              placeholder={beforePhone === '+998' ? '90 123 45 67' : '123 123 1234'}
             />
           </Form.Item>
 
           {/* Parol */}
           <Form.Item
             label="Parol"
-            validateStatus={errors.password ? 'error' : ''}
-            help={errors.password?.message}
+            name="password"
+            rules={[{ required: true, message: 'Parolni kiriting' }]}
           >
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <Input.Password {...field} placeholder="Parol" className="!h-12 !rounded-2xl" />
-              )}
-            />
+            <Input.Password size="large" placeholder="Parol" />
           </Form.Item>
           {loginErrorMessage && (
             <div className="mb-5">
@@ -105,10 +112,9 @@ export default function SignInUI() {
           {/* Tugma */}
           <Form.Item>
             <ButtonPrimary
-              classNameDy="w-full justify-center"
+              classNameDy="w-full justify-center !py-3 !mt-5"
               type="primary"
               label={loginMutation.isPending ? 'Kirish...' : 'Kirish'}
-              // htmlType="submit"
             />
           </Form.Item>
         </Form>
