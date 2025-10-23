@@ -15,10 +15,10 @@ import ShoxHospital from "@/assets/images/landing-images/Shox-hospital.svg";
 
 const partners = [
   { name: "Bek Homes", logo: BekHomeless },
-  { name: "Auto Glass", logo: AutoGlass },
-  { name: "Ermak", logo: Ermak },
   { name: "Powerless Gym", logo: PowerlessGym },
+  { name: "Auto Glass", logo: AutoGlass },
   { name: "Shox Hospital", logo: ShoxHospital },
+  { name: "Ermak", logo: Ermak },
 ];
 
 export const Partners = () => {
@@ -29,7 +29,7 @@ export const Partners = () => {
       focus: "center",
       arrows: false,
       pagination: false,
-      perPage: 3,
+      perPage: 4,
       autoScroll: {
         speed: 0.6,
       },

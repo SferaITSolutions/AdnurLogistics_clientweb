@@ -13,7 +13,7 @@ export const SlideImage = ({ src, alt }: SlideImageProps) => {
       <Image
         src={src}
         alt={alt}
-        height={150}
+        height={120}
         className="object-contain transition-transform duration-300 hover:scale-110"
       />
     </div>
