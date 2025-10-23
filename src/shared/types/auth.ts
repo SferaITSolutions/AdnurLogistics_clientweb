@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
-
-import { ForeignRegisterSchemaType } from "../schemas/foreignRegisterSchema";
+import { ForeignRegisterSchemaType } from '../schemas/foreignRegisterSchema';
 
 export enum TokenEnum {
-  accessToken = "access_token",
-  refreshToken = "refresh_token",
+  accessToken = 'access_token',
+  refreshToken = 'refresh_token',
 }
 
-export type IForeignRegisterData = Pick<ForeignRegisterSchemaType, "email" | "password" | "confirmPassword">
+export type IForeignRegisterData = Pick<
+  ForeignRegisterSchemaType,
+  'email' | 'password' | 'confirmPassword'
+>;
 
 export interface IForeignRegisterResponse {
   email: string;
