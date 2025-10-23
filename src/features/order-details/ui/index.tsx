@@ -10,9 +10,12 @@ import DeliviryStatus from "../molecules/deliviry";
 import { StatusProductTitle } from "../atoms";
 
 // SSRda map yuklanmasligi uchun dynamic import
-const YandexMapWith = dynamic(async () => {
-  return (await import("../molecules/MapWithRoute")).default;
-}, { ssr: false });
+const YandexMapWith = dynamic(
+  async () => {
+    return (await import("../molecules/MapWithRoute")).default;
+  },
+  { ssr: false }
+);
 
 const OrderDetailsModal: React.FC = () => {
   const { isModalOpen, closeModal, orderId } = useOrderDetailsStore();
@@ -39,8 +42,8 @@ const OrderDetailsModal: React.FC = () => {
               Details for order: <span className="font-mono">{orderId}</span>
             </div>
             <YandexMapWith
-              origin="Tashkent, Uzbekistan"
-              destination="Samarkand, Uzbekistan"
+              origin={orderData?.orderRoadMap?.fromLocation}
+              destination={orderData?.orderRoadMap?.toLocation}
             />
             <div className="text-gray-800 mb-2 text-xl font-bold border-t border-gray-100 pt-4">
               <DeliviryStatus deliviryStatus={orderData?.orderRoadMap || {}} />
