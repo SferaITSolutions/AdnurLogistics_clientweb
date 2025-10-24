@@ -1,7 +1,7 @@
-import React from "react";
+import { From, ToLocation } from '../atoms';
+
 // import DeleveryStatus from '../atoms/delevery-status'
-import { FaArrowRight } from "react-icons/fa";
-import { From, ToLocation } from "../atoms";
+import { FaArrowRight } from 'react-icons/fa';
 
 interface DeliviryStatusProps {
   deliviryStatus: {
@@ -11,10 +11,8 @@ interface DeliviryStatusProps {
   };
 }
 
-export default function DeliviryStatus({
-  deliviryStatus,
-}: DeliviryStatusProps) {
-  const from = deliviryStatus?.fromLocation;
+export default function DeliviryStatus({ deliviryStatus }: DeliviryStatusProps) {
+  const from = deliviryStatus?.fromLocation ? 'Yiwu, China' : null;
   const to = deliviryStatus?.toLocation;
 
   const isLoading = !from && !to;
@@ -27,9 +25,9 @@ export default function DeliviryStatus({
         </div>
       ) : (
         <div className="flex items-center gap-4 p-4 rounded-xl bg-blue-50 border border-blue-200 shadow-sm">
-          <From from={from || "Shanghai"} />
+          <From from={from || 'Shanghai'} />
           <FaArrowRight className="text-blue-400 text-lg" />
-          <ToLocation to={to || "Tashkent"} />
+          <ToLocation to={to || 'Tashkent'} />
         </div>
       )}
       {/* <DeleveryStatus deliviryStatus={deliviryStatus.status} /> */}

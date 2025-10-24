@@ -1,24 +1,24 @@
 'use client';
 
-import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
-import { Form, Input } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
+import { Form, Input } from 'antd';
+import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
 
-import { useRegisterMutation } from '@/services/auth/hook';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import SelectBefore from '@/shared/components/dump/atoms/select-before';
-import { registerSchema } from '@/shared/schemas/registerSchema';
-import { useGlobalStore } from '@/shared/store/globalStore';
-import { extractErrorMessage } from '@/shared/utils';
-import { setLocalItem } from '@/shared/utils/storage';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useState } from 'react';
 import { FaInfoCircle } from 'react-icons/fa';
-import { z } from 'zod';
+import Link from 'next/link';
 import RegisterErrorlabel from '../molecules/errorLabel';
+import SelectBefore from '@/shared/components/dump/atoms/select-before';
+import { extractErrorMessage } from '@/shared/utils';
+import { registerSchema } from '@/shared/schemas/registerSchema';
+import { setLocalItem } from '@/shared/utils/storage';
+import { useGlobalStore } from '@/shared/store/globalStore';
+import { useRegisterMutation } from '@/services/auth/hook';
 import { useRegisterStore } from '../store/registerStore';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function RegisterForm() {
   const t = useTranslations();
