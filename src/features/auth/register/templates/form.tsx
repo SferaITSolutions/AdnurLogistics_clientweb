@@ -149,6 +149,7 @@ export default function RegisterForm() {
             Icon={registerMutation.isPending && <FaSpinner className="animate-spin" />}
             label={t('register.getId')}
             classNameDy="w-full justify-center"
+            disabled={registerMutation.isPending}
           />
         </Form.Item>
       </Form>
