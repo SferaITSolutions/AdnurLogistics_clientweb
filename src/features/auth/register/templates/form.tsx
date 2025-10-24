@@ -5,7 +5,7 @@ import { Form, Input } from 'antd';
 import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
 
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import { FaInfoCircle } from 'react-icons/fa';
+import { FaInfoCircle, FaSpinner } from 'react-icons/fa';
 import Link from 'next/link';
 import RegisterErrorlabel from '../molecules/errorLabel';
 import SelectBefore from '@/shared/components/dump/atoms/select-before';
@@ -64,7 +64,7 @@ export default function RegisterForm() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md">
-      <h1 className="text-2xl font-semibold mb-4">Hush kelibsiz 😊</h1>
+      <h1 className="text-2xl font-semibold mb-4">{t("register.welcome")}</h1>
 
       {registerErrorMessage && (
         <div className="mb-5">
@@ -84,18 +84,18 @@ export default function RegisterForm() {
         className="flex flex-col gap-1 w-full"
       >
         <Form.Item
-          label="Ism Familyangiz"
+          label={t("register.name")}
           validateStatus={errors.fullname ? 'error' : ''}
           help={errors.fullname?.message}
         >
           <Controller
             name="fullname"
             control={control}
-            render={({ field }) => <Input {...field} placeholder="To'liq ismingiz" size="large" />}
+            render={({ field }) => <Input {...field} placeholder={t("register.name")} size="large" />}
           />
         </Form.Item>
         <Form.Item
-          label="Telefon raqamingiz"
+          label={t("register.phone")}
           validateStatus={errors.phone ? 'error' : ''}
           help={errors.phone?.message}
         >
@@ -114,39 +114,39 @@ export default function RegisterForm() {
         </Form.Item>
 
         <Form.Item
-          label="Parol"
+          label={t("register.password")}
           validateStatus={errors.password ? 'error' : ''}
           help={errors.password?.message}
         >
           <Controller
             name="password"
             control={control}
-            render={({ field }) => <Input.Password {...field} placeholder="Parol" size="large" />}
+            render={({ field }) => <Input.Password {...field} placeholder={t("register.password")} size="large" />}
           />
         </Form.Item>
 
         <Form.Item
-          label="Takroriy parol"
+          label={t("register.repeatPassword")}
           validateStatus={errors.repeatedPassword ? 'error' : ''}
           help={errors.repeatedPassword?.message}
         >
           <Controller
             name="repeatedPassword"
             control={control}
-            render={({ field }) => <Input.Password {...field} placeholder="Parol" size="large" />}
+            render={({ field }) => <Input.Password {...field} placeholder={t("register.repeatPassword")} size="large" />}
           />
         </Form.Item>
 
         <Form.Item>
           <ButtonPrimary
             type="primary"
-            label={registerMutation.isPending ? 'Yuborilmoqda...' : 'Shaxsiy raqam olish'}
+            label={registerMutation.isPending ? <FaSpinner className="animate-spin" /> : t("register.getId")}
             classNameDy="w-full justify-center"
           />
         </Form.Item>
       </Form>
       <p className="hover:underline text-sm">
-        <Link href="/auth/log-in">Avval ro'yhatdan o'tganman</Link>
+        <Link href="/auth/log-in">{t("register.alreadyRegistered")}</Link>
       </p>
     </div>
   );

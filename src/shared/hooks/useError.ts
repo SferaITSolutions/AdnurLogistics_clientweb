@@ -37,7 +37,7 @@ export const useError = () => {
       return;
     }
 
-    toast.error(t("error"));
+    toast.error(error.response?.data as string || 'Something went wrong');
   }, [t])
 
 

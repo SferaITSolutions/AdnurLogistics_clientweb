@@ -16,7 +16,7 @@ import RegisterErrorlabel from '../molecules/errorLabel';
 import { useRegisterStore } from '../store/registerStore';
 
 export default function PersonalNumber() {
-  const t = useTranslations();
+  const t = useTranslations("personalNumberPage");
 
   const { nextStep, step } = useRegisterStore();
   const checkCheckIdentity = useCheckIdentityMutation();
@@ -51,7 +51,7 @@ export default function PersonalNumber() {
     <div className="w-full max-w-md">
       <Form layout="vertical" onFinish={handleSubmit(onFinish)}>
         <Form.Item
-          label="Shaxsiy raqamingiz"
+          label={t("label")}
           name="code"
           validateStatus={errors.code ? 'error' : ''}
           help={errors.code?.message}
@@ -60,7 +60,7 @@ export default function PersonalNumber() {
             name="code"
             control={control}
             render={({ field }) => (
-              <Input {...field} placeholder="Raqamni kiriting..." className="!h-12 !rounded-2xl" />
+              <Input {...field} placeholder={t("placeholder")} className="!h-12 !rounded-2xl" />
             )}
           />
 
@@ -76,7 +76,7 @@ export default function PersonalNumber() {
             </div>
           )}
         </Form.Item>
-        <ButtonPrimary type="primary" label={'Davom etish'} classNameDy="w-full justify-center" />
+        <ButtonPrimary type="primary" label={t("button")} classNameDy="w-full justify-center" />
       </Form>
     </div>
   );

@@ -97,7 +97,7 @@
       "receiver": "Receiver:",
       "labels": "Mandatory labels for commercial shipments:",
       "transport": "For separation by transport types:"
-    },  
+    },
     "contact": {
       "address": "Tashkent, Shaykhontohur district, O‘qchi - 6. (Near Tashkent City Boulevard)",
       "phone": "+7 980 470 00958",
@@ -116,6 +116,150 @@
     "passwordPlaceholder": "Enter your password",
     "button": "Login",
     "register": "Register"
+  },
+  "Schemas": {
+    "email": "Enter a valid email address",
+    "number": "Enter a valid number",
+    "numberFormat": "Enter a valid number Format",
+    "turkishNumberFormat": "Turk number format is not valid",
+    "region_not_allowed": "Unfortunately, participation from your region is not available. To participate, you must select one of the permitted regions.",
+    "verify": "Please verify your email",
+    "required": "This field is required",
+    "minString": "The field must contain at least {min} character",
+    "passwordMismatch": "Passwords must match",
+    "passwordUppercase": "Password must include at least one uppercase letter",
+    "passwordLowercase": "Password must include at least one lowercase letter",
+    "passwordNumber": "Password must include at least one number",
+    "passwordSpecial": "Password must include at least one special character (@$!%*?&)",
+    "industries": {
+      "min": "Please select at least one industry.",
+      "nonempty": "Industry field cannot be empty.",
+      "required": "Industry is required."
+    },
+    "stages": {
+      "min": "Please select at least one stage.",
+      "nonempty": "Stage field cannot be empty.",
+      "required": "Stage is required."
+    },
+    "name": {
+      "min": "Name must be at least 2 characters long.",
+      "required": "Name is required."
+    },
+    "surname": {
+      "min": "Name must be at least 2 characters long.",
+      "required": "Name is required."
+    },
+    "investor_type": {
+      "invalid": "Invalid investor type selected."
+    },
+    "description": {
+      "min": "Description must be at least 10 characters long.",
+      "max": "The description should be no more than 1000 characters long.",
+      "short": "Description must max 200 characters long.",
+      "dynamic_max": "Description must max {length} characters long.",
+      "long": "Description must max 1000 characters long.",
+      "required": "Description is required."
+    },
+    "photo": {
+      "invalid": "Photo must be a PNG or SVG file and no larger than 5MB."
+    },
+    "file": {
+      "invalid": "File must be a {types} file and no larger than {size}MB."
+    },
+    "link": {
+      "invalid": "Link must be a valid URL."
+    },
+    "contacts": {
+      "min": "Contacts must be at least 5 characters long.",
+      "required": "Contact is required."
+    },
+    "investment_amount": {
+      "min": "Investment amount cannot be empty."
+    },
+    "region": {
+      "invalid": "Invalid region selected."
+    },
+    "fullname": {
+      "required": "Full name is required.",
+      "minLength": "Full name must be at least 3 characters long"
+    },
+    "stage": {
+      "invalid": "Invalid stage selection."
+    },
+    "presentation": {
+      "invalid_type": "Presentation must be a PDF file.",
+      "max_size": "Presentation must be 5MB or less.",
+      "max_size_15": "Presentation must be 15MB or less."
+    },
+    "logo": {
+      "invalid_type": "Logo must be a PNG or SVG file.",
+      "max_size": "Logo must be 5MB or less."
+    },
+    "logo_edit_profile": {
+      "invalid_type": "Logo must be a PNG, JPG or JPEG file.",
+      "max_size": "Logo must be 5MB or less."
+    },
+    "contact": {
+      "required": "Contact is required.",
+      "minLength": "Contact must be at least 9 characters long"
+    },
+    "organization": {
+      "required": "Organization is required.",
+      "minLength": "Organization must be at least 3 characters long"
+    },
+    "position": {
+      "required": "Position is required.",
+      "minLength": "Position must be at least 3 characters long"
+    },
+    "linkedin": {
+      "required": "linkedin is required."
+    },
+    "investment_required": {
+      "nonnegative": "Investment required must be a non-negative number."
+    },
+    "reason": {
+      "required": "Reason is required."
+    },
+    "legal_name": {
+      "required": "Legal name is required."
+    },
+    "tax_report": {
+      "max_size": "Tax report must be 5MB or less."
+    },
+    "is_member": {
+      "required": "Membership status is required."
+    },
+    "certificate": {
+      "required": "Certificate is required to upload",
+      "max_size": "Certificate must be 5MB or less."
+    },
+    "industry": {
+      "invalid": "Invalid industry selection."
+    }
+  },
+  "register": {
+    "welcome": "Welcome 😊",
+    "steps": {
+      "step1": "Information",
+      "step2": "Personal ID",
+      "step3": "Verification"
+    },
+    "name": "Full Name",
+    "phone": "Your phone number",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "getId": "Get personal ID",
+    "alreadyRegistered": "I am already registered",
+    "back": "Back"
+  },
+  "personalNumberPage": {
+    "label": "Your Personal Number",
+    "placeholder": "Enter the number...",
+    "button": "Continue"
+  },
+  "finelyTab": {
+    "title": "Congratulations!",
+    "message": "Your registration process has been successfully completed.",
+    "button": "Go to Personal Dashboard"
   }
-
 }

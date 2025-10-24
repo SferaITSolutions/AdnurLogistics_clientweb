@@ -14,7 +14,7 @@ export const registerSchema = (t: TranslationsType, param?: string) => {
           error: t('Schemas.number'),
         })
         .regex(phoneRegex, {
-          message: t(param === '+998' ? 'Schemas.numberFormat' : 'Turk raqami formatida emas'),
+          message: t(param === '+998' ? 'Schemas.numberFormat' : 'Schemas.turkishNumberFormat'),
         })
         .min(1, { message: t('Schemas.numberRequired') }),
       password: z
