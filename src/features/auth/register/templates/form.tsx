@@ -6,7 +6,7 @@ import { Form, Input } from 'antd';
 import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
 
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import RegisterErrorlabel from '../molecules/errorLabel';
 import SelectBefore from '@/shared/components/dump/atoms/select-before';
 import { extractErrorMessage } from '@/shared/utils';

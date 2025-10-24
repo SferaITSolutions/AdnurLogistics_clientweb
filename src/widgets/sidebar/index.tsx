@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { DrawerSidebar } from "@/shared/components/dump/molecules/DrawerSidebar";
-import { FaSignOutAlt } from "react-icons/fa";
-import Logo from "@/shared/components/dump/atoms/Logo";
-import SidebarItems from "@/shared/components/dump/molecules/sidebar-items";
-import { authService } from "@/services/auth/auth.service";
-import { useRouter } from "next/navigation";
-import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
-import { useTranslations } from "next-intl";
+import { DrawerSidebar } from '@/shared/components/dump/molecules/DrawerSidebar';
+import { FaSignOutAlt } from 'react-icons/fa';
+import Logo from '@/shared/components/dump/atoms/Logo';
+import SidebarItems from '@/shared/components/dump/molecules/sidebar-items';
+import { authService } from '@/services/auth/auth.service';
+import { useRouter } from '@/i18n/routing';
+import { useSidebarStore } from '@/features/auth/register/store/sidebarStore';
+import { useTranslations } from 'next-intl';
 
 const Sidebar = () => {
-  const t = useTranslations("clientDashboard");
+  const t = useTranslations('clientDashboard');
   const { isOpen, closeSidebar } = useSidebarStore();
   const router = useRouter();
   const logout = () => {
     authService.clearStorage();
-    router.push("/");
+    router.push('/');
   };
   return (
     <>
       {/* Desktop Sidebar */}
       <aside className="min-w-[300px] fixed min-h-screen bg-secondary-blue-color text-white hidden lg:flex flex-col p-6 z-50">
         <Logo />
-        <SidebarItems />{" "}
+        <SidebarItems />{' '}
         <div className="flex flex-col justify-end gap-3 mt-auto items-start">
           <button
             onClick={() => {
@@ -31,9 +31,9 @@ const Sidebar = () => {
             className="!group flex items-center gap-3 px-4 py-3 rounded-r-xl text-sm font-medium transition-all duration-100"
           >
             <FaSignOutAlt color="red" />
-            {t("logout")}
+            {t('logout')}
           </button>
-        </div>{" "}
+        </div>{' '}
       </aside>
 
       {/* Mobile Sidebar (Drawer) */}

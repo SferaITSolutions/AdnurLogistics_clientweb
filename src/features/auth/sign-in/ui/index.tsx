@@ -2,6 +2,7 @@
 
 import { FaInfoCircle, FaSpinner } from 'react-icons/fa';
 import { Form, Input } from 'antd';
+import { Link, useRouter } from '@/i18n/routing';
 import {
   deformatPhone,
   deformatPhoneTR,
@@ -12,14 +13,12 @@ import {
 import BgImage from '@/assets/images/auth/Group 48097120.png';
 import { ButtonPrimary } from '@/shared/components/dump/atoms';
 import Image from 'next/image';
-import Link from 'next/link';
 import LoginErrorlabel from '../molecules/errorLabel';
 import SelectBefore from '@/shared/components/dump/atoms/select-before';
 import { extractErrorMessage } from '@/shared/utils';
 import { loginSchema } from '@/shared/schemas/loginSchema';
 import { useGlobalStore } from '@/shared/store/globalStore';
 import { useLoginMutation } from '@/services/auth/hook';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';

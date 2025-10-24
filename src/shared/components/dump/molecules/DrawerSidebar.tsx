@@ -6,7 +6,7 @@ import { Drawer } from 'antd';
 import Logo from '@/shared/components/dump/atoms/Logo';
 import MenuItem from './menu-item';
 import { authService } from '@/services/auth/auth.service';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 export const DrawerSidebar = ({
