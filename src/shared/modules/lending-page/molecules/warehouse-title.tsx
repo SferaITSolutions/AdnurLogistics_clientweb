@@ -1,10 +1,13 @@
+"use client"
+import { useTranslations } from 'next-intl';
 import React from 'react'
 
 
 export default function AwarehouseTitle({ classNameDy }: { classNameDy?: string }) {
+  const t = useTranslations("LendingPage.warehouses");
   return (
     <div className=''>
-      <h1 className='text-5xl text-black'>Xitoyda ulgurji yuklarni qabul qilish uchun ombor</h1>
+      <h1 className='text-5xl text-black'>{t("china")}</h1>
     </div>
   )
 }

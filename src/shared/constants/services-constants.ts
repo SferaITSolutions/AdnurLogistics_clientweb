@@ -19,7 +19,7 @@ const servicesConstants = [
 const locationConstants = [
   {
     id: 1,
-    title: "Foshan dagi ombor",
+    title: "Foshan",
     fullLocation: "广州市番禺区市东环街天保路10号雅智电商物流园4栋101 Adnur商业货入仓处",
     receiver: "李炜煊 18928780596+ID您的 Adnur Cargo 账号",
     marks: "商业货 - commercial",
@@ -27,7 +27,7 @@ const locationConstants = [
   },  
   {
     id: 2,
-    title: "YIWU dagi ombor",
+    title: "YIWU ",
     fullLocation: "广州市番禺区市东环街天保路10号雅智电商物流园4栋101 Adnur商业货入仓处",
     receiver: "李炜煊 18928780596+ID您的 Adnur Cargo 账号",
     marks: "商业货 - commercial",
@@ -35,7 +35,7 @@ const locationConstants = [
   },
   {
     id: 3,
-    title: "HARGOS dagi ombor",
+    title: "HARGOS",
     fullLocation: "广州市番禺区市东环街天保路10号雅智电商物流园4栋101 Adnur商业货入仓处",
     receiver: "李炜煊 18928780596+ID您的 Adnur Cargo 账号",
     marks: "商业货 - commercial",

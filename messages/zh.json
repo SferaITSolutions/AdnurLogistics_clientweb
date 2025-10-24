@@ -1,0 +1,111 @@
+{
+  "LendingPage": {
+    "header": {
+      "logo": "标志",
+      "login": "登录"
+    },
+    "applyModal": {
+      "title": "申请",
+      "success": "您的申请已成功提交 ✅",
+      "error": "发生错误。请重试 ❌",
+      "fields": {
+        "fullname": {
+          "label": "您的姓名",
+          "placeholder": "您的姓名",
+          "required": "请输入您的姓名！",
+          "pattern": "只使用字母！"
+        },
+        "phone": {
+          "label": "您的电话号码",
+          "placeholderUz": "90 123 45 67",
+          "placeholderTr": "123 123 1234",
+          "required": "请输入您的电话号码！",
+          "patternUz": "电话格式: +998 90 123 45 67",
+          "patternTr": "电话格式: +90 123 123 1234"
+        },
+        "fromLocation": {
+          "label": "从哪里",
+          "placeholder": "从哪里",
+          "required": "请选择起点！"
+        },
+        "toLocation": {
+          "label": "到哪里",
+          "placeholder": "到哪里",
+          "required": "请选择目的地！"
+        },
+        "bulk": {
+          "label": "体积 (m3)",
+          "placeholder": "体积 (m3)",
+          "required": "请输入体积！"
+        },
+        "density": {
+          "label": "重量 (KG)",
+          "placeholder": "重量 (KG)",
+          "required": "请输入重量！"
+        },
+        "weight": {
+          "label": "密度 (Kg/m3)",
+          "placeholder": "密度 (Kg/m3)",
+          "required": "请输入密度！"
+        },
+        "description": {
+          "label": "留言",
+          "placeholder": "您的留言...",
+          "required": "请输入您的留言！"
+        }
+      },
+      "button": {
+        "submit": "提交"
+      }
+    },
+    "hero": {
+      "title": "Adnur 物流",
+      "subtitle": "Adnur 物流是拥有多年经验的专业物流服务提供商。我们为您提供最佳的物流解决方案，并以最优惠的条件交付您的货物。",
+      "applyButton": "立即申请"
+    },
+    "stats": {
+      "years": "10+",
+      "experienceLabel": "多年经验",
+      "countries": "3+",
+      "countriesLabel": "跨越国家",
+      "services": "4+",
+      "servicesLabel": "服务类型"
+    },
+    "about": {
+      "titleHead": "我们是乌兹别克斯坦的",
+      "titleRed": "#1 物流公司",
+      "titleFooter": "公司",
+      "highlight": "#1 物流公司",
+      "description": "我们是一家在世界范围内超过 4 个国家赢得信任的国际公司。得益于我们的服务，您的货物能够快速、安全地送达！",
+      "apply": "立即申请",
+      "watchVideo": "观看视频"
+    },
+    "services": {
+      "title1": "您需要的",
+      "title2": "一切",
+      "title3": "都在这里！",
+      "list": {
+        "transport": "运输与物流",
+        "inspection": "货物检验",
+        "storage": "临时仓储",
+        "customs": "海关手续"
+      }
+    },
+    "warehouses": {
+      "china": "中国仓库",
+      "address": "完整地址：",
+      "receiver": "收件人：",
+      "labels": "商业货物的必备标志：",
+      "transport": "按运输方式分类："
+    },
+    "contact": {
+      "address": "塔什干, 奇尔奇克区, O‘qchi - 6. (塔什干城市大道附近)",
+      "phone": "+7 980 470 00958",
+      "getInTouch": "联系我们"
+    },
+    "footer": {
+      "copyright": "© 2025 Adnur 物流 - 版权所有",
+      "developedBy": "开发者: Sfera IT Solutions"
+    }
+  }
+}

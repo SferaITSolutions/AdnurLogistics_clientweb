@@ -1,0 +1,111 @@
+{
+  "LendingPage": {
+    "header": {
+      "logo": "Logo",
+      "login": "Giriş Yap"
+    },
+    "applyModal": {
+      "title": "Başvuru Yap",
+      "success": "Başvurunuz başarıyla gönderildi ✅",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin ❌",
+      "fields": {
+        "fullname": {
+          "label": "Adınız",
+          "placeholder": "Adınız",
+          "required": "Lütfen adınızı girin!",
+          "pattern": "Sadece harf kullanın!"
+        },
+        "phone": {
+          "label": "Telefon Numaranız",
+          "placeholderUz": "90 123 45 67",
+          "placeholderTr": "123 123 1234",
+          "required": "Lütfen telefon numaranızı girin!",
+          "patternUz": "Telefon formatı: +998 90 123 45 67",
+          "patternTr": "Telefon formatı: +90 123 123 1234"
+        },
+        "fromLocation": {
+          "label": "Nereden",
+          "placeholder": "Nereden",
+          "required": "Lütfen başlangıç noktasını seçin!"
+        },
+        "toLocation": {
+          "label": "Nereye",
+          "placeholder": "Nereye",
+          "required": "Lütfen varış noktasını seçin!"
+        },
+        "bulk": {
+          "label": "Hacim (m3)",
+          "placeholder": "Hacim (m3)",
+          "required": "Lütfen hacmi girin!"
+        },
+        "density": {
+          "label": "Ağırlık (KG)",
+          "placeholder": "Ağırlık (KG)",
+          "required": "Lütfen ağırlığı girin!"
+        },
+        "weight": {
+          "label": "Yoğunluk (Kg/m3)",
+          "placeholder": "Yoğunluk (Kg/m3)",
+          "required": "Lütfen yoğunluğu girin!"
+        },
+        "description": {
+          "label": "Mesaj",
+          "placeholder": "Mesajınız...",
+          "required": "Lütfen mesajınızı girin!"
+        }
+      },
+      "button": {
+        "submit": "Gönder"
+      }
+    },
+    "hero": {
+      "title": "Adnur Lojistik",
+      "subtitle": "Adnur Lojistik, yılların tecrübesine sahip profesyonel bir lojistik hizmet sağlayıcısıdır. Size en iyi lojistik çözümlerini sunar ve gönderilerinizi en uygun koşullarda teslim ederiz.",
+      "applyButton": "Başvuru Yap"
+    },
+    "stats": {
+      "years": "10+",
+      "experienceLabel": "Yıllık Deneyim",
+      "countries": "3+",
+      "countriesLabel": "Ülkeler Arası",
+      "services": "4+",
+      "servicesLabel": "Hizmet Türleri"
+    },
+    "about": {
+      "titleHead": "Biz Özbekistan’ın",
+      "titleRed": "#1 Lojistik Şirketiyiz",
+      "titleFooter": "Kampaniya",
+      "highlight": "#1 Lojistik Şirketiyiz",
+      "description": "Dünya genelinde 4’ten fazla ülkede güven kazanmış uluslararası bir şirketiz. Hizmetimiz sayesinde gönderileriniz hızlı ve güvenli bir şekilde ulaştırılır!",
+      "apply": "Başvuru Yap",
+      "watchVideo": "Videoyu İzle"
+    },
+    "services": {
+      "title1": "İhtiyacınız olan",
+      "title2": "HER",
+      "title3": "ŞEY bizde!",
+      "list": {
+        "transport": "Taşıma ve Lojistik",
+        "inspection": "Yük Kontrolü",
+        "storage": "Geçici Depolama",
+        "customs": "Gümrük İşlemleri"
+      }
+    },
+    "warehouses": {
+      "china": "Çin Deposu",
+      "address": "Tam adres:",
+      "receiver": "Alıcı:",
+      "labels": "Ticari gönderiler için zorunlu işaretler:",
+      "transport": "Taşıma türlerine göre ayırmak için:"
+    },
+    "contact": {
+      "address": "Taşkent, Shayxontohur bölgesi, O‘qchi - 6. (Tashkent City Bulvarı yakınında)",
+      "phone": "+7 980 470 00958",
+      "getInTouch": "İletişime Geçin"
+    },
+    "footer": {
+      "copyright": "© 2025 Adnur Lojistik - Tüm Hakları Saklıdır",
+      "developedBy": "Geliştiren: Sfera IT Solutions"
+    }
+  }
+}

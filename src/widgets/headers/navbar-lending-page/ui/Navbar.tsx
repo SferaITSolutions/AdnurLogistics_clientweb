@@ -6,9 +6,11 @@ import { FaArrowRight, FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { ButtonPrimary, ButtonSecondary } from "@/shared/components/dump/atoms/button";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export const Navbar = () => {
   const navigate = useRouter();
+  const t = useTranslations("LendingPage.header");
   return (
     <header className="fixed  flex justify-between items-center  top-0 left-0 w-full bg-white shadow-sm z-50">
       <nav className=" flex justify-between items-center  container mx-auto w-full">
@@ -18,7 +20,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-6 justify-center">
           <ButtonPrimary
             type="primary"
-            label="Kirish"
+            label={t("login")}
             Icon={<FaArrowRight color="#fff" />}
             onClick={() => {
               navigate.push("/auth/log-in");

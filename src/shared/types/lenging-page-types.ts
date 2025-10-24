@@ -11,6 +11,10 @@ interface ModalState {
   setOpen: (value: boolean) => void;
 }
 interface ApplyRequest {
+  description?: string;
+  bulk?: number;
+  weight?: number;
+  density?: number;
   name: string;
   phone: string;
   message: string;

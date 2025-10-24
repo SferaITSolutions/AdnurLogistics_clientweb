@@ -1,9 +1,27 @@
-import { TitleText } from "@/shared/components/dump/atoms";
+"use client"
 import React from "react";
-import { servicesConstants } from "@/shared/constants";
 import servisecardImg from '@/assets/images/landing-images/servisecard.png';
+import { useTranslations } from "next-intl";
 
 export const ServiceCard = () => {
+  const t = useTranslations("LendingPage.services.list");
+const servicesConstants = [
+  {
+    id: 1,
+    title: "01",
+    description: t("transport"),
+  },
+  {
+    id: 2,
+    title: "02",
+    description: t("inspection"),
+  },
+  {
+    id: 3,
+    title: "03",
+    description: t("storage"),
+  },
+];
   const cardClasses = `flex flex-col gap-4 p-8 pb-20 shadow-xl rounded-4xl bg-[#F8F8F8] text-black`;
   return (
     <>
@@ -32,7 +50,7 @@ export const ServiceCard = () => {
           <p
             className="text-xl text-white"
           >
-            {'Yuk bojxona rasmiylashtiruvi'}
+            {t("customs")}
           </p>
         </div>
       </div>
