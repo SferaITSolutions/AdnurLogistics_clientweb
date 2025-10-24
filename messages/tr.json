@@ -107,5 +107,14 @@
       "copyright": "© 2025 Adnur Lojistik - Tüm Hakları Saklıdır",
       "developedBy": "Geliştiren: Sfera IT Solutions"
     }
+  },
+  "login": {
+    "title": "Giriş Yap",
+    "phone": "Telefon numaranız",
+    "phonePlaceholder": "Telefon numaranızı girin!",
+    "password": "Parola",
+    "passwordPlaceholder": "Parolanızı girin",
+    "button": "Giriş Yap",
+    "register": "Kayıt Ol"
   }
 }

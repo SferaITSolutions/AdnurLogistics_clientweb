@@ -107,5 +107,15 @@
       "copyright": "© 2025 Adnur Logistika - Barcha Huquqlar Himoyalangan",
       "developedBy": "Ishlab Chiqaruvchi: Sfera IT Solutions"
     }
+  },
+  "login": {
+    "title": "Kirish",
+    "phone": "Telefon raqamingiz",
+    "phonePlaceholder": "Telefon raqamni kiriting!",
+    "password": "Parol",
+    "passwordPlaceholder": "Parolni kiriting",
+    "button": "Kirish",
+    "register": "Ro'yhatdan o'tish"
   }
+
 }

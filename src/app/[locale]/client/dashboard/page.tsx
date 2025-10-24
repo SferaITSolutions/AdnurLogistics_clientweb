@@ -6,7 +6,7 @@ import { FaSpinner } from "react-icons/fa";
 
 export default function DashboardClient() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 container">
       <h1 className="text-2xl font-bold">Dashboard Client</h1>
       <Filters />
       <List />

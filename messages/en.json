@@ -107,5 +107,15 @@
       "copyright": "© 2025 Adnur Logistics - All Rights Reserved",
       "developedBy": "Developed By: Sfera IT Solutions"
     }
+  },
+  "login": {
+    "title": "Login",
+    "phone": "Your phone number",
+    "phonePlaceholder": "Enter your phone number!",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "button": "Login",
+    "register": "Register"
   }
+
 }

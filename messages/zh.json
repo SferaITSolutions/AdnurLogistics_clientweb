@@ -107,5 +107,14 @@
       "copyright": "© 2025 Adnur 物流 - 版权所有",
       "developedBy": "开发者: Sfera IT Solutions"
     }
+  },
+  "login": {
+    "title": "登录",
+    "phone": "您的电话号码",
+    "phonePlaceholder": "请输入电话号码！",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "button": "登录",
+    "register": "注册"
   }
 }
