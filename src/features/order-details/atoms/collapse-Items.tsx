@@ -1,5 +1,6 @@
 import React from 'react'
 import InfoRow from './inforow'
+import { useTranslations } from 'next-intl';
 
 interface ProductData {
   documentNumber: string;
@@ -15,13 +16,14 @@ interface CollapseItemsProps {
 }
 
 export default function CollapseItems({ productData }: CollapseItemsProps) {
+  const t = useTranslations("orderInfo");
   const items = [
     {
       key: "1",
       label: (
         <div className="flex flex-row items-center gap-2">
           <span className="text-xs bg-blue-50 text-primary-blue font-semibold rounded px-2.5 py-1 mr-3">
-            Buyurtma raqami
+            {t("orderNumber")}
           </span>
           <span className="text-base text-gray-700 font-bold">
             {productData?.documentNumber}
@@ -31,23 +33,23 @@ export default function CollapseItems({ productData }: CollapseItemsProps) {
       children: (
         <div className="flex flex-col gap-3 pt-2 pb-1 px-1">
           <InfoRow
-            label="Mahsulot nomi:"
+            label={t("productName")}
             value={productData?.productName || "-"}
           />
           <InfoRow
-            label="Tasnifi:"
+            label={t("description")}
             value={productData?.productDescription || "-"}
           />
           <InfoRow
-            label="Soni:"
+            label={t("quantity")}
             value={productData?.productCount || "-"}
           />
           <InfoRow
-            label="Narx (so'm):"
+            label={t("priceSum")}
             value={productData?.productRate || "-"}
           />
           <InfoRow
-            label="Jami summa (so'm):"
+            label={t("totalAmount")}
             value={productData?.productNetAmount || "-"}
             valueClass={
               Number(productData?.productNetAmount || 0) < 0

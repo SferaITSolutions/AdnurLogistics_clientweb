@@ -322,5 +322,13 @@
     "sendRequestButton": "Send Request to Admin",
     "errorNeedCalculationTitle": "Please perform the calculation first to submit a request!",
     "errorNeedCalculationMessage": "Please fill in all fields in the form and perform the calculation to get the result."
+  },
+  "orderInfo": {
+    "orderNumber": "Order Number:",
+    "productName": "Product Name:",
+    "description": "Description:",
+    "quantity": "Quantity:",
+    "priceSum": "Price (UZS):",
+    "totalAmount": "Total Amount (UZS):"
   }
 }

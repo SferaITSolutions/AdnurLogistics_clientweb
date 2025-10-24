@@ -90,7 +90,7 @@ export default function SignInUI() {
           <Form.Item
             label={t('password')}
             name="password"
-            rules={[{ required: true, message: t('login.passwordPlaceholder') }]}
+            rules={[{ required: true, message: t('passwordPlaceholder') }]}
           >
             <Input.Password size="large" placeholder={t('passwordPlaceholder')} />
           </Form.Item>
@@ -111,7 +111,7 @@ export default function SignInUI() {
             <ButtonPrimary
               classNameDy="w-full justify-center !py-3 !mt-5"
               type="primary"
-              Icon={loginMutation.isPending && <FaSpinner className="animate-spin" />}
+              Icon={loginMutation.isPending && <FaSpinner className="animate-spin text-white" />}
               label={t('button')}
               disabled={loginMutation.isPending}
             />

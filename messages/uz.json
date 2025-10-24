@@ -237,6 +237,14 @@
       "invalid": "Noto'g'ri soha tanlangan."
     }
   },
+  "orderInfo": {
+    "orderNumber": "Buyurtma raqami:",
+    "productName": "Mahsulot nomi:",
+    "description": "Tasnifi:",
+    "quantity": "Soni:",
+    "priceSum": "Narx (so'm):",
+    "totalAmount": "Jami summa (so'm):"
+  },
   "register": {
     "welcome": "Hush kelibsiz 😊",
     "steps": {

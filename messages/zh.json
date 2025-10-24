@@ -322,5 +322,13 @@
     "sendRequestButton": "发送请求给管理员",
     "errorNeedCalculationTitle": "要提交请求，请先进行计算！",
     "errorNeedCalculationMessage": "请先填写表格中的所有字段并进行计算，才能获取计算结果。"
+  },
+  "orderInfo": {
+    "orderNumber": "订单编号:",
+    "productName": "产品名称:",
+    "description": "描述/分类:",
+    "quantity": "数量:",
+    "priceSum": "价格 (苏姆):",
+    "totalAmount": "总金额 (苏姆):"
   }
 }

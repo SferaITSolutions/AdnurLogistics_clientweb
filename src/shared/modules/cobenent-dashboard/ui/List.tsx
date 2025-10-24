@@ -8,8 +8,10 @@ import OrderDetailsModal from '@/features/order-details/ui';
 import Pagination from '../molecules/pagination';
 import { useOrder } from '@/entities/hooks/order/hooks';
 import { useOrderDetailsStore } from '@/features/order-details/lib/store';
-
+import { useTranslations } from 'next-intl';
+import { Empty } from 'antd';
 export default function OrdersList() {
+  const t = useTranslations("clientDashboard");
   const { setOrderId, openModal, orderIdFilter, page, type, setLoading, setStartEndDate } =
     useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
@@ -44,7 +46,7 @@ export default function OrdersList() {
           <div className="flex items-center justify-center ">
             <FaSpinner size={40} className="animate-spin" />
           </div>
-        ) : (
+        ) : data?.data ? (
           data?.data.map(
             (
               card: {
@@ -72,6 +74,10 @@ export default function OrdersList() {
               />
             ),
           )
+        ) : (
+          <div className="flex items-center justify-center ">
+            <p className="text-gray-500"><Empty description={''} /></p>
+          </div>
         )}
       </div>
       <Pagination dataLength={data?.data.length || 0} />

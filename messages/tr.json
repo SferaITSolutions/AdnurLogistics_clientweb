@@ -311,6 +311,14 @@
     "result": "Hesaplanan fiyat: ",
     "additionalPayments": "Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi."
   },
+  "orderInfo": {
+    "orderNumber": "Sipariş Numarası:",
+    "productName": "Ürün Adı:",
+    "description": "Tanım/Açıklama:",
+    "quantity": "Miktar:",
+    "priceSum": "Fiyat (som):",
+    "totalAmount": "Toplam Tutar (som):"
+  },
   "calculationResult": {
     "loading": "Yükleniyor...",
     "modalTitleSuccess": "Talebiniz kabul edildi!",
