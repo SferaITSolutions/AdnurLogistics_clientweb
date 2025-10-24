@@ -1,8 +1,19 @@
-import { z } from 'zod';
 import { TranslationsType } from '../types/locales';
+import { z } from 'zod';
 
 export const registerSchema = (t: TranslationsType, param?: string) => {
-  const phoneRegex = /^(?:\+998\s|\+90\s)?\d{2,3}\s\d{3}\s\d{2}\s\d{2}$/;
+  function getPhoneRegex(status: string) {
+    if (status === '+998') {
+      // 🇺🇿 O'zbekiston raqamlar: 9xx xxx xx xx
+      return /^9\d{8}$/;
+    } else if (status === '+90') {
+      // 🇹🇷 Turkiya raqamlar: 5xx xxx xx xx
+      return /^5\d{9}$/;
+    } else {
+      // fallback — hech qaysi davlat kodi tanlanmagan bo‘lsa, umumiy 9 raqamli
+      return /^\d{9,10}$/;
+    }
+  }
 
   return z
     .object({
@@ -13,7 +24,7 @@ export const registerSchema = (t: TranslationsType, param?: string) => {
         .string({
           error: t('Schemas.number'),
         })
-        .regex(phoneRegex, {
+        .regex(getPhoneRegex(param || ''), {
           message: t(param === '+998' ? 'Schemas.numberFormat' : 'Schemas.turkishNumberFormat'),
         })
         .min(1, { message: t('Schemas.numberRequired') }),

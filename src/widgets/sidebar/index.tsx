@@ -4,6 +4,7 @@ import { DrawerSidebar } from '@/shared/components/dump/molecules/DrawerSidebar'
 import { FaSignOutAlt } from 'react-icons/fa';
 import Logo from '@/shared/components/dump/atoms/Logo';
 import SidebarItems from '@/shared/components/dump/molecules/sidebar-items';
+import { authService } from '@/services/auth/auth.service';
 import { useRouter } from 'next/navigation';
 import { useSidebarStore } from '@/features/auth/register/store/sidebarStore';
 
@@ -11,7 +12,7 @@ const Sidebar = () => {
   const { isOpen, closeSidebar } = useSidebarStore();
   const router = useRouter();
   const logout = () => {
-    localStorage.removeItem('access_token');
+    authService.clearStorage();
     router.push('/');
   };
   return (

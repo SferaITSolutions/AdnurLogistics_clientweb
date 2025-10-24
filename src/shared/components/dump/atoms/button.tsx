@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const ButtonPrimary = ({
   type,
@@ -8,12 +8,12 @@ export const ButtonPrimary = ({
   classNameDy,
   ...props
 }: {
-  type: "primary" | "secondary";
+  type: 'primary' | 'secondary';
   onClick?: () => void;
   label: string;
   Icon?: React.ReactNode;
   classNameDy?: string;
-  props?: any
+  [key: string]: any;
 }) => {
   return (
     <button
@@ -31,7 +31,7 @@ export const ButtonSecondary = ({
   label,
   Icon,
 }: {
-  type: "primary" | "secondary";
+  type: 'primary' | 'secondary';
   onClick: () => void;
   label: string;
   Icon?: React.ReactNode;

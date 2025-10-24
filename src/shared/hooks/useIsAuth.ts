@@ -1,28 +1,30 @@
-"use client";
+// ishlatilmagan ekan build error berdi...
 
-import { IProfile } from "../types";
-import { useEffect, useState } from "react";
-import { useAuthGlobal } from "@/context/AuthContext";
+// "use client";
 
-export const useIsAuth = () => {
-  const [isAuth, setIsAuth] = useState<IProfile | null>(null);
-  const { isLoading, user, isSuccess } = useAuthGlobal()
+// import { IProfile } from "../types";
+// import { useEffect, useState } from "react";
+// import { useAuthGlobal } from "@/context/AuthContext";
 
-  // const { isLoading, data, isSuccess } = useQuery<IProfile>({
-  //   queryKey: ["profile"],
-  //   queryFn: (meta) => profileService.getProfile(meta),
-  //   retry: false,
-  // });
+// export const useIsAuth = () => {
+//   const [isAuth, setIsAuth] = useState<IProfile | null>(null);
+//   const { isLoading, user, isSuccess } = useAuthGlobal()
 
-  useEffect(() => {
-    if (isLoading) {
-      setIsAuth(null);
-    }
-    if (isSuccess) {
-      //@ts-ignore
-      setIsAuth(user);
-    }
-  }, [isLoading, user, isSuccess]);
+//   // const { isLoading, data, isSuccess } = useQuery<IProfile>({
+//   //   queryKey: ["profile"],
+//   //   queryFn: (meta) => profileService.getProfile(meta),
+//   //   retry: false,
+//   // });
 
-  return isAuth;
-};
+//   useEffect(() => {
+//     if (isLoading) {
+//       setIsAuth(null);
+//     }
+//     if (isSuccess) {
+//       //@ts-ignore
+//       setIsAuth(user);
+//     }
+//   }, [isLoading, user, isSuccess]);
+
+//   return isAuth;
+// };

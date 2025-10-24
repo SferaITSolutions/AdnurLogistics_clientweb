@@ -1,16 +1,16 @@
 import { axiosInstace, axiosWithAuth } from '@/api/interceptors';
 import { removeLocalItem, setLocalItem } from '@/shared/utils/storage';
 
+import { IForeignRegisterData } from '@/shared/types/auth';
 import { LoginSchemaType } from '@/shared/schemas/loginSchema';
 import { RegisterSchemaType } from '@/shared/schemas/registerSchema';
-import { IForeignRegisterData } from '@/shared/types/auth';
 
 export const authService = {
   async clearStorage() {
     removeLocalItem('access_token');
     removeLocalItem('refresh_token');
     removeLocalItem('identity');
-    if (typeof window !== 'undefined') window.location.href = '/';
+    // if (typeof window !== 'undefined') window.location.href = '/';
   },
 
   async login(data: LoginSchemaType) {
