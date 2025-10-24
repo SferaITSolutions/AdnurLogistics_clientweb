@@ -2,10 +2,6 @@
 
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import React, { useEffect, useRef, useState } from 'react';
-
-import { useOrderDetailsStore } from '@/features/order-details/lib/store';
-import { dateToNumber } from '@/shared/utils/formatter';
-import { logger } from '@/shared/utils/logger';
 import { Tag } from 'antd';
 
 interface Props {
@@ -15,126 +11,55 @@ interface Props {
   speedKmH?: number;
 }
 
-// const DEFAULT_ORIGIN = 'Yiwu, Zhejiang, China';
-// const DEFAULT_DESTINATION = 'Tashkent, Uzbekistan';
-
 const YandexMapWithTruck: React.FC<Props> = ({
   height = 400,
-  origin,
-  destination,
-  speedKmH = 50, // km/h
+  origin = "Yiwu, China",
+  destination = "Tashkent, Uzbekistan",
+  speedKmH = 200,
 }) => {
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
+  const multiRouteRef = useRef<any>(null);
+  const routeCoordsRef = useRef<number[][]>([]);
+  const totalDistanceRef = useRef<number>(0);
+  const updateIntervalRef = useRef<number | null>(null);
+
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
-  const { startEndDate } = useOrderDetailsStore();
+  const [currentProgress, setCurrentProgress] = useState<number>(0);
+  const [isMapReady, setIsMapReady] = useState(false); // Yangi state
 
-  // For testing with the specified current date: October 23, 2025
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth() + 1;
-  const currentDay = new Date().getDay();
-
-  const isStatus =
-    dateToNumber(startEndDate.end || '') -
-      dateToNumber(`${currentYear}/${currentMonth}/${currentDay}`) <=
-    0;
-
-  // Remove !isStatus condition to always show the route if data is available
-  const referencePoints = [
-    origin?.trim() && startEndDate.start && startEndDate.end ? origin : null,
-    destination?.trim() && startEndDate.start && startEndDate.end ? destination : null,
-  ];
-  logger.log(startEndDate);
-
-  // --- Yo‘lni yaratish ---
-  const createRoute = async () => {
-    const ymaps = ymapsRef.current;
-    const map = mapRef.current;
-    if (!ymaps || !map) return;
-
-    const multiRoute = new ymaps.multiRouter.MultiRoute(
-      { referencePoints },
-      {
-        boundsAutoApply: true,
-        wayPointVisible: true,
-        routeActiveStrokeWidth: 5,
-        routeActiveStrokeColor: '#1976d2',
-      },
-    );
-
-    map.geoObjects.removeAll();
-    map.geoObjects.add(multiRoute);
-
-    // Add event for request fail to debug
-    multiRoute.model.events.add('requestfail', (event: any) => {
-      console.error('MultiRoute request failed:', event.get('error'));
-    });
-
-    multiRoute.model.events.add('requestsuccess', () => {
-      const activeRoute = multiRoute.getActiveRoute();
-      if (!activeRoute) return;
-
-      const distance = activeRoute.properties.get('distance').value; // metrda
-      const distanceKm = distance / 1000;
-      setDistanceKm(distanceKm);
-
-      const path = activeRoute.getPaths().get(0);
-      const coords = path.geometry.getCoordinates(); // number[][] formatidagi koordinatalar
-
-      console.log('coords', coords);
-      console.log('coords.length', coords.length);
-
-      if (coords.length > 0) {
-        addTruckAtCurrentPosition(coords, distance, ymaps);
-      }
-    });
+  const startEndDate = {
+    end: "2025/10/28",
+    start: "2025/10/24"
   };
 
-  // --- Oddiy placemarkni joriy pozitsiyaga qo'yish ---
-  const addTruckAtCurrentPosition = (coords: number[][], totalDistance: number, ymaps: any) => {
-    // Avvalgi markerni o‘chirish
-    if (carRef.current) {
-      mapRef.current.geoObjects.remove(carRef.current);
-    }
+  const referencePoints = [
+    origin?.trim() ? origin : null,
+    destination?.trim() ? destination : null,
+  ].filter(Boolean);
 
-    // Start va end datalarni Date ob'ektlariga aylantirish (format: 'YYYY/MM/DD')
-    const startParts = startEndDate.start?.split('/') || [];
-    const startDate = new Date(
-      parseInt(startParts[0]),
-      parseInt(startParts[1]) - 1,
-      parseInt(startParts[2]),
-    );
-    const endParts = startEndDate.end?.split('/') || [];
-    const endDate = new Date(
-      parseInt(endParts[0]),
-      parseInt(endParts[1]) - 1,
-      parseInt(endParts[2]),
-    );
-    const nowDate = new Date(currentYear, currentMonth - 1, currentDay);
+  const calculateCurrentFraction = () => {
+    const startDate = new Date(startEndDate.start.replace(/\//g, '-'));
+    const endDate = new Date(startEndDate.end.replace(/\//g, '-'));
+    const now = new Date();
 
-    // Fraction hisoblash (o'tgan vaqt / umumiy vaqt)
     const totalMs = endDate.getTime() - startDate.getTime();
-    const passedMs = nowDate.getTime() - startDate.getTime();
-    let fraction = passedMs / totalMs;
-    fraction = Math.max(0, Math.min(1, fraction)); // 0-1 oralig'ida saqlash
-    console.log('fraction', fraction);
+    const passedMs = now.getTime() - startDate.getTime();
+    return Math.max(0, Math.min(1, passedMs / totalMs));
+  };
 
-    // Target masofa (metrda)
-    const targetDistance = fraction * totalDistance;
-    console.log('targetDistance', targetDistance);
-
-    // Yo'l bo'ylab masofani hisoblash va pozitsiyani topish
+  const getPositionAtFraction = (fraction: number, coords: number[][], ymaps: any) => {
+    const targetDistance = fraction * totalDistanceRef.current;
     let currentDistance = 0;
     let prevPoint = coords[0];
-    let currentPosition = prevPoint; // Agar topilmasa, boshida qolsin
+    let currentPosition = prevPoint;
 
     for (let i = 1; i < coords.length; i++) {
       const point = coords[i];
       const segmentDist = ymaps.coordSystem.geo.getDistance(prevPoint, point);
 
       if (currentDistance + segmentDist >= targetDistance) {
-        // Segment ichida interpolyatsiya
         const remaining = targetDistance - currentDistance;
         const ratio = remaining / segmentDist;
         const lat = prevPoint[0] + (point[0] - prevPoint[0]) * ratio;
@@ -147,31 +72,151 @@ const YandexMapWithTruck: React.FC<Props> = ({
       prevPoint = point;
     }
 
-    // Agar target totaldan katta bo'lsa, oxirgi nuqtani o'rnatish (xavfsizlik uchun)
-    if (currentDistance < targetDistance) {
-      currentPosition = coords[coords.length - 1];
+    if (fraction >= 1) currentPosition = coords[coords.length - 1];
+    return currentPosition;
+  };
+
+  const updateTruckPosition = () => {
+    const ymaps = ymapsRef.current;
+    const map = mapRef.current;
+    const coords = routeCoordsRef.current;
+
+    if (!ymaps || !map || coords.length === 0 || !multiRouteRef.current) return;
+
+    const fraction = calculateCurrentFraction();
+    setCurrentProgress(fraction);
+
+    const currentPosition = getPositionAtFraction(fraction, coords, ymaps);
+
+    if (!carRef.current) {
+      const marker = new ymaps.Placemark(currentPosition, {
+        hintContent: `Yo'lning ${(fraction * 100).toFixed(1)}%`,
+        balloonContent: `Tezlik: ${speedKmH} km/h`,
+        iconContent: 'Truck',
+      }, {
+        iconLayout: 'default#image',
+        iconImageHref: '/truck.png',
+        iconImageSize: [40, 40],
+        iconImageOffset: [-20, -20],
+      });
+
+      carRef.current = marker;
+      map.geoObjects.add(marker);
+    } else {
+      carRef.current.geometry.setCoordinates(currentPosition);
     }
 
-    console.log('currentPosition', currentPosition);
+    if (fraction < 0.01 && map.getZoom() < 10) {
+      map.setCenter(currentPosition, 10);
+    }
+  };
 
-    // Oddiy default placemark
-    const marker = new ymaps.Placemark(currentPosition, {
-      hintContent: 'Joriy pozitsiya',
-      balloonContent: 'Mahsulot shu yerda',
+  const createRoute = () => {
+    const ymaps = ymapsRef.current;
+    const map = mapRef.current;
+
+    if (!ymaps || !map || referencePoints.length < 2 || multiRouteRef.current) {
+      return;
+    }
+
+    // YMaps to'liq yuklanganini kutish
+    ymaps.ready(() => {
+      const multiRoute = new ymaps.multiRouter.MultiRoute(
+        { referencePoints },
+        {
+          boundsAutoApply: true,
+          wayPointVisible: true,
+          routeActiveStrokeWidth: 5,
+          routeActiveStrokeColor: '#1976d2',
+        }
+      );
+
+      multiRouteRef.current = multiRoute;
+      map.geoObjects.add(multiRoute);
+
+      multiRoute.model.events.add('requestsuccess', () => {
+        const activeRoute = multiRoute.getActiveRoute();
+        if (!activeRoute) return;
+
+        const distance = activeRoute.properties.get('distance').value;
+        const distanceKm = distance / 1000;
+        setDistanceKm(distanceKm);
+        totalDistanceRef.current = distance;
+
+        const allCoords: number[][] = [];
+        const paths = activeRoute.getPaths();
+
+        for (let i = 0; i < paths.getLength(); i++) {
+          const path = paths.get(i);
+          const segments = path.getSegments();
+          for (let j = 0; j < segments.getLength(); j++) {
+            const segment = segments.get(j);
+            allCoords.push(...segment.geometry.getCoordinates());
+          }
+        }
+
+        routeCoordsRef.current = allCoords;
+
+        // Map tayyor ekanligini bildirish
+        setIsMapReady(true);
+
+        // Birinchi marta marker qo‘yish
+        updateTruckPosition();
+
+        // Har 1 soniyada yangilash (test uchun)
+        if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
+        updateIntervalRef.current = window.setInterval(updateTruckPosition, 1000);
+      });
+
+      multiRoute.model.events.add('requestfail', (e: any) => {
+        console.error('Route xato:', e.get('error'));
+      });
     });
-
-    carRef.current = marker;
-    mapRef.current.geoObjects.add(marker);
-
-    // Markerni ko'rish uchun xaritani markerga markazlash
-    mapRef.current.setCenter(currentPosition, 10);
   };
 
   useEffect(() => {
+    if (ymapsRef.current && mapRef.current && !multiRouteRef.current) {
+      console.log("✅ Map va YMaps tayyor, yo‘l yaratilmoqda...");
+      createRoute();
+    }
+  }, [ymapsRef.current, mapRef.current]);
+  // 1️⃣ YMaps va Map yuklanganda yo‘lni yaratish
+
+  useEffect(() => {
+    let checkReady: any;
+
+    const waitForYmapsAndMap = () => {
+      if (ymapsRef.current && mapRef.current) {
+        console.log("✅ YMaps va Map tayyor!");
+        clearInterval(checkReady);
+        createRoute();
+      }
+    };
+
+    // Har 300ms da tekshiradi
+    checkReady = setInterval(waitForYmapsAndMap, 300);
+
+    return () => clearInterval(checkReady);
+  }, [origin, destination]);
+
+
+  // Map tayyor bo‘lganda animatsiyani boshlash
+  useEffect(() => {
+    if (isMapReady) {
+      updateTruckPosition();
+    }
+  }, [isMapReady]);
+
+  // Cleanup
+  useEffect(() => {
     return () => {
+      if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
       if (mapRef.current) mapRef.current.geoObjects.removeAll();
     };
   }, []);
+
+
+  const isDelivered = currentProgress >= 1;
 
   return (
     <div className="rounded-xl overflow-hidden border border-gray-300 shadow-sm">
@@ -187,30 +232,22 @@ const YandexMapWithTruck: React.FC<Props> = ({
           width="100%"
           height={height}
           modules={['multiRouter.MultiRoute', 'control.ZoomControl', 'coordSystem.geo']}
-          instanceRef={(ref) => {
-            mapRef.current = ref;
-            if (ymapsRef.current) {
-              createRoute();
-            }
-          }}
-          onLoad={(ymaps: any) => {
+          instanceRef={mapRef}
+          onLoad={(ymaps) => {
             ymapsRef.current = ymaps;
-            if (mapRef.current) {
-              createRoute();
-            }
           }}
         />
       </YMaps>
 
       {distanceKm && (
         <div className="p-3 text-center text-sm text-gray-700 bg-gray-50 border-t">
-          🚚 Masofa: <b>{distanceKm.toFixed(1)} km</b> <br />
-          ⏱️ Tezlik: <b>{speedKmH} km/h</b> <br />
-          📅 Yetib kelish vaqti:{' '}
-          {isStatus ? (
+          Masofa: <b>{distanceKm.toFixed(1)} km</b> |{' '}
+          Tezlik: <b>{speedKmH} km/h</b> |{' '}
+          Progress: <b>{(currentProgress * 100).toFixed(1)}%</b> |{' '}
+          {isDelivered ? (
             <Tag color="green">Yetkazib berilgan</Tag>
           ) : (
-            <b>{startEndDate.end ?? 'Sana belgilanmagan'}</b>
+            <b>{startEndDate.end}</b>
           )}
         </div>
       )}
