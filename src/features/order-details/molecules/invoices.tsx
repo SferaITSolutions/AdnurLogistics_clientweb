@@ -5,6 +5,7 @@ import {
   InvoiceStatus,
   TotalAmount,
 } from "../atoms";
+import { useTranslations } from "next-intl";
 
 type InvoiceProps = {
   amountPaid: string;
@@ -13,6 +14,7 @@ type InvoiceProps = {
   invoiceStatus: string;
   invoiceTotalAmount: string;
   documentNumber: string;
+  currency: string;
 };
 
 export default function InvoiceCard({
@@ -22,7 +24,9 @@ export default function InvoiceCard({
   invoiceStatus,
   invoiceTotalAmount,
   documentNumber,
+  currency,
 }: InvoiceProps) {
+  const t = useTranslations("clientDashboard");
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow p-6 border border-gray-100 font-sans">
       <InvoiceNumber invoiceNumber={invoiceNumber} />
@@ -31,18 +35,18 @@ export default function InvoiceCard({
 
       <div className="grid grid-cols-2 gap-3 mt-4">
         <div className="flex flex-col gap-1">
-          <TotalAmount invoiceTotalAmount={invoiceTotalAmount} />
-          <span className="text-xs text-gray-500">To'langan summa</span>
+          <TotalAmount invoiceTotalAmount={invoiceTotalAmount} currency={currency} />
+          <span className="text-xs text-gray-500">{t("paidAmount")}</span>
           <span className="font-semibold text-green-700">
             {Number(amountPaid).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}{" "}
-            so'm
+            {currency}
           </span>
         </div>
         <div className="flex flex-col gap-1">
-          <span className="text-xs text-gray-500">Qolgan summa</span>
+          <span className="text-xs text-gray-500">{t("remainingAmount")}</span>
           <span
             className={
               +amountRemaining === 0
@@ -54,7 +58,7 @@ export default function InvoiceCard({
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}{" "}
-            so'm
+            {currency}
           </span>
         </div>
       </div>

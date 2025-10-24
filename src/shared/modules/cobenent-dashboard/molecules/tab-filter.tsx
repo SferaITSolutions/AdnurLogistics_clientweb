@@ -1,10 +1,29 @@
 "use client";
 import { Tabs } from "antd";
 import React, { useState } from "react";
-import { items } from "@/shared/constants";
 import { useOrderDetailsStore } from "@/features/order-details/lib/store";
+import { useTranslations } from "next-intl";
 
 export default function TabFilter() {
+  const t = useTranslations("clientDashboard");
+  const items = [
+    {
+      key: "0",
+      label: t("all"),
+    },
+    {
+      key: "1",
+      label: t("inDelivery"),
+    },
+    {
+      key: "2",
+      label: t("pendingDelivery"),
+    },
+    {
+      key: "3",
+      label: t("pendingPayment"),
+    },
+  ];
   const [activeKey, setActiveKey] = useState("0");
   const { setType } = useOrderDetailsStore();
   const onChange = (key: string) => {

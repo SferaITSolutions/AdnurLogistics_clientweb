@@ -6,6 +6,7 @@ import { Drawer } from 'antd';
 import Logo from '@/shared/components/dump/atoms/Logo';
 import MenuItem from './menu-item';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -14,7 +15,8 @@ export const DrawerSidebar = ({
   closeSidebar: () => void;
   isOpen: boolean;
 }) => {
-  const router = useRouter();
+  const t = useTranslations("clientDashboard");
+  const   router = useRouter();
   const logout = () => {
     localStorage.removeItem('access_token');
     router.push('/');
@@ -31,9 +33,9 @@ export const DrawerSidebar = ({
       <div className="flex flex-col h-full text-white">
         <Logo />
         <nav className="flex flex-col gap-3 mt-10">
-          <MenuItem label="Dashboard" path="/client/dashboard" icon={<FaHome color="white" />} />
+          <MenuItem label={t("dashboard")} path="/client/dashboard" icon={<FaHome color="white" />} />
           <MenuItem
-            label="Calculation"
+            label={t("calculation")}
             path="/client/calculation"
             icon={<FaCalculator color="white" />}
           />
@@ -46,7 +48,7 @@ export const DrawerSidebar = ({
             className="!mb-3 flex items-center gap-2 text-xl"
           >
             <FaSignOutAlt color="red" />
-            Logout
+            {t("logout")}
           </button>
         </div>
       </div>

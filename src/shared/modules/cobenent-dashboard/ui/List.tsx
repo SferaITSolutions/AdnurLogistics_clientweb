@@ -8,6 +8,7 @@ import OrderDetailsModal from '@/features/order-details/ui';
 import { Spin } from 'antd';
 import DashboardCard from '../molecules/cards';
 import Pagination from '../molecules/pagination';
+import { FaSpinner } from 'react-icons/fa';
 
 export default function OrdersList() {
   const { setOrderId, openModal, orderIdFilter, page, type, setLoading, setStartEndDate } =
@@ -36,13 +37,14 @@ export default function OrdersList() {
   useEffect(() => {
     setLoading(isLoading);
   }, [isLoading]);
-
+  
   return (
     <div className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
         {isLoading ? (
-          <div className="flex items-center justify-center">
-            <Spin size="large" />
+          <div className="flex items-center justify-center " >
+            <FaSpinner size={40} className="animate-spin" />
           </div>
         ) : (
           data?.data.map(
@@ -65,7 +67,7 @@ export default function OrdersList() {
                 Volume={Number(card.density)}
                 Weight={String(card.weight)}
                 onClick={() => {
-                  setOrderId(card.id);
+                  setOrderId("33541");
                   openModal();
                   setStartEndDate({ start: card.createddate, end: card.etadate });
                 }}

@@ -15,10 +15,12 @@ import { FROM_OPTIONS } from "@/shared/constants";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
 import { FaSpinner } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 const { Option } = Select;
 
 export default function FormCalculation() {
+  const t = useTranslations("calculationPage");
   const { values, setValue, resetForm } = useFormStore();
   const { setResponse } = useCalculationStore();
   const calculationMutation = useCalculation((data: any) => {
@@ -67,11 +69,11 @@ export default function FormCalculation() {
       className="w-full"
     >
       <Form.Item
-        label="Qayerdan"
+        label={t("fromLabel")}
         name="from"
-        rules={[{ required: true, message: "Manzilni tanlang" }]}
+        rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
-        <Select placeholder="Qayerdan tanlang" value={values.from}>
+        <Select placeholder={t("fromPlaceholder")} value={values.from}>
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
@@ -80,81 +82,81 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label="KG"
+        label={t("weightLabel")}
         name="kg"
         rules={[
-          { required: true, message: "Iltimos, og'irlikni kg da kiriting" },
+          { required: true, message: t("weightPlaceholder") },
           {
             type: "number",
             min: 0.01,
-            message: "Qiymat 0 dan katta bo‘lishi kerak",
+            message: t("valueGreaterThanZero"),
           },
         ]}
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
-          placeholder="Og'irlikni kiriting (kg)"
+          placeholder={t("weightPlaceholder")}
           min={0.01}
         />
       </Form.Item>
 
       <Form.Item
-        label="KG/m³"
+        label={t("densityLabel")}
         name="kgm3"
         rules={[
           {
             required: true,
-            message: "Iltimos, 1 m³ uchun og'irlikni kiriting",
+            message: t("densityPlaceholder"),
           },
           {
             type: "number",
             min: 0.01,
-            message: "Qiymat 0 dan katta bo‘lishi kerak",
+            message: t("valueGreaterThanZero"),
           },
         ]}
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
-          placeholder="KG/m³ kiriting"
+          placeholder={t("densityPlaceholder")}
           min={0.01}
           value={values.kgm3}
           onChange={(val) => setValue("kgm3", val)}
         />
       </Form.Item>
       <Form.Item
-        label="m³"
+        label={t("volumeLabel")}
         name="m3"
         rules={[
-          { required: true, message: "Iltimos, hajmni m³ ni kiriting" },
+          { required: true, message: t("volumePlaceholder") },
           {
             type: "number",
             min: 0.01,
-            message: "Qiymat 0 dan katta bo‘lishi kerak",
+            message: t("valueGreaterThanZero"),
           },
         ]}
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
-          placeholder="Hajmni kiriting (m³)"
+          placeholder={t("volumePlaceholder")}
           min={0.01}
           value={values.m3}
           onChange={(val) => setValue("m3", val)}
         />
       </Form.Item>
       <Form.Item
-        label="Turi"
+        label={t("typeLabel")}
         name="containerType"
-        rules={[{ required: true, message: "Konteyner turini tanlang" }]}
+        rules={[{ required: true, message: t("containerTypePlaceholder") }]}
       >
         <Radio.Group
           value={values.containerType}
           onChange={(e) => setValue("containerType", e.target.value)}
         >
-          <Radio value="ICL">ICL (Qisman konteyner)</Radio>
-          <Radio value="FCL">FCL (To‘liq konteyner)</Radio>
+          <Radio value="ICL">{t("typeIcl")}</Radio>
+          <Radio value="FCL">{t("typeFcl")}</Radio>
         </Radio.Group>
       </Form.Item>
       <Form.Item
@@ -165,7 +167,7 @@ export default function FormCalculation() {
             validator(_, value) {
               if (value) return Promise.resolve();
               return Promise.reject(
-                new Error("Hisoblash uchun bojxona narxi bilan rozilik kerak")
+                new Error(t("customsAgreement"))
               );
             },
           },
@@ -177,7 +179,7 @@ export default function FormCalculation() {
             setValue("customsPriceCalculation", e.target.checked)
           }
         >
-          Bojxona xizmat narxi bilan hisoblash
+          {t("customsLabel")}
         </Checkbox>
       </Form.Item>
       <Form.Item>
@@ -186,7 +188,7 @@ export default function FormCalculation() {
           className="bg-secondary-blue-color !p-4 w-full"
           htmlType="submit"
         >
-          Hisoblash
+          {t("calculateButton")}
         </Button>
       </Form.Item>
     </Form>

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ButtonPrimary, ButtonSecondary } from "@/shared/components/dump/atoms/button";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/features/change-language/ui";
 
 export const Navbar = () => {
   const navigate = useRouter();
@@ -18,6 +19,7 @@ export const Navbar = () => {
 
         {/* Desktop nav links */}
         <div className="flex items-center gap-6 justify-center">
+        <LanguageSwitcher />
           <ButtonPrimary
             type="primary"
             label={t("login")}

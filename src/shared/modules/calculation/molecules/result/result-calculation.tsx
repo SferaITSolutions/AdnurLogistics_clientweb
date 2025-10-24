@@ -6,9 +6,11 @@ import React, { useEffect, useState } from "react";
 import { useFormStore } from "../../store/store";
 import { useCreatePetition } from "@/entities/hooks/calculation/hooks";
 import { FaArrowLeft, FaArrowUp, FaSpinner } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 export default function ResultCalculation({ response }: { response: any }) {
   const { values } = useFormStore();
+  const t = useTranslations("calculationResult");
   const createPetitionMutation = useCreatePetition();
 
   // Modal state for petition success
@@ -55,29 +57,26 @@ export default function ResultCalculation({ response }: { response: any }) {
         centered
         footer={[
           <Button key="ok" type="primary" onClick={handleModalOk}>
-            OK
+            {t("modalButtonOk")}
           </Button>,
         ]}
       >
         <div className="flex flex-col gap-3 items-center">
           <span className="text-lg font-semibold">
-            So’rovingiz qabul qilindi!
+            {t("modalTitleSuccess")}
           </span>
-          <span>
-            Adminga so’rov yuborildi. Yaqin orada siz bilan bog'lanishadi.
-          </span>
+          <span>{t("modalMessageSuccess")}</span>
         </div>
       </Modal>
       {response ? (
         <>
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold">Hisoblangan narx: </h1>
-            <p className="text-xl font-bold">${response?.result || 0} USD</p>
+            <h1 className="text-xl font-bold">{t("calculatedPriceTitle")} </h1>
+            <p className="text-xl font-bold">
+              ${response?.result || 0} {t("priceSuffix")}
+            </p>
           </div>
-          <p>
-            Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi
-            mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi.
-          </p>
+          <p>{t("disclaimer")}</p>
           <Button
             type="primary"
             htmlType="submit"
@@ -85,21 +84,22 @@ export default function ResultCalculation({ response }: { response: any }) {
             onClick={handleCreatePetition}
             disabled={createPetitionMutation.isPending}
           >
-            Adminga so’rov qoldirish
+            {t("sendRequestButton")}
           </Button>
         </>
       ) : (
-        <div className="flex flex-col items-center justify-center h-full gap-3 py-8 text-gray-500">
-          <div className="flex items-center flex-col gap-5 text-lg font-semibold">
-            <FaArrowLeft size={40} className="text-primary lg:block hidden" />
-            <FaArrowUp size={40} className="text-primary lg:hidden block" />
-            <span>
-              So'rov qoldirish uchun avval hisoblashni amalga oshiring!
+        <div className="flex flex-col items-center justify-center min-h-[260px] rounded-lg gap-4 px-4 py-10">
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center gap-2 mb-3">
+              <FaArrowLeft size={32} className="text-primary/60 lg:block hidden" />
+              <FaArrowUp size={32} className="text-primary/60 lg:hidden block" />
+            </div>
+            <span className="text-lg font-bold text-primary text-center">
+              {t("errorNeedCalculationTitle")}
             </span>
           </div>
-          <p className="text-sm text-center">
-            Iltimos, hisob-kitob natijasini olish uchun avval formadagi barcha
-            maydonlarni to'ldirib, hisoblashingiz kerak.
+          <p className="text-base text-center text-gray-600">
+            {t("errorNeedCalculationMessage")}
           </p>
         </div>
       )}

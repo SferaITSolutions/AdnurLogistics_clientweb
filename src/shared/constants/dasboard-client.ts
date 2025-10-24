@@ -27,21 +27,3 @@ export const cardsExampleList = [
     Status: "Delivered",
   },
 ];
-export const items = [
-  {
-    key: "0",
-    label: "Barchasi",
-  },
-  {
-    key: "1",
-    label: "Yetkazib berish jarayonida",
-  },
-  {
-    key: "2",
-    label: "Yetkazib berish kutilmoqda",
-  },
-  {
-    key: "3",
-    label: "To'lov kutilmoqda",
-  },
-];

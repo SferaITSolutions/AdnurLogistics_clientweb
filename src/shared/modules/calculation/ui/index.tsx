@@ -6,7 +6,9 @@ import { TitleText } from "@/shared/components/dump/atoms/title";
 import ResultCalculation from "../molecules/result/result-calculation";
 import { useFormStore } from "../store/store";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
+import { useTranslations } from "next-intl";
 export default function CalculationUI() {
+  const t = useTranslations("calculationPage");
   const { response } = useCalculationStore();
   const { values } = useFormStore();
   return (
@@ -14,7 +16,7 @@ export default function CalculationUI() {
       <FonLogo />
       <FonImage />
       <div className="w-full flex justify-center items-center">
-        <TitleText title="Buyurtmani narxini hisoblash" />
+        <TitleText title={t("title")} />
       </div>
       <div className="flex justify-between flex-col lg:flex-row gap-5 mt-10">
         <div className="w-full bg-white rounded-lg !p-4 !px-10 shadow-md">

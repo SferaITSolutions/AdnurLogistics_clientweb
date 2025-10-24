@@ -1,5 +1,4 @@
 "use client";
-
 import { MdMenu } from "react-icons/md";
 import NavbarItems from "@/shared/components/dump/molecules/navbar-items";
 import NotificationsRoute from "./atoms/notofications-route";
@@ -10,8 +9,10 @@ import { formatPhone } from "@/shared/utils/formatter";
 import { useMe } from "./hook/hook";
 import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
 import { useUpdateProfileModalStore } from "@/features/update-profile/lib/store";
+import { useTranslations } from "next-intl";
 
 const Navbar: React.FC = () => {
+  const t = useTranslations("personalNumberPage");
   const { isOpen, toggleSidebar } = useSidebarStore();
   const { openModal } = useUpdateProfileModalStore();
   const { data } = useMe();
@@ -29,8 +30,7 @@ const Navbar: React.FC = () => {
           </button>
         )}
         <h1 className="text-md lg:text-xl font-semibold text-gray-500 !mb-0">
-          {/* {info?.code ? `Shaxsiy raqam: ${info?.code}` : null} */}
-          Shaxsiy raqam: {info?.code || "-"}
+          {t("label")}: {info?.code || "-"}
         </h1>
       </div>
       <div className="flex items-center gap-5">

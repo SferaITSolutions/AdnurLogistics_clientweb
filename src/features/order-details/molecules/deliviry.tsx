@@ -1,3 +1,5 @@
+"use client";
+import { useTranslations } from 'next-intl';
 import { From, ToLocation } from '../atoms';
 
 // import DeleveryStatus from '../atoms/delevery-status'
@@ -14,14 +16,14 @@ interface DeliviryStatusProps {
 export default function DeliviryStatus({ deliviryStatus }: DeliviryStatusProps) {
   const from = deliviryStatus?.fromLocation ? 'Yiwu, China' : null;
   const to = deliviryStatus?.toLocation;
-
+const t = useTranslations("clientDashboard");
   const isLoading = !from && !to;
 
   return (
     <div className="flex flex-col gap-4">
       {isLoading ? (
         <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-blue-50 border border-blue-200 shadow-sm text-gray-500 font-medium">
-          <span>Maxsulotingiz Yig'ilmoqda </span>
+          <span>{t("itemsBeingCollected")}</span>
         </div>
       ) : (
         <div className="flex items-center gap-4 p-4 rounded-xl bg-blue-50 border border-blue-200 shadow-sm">

@@ -1,6 +1,9 @@
+"use client";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 export default function InvoiceStatus({ invoiceStatus }: { invoiceStatus: string }) {
+  const t = useTranslations("clientDashboard");
   const statusStyle: Record<string, string> = {
     Paid: "bg-green-50 text-green-700 border-green-200",
     "Paid In Full": "bg-green-50 text-green-700 border-green-200",
@@ -21,7 +24,7 @@ export default function InvoiceStatus({ invoiceStatus }: { invoiceStatus: string
   }
   return (
     <div className="flex flex-row items-center justify-between mb-3">
-      <span className="text-sm text-gray-500">Status</span>
+      <span className="text-sm text-gray-500">{t("status")}</span>
       <span
         className={
           "px-3 py-1 text-xs rounded-xl border font-semibold " +
