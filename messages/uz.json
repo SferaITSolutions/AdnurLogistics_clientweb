@@ -272,6 +272,7 @@
   },
   "clientDashboard": {
     "title": "Bosh sahifa",
+    "orderDetails": "Buyurtma ma’lumotlari",
     "all": "Barchasi",
     "inDelivery": "Yetkazib berish jarayonida",
     "pendingDelivery": "Yetkazib berish kutilmoqda",
@@ -330,5 +331,10 @@
     "sendRequestButton": "Adminga so’rov qoldirish",
     "errorNeedCalculationTitle": "So'rov qoldirish uchun avval hisoblashni amalga oshiring!",
     "errorNeedCalculationMessage": "Iltimos, hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak."
+  },
+  "regions": {
+    "horgos": "Horgos",
+    "yiwu": "Yiwu",
+    "foshan": "Foshan"
   }
-}
+} 

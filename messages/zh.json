@@ -272,6 +272,7 @@
     "calculation": "计算",
     "itemsBeingCollected": "货物正在集货中",
     "productDetails": "产品详情",
+    "orderDetails": "订单详情",
     "from": "从",
     "to": "到",
     "eta": "预计到达时间:",
@@ -330,5 +331,10 @@
     "quantity": "数量:",
     "priceSum": "价格 (苏姆):",
     "totalAmount": "总金额 (苏姆):"
+  },
+  "regions": {
+    "horgos": "霍尔果斯",
+    "yiwu": "义乌",
+    "foshan": "佛山"
   }
 }

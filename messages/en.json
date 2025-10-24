@@ -265,6 +265,7 @@
   "clientDashboard": {
     "title": "Dashboard Client",
     "all": "All",
+    "orderDetails": "Order Details",
     "inDelivery": "In Delivery Process",
     "pendingDelivery": "Pending Delivery",
     "pendingPayment": "Pending Payment",
@@ -330,5 +331,10 @@
     "quantity": "Quantity:",
     "priceSum": "Price (UZS):",
     "totalAmount": "Total Amount (UZS):"
+  },
+  "regions": {
+    "horgos": "Horgos",
+    "yiwu": "Yiwu",
+    "foshan": "Foshan"
   }
 }

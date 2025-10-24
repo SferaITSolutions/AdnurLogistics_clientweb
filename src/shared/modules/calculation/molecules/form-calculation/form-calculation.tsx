@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { useFormStore } from "../../store/store";
 import { LiaWeightSolid } from "react-icons/lia";
-import { FROM_OPTIONS } from "@/shared/constants";
+import { FROM_OPTIONS, useRegions } from "@/shared/constants";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
 import { FaSpinner } from "react-icons/fa";
@@ -74,7 +74,7 @@ export default function FormCalculation() {
         rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
         <Select placeholder={t("fromPlaceholder")} value={values.from}>
-          {FROM_OPTIONS.map((option: { value: string; label: string }) => (
+          {useRegions().FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
             </Option>

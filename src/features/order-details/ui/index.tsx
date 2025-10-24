@@ -29,7 +29,7 @@ const OrderDetailsModal: React.FC = () => {
   if (isLoading) return <Spin />;
   return (
     <Drawer
-      title={`Order Details${orderId ? ` - ${orderId}` : ""}`}
+      title={`${t("orderDetails")}${orderId ? ` - ${orderId}` : ""}`}
       placement="right"
       onClose={closeModal}
       open={isModalOpen}
@@ -41,7 +41,7 @@ const OrderDetailsModal: React.FC = () => {
         {orderId ? (
           <>
             <div className="text-gray-800 mb-2">
-              Details for order: <span className="font-mono">{orderId}</span>
+              {t("orderDetails")} <span className="font-mono">{orderId}</span>
             </div>
             <YandexMapWith
               origin={

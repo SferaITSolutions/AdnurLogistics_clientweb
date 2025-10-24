@@ -9,7 +9,7 @@ import {
 import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
 
 import SelectBefore from "@/shared/components/dump/atoms/select-before";
-import { FROM_OPTIONS } from "@/shared/constants";
+import { FROM_OPTIONS, useRegions } from "@/shared/constants";
 import { TitleText } from "@/shared/modules/lending-page";
 import { useGlobalStore } from "@/shared/store/globalStore";
 import { ApplyRequest } from "@/shared/types/lenging-page-types";
@@ -144,7 +144,7 @@ export const ApplyModal = () => {
           >
             <Select
               placeholder={t("fields.fromLocation.placeholder")}
-              options={FROM_OPTIONS}
+              options={useRegions().FROM_OPTIONS}
             />
           </Form.Item>
           <Form.Item

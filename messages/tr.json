@@ -265,6 +265,7 @@
   "clientDashboard": {
     "title": "Ana Sayfa",
     "all": "Hepsi",
+    "orderDetails": "Sipariş Detayları",
     "inDelivery": "Teslimat Aşamasında",
     "pendingDelivery": "Teslimat Bekleniyor",
     "pendingPayment": "Ödeme Bekleniyor",
@@ -330,5 +331,10 @@
     "sendRequestButton": "Yöneticiye Talep Gönder",
     "errorNeedCalculationTitle": "Talep göndermek için önce hesaplama yapın!",
     "errorNeedCalculationMessage": "Lütfen hesaplama sonucunu almak için öncelikle formdaki tüm alanları doldurup hesaplama yapmalısınız."
+  },
+  "regions": {
+    "horgos": "Horgos",
+    "yiwu": "Yiwu",
+    "foshan": "Foshan"
   }
 }

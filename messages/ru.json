@@ -273,6 +273,7 @@
   "clientDashboard": {
     "title": "Панель Клиента",
     "all": "Все",
+    "orderDetails": "Детали заказа",
     "inDelivery": "В процессе доставки",
     "pendingDelivery": "Ожидается доставка",
     "pendingPayment": "Ожидается оплата",
@@ -330,5 +331,10 @@
     "sendRequestButton": "Отправить запрос администратору",
     "errorNeedCalculationTitle": "Чтобы оставить заявку, сначала выполните расчет!",
     "errorNeedCalculationMessage": "Пожалуйста, заполните все поля в форме и выполните расчет, чтобы получить результат."
+  },
+  "regions": {
+    "horgos": "Хоргос",
+    "yiwu": "Уиу",
+    "foshan": "Фосхан"
   }
 }
