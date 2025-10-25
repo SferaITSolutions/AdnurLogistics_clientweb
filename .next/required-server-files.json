@@ -2,6 +2,7 @@
   "version": 1,
   "config": {
     "env": {},
+    "webpack": null,
     "eslint": {
       "ignoreDuringBuilds": true
     },
@@ -97,7 +98,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\Vini\\Desktop\\adnurlogistics_clientweb",
+    "outputFileTracingRoot": "/home/alisher/projects/adnur-logistic",
     "experimental": {
       "useSkewCookie": false,
       "cacheLife": {
@@ -156,7 +157,7 @@
       "middlewarePrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 11,
+      "cpus": 7,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -177,6 +178,11 @@
       "swcTraceProfiling": false,
       "forceSwcTransforms": false,
       "largePageDataBytes": 128000,
+      "turbo": {
+        "resolveAlias": {
+          "next-intl/config": "./src/i18n/request.ts"
+        }
+      },
       "typedEnv": false,
       "parallelServerCompiles": false,
       "parallelServerBuildTraces": false,
@@ -287,32 +293,33 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "C:\\Users\\Vini\\Desktop\\adnurlogistics_clientweb"
+      "resolveAlias": {
+        "next-intl/config": "./src/i18n/request.ts"
+      },
+      "root": "/home/alisher/projects/adnur-logistic"
     }
   },
-  "appDir": "C:\\Users\\Vini\\Desktop\\adnurlogistics_clientweb",
+  "appDir": "/home/alisher/projects/adnur-logistic",
   "relativeAppDir": "",
   "files": [
-    ".next\\routes-manifest.json",
-    ".next\\server\\pages-manifest.json",
-    ".next\\build-manifest.json",
-    ".next\\prerender-manifest.json",
-    ".next\\server\\functions-config-manifest.json",
-    ".next\\server\\middleware-manifest.json",
-    ".next\\server\\middleware-build-manifest.js",
-    ".next\\server\\middleware-react-loadable-manifest.js",
-    ".next\\react-loadable-manifest.json",
-    ".next\\server\\app-paths-manifest.json",
-    ".next\\app-path-routes-manifest.json",
-    ".next\\app-build-manifest.json",
-    ".next\\server\\server-reference-manifest.js",
-    ".next\\server\\server-reference-manifest.json",
-    ".next\\BUILD_ID",
-    ".next\\server\\next-font-manifest.js",
-    ".next\\server\\next-font-manifest.json",
-    ".next\\required-server-files.json"
+    ".next/routes-manifest.json",
+    ".next/server/pages-manifest.json",
+    ".next/build-manifest.json",
+    ".next/prerender-manifest.json",
+    ".next/server/functions-config-manifest.json",
+    ".next/server/middleware-manifest.json",
+    ".next/server/middleware-build-manifest.js",
+    ".next/server/app-paths-manifest.json",
+    ".next/app-path-routes-manifest.json",
+    ".next/app-build-manifest.json",
+    ".next/server/server-reference-manifest.js",
+    ".next/server/server-reference-manifest.json",
+    ".next/BUILD_ID",
+    ".next/server/next-font-manifest.js",
+    ".next/server/next-font-manifest.json",
+    ".next/required-server-files.json"
   ],
   "ignore": [
-    "node_modules\\.pnpm\\next@15.5.5_@babel+core@7.2_aec852d797e571d83e438071d3e163a7\\node_modules\\next\\dist\\compiled\\@ampproject\\toolbox-optimizer\\**\\*"
+    "node_modules/.pnpm/next@15.5.5_@babel+core@7.28.4_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*"
   ]
 }
