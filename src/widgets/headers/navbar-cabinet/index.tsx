@@ -1,20 +1,18 @@
-"use client";
-import { MdMenu } from "react-icons/md";
-import NavbarItems from "@/shared/components/dump/molecules/navbar-items";
-import NotificationsRoute from "./atoms/notofications-route";
-import React from "react";
-import UpdateProfileModal from "@/features/update-profile/ui/update-modal";
-import UserDetails from "./molecules/get-me";
-import { formatPhone } from "@/shared/utils/formatter";
-import { useMe } from "./hook/hook";
-import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
-import { useUpdateProfileModalStore } from "@/features/update-profile/lib/store";
-import { useTranslations } from "next-intl";
+'use client';
+
+import { useSidebarStore } from '@/features/auth/register/store/sidebarStore';
+import NavbarItems from '@/shared/components/dump/molecules/navbar-items';
+import { formatPhone } from '@/shared/utils/formatter';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { MdMenu } from 'react-icons/md';
+import NotificationsRoute from './atoms/notofications-route';
+import { useMe } from './hook/hook';
+import UserDetails from './molecules/get-me';
 
 const Navbar: React.FC = () => {
-  const t = useTranslations("personalNumberPage");
+  const t = useTranslations('personalNumberPage');
   const { isOpen, toggleSidebar } = useSidebarStore();
-  const { openModal } = useUpdateProfileModalStore();
   const { data } = useMe();
   const info = data?.data;
 
@@ -30,19 +28,14 @@ const Navbar: React.FC = () => {
           </button>
         )}
         <h1 className="text-md lg:text-xl font-semibold text-gray-500 !mb-0">
-          {t("label")}: {info?.code || "-"}
+          {t('label')}: {info?.code || '-'}
         </h1>
       </div>
       <div className="flex items-center gap-5">
         <NotificationsRoute />
-        <UserDetails
-          userName={info?.fullname || ""}
-          userPhone={formatPhone(info?.phone || "")}
-          onClick={() => openModal(info?.fullname || "")}
-        />
+        <UserDetails userName={info?.fullname || ''} userPhone={formatPhone(info?.phone || '')} />
         <NavbarItems />
       </div>
-      <UpdateProfileModal />
     </header>
   );
 };
