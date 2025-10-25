@@ -1,26 +1,20 @@
-"use client";
-import React, { useEffect } from "react";
-import {
-  Form,
-  Select,
-  InputNumber,
-  Radio,
-  Checkbox,
-  Button,
-  message,
-} from "antd";
-import { useFormStore } from "../../store/store";
-import { LiaWeightSolid } from "react-icons/lia";
-import { FROM_OPTIONS, useRegions } from "@/shared/constants";
-import { useCalculation } from "@/entities/hooks/calculation/hooks";
-import { useCalculationStore } from "@/entities/hooks/calculation/store";
-import { FaSpinner } from "react-icons/fa";
-import { useTranslations } from "next-intl";
+'use client';
+
+import { Button, Checkbox, Form, InputNumber, Radio, Select } from 'antd';
+
+import { useCalculation } from '@/entities/hooks/calculation/hooks';
+import { useCalculationStore } from '@/entities/hooks/calculation/store';
+import { useRegions } from '@/shared/constants';
+import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import { FaSpinner } from 'react-icons/fa';
+import { LiaWeightSolid } from 'react-icons/lia';
+import { useFormStore } from '../../store/store';
 
 const { Option } = Select;
 
 export default function FormCalculation() {
-  const t = useTranslations("calculationPage");
+  const t = useTranslations('calculationPage');
   const { values, setValue, resetForm } = useFormStore();
   const { setResponse } = useCalculationStore();
   const calculationMutation = useCalculation((data: any) => {
@@ -60,6 +54,7 @@ export default function FormCalculation() {
       </div>
     );
   }
+
   return (
     <Form
       form={form}
@@ -70,11 +65,16 @@ export default function FormCalculation() {
       className="w-full"
     >
       <Form.Item
-        label={t("fromLabel")}
+        label={t('fromLabel')}
         name="from"
-        rules={[{ required: true, message: t("fromPlaceholder") }]}
+        rules={[{ required: true, message: t('fromPlaceholder') }]}
       >
-        <Select placeholder={t("fromPlaceholder")} value={values.from}>
+        <Select
+          style={{ borderRadius: '8px' }}
+          className="!rounded-xl"
+          placeholder={t('fromPlaceholder')}
+          value={values.from}
+        >
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
@@ -83,21 +83,22 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label={t("weightLabel")}
+        label={t('weightLabel')}
         name="kg"
         rules={[
-          { required: true, message: t("weightPlaceholder") },
+          { required: true, message: t('weightPlaceholder') },
           {
-            type: "number",
+            type: 'number',
             min: 0.01,
-            message: t("valueGreaterThanZero"),
+            message: t('valueGreaterThanZero'),
           },
         ]}
       >
         <InputNumber
+          className="!rounded-xl"
           prefix={<LiaWeightSolid color="blue" size={18} />}
-          style={{ width: "100%" }}
-          placeholder={t("weightPlaceholder")}
+          style={{ width: '100%' }}
+          placeholder={t('weightPlaceholder')}
           min={0.01}
         />
       </Form.Item>
@@ -127,37 +128,38 @@ export default function FormCalculation() {
         />
       </Form.Item> */}
       <Form.Item
-        label={t("volumeLabel")}
+        label={t('volumeLabel')}
         name="m3"
         rules={[
-          { required: true, message: t("volumePlaceholder") },
+          { required: true, message: t('volumePlaceholder') },
           {
-            type: "number",
+            type: 'number',
             min: 0.01,
-            message: t("valueGreaterThanZero"),
+            message: t('valueGreaterThanZero'),
           },
         ]}
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
-          style={{ width: "100%" }}
-          placeholder={t("volumePlaceholder")}
+          className="!rounded-xl !w-full"
+          placeholder={t('volumePlaceholder')}
           min={0.01}
           value={values.m3}
-          onChange={(val) => setValue("m3", val)}
+          onChange={(val) => setValue('m3', val)}
         />
       </Form.Item>
       <Form.Item
-        label={t("typeLabel")}
+        label={t('typeLabel')}
         name="containerType"
-        rules={[{ required: true, message: t("containerTypePlaceholder") }]}
+        className="!pb-0"
+        rules={[{ required: true, message: t('containerTypePlaceholder') }]}
       >
         <Radio.Group
           value={values.containerType}
-          onChange={(e) => setValue("containerType", e.target.value)}
+          onChange={(e) => setValue('containerType', e.target.value)}
         >
-          <Radio value="ICL">{t("typeIcl")}</Radio>
-          <Radio value="FCL">{t("typeFcl")}</Radio>
+          <Radio value="ICL">{t('typeIcl')}</Radio>
+          <Radio value="FCL">{t('typeFcl')}</Radio>
         </Radio.Group>
       </Form.Item>
       <Form.Item
@@ -167,27 +169,25 @@ export default function FormCalculation() {
           {
             validator(_, value) {
               if (value) return Promise.resolve();
-              return Promise.reject(new Error(t("customsAgreement")));
+              return Promise.reject(new Error(t('customsAgreement')));
             },
           },
         ]}
       >
         <Checkbox
           checked={values.customsPriceCalculation}
-          onChange={(e) =>
-            setValue("customsPriceCalculation", e.target.checked)
-          }
+          onChange={(e) => setValue('customsPriceCalculation', e.target.checked)}
         >
-          {t("customsLabel")}
+          {t('customsLabel')}
         </Checkbox>
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="mt-3">
         <Button
           type="primary"
-          className="bg-secondary-blue-color !p-4 w-full"
+          className="bg-secondary-blue-color !p-4 w-full !rounded-xl"
           htmlType="submit"
         >
-          {t("calculateButton")}
+          {t('calculateButton')}
         </Button>
       </Form.Item>
     </Form>

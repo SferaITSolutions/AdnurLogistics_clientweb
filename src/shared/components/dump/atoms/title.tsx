@@ -1,4 +1,3 @@
-import React from "react";
 export const TitleText = ({
   title,
   redText,
@@ -11,9 +10,7 @@ export const TitleText = ({
   return (
     <div className="flex items-center gap-2">
       <div
-        className={`text-5xl font-bold ${
-          color ? `text-${color}` : "text-secondary-black-color"
-        }`}
+        className={`text-3xl !font-bold ${color ? `text-${color}` : 'text-secondary-black-color'}`}
       >
         <span className="text-primary-red-color">{redText} </span>
         <span>{title}</span>

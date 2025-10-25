@@ -21,7 +21,7 @@ export default function CollapseItems({ productData }: CollapseItemsProps) {
       key: '1',
       label: (
         <div className="flex flex-row items-center gap-2 !mb-0">
-          <span className="text-xs bg-blue-50 text-primary-blue font-semibold rounded px-2.5 mr-3">
+          <span className="text-lg bg-blue-50 text-gray-700 !font-bold rounded px-2.5 mr-3">
             {t('orderNumber')}
           </span>
           <span className="text-base text-gray-700 font-bold">{productData?.documentNumber}</span>

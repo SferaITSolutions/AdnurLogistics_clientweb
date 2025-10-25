@@ -1,17 +1,17 @@
-"use client";
-import { useCalculationStore } from "@/entities/hooks/calculation/store";
-import { useFormRequestStore } from "@/features/send-request-to-admin/lib/store";
-import { Button, Modal } from "antd";
-import React, { useEffect, useState } from "react";
-import { useFormStore } from "../../store/store";
-import { useCreatePetition } from "@/entities/hooks/calculation/hooks";
-import { FaArrowLeft, FaArrowUp, FaSpinner } from "react-icons/fa";
-import { useTranslations } from "next-intl";
-import { formatNumber } from "@/shared/utils/formatter";
+'use client';
+
+import { Button, Modal } from 'antd';
+import { useEffect, useState } from 'react';
+import { FaArrowLeft, FaArrowUp, FaSpinner } from 'react-icons/fa';
+
+import { useCreatePetition } from '@/entities/hooks/calculation/hooks';
+import { formatNumber } from '@/shared/utils/formatter';
+import { useTranslations } from 'next-intl';
+import { useFormStore } from '../../store/store';
 
 export default function ResultCalculation({ response }: { response: any }) {
   const { values } = useFormStore();
-  const t = useTranslations("calculationResult");
+  const t = useTranslations('calculationResult');
   const createPetitionMutation = useCreatePetition();
 
   // Modal state for petition success
@@ -20,7 +20,7 @@ export default function ResultCalculation({ response }: { response: any }) {
   const handleCreatePetition = () => {
     createPetitionMutation.mutate({
       fromLocation: values.from,
-      toLocation: "TASHKENT",
+      toLocation: 'TASHKENT',
       weight: values.kg,
       bulk: values.m3,
       containerType: values.containerType,
@@ -57,26 +57,24 @@ export default function ResultCalculation({ response }: { response: any }) {
         centered
         footer={[
           <Button key="ok" type="primary" onClick={handleModalOk}>
-            {t("modalButtonOk")}
+            {t('modalButtonOk')}
           </Button>,
         ]}
       >
         <div className="flex flex-col gap-3 items-center">
-          <span className="text-lg font-semibold">
-            {t("modalTitleSuccess")}
-          </span>
-          <span>{t("modalMessageSuccess")}</span>
+          <span className="text-lg font-semibold">{t('modalTitleSuccess')}</span>
+          <span>{t('modalMessageSuccess')}</span>
         </div>
       </Modal>
       {response ? (
         <>
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold">{t("calculatedPriceTitle")} </h1>
+            <h1 className="text-xl font-bold">{t('calculatedPriceTitle')} </h1>
             <p className="text-xl font-bold">
-              ${formatNumber(response?.result) || 0} {t("priceSuffix")}
+              ${formatNumber(response?.result) || 0} {t('priceSuffix')}
             </p>
           </div>
-          <p>{t("disclaimer")}</p>
+          <p>{t('disclaimer')}</p>
           <Button
             type="primary"
             htmlType="submit"
@@ -84,7 +82,7 @@ export default function ResultCalculation({ response }: { response: any }) {
             onClick={handleCreatePetition}
             disabled={createPetitionMutation.isPending}
           >
-            {t("sendRequestButton")}
+            {t('sendRequestButton')}
           </Button>
         </>
       ) : (
@@ -94,13 +92,11 @@ export default function ResultCalculation({ response }: { response: any }) {
               <FaArrowLeft size={32} className="text-primary/60 lg:block hidden" />
               <FaArrowUp size={32} className="text-primary/60 lg:hidden block" />
             </div>
-            <span className="text-lg font-bold text-primary text-center">
-              {t("errorNeedCalculationTitle")}
+            <span className="text-xl !font-semibold text-primary text-center">
+              {t('errorNeedCalculationTitle')}
             </span>
           </div>
-          <p className="text-base text-center text-gray-600">
-            {t("errorNeedCalculationMessage")}
-          </p>
+          <p className="text-lg text-center text-gray-600">{t('errorNeedCalculationMessage')}</p>
         </div>
       )}
     </div>
