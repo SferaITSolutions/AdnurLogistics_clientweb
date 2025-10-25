@@ -1,7 +1,7 @@
 import { Link, usePathname } from '@/i18n/routing';
 
-import { ReactNode } from 'react';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
 
 interface SidebarItemProps {
   path: string;
@@ -17,11 +17,11 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
     <Link
       href={path}
       className={clsx(
-        'group flex items-center gap-3 px-4 py-3 rounded-r-xl text-sm font-medium transition-all duration-100',
+        'group flex items-center gap-3 px-4 py-3 rounded-r-2xl text-sm font-medium transition-all duration-100',
         'text-gray-300 hover:text-white',
         isActive
-          ? 'bg-[#104AE4E3] shadow-md scale-[1.02] text-white rounded-r-xl'
-          : 'hover:bg-primary-blue-color/40 hover:scale-[1.02]',
+          ? 'bg-[#104AE4E3] shadow-md scale-[1.02] text-white rounded-r-2xl'
+          : 'hover:bg-primary-blue-color/40 shadow-sm hover:scale-[1.02]',
       )}
     >
       {/* Icon qismi */}
@@ -38,7 +38,7 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
       )}
 
       {/* Label qismi */}
-      <span className={clsx('transition-all duration-300 text-white')}>{label}</span>
+      <span className={clsx('transition-all duration-300 text-white text-xl')}>{label}</span>
 
       {/* Active chiziq animatsiyasi */}
       <span

@@ -9,9 +9,17 @@ export default function SidebarItems() {
   const t = useTranslations('clientDashboard');
 
   return (
-    <nav className="flex flex-col gap-3 mt-10 text-white z-50">
-      <MenuItem label={t('dashboard')} path={`/client/dashboard`} icon={<FaHome color="white" />} />
-      <MenuItem label={t('calculation')} path={`/client/calculation`} icon={<FaCalculator />} />
+    <nav className="flex flex-col gap-5 mt-10 text-white z-50">
+      <MenuItem
+        label={t('dashboard')}
+        path={`/client/dashboard`}
+        icon={<FaHome size={26} color="white" />}
+      />
+      <MenuItem
+        label={t('calculation')}
+        path={`/client/calculation`}
+        icon={<FaCalculator size={26} />}
+      />
     </nav>
   );
 }

@@ -1,10 +1,10 @@
-"use client";
-import React from "react";
-import { FaTruck } from "react-icons/fa";
-import StatusOrder from "../atoms/status-order";
-import QuantityOrder from "../atoms/quentity-order";
-import OrderId from "../atoms/order-id";
-import ETA from "../atoms/ETA";
+'use client';
+
+import React from 'react';
+import { FaTruck } from 'react-icons/fa';
+import ETA from '../atoms/ETA';
+import OrderId from '../atoms/order-id';
+import QuantityOrder from '../atoms/quentity-order';
 
 interface DashboardCardProps {
   ETAdata?: number | string;
@@ -28,22 +28,19 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className="relative w-full cursor-pointer flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:-translate-y-[2px] transition-all duration-200"
+      className="relative w-full cursor-pointer flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:-translate-y-[2px] transition-all duration-200"
     >
       {/* Chapdagi rasm */}
       <div className="flex items-center gap-4 p-4">
-        <div className="flex items-center justify-center min-w-10 h-10 rounded-full bg-gray-100">
-          <FaTruck className="text-gray-700 text-xl" />
+        <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-gray-100">
+          <FaTruck className="text-gray-700 text-2xl" />
         </div>
 
         {/* Ma'lumotlar */}
         <div className="flex flex-col text-sm text-gray-700 leading-6">
           <ETA ETA={String(ETAdata)} />
           <OrderId OrderId={String(OrderIdprops)} />
-          <QuantityOrder
-            Volume={Number(Volume)}
-            Weight={Number(Weight)}
-          />
+          <QuantityOrder Volume={Number(Volume)} Weight={Number(Weight)} />
         </div>
       </div>
 
