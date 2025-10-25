@@ -207,7 +207,9 @@ export const ApplyModal = () => {
         {/* Message */}
         <Form.Item
           label={
-            <span className="global-label-size">{t("fields.weight.label")}</span>
+            <span className="global-label-size">
+              {t("fields.weight.label")}
+            </span>
           }
           name="weight"
           rules={[{ required: true, message: t("fields.weight.required") }]}
@@ -216,7 +218,11 @@ export const ApplyModal = () => {
         </Form.Item>
 
         <Form.Item
-          label={<span className="global-label-size">{t("fields.description.label")}</span>}
+          label={
+            <span className="global-label-size">
+              {t("fields.description.label")}
+            </span>
+          }
           name="description"
           rules={[
             { required: true, message: t("fields.description.required") },
@@ -237,7 +243,21 @@ export const ApplyModal = () => {
           htmlType="submit"
           type="primary"
           loading={applyRequest.isPending}
-          className="w-full bg-blue-600 hover:bg-blue-700 mt-2"
+          className="
+            w-full 
+            bg-primary-blue-color 
+            cursor-pointer 
+            hover:!text-[#004F98] 
+            hover:!bg-[#fff] 
+            hover:!border-[#0D6CEC] 
+            hover:!border-2 
+            !border-2 
+            border-primary-blue-color 
+            !px-6 !py-4 !rounded-full 
+            flex items-center 
+            gap-2 !text-[#fff] 
+            transition-all 
+            duration-200"
         >
           {t("button.submit")}
         </Button>
