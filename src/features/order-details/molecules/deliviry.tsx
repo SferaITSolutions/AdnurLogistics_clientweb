@@ -1,9 +1,10 @@
-"use client";
-import { useTranslations } from 'next-intl';
+'use client';
+
 import { From, ToLocation } from '../atoms';
 
-// import DeleveryStatus from '../atoms/delevery-status'
 import { FaArrowRight } from 'react-icons/fa';
+// import DeleveryStatus from '../atoms/delevery-status'
+import { useTranslations } from 'next-intl';
 
 interface DeliviryStatusProps {
   deliviryStatus: {
@@ -16,14 +17,14 @@ interface DeliviryStatusProps {
 export default function DeliviryStatus({ deliviryStatus }: DeliviryStatusProps) {
   const from = deliviryStatus?.fromLocation ? 'Yiwu, China' : null;
   const to = deliviryStatus?.toLocation;
-const t = useTranslations("clientDashboard");
+  const t = useTranslations('clientDashboard');
   const isLoading = !from && !to;
 
   return (
     <div className="flex flex-col gap-4">
       {isLoading ? (
-        <div className="flex items-center justify-center gap-2 p-4 rounded-xl bg-blue-50 border border-blue-200 shadow-sm text-gray-500 font-medium">
-          <span>{t("itemsBeingCollected")}</span>
+        <div className="flex items-center justify-center gap-2 p-4 rounded-2xl bg-blue-50 border border-blue-200 shadow-sm text-gray-500 !font-medium">
+          <span className="text-lg">{t('itemsBeingCollected')}</span>
         </div>
       ) : (
         <div className="flex items-center gap-4 p-4 rounded-xl bg-blue-50 border border-blue-200 shadow-sm">
@@ -32,7 +33,6 @@ const t = useTranslations("clientDashboard");
           <ToLocation to={to || 'Tashkent'} />
         </div>
       )}
-      {/* <DeleveryStatus deliviryStatus={deliviryStatus.status} /> */}
     </div>
   );
 }

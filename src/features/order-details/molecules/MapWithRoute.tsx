@@ -2,6 +2,8 @@
 
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { useOrderDetailsStore } from '@/features/order-details/lib/store';
 import { Tag } from 'antd';
 
 interface Props {
@@ -13,10 +15,11 @@ interface Props {
 
 const YandexMapWithTruck: React.FC<Props> = ({
   height = 400,
-  origin = "Yiwu, China",
-  destination = "Tashkent, Uzbekistan",
+  origin = 'Yiwu, China',
+  destination = 'Tashkent, Uzbekistan',
   speedKmH = 200,
 }) => {
+  const { startEndDate } = useOrderDetailsStore();
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
@@ -29,19 +32,14 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const [currentProgress, setCurrentProgress] = useState<number>(0);
   const [isMapReady, setIsMapReady] = useState(false); // Yangi state
 
-  const startEndDate = {
-    end: "2025/10/28",
-    start: "2025/10/24"
-  };
-
   const referencePoints = [
     origin?.trim() ? origin : null,
     destination?.trim() ? destination : null,
   ].filter(Boolean);
 
   const calculateCurrentFraction = () => {
-    const startDate = new Date(startEndDate.start.replace(/\//g, '-'));
-    const endDate = new Date(startEndDate.end.replace(/\//g, '-'));
+    const startDate = new Date(startEndDate.start?.replace(/\//g, '-') || '');
+    const endDate = new Date(startEndDate.end?.replace(/\//g, '-') || '');
     const now = new Date();
 
     const totalMs = endDate.getTime() - startDate.getTime();
@@ -89,16 +87,20 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const currentPosition = getPositionAtFraction(fraction, coords, ymaps);
 
     if (!carRef.current) {
-      const marker = new ymaps.Placemark(currentPosition, {
-        hintContent: `Yo'lning ${(fraction * 100).toFixed(1)}%`,
-        balloonContent: `Tezlik: ${speedKmH} km/h`,
-        iconContent: 'Truck',
-      }, {
-        iconLayout: 'default#image',
-        iconImageHref: '/truck.png',
-        iconImageSize: [40, 40],
-        iconImageOffset: [-20, -20],
-      });
+      const marker = new ymaps.Placemark(
+        currentPosition,
+        {
+          hintContent: `Yo'lning ${(fraction * 100).toFixed(1)}%`,
+          balloonContent: `Tezlik: ${speedKmH} km/h`,
+          iconContent: 'Truck',
+        },
+        {
+          iconLayout: 'default#image',
+          iconImageHref: '/truck.png',
+          iconImageSize: [40, 40],
+          iconImageOffset: [-20, -20],
+        },
+      );
 
       carRef.current = marker;
       map.geoObjects.add(marker);
@@ -128,7 +130,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
           wayPointVisible: true,
           routeActiveStrokeWidth: 5,
           routeActiveStrokeColor: '#1976d2',
-        }
+        },
       );
 
       multiRouteRef.current = multiRoute;
@@ -176,7 +178,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
   useEffect(() => {
     if (ymapsRef.current && mapRef.current && !multiRouteRef.current) {
-      console.log("✅ Map va YMaps tayyor, yo‘l yaratilmoqda...");
+      console.log('✅ Map va YMaps tayyor, yo‘l yaratilmoqda...');
       createRoute();
     }
   }, [ymapsRef.current, mapRef.current]);
@@ -187,7 +189,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
     const waitForYmapsAndMap = () => {
       if (ymapsRef.current && mapRef.current) {
-        console.log("✅ YMaps va Map tayyor!");
+        console.log('✅ YMaps va Map tayyor!');
         clearInterval(checkReady);
         createRoute();
       }
@@ -198,7 +200,6 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
     return () => clearInterval(checkReady);
   }, [origin, destination]);
-
 
   // Map tayyor bo‘lganda animatsiyani boshlash
   useEffect(() => {
@@ -214,7 +215,6 @@ const YandexMapWithTruck: React.FC<Props> = ({
       if (mapRef.current) mapRef.current.geoObjects.removeAll();
     };
   }, []);
-
 
   const isDelivered = currentProgress >= 1;
 
@@ -241,14 +241,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
       {distanceKm && (
         <div className="p-3 text-center text-sm text-gray-700 bg-gray-50 border-t">
-          Masofa: <b>{distanceKm.toFixed(1)} km</b> |{' '}
-          Tezlik: <b>{speedKmH} km/h</b> |{' '}
-          Progress: <b>{(currentProgress * 100).toFixed(1)}%</b> |{' '}
-          {isDelivered ? (
-            <Tag color="green">Yetkazib berilgan</Tag>
-          ) : (
-            <b>{startEndDate.end}</b>
-          )}
+          Masofa: <b>{distanceKm.toFixed(1)} km</b> | Tezlik: <b>{speedKmH} km/h</b> | Progress:{' '}
+          <b>{(currentProgress * 100).toFixed(1)}%</b> |{' '}
+          {isDelivered ? <Tag color="green">Yetkazib berilgan</Tag> : <b>{startEndDate.end}</b>}
         </div>
       )}
     </div>

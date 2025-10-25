@@ -1,8 +1,7 @@
-"use client";
-import React from "react";
-import { Collapse } from "antd";
-import InfoRow from "../atoms/inforow";
-import CollapseItems from "../atoms/collapse-Items";
+'use client';
+
+import { Collapse } from 'antd';
+import CollapseItems from '../atoms/collapse-Items';
 
 export default function Products({
   productData,
@@ -16,7 +15,6 @@ export default function Products({
     productNetAmount: string;
   };
 }) {
-
   return (
     <div className="max-w-md mx-auto font-sans">
       <Collapse
@@ -24,7 +22,7 @@ export default function Products({
         items={CollapseItems({ productData })} // ✅ yangi tavsiya etilgan usul
         className="!bg-white !shadow-sm !rounded-xl !border !border-gray-100 overflow-hidden"
         expandIconPosition="end"
-        style={{ boxShadow: "0 1px 8px 0 rgb(24 24 27 / 6%)" }}
+        style={{ boxShadow: '0 1px 8px 0 rgb(24 24 27 / 6%)' }}
       />
     </div>
   );

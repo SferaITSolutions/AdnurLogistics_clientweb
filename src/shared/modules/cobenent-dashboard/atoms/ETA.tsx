@@ -1,10 +1,13 @@
-"use client";
-import React from 'react'
+'use client';
+
 import { useTranslations } from 'next-intl';
 
 export default function ETA({ ETA }: { ETA: string }) {
-  const t = useTranslations("clientDashboard");
+  const t = useTranslations('clientDashboard');
   return (
-    <div>{t("eta")} <span className="font-semibold">{ETA}</span></div>
-  )
+    <div className="space-x-2">
+      <span className="!font-[700]">{t('eta')}</span>
+      <span>{ETA}</span>
+    </div>
+  );
 }
