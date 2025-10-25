@@ -4,6 +4,8 @@ import '@splidejs/splide/css';
 import 'antd/dist/reset.css';
 import './globals.css';
 
+import { Manrope, Nunito_Sans, Poppins, Urbanist } from 'next/font/google';
+
 import ThemeState from '@/context/ThemeState';
 import MainLayout from '@/providers/MainLayout';
 import { TanStackProvider } from '@/providers/TanStackProvider';
@@ -11,6 +13,26 @@ import { Toaster } from '@/shared/components/dump/ui/sonner';
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const nunito = Nunito_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'Adnur logistic',
@@ -21,7 +43,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages();
   return (
     <html lang="en">
-      <body>
+      <body className={nunito.className}>
         <TanStackProvider>
           <NextIntlClientProvider messages={messages}>
             <MainLayout>
