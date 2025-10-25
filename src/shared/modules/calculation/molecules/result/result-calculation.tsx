@@ -7,6 +7,7 @@ import { useFormStore } from "../../store/store";
 import { useCreatePetition } from "@/entities/hooks/calculation/hooks";
 import { FaArrowLeft, FaArrowUp, FaSpinner } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { formatNumber } from "@/shared/utils/formatter";
 
 export default function ResultCalculation({ response }: { response: any }) {
   const { values } = useFormStore();
@@ -73,7 +74,7 @@ export default function ResultCalculation({ response }: { response: any }) {
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold">{t("calculatedPriceTitle")} </h1>
             <p className="text-xl font-bold">
-              ${response?.result || 0} {t("priceSuffix")}
+              ${formatNumber(response?.result) || 0} {t("priceSuffix")}
             </p>
           </div>
           <p>{t("disclaimer")}</p>

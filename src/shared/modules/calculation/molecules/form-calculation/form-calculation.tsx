@@ -27,6 +27,7 @@ export default function FormCalculation() {
     setResponse(data);
   });
   const [form] = Form.useForm();
+  const { FROM_OPTIONS } = useRegions();
 
   // Sync all store values into form fields when store values change
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function FormCalculation() {
         rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
         <Select placeholder={t("fromPlaceholder")} value={values.from}>
-          {useRegions().FROM_OPTIONS.map((option: { value: string; label: string }) => (
+          {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
             </Option>
@@ -166,9 +167,7 @@ export default function FormCalculation() {
           {
             validator(_, value) {
               if (value) return Promise.resolve();
-              return Promise.reject(
-                new Error(t("customsAgreement"))
-              );
+              return Promise.reject(new Error(t("customsAgreement")));
             },
           },
         ]}
