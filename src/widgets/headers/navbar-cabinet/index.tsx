@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             <MdMenu className="text-2xl text-primary-blue-color cursor-pointer" />
           </button>
         )}
-        <h1 className="text-md lg:text-xl font-semibold text-gray-500 !mb-0">
+        <h1 className="text-md lg:text-lg font-semibold text-gray-500 !mb-0">
           {t('label')}: {info?.code || '-'}
         </h1>
       </div>

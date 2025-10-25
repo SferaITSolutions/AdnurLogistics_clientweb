@@ -17,6 +17,9 @@ body {
 .ant-select-selector {
   border-radius: 0.7rem !important;
 }
+.ant-input::placeholder {
+  font-size: 14px;
+}
 /* .client-container {
   max-width: 1400px;
   margin: 0 auto;
