@@ -1,19 +1,26 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import DashboardCard from '../molecules/cards';
-import { FaSpinner } from 'react-icons/fa';
-import OrderDetailsModal from '@/features/order-details/ui';
-import Pagination from '../molecules/pagination';
-import { useOrder } from '@/entities/hooks/order/hooks';
-import { useOrderDetailsStore } from '@/features/order-details/lib/store';
-import { useTranslations } from 'next-intl';
-import { Empty } from 'antd';
+import DashboardCard from "../molecules/cards";
+import { FaSpinner } from "react-icons/fa";
+import OrderDetailsModal from "@/features/order-details/ui";
+import Pagination from "../molecules/pagination";
+import { useOrder } from "@/entities/hooks/order/hooks";
+import { useOrderDetailsStore } from "@/features/order-details/lib/store";
+import { useTranslations } from "next-intl";
+import { Empty } from "antd";
 export default function OrdersList() {
   const t = useTranslations("clientDashboard");
-  const { setOrderId, openModal, orderIdFilter, page, type, setLoading, setStartEndDate } =
-    useOrderDetailsStore();
+  const {
+    setOrderId,
+    openModal,
+    orderIdFilter,
+    page,
+    type,
+    setLoading,
+    setStartEndDate,
+  } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
     orderId: orderIdFilter,
@@ -57,11 +64,11 @@ export default function OrdersList() {
                 id: string;
                 weight: string;
               },
-              index: number,
+              index: number
             ) => (
               <DashboardCard
-                key={`${card.documentnumber || 'card'}-${index}`}
-                ETAdata={card.etadate || '-'}
+                key={`${card.documentnumber || "card"}-${index}`}
+                ETAdata={card.etadate || "-"}
                 OrderIdprops={card.documentnumber}
                 Quantity={Number(card.weight)}
                 Volume={Number(card.density)}
@@ -69,14 +76,19 @@ export default function OrdersList() {
                 onClick={() => {
                   setOrderId(card.id);
                   openModal();
-                  setStartEndDate({ start: card.createddate, end: card.etadate });
+                  setStartEndDate({
+                    start: card.createddate,
+                    end: card.etadate,
+                  });
                 }}
               />
-            ),
+            )
           )
         ) : (
           <div className="flex items-center justify-center ">
-            <p className="text-gray-500"><Empty description={''} /></p>
+            <p className="text-gray-500">
+              <Empty description={""} />
+            </p>
           </div>
         )}
       </div>

@@ -102,7 +102,7 @@ export default function FormCalculation() {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         label={t("densityLabel")}
         name="kgm3"
         rules={[
@@ -125,7 +125,7 @@ export default function FormCalculation() {
           value={values.kgm3}
           onChange={(val) => setValue("kgm3", val)}
         />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item
         label={t("volumeLabel")}
         name="m3"

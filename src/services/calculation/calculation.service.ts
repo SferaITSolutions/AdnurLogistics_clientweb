@@ -15,7 +15,7 @@ class CalculationService {
     toLocation: string;
     weight: number;
     bulk: number;
-    density: number;
+    // density: number;
     containerType: string;
     customs: boolean;
     price: number;
