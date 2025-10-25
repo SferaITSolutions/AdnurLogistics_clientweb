@@ -1,0 +1,26 @@
+{
+  "pages": {
+    "/[locale]/(lending-page)/page": [
+      "static/chunks/7b6fae710c63fd85.js",
+      "static/chunks/528231986caa3cbc.js",
+      "static/chunks/6bca5ed8b8ad34d4.css",
+      "static/chunks/b9aa10a74b1d37a0.css",
+      "static/chunks/ed9304455d3327e7.js",
+      "static/chunks/62f5964169dab682.js",
+      "static/chunks/7349a394aed53f64.js",
+      "static/chunks/978db2b80f6bc949.js",
+      "static/chunks/b68e5b4a1a4b2d2a.js",
+      "static/chunks/70102ec8803faed0.js",
+      "static/chunks/dbeddcd9e747c4ff.js",
+      "static/chunks/60a9efead0d2cf4f.js",
+      "static/chunks/47843b39d4a65047.js",
+      "static/chunks/022ae6d00efa77b7.js",
+      "static/chunks/5201f4e3e1a91b29.js",
+      "static/chunks/9230b1a0288d7ecb.js",
+      "static/chunks/977814906ce33674.js",
+      "static/chunks/208a36c18ffff5fe.js",
+      "static/chunks/89d5dbcf49d2d067.js",
+      "static/chunks/turbopack-1666d586b1a5cb38.js"
+    ]
+  }
+}
