@@ -23,9 +23,9 @@ export const CopyText: React.FC<CopyTextProps> = ({ text }) => {
 
   return (
     <div className="gap-2">
-      <span className="break-all inline">{text}</span>
+      <span className="break-all inline global-text-size">{text}</span>
       <button
-        className="px-3 py-1 rounded text-sm bg-transparent inline"
+        className="px-3 py-1 rounded text-sm bg-transparent inline cursor-pointer transition-all duration-200"
         onClick={handleCopy}
         type="button"
       >

@@ -35,10 +35,10 @@ export const AboutLogistic = () => {
               onClick={() => {
                 setOpen(true);
               }}
-              Icon={<FaWpforms color="#fff" />}
+              Icon={<FaWpforms />}
             />
             <ButtonLight
-              icon={<FaVideo color="#004f98" />}
+              icon={<FaVideo />}
               label={t("watchVideo")}
               onClick={() => {
                 setIsVideoModalOpen(true);

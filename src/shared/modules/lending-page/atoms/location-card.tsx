@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { TitleText } from "@/shared/components/dump/atoms";
 import { CopyText } from "@/shared/components/dump/atoms/copyText";
 import { LocationTypes } from "@/shared/types/lenging-page-types";
@@ -14,22 +14,26 @@ export const LocationCard: React.FC<{ location: LocationTypes }> = ({
       <h1 className="text-2xl font-bold text-center">{location.title}</h1>
       <div className="p-6 rounded-2xl flex flex-col gap-6 bg-[#fff]">
         <div className="flex flex-col">
-          <div className="font-semibold mb-1">{t("address")}</div>
+          <div className="mb-1 global-label-size !font-bold">
+            {t("address")}{" "}
+          </div>
           <CopyText text={location.fullLocation} />
         </div>
         <div>
-          <div className="font-semibold mb-1">{t("receiver")}</div>
+          <div className="mb-1 global-label-size !font-bold">
+            {t("receiver")}{" "}
+          </div>
           <CopyText text={location.receiver} />
         </div>
         <div>
-          <div className="font-semibold mb-1">
-            {t("labels")}
+          <div className="mb-1 global-label-size !font-bold">
+            {t("labels")}{" "}
           </div>
           <CopyText text={location.marks} />
         </div>
         <div>
-          <div className="font-semibold mb-1">
-            {t("transport")}
+          <div className="mb-1 global-label-size !font-bold">
+            {t("transport")}{" "}
           </div>
           <CopyText text={location.transport} />
         </div>

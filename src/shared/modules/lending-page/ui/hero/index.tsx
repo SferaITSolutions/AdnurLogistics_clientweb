@@ -29,7 +29,7 @@ export const Hero = () => {
           <ButtonPrimary
             type="primary"
             label={t("hero.applyButton")}
-            Icon={<FaWpforms color="#fff" />}
+            Icon={<FaWpforms />}
             onClick={() => setOpen(true)}
           />
           <div className="flex md:flex-row lg:flex-col flex-col mt-12 justify-center gap-10 md:gap-3 lg:mb-0 mb-20">

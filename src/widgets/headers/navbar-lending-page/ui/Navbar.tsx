@@ -21,7 +21,7 @@ export const Navbar = () => {
           <ButtonPrimary
             type="primary"
             label={t('login')}
-            Icon={<FaArrowRight color="#fff" />}
+            Icon={<FaArrowRight />}
             onClick={() => {
               navigate.push('/auth/log-in');
             }}
