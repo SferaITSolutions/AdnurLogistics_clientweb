@@ -4,7 +4,7 @@ import '@splidejs/splide/css';
 import 'antd/dist/reset.css';
 import './globals.css';
 
-import { Manrope, Nunito_Sans, Poppins, Urbanist } from 'next/font/google';
+import { Manrope, Montserrat, Nunito_Sans, Poppins, Urbanist } from 'next/font/google';
 
 import ThemeState from '@/context/ThemeState';
 import MainLayout from '@/providers/MainLayout';
@@ -14,22 +14,8 @@ import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
 
-const urbanist = Urbanist({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const nunito = Nunito_Sans({
+const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
 });
@@ -43,7 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages();
   return (
     <html lang="en">
-      <body className={nunito.className}>
+      <body className={montserrat.className}>
         <TanStackProvider>
           <NextIntlClientProvider messages={messages}>
             <MainLayout>

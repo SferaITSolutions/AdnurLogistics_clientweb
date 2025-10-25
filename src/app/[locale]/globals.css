@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  font-weight: 500;
 }
 
 body {
@@ -32,4 +33,7 @@ body {
 }
 .border-primary-blue-color {
   border: 1px solid #004f98 !important;
+}
+.title-size {
+  font-size: 50px;
 }

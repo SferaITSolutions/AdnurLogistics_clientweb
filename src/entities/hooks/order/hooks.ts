@@ -1,26 +1,29 @@
 import dashboardService from "@/services/client-dashboard/dashboard.service";
 import { useQuery } from "@tanstack/react-query";
 
-let lastFetchtime = 0;
+let lastFetchTime: number | null = null;
+
 export const useOrder = (data: any) => {
   return useQuery({
     queryKey: ["order", data],
     queryFn: async () => {
       const now = Date.now();
-
-      if (now - lastFetchtime > 3000) {
-        const waitTime = 3000 - (now - lastFetchtime);
+      if (lastFetchTime && now - lastFetchTime < 3000) {
+        const waitTime = 3000 - (now - lastFetchTime);
         await new Promise((resolve) => setTimeout(resolve, waitTime));
       }
-      lastFetchtime = Date.now();
-      return dashboardService.getOrdersData(data);
+      const response = await dashboardService.getOrdersData(data);
+      lastFetchTime = Date.now();
+
+      return response;
     },
   });
 };
+
 export const useOrderById = (id: string) => {
   return useQuery({
     queryKey: ["order", id],
     queryFn: () => dashboardService.getOrderById(id),
     enabled: !!id,
-  });
+  }); 
 };
