@@ -12,6 +12,7 @@ export default function FilterPersonalNumber() {
       <label htmlFor="personal-number text-2xl">{t('orderId')}</label>
       <Input
         id="personal-number"
+        className="!rounded-xl"
         value={orderIdFilter || ''}
         onChange={(e) => setOrderIdFilter(e.target.value)}
         placeholder={t('orderId')}
