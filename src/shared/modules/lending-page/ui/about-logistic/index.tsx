@@ -25,7 +25,7 @@ export const AboutLogistic = () => {
         <div className="flex flex-col gap-10 p-0 lg:p-6">
           <AboutTitle classNameDy="" />
           <HeroDescription
-            classNameDy="leading-6"
+            classNameDy="leading-6 global-text-size"
             color="gray-300"
             text={t("description")}
           />

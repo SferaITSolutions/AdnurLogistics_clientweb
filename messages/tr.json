@@ -92,7 +92,7 @@
       }
     },
     "warehouses": {
-      "china": "Çin Deposu",
+      "china": "Çin'de toptan yüklerin teslim alınacağı depo",
       "address": "Tam adres:",
       "receiver": "Alıcı:",
       "labels": "Ticari gönderiler için zorunlu işaretler:",

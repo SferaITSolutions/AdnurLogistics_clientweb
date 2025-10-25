@@ -17,7 +17,7 @@ export const ButtonPrimary = ({
 }) => {
   return (
     <button
-      className={`bg-primary-blue-color cursor-pointer  px-6 py-4 rounded-full hover:bg-secondary-blue-color w-fit flex items-center gap-2 text-[#fff] ${classNameDy}`}
+      className={`bg-primary-blue-color cursor-pointer hover:!text-[#0D6CEC] hover:!bg-[#fff] hover:!border-[#0D6CEC] hover:!border-2 !border-2 border-primary-blue-color px-6 py-4 rounded-full w-fit flex items-center gap-2 text-[#fff] ${classNameDy} transition-all duration-200`}
       onClick={onClick}
       {...props}
     >

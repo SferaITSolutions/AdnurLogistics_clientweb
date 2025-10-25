@@ -23,15 +23,17 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      <Select
+      <select 
         value={getLocalItem('lang') || 'uz'}
-        onChange={handleChange}
-        style={{ width: 120 }}
-        options={LANGUAGES.map((lang: { code: string; label: string }) => ({
-          value: lang.code,
-          label: lang.label,
-        }))}
-      />
+        onChange={(e) => handleChange(e.target.value)}
+        className="py-3 px-3 rounded-full global-select-border"
+        >
+          {LANGUAGES.map((lang: { code: string; label: string }) => (
+            <option key={lang.code} value={lang.code}>
+              {lang.label}
+            </option>
+          ))}
+        </select>
     </div>
   );
 }

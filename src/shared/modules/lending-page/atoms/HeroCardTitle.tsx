@@ -2,7 +2,7 @@ import React from "react";
 export const HeroCardText = ({
   title,
   subText,
-  classnameDy
+  classnameDy,
 }: {
   title: string;
   subText?: string;
@@ -10,8 +10,8 @@ export const HeroCardText = ({
 }) => {
   return (
     <div className={`${classnameDy}`}>
-      <p className="text-5xl !mb-0">{title}</p>
-      <p className="text-lg !mb-0">{subText}</p>
+      <p className=" !mb-0 heading-title-size">{title}</p>
+      <p className=" !mb-0 global-text-size">{subText}</p>
     </div>
   );
 };

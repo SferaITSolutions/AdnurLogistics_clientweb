@@ -92,7 +92,7 @@
       }
     },
     "warehouses": {
-      "china": "China Warehouse",
+      "china": "Warehouse for receiving goods in China",
       "address": "Full address:",
       "receiver": "Receiver:",
       "labels": "Mandatory labels for commercial shipments:",

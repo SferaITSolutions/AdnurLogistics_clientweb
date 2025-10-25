@@ -34,19 +34,19 @@ export const Hero = () => {
           />
           <div className="flex md:flex-row lg:flex-col flex-col mt-12 justify-center gap-10 md:gap-3 lg:mb-0 mb-20">
             <HeroCard
-              title="10+"
+              title="12+"
               description={t("stats.experienceLabel")}
-              classNameDy="text-red-600 text-center lg:text-start"
+              classNameDy="text-red-600 text-center lg:text-start  "
             />
             <HeroCard
               title="3+"
               description={t("stats.countriesLabel")}
-              classNameDy="text-center lg:text-start"
+              classNameDy="text-center lg:text-start heading-title-size"
             />
-            <HeroCard
+            <HeroCard 
               title="4+"
               description={t("stats.servicesLabel")}
-              classNameDy="text-center lg:text-start"
+              classNameDy="text-center lg:text-start heading-title-size"
             />
           </div>
         </div>

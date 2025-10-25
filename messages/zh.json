@@ -92,7 +92,7 @@
       }
     },
     "warehouses": {
-      "china": "中国仓库",
+      "china": "中国接收批发货物的仓库",
       "address": "完整地址：",
       "receiver": "收件人：",
       "labels": "商业货物的必备标志：",

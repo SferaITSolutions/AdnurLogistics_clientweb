@@ -80,7 +80,11 @@ export const ApplyModal = () => {
         {/* Name & Phone - first row */}
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
-            label={t("fields.fullname.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.fullname.label")}
+              </span>
+            }
             name="fullname"
             className="flex-1"
             rules={[
@@ -102,7 +106,11 @@ export const ApplyModal = () => {
             />
           </Form.Item>
           <Form.Item
-            label={t("fields.phone.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.phone.label")}
+              </span>
+            }
             name="phone"
             className="flex-1"
             rules={[
@@ -135,7 +143,11 @@ export const ApplyModal = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
-            label={t("fields.fromLocation.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.fromLocation.label")}
+              </span>
+            }
             name="fromLocation"
             className="flex-1"
             rules={[
@@ -148,7 +160,11 @@ export const ApplyModal = () => {
             />
           </Form.Item>
           <Form.Item
-            label={t("fields.toLocation.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.toLocation.label")}
+              </span>
+            }
             name="toLocation"
             className="flex-1"
             rules={[
@@ -164,7 +180,11 @@ export const ApplyModal = () => {
 
         <div className="flex flex-col md:flex-row gap-4">
           <Form.Item
-            label={t("fields.bulk.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.bulk.label")}
+              </span>
+            }
             name="bulk"
             className="flex-1"
             rules={[{ required: true, message: t("fields.bulk.required") }]}
@@ -172,7 +192,11 @@ export const ApplyModal = () => {
             <Input placeholder={t("fields.bulk.placeholder")} />
           </Form.Item>
           <Form.Item
-            label={t("fields.density.label")}
+            label={
+              <span className="global-label-size">
+                {t("fields.density.label")}
+              </span>
+            }
             name="density"
             className="flex-1"
             rules={[{ required: true, message: t("fields.density.required") }]}
@@ -182,7 +206,9 @@ export const ApplyModal = () => {
         </div>
         {/* Message */}
         <Form.Item
-          label={t("fields.weight.label")}
+          label={
+            <span className="global-label-size">{t("fields.weight.label")}</span>
+          }
           name="weight"
           rules={[{ required: true, message: t("fields.weight.required") }]}
         >
@@ -190,7 +216,7 @@ export const ApplyModal = () => {
         </Form.Item>
 
         <Form.Item
-          label={t("fields.description.label")}
+          label={<span className="global-label-size">{t("fields.description.label")}</span>}
           name="description"
           rules={[
             { required: true, message: t("fields.description.required") },

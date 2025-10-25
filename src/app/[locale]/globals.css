@@ -22,6 +22,7 @@ body {
 .bg-primary-blue-color {
   background-color: #004f98 !important;
 }
+
 .bg-secondary-blue-color {
   background-color: #0d6cec !important;
 }
@@ -36,4 +37,18 @@ body {
 }
 .title-size {
   font-size: 50px;
+}
+.global-select-border {
+  border: 1px solid #0D6CEC;
+  color: #0D6CEC;
+}
+.heading-title-size {
+  font-size: 50px !important;
+}
+.global-label-size {
+  font-size: 18px !important;
+  font-weight: 500;
+}
+.global-text-size {
+  font-size: 20px !important;
 }
