@@ -23,7 +23,6 @@ export default function ResultCalculation({ response }: { response: any }) {
       toLocation: "TASHKENT",
       weight: values.kg,
       bulk: values.m3,
-      density: values.kgm3,
       containerType: values.containerType,
       customs: values.customsPriceCalculation,
       price: Number(response?.result),
