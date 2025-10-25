@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-self.__NEXT_FONT_MANIFEST="{\n  \"app\": {\n    \"[project]/src/app/[locale]/(lending-page)/page\": [\n      \"static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2\"\n    ],\n    \"[project]/src/app/[locale]/auth/log-in/page\": [\n      \"static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2\"\n    ]\n  },\n  \"appUsingSizeAdjust\": true,\n  \"pages\": {},\n  \"pagesUsingSizeAdjust\": false\n}"
-=======
-self.__NEXT_FONT_MANIFEST="{\n  \"app\": {\n    \"[project]/src/app/[locale]/client/calculation/page\": [\n      \"static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2\"\n    ],\n    \"[project]/src/app/[locale]/client/dashboard/page\": [\n      \"static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2\"\n    ]\n  },\n  \"appUsingSizeAdjust\": true,\n  \"pages\": {},\n  \"pagesUsingSizeAdjust\": false\n}"
->>>>>>> f7b107a2181be1abf01ecde3722ea92b0f2ecb96
+self.__NEXT_FONT_MANIFEST="{\n  \"app\": {\n    \"[project]/src/app/[locale]/(lending-page)/page\": [\n      \"static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2\"\n    ]\n  },\n  \"appUsingSizeAdjust\": true,\n  \"pages\": {},\n  \"pagesUsingSizeAdjust\": false\n}"
