@@ -31,7 +31,7 @@ const Sidebar = () => {
             className="w-full flex items-center gap-3 px-4 py-3 rounded-r-2xl text-xl shadow-sm font-medium transition-all duration-100"
           >
             <FaSignOutAlt color="red" size={26} />
-            <span className="text-xl">{t('logout')}</span>
+            <span className="text-lg">{t('logout')}</span>
           </button>
         </div>{' '}
       </aside>

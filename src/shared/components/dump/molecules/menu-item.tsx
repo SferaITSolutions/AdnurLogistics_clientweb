@@ -1,7 +1,7 @@
 import { Link, usePathname } from '@/i18n/routing';
 
-import clsx from 'clsx';
 import { ReactNode } from 'react';
+import clsx from 'clsx';
 
 interface SidebarItemProps {
   path: string;
@@ -38,7 +38,7 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
       )}
 
       {/* Label qismi */}
-      <span className={clsx('transition-all duration-300 text-white text-xl')}>{label}</span>
+      <span className={clsx('transition-all duration-300 text-white text-lg')}>{label}</span>
 
       {/* Active chiziq animatsiyasi */}
       <span
