@@ -1,13 +1,13 @@
 'use client';
 
-import { DrawerSidebar } from '@/shared/components/dump/molecules/DrawerSidebar';
-import { FaSignOutAlt } from 'react-icons/fa';
-import Logo from '@/shared/components/dump/atoms/Logo';
-import SidebarItems from '@/shared/components/dump/molecules/sidebar-items';
-import { authService } from '@/services/auth/auth.service';
-import { useRouter } from '@/i18n/routing';
 import { useSidebarStore } from '@/features/auth/register/store/sidebarStore';
+import { useRouter } from '@/i18n/routing';
+import { authService } from '@/services/auth/auth.service';
+import Logo from '@/shared/components/dump/atoms/Logo';
+import { DrawerSidebar } from '@/shared/components/dump/molecules/DrawerSidebar';
+import SidebarItems from '@/shared/components/dump/molecules/sidebar-items';
 import { useTranslations } from 'next-intl';
+import { FaSignOutAlt } from 'react-icons/fa';
 
 const Sidebar = () => {
   const t = useTranslations('clientDashboard');
@@ -28,10 +28,10 @@ const Sidebar = () => {
             onClick={() => {
               logout();
             }}
-            className="!group flex items-center gap-3 px-4 py-3 rounded-r-xl text-sm font-medium transition-all duration-100"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-r-2xl text-xl shadow-sm font-medium transition-all duration-100"
           >
-            <FaSignOutAlt color="red" />
-            {t('logout')}
+            <FaSignOutAlt color="red" size={26} />
+            <span className="text-xl">{t('logout')}</span>
           </button>
         </div>{' '}
       </aside>

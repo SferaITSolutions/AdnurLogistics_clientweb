@@ -1,6 +1,7 @@
-import React from "react";
-import { useOrderDetailsStore } from "@/features/order-details/lib/store";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+
+import { useOrderDetailsStore } from '@/features/order-details/lib/store';
+import React from 'react';
 
 interface PaginationProps {
   dataLength: number; // hozirgi page uchun data uzunligi, oldinga yurish buttonni disable uchun kerak
@@ -26,9 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ dataLength }) => {
       >
         <FaArrowLeft className="text-white" />
       </button>
-      <span className="flex items-center px-3 text-gray-700 font-medium">
-        {page + 1}
-      </span>
+      <span className="flex items-center px-3 text-gray-700 font-medium">{page + 1}</span>
       <button
         onClick={handleNext}
         disabled={dataLength === 0}
