@@ -27,7 +27,6 @@ export const ServiceCard = () => {
       description: t("customs"),
     },
   ];
-  const cardClasses = `flex flex-col gap-4 p-8 pb-20 shadow-xl rounded-4xl bg-[#F8F8F8] text-black`;
   return (
     <>
       {servicesConstants.map((service) => (
