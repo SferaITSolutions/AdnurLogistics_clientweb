@@ -2,15 +2,6 @@
   "app": {
     "[project]/src/app/[locale]/(lending-page)/page": [
       "static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2"
-    ],
-    "[project]/src/app/[locale]/auth/log-in/page": [
-      "static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2"
-    ],
-    "[project]/src/app/[locale]/client/calculation/page": [
-      "static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2"
-    ],
-    "[project]/src/app/[locale]/client/dashboard/page": [
-      "static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2"
     ]
   },
   "appUsingSizeAdjust": true,

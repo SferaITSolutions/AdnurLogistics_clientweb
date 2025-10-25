@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { TitleText } from "@/shared/components/dump/atoms/title";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="">
             <div className="flex items-center gap-2">
               <h1 className="text-white text-md hover:underline">
-                +7 980 470 00958
+                +998 71 200 1909
               </h1>
             </div>
           </div>
@@ -51,9 +51,7 @@ export default function Footer() {
       </div>
       <div className="flex justify-center md:flex-row flex-col items-center gap-20 mt-20">
         <div className="flex flex-col gap-2">
-          <p className="text-white text-md !mb-0">
-            {t("copyright")}
-          </p>
+          <p className="text-white text-md !mb-0">{t("copyright")}</p>
         </div>
         <div className="flex flex-col gap-2">
           <a
@@ -61,8 +59,9 @@ export default function Footer() {
             className="text-white text-md hover:underline"
           >
             {t("developedBy")}
-          </a>  
+          </a>
         </div>
-      </div>    </div>
+      </div>{" "}
+    </div>
   );
 }

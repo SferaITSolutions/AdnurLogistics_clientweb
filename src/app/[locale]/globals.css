@@ -53,5 +53,10 @@ body {
   font-weight: 500;
 }
 .global-text-size {
-  font-size: 20px !important;
+  font-size: 18px !important;
+}
+@media (max-width: 768px) {
+  .heading-title-size {
+    font-size: 30px !important;
+  }
 }
