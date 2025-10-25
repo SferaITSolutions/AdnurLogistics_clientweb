@@ -1,33 +1,53 @@
 {
-  "polyfillFiles": [
-    "static/chunks/polyfills-42372ed130431b0a.js"
-  ],
-  "devFiles": [],
-  "ampDevFiles": [],
-  "lowPriorityFiles": [
-    "static/BH-a0ksDS9gRb8VWTL8Nc/_buildManifest.js",
-    "static/BH-a0ksDS9gRb8VWTL8Nc/_ssgManifest.js"
-  ],
-  "rootMainFiles": [
-    "static/chunks/webpack-e1cc6e0caba08ba2.js",
-    "static/chunks/d49cd7d9-5e91aa3c2d1e46f1.js",
-    "static/chunks/13-b0e1178a4b33f25f.js",
-    "static/chunks/main-app-10e3ca506cbd7ec8.js"
-  ],
-  "rootMainFilesTree": {},
   "pages": {
     "/_app": [
-      "static/chunks/webpack-e1cc6e0caba08ba2.js",
-      "static/chunks/framework-2a73cc92e9626823.js",
-      "static/chunks/main-0b28b979e3ce9f51.js",
-      "static/chunks/pages/_app-342b10d4b9e2b234.js"
+      "static/chunks/264e2_next_dist_compiled_next-devtools_index_f497f62e.js",
+      "static/chunks/264e2_next_dist_compiled_ab5d849f._.js",
+      "static/chunks/264e2_next_dist_shared_lib_84344400._.js",
+      "static/chunks/264e2_next_dist_client_ce0f35d8._.js",
+      "static/chunks/264e2_next_dist_e213e740._.js",
+      "static/chunks/264e2_next_app_db9b4eba.js",
+      "static/chunks/[next]_entry_page-loader_ts_5ce1f9a7._.js",
+      "static/chunks/c046a_react-dom_812c9f31._.js",
+      "static/chunks/node_modules__pnpm_f012a4b7._.js",
+      "static/chunks/[root-of-the-server]__45f039c3._.js",
+      "static/chunks/pages__app_2da965e7._.js",
+      "static/chunks/turbopack-pages__app_66c5af75._.js"
     ],
     "/_error": [
-      "static/chunks/webpack-e1cc6e0caba08ba2.js",
-      "static/chunks/framework-2a73cc92e9626823.js",
-      "static/chunks/main-0b28b979e3ce9f51.js",
-      "static/chunks/pages/_error-74b989a4c6d01fae.js"
+      "static/chunks/264e2_next_dist_compiled_next-devtools_index_f497f62e.js",
+      "static/chunks/264e2_next_dist_compiled_ab5d849f._.js",
+      "static/chunks/264e2_next_dist_shared_lib_786f96b9._.js",
+      "static/chunks/264e2_next_dist_client_ce0f35d8._.js",
+      "static/chunks/264e2_next_dist_b2461b84._.js",
+      "static/chunks/264e2_next_error_1ac23c0b.js",
+      "static/chunks/[next]_entry_page-loader_ts_5ceab22d._.js",
+      "static/chunks/c046a_react-dom_812c9f31._.js",
+      "static/chunks/node_modules__pnpm_f012a4b7._.js",
+      "static/chunks/[root-of-the-server]__092393de._.js",
+      "static/chunks/pages__error_2da965e7._.js",
+      "static/chunks/turbopack-pages__error_157bb3a6._.js"
     ]
   },
+  "devFiles": [],
+  "ampDevFiles": [],
+  "polyfillFiles": [
+    "static/chunks/264e2_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
+  "lowPriorityFiles": [
+    "static/development/_ssgManifest.js",
+    "static/development/_buildManifest.js"
+  ],
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_b78e848e._.js",
+    "static/chunks/264e2_next_dist_compiled_react-dom_496dac4d._.js",
+    "static/chunks/264e2_next_dist_compiled_next-devtools_index_5d3d94b5.js",
+    "static/chunks/264e2_next_dist_compiled_a06bc344._.js",
+    "static/chunks/264e2_next_dist_client_bd0338f9._.js",
+    "static/chunks/264e2_next_dist_95033fbe._.js",
+    "static/chunks/69652_@swc_helpers_cjs_77b72907._.js",
+    "static/chunks/_a0ff3932._.js",
+    "static/chunks/turbopack-_55b1b124._.js"
+  ],
   "ampFirstPages": []
 }

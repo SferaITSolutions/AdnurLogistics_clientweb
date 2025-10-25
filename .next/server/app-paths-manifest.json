@@ -1,9 +1,8 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/[locale]/(lending-page)/page": "app/[locale]/(lending-page)/page.js",
   "/[locale]/auth/log-in/page": "app/[locale]/auth/log-in/page.js",
-  "/[locale]/auth/register/page": "app/[locale]/auth/register/page.js",
+  "/[locale]/client/calculation/page": "app/[locale]/client/calculation/page.js",
   "/[locale]/client/dashboard/page": "app/[locale]/client/dashboard/page.js",
-  "/[locale]/client/calculation/page": "app/[locale]/client/calculation/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }
