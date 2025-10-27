@@ -300,7 +300,9 @@
     "totalAmount": "Общая сумма",
     "paidAmount": "Оплаченная сумма",
     "remainingAmount": "Оставшаяся сумма",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "activeOrder": "Активные заказы",
+    "savedOrder": "Принятые заказы"
   },
   "calculationPage": {
     "title": "Расчет Стоимости Заказа",

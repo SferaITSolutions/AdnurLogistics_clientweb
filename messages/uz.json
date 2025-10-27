@@ -297,7 +297,9 @@
     "totalAmount": "Jami summa",
     "paidAmount": "To'langan summa",
     "remainingAmount": "Qolgan summa",
-    "logout": "Chiqish"
+    "logout": "Chiqish",
+    "activeOrder": "Faol buyurtmalar",
+    "savedOrder": "Qabul qilingan buyurtmalar"
   },
   "calculationPage": {
     "title": "Buyurtma narxini hisoblash",

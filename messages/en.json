@@ -295,7 +295,9 @@
     "totalAmount": "Total Amount",
     "paidAmount": "Paid Amount",
     "remainingAmount": "Remaining Amount",
-    "logout": "Logout"
+    "logout": "Logout",
+    "activeOrder": "Active Orders",
+    "savedOrder": "Accepted Orders"
   },
   "calculationPage": {
     "title": "Calculate Order Price",

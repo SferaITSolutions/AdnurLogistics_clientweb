@@ -1,14 +1,15 @@
 'use client';
 
 import { FonImage, FonLogo } from '../atoms';
+
 import { useCalculationStore } from '@/entities/hooks/calculation/store';
 import { TitleText } from '@/shared/components/dump/atoms/title';
-import { useTranslations } from 'next-intl';
-import FormCalculation from '../molecules/form-calculation/form-calculation';
-import ResultCalculation from '../molecules/result/result-calculation';
 import { Tabs } from 'antd';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import ApplyForm from '../molecules/apply-form';
+import FormCalculation from '../molecules/form-calculation/form-calculation';
+import ResultCalculation from '../molecules/result/result-calculation';
 
 export default function CalculationUI() {
   const t = useTranslations('calculationPage');
@@ -32,11 +33,7 @@ export default function CalculationUI() {
     },
     {
       key: 'FCL',
-      label: (
-        <span className=" select-none cursor-not-allowed">
-          {t('typeFcl')}
-        </span>
-      ),
+      label: t('typeFcl'),
       children: (
         <div className=" ">
           <ApplyForm />

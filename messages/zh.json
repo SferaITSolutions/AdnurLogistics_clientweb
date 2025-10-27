@@ -292,7 +292,9 @@
     "totalAmount": "总金额",
     "paidAmount": "已付金额",
     "remainingAmount": "剩余金额",
-    "logout": "退出"
+    "logout": "退出",
+    "activeOrder": "活跃订单",
+    "savedOrder": "已接受订单"
   },
   "calculationPage": {
     "title": "计算订单价格",

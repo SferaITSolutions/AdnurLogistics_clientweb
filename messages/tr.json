@@ -286,7 +286,9 @@
     "totalAmount": "Toplam Tutar",
     "paidAmount": "Ödenen Tutar",
     "remainingAmount": "Kalan Tutar",
-    "logout": "Çıkış Yap"
+    "logout": "Çıkış Yap",
+    "activeOrder": "Aktif Siparişler",
+    "savedOrder": "Kabul Edilen Siparişler"
   },
   "calculationPage": {
     "title": "Sipariş Fiyatını Hesapla",
