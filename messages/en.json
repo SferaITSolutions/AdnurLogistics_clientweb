@@ -262,6 +262,12 @@
     "message": "Your registration process has been successfully completed.",
     "button": "Go to Personal Dashboard"
   },
+  "logoutModal": {
+    "title": "Log out of the system",
+    "cancelText": "No",
+    "okText": "Yes",
+    "confirmationMessage": "Do you confirm logging out of the system?"
+  },
   "clientDashboard": {
     "title": "Dashboard Client",
     "all": "All",

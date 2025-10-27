@@ -108,6 +108,12 @@
       "developedBy": "开发者: Sfera IT Solutions"
     }
   },
+  "logoutModal": {
+    "title": "退出系统",
+    "cancelText": "否",
+    "okText": "是",
+    "confirmationMessage": "您确认要退出系统吗?"
+  },
   "login": {
     "title": "登录",
     "phone": "您的电话号码",

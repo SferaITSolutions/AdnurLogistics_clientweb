@@ -11,7 +11,6 @@ import "../style/style.css";
 export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
-
   const pathParts = pathname.split("/").filter(Boolean);
 
   const handleChange = (value: string) => {
