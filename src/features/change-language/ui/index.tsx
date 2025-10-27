@@ -25,7 +25,7 @@ export default function LanguageSwitcher() {
     <Select
       value={getLocalItem("lang") || "uz"}
       onChange={handleChange}
-      className="custom-lang-select w-[150px] !min-h-[50px]"
+      className="custom-lang-select flex justify-center items-center min-w-[160px] !min-h-[50px]"
       dropdownStyle={{
         padding: "10px 6px ",
         borderRadius: "10px",
