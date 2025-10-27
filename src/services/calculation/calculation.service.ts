@@ -22,6 +22,17 @@ class CalculationService {
   }) {
     const response = await axiosWithAuth.post(`/petition/create`, data);
     return response.data;
+ 
+  }
+  static async applyForm(data: {
+    fromLocation: string;
+    toLocation: string;
+    weight: number;
+    bulk: number;
+    customs: boolean;
+  }) {
+    const response = await axiosWithAuth.post(`/petition/create/fcl`, data);
+    return response.data;
   }
 }
 

@@ -35,11 +35,27 @@ export const useCreatePetition = () => {
     }) => CalculationService.createPetition(data),
     onSuccess: () => {
       toast.success("So'rov qoldirildi");
-     
     },
     onError: (error: any) => {
       message.error(error?.response?.data?.message || "Xatolik yuz berdi");
       return error;
+    },
+  });
+};
+export const useApplyForm = () => {
+  return useMutation({
+    mutationFn: (data: {
+      fromLocation: string;
+      toLocation: string;
+      weight: number;
+      bulk: number;
+      customs: boolean;
+    }) => CalculationService.applyForm(data),
+    onSuccess: () => {
+      toast.success("#application submitted successfully ✅");
+    },
+    onError: (error: any) => {
+      message.error(error?.response?.data?.message || "#something went wrong ❌");
     },
   });
 };

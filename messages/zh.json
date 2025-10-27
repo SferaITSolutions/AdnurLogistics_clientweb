@@ -282,7 +282,7 @@
     "orderDetails": "订单详情",
     "from": "从",
     "to": "到",
-    "eta": "预计到达时间:",
+    "eta": "到达时间:",
     "orderId": "订单编号:",
     "unpaid": "未付款",
     "noProductsFound": "未找到产品",
@@ -354,5 +354,23 @@
     "hint": "姓名不应包含数字或特殊字符，且不能为空",
     "okText": "保存",
     "cancelText": "取消"
+  },
+  "applyForm": {
+    "fromLabel": "起始地点",
+    "fromPlaceholder": "输入起始地点",
+    "fromRequiredError": "请输入起始地点！",
+    "toLabel": "目的地",
+    "toPlaceholder": "输入目的地",
+    "toRequiredError": "请输入目的地！",
+    "weightLabel": "重量 (公斤)",
+    "weightPlaceholder": "输入以公斤为单位的重量",
+    "weightRequiredError": "请输入重量！",
+    "weightMinError": "重量必须大于 0",
+    "bulkLabel": "体积 (m³)",
+    "bulkPlaceholder": "输入以 m³ 为单位的体积",
+    "bulkRequiredError": "请输入体积！",
+    "bulkMinError": "体积必须大于 0",
+    "customsCheckbox": "需要报关",
+    "submitButton": "提交"
   }
 }

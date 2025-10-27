@@ -222,12 +222,12 @@ export const ApplyModal = () => {
             placeholder={t("fields.description.placeholder")}
           />
         </Form.Item>
-        {/* <Form.Item
+        <Form.Item
           name="isAgree"
-          rules={[{ required: true, message: "Rozi bo'lish shart" }]}
+          // rules={[{ required: true, message: "Rozi bo'lish shart" }]}
         >
-          <Checkbox>Shaxsiy ma'lumotlarimni qayta ishlashga roziman</Checkbox>
-        </Form.Item> */}
+          <Checkbox>{t("fields.isAgree.label")}</Checkbox>
+        </Form.Item>
         <Button
           htmlType="submit"
           type="primary"

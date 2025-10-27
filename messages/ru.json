@@ -290,7 +290,7 @@
     "productDetails": "Детали продукта",
     "from": "от",
     "to": "до",
-    "eta": "Ожид. дата:",
+    "eta": "Время прибытия:",
     "orderId": "ID Заказа:",
     "unpaid": "Неоплаченный",
     "noProductsFound": "Товары не найдены",
@@ -354,5 +354,23 @@
     "hint": "Имя не должно содержать цифр или специальных символов и не может быть пустым",
     "okText": "Сохранить",
     "cancelText": "Отмена"
+  },
+  "applyForm": {
+    "fromLabel": "Место отправления",
+    "fromPlaceholder": "Введите место отправления",
+    "fromRequiredError": "Пожалуйста, введите место отправления!",
+    "toLabel": "Место назначения",
+    "toPlaceholder": "Введите место назначения",
+    "toRequiredError": "Пожалуйста, введите место назначения!",
+    "weightLabel": "Вес (кг)",
+    "weightPlaceholder": "Введите вес в кг",
+    "weightRequiredError": "Пожалуйста, введите вес!",
+    "weightMinError": "Вес должен быть больше 0",
+    "bulkLabel": "Объем (м³)",
+    "bulkPlaceholder": "Введите объем в м³",
+    "bulkRequiredError": "Пожалуйста, введите объем!",
+    "bulkMinError": "Объем должен быть больше 0",
+    "customsCheckbox": "Требуется Таможенное оформление",
+    "submitButton": "Отправить"
   }
 }

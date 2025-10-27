@@ -9,6 +9,9 @@
       "success": "Your application has been successfully submitted ✅",
       "error": "An error occurred. Please try again ❌",
       "fields": {
+        "isAgree": {
+          "label": "I agree to the processing of my personal data"
+        },
         "fullname": {
           "label": "Your Name",
           "placeholder": "Your Name",
@@ -282,7 +285,7 @@
     "productDetails": "Product Details",
     "from": "from",
     "to": "to",
-    "eta": "ETA:",
+    "eta": " Arrival time:",
     "orderId": "Order ID:",
     "unpaid": "Unpaid",
     "noProductsFound": "No products found",
@@ -346,6 +349,24 @@
   },
   "toRegions": {
     "tashkent": "Tashkent"
+  },
+  "applyForm": {
+    "fromLabel": "From Location",
+    "fromPlaceholder": "Enter starting location",
+    "fromRequiredError": "Please input the starting location!",
+    "toLabel": "To Location",
+    "toPlaceholder": "Enter destination location",
+    "toRequiredError": "Please input the destination location!",
+    "weightLabel": "Weight (kg)",
+    "weightPlaceholder": "Enter weight in kg",
+    "weightRequiredError": "Please input weight!",
+    "weightMinError": "Weight must be greater than 0",
+    "bulkLabel": "Bulk (m³)",
+    "bulkPlaceholder": "Enter volume in m³",
+    "bulkRequiredError": "Please input bulk!",
+    "bulkMinError": "Bulk must be greater than 0",
+    "customsCheckbox": "Customs Required",
+    "submitButton": "Submit"
   },
   "editNameModal": {
     "title": "Edit Profile",

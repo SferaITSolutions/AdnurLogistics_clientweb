@@ -9,6 +9,9 @@
       "success": "Arizangiz muvaffaqiyatli yuborildi ✅",
       "error": "Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring ❌",
       "fields": {
+        "isAgree": {
+          "label": "Shaxsiy ma'lumotlarimni qayta ishlashga roziman"
+        },
         "fullname": {
           "label": "Ismingiz",
           "placeholder": "Ismingiz",
@@ -284,7 +287,7 @@
     "productDetails": "Mahsulot tafsilotlari",
     "from": "dan",
     "to": "gacha",
-    "eta": "ETA:",
+    "eta": "Kelish vaqti:",
     "orderId": "Buyurtma ID:",
     "unpaid": "To'lov qilinmagan",
     "noProductsFound": "Mahsulotlar topilmadi",
@@ -354,5 +357,23 @@
     "hint": "Ism raqam yoki maxsus belgilar bo'lmasin, bo'sh qoldirish mumkin emas",
     "okText": "Saqlash",
     "cancelText": "Bekor qilish"
+  },
+  "applyForm": {
+    "fromLabel": "Qayerdan",
+    "fromPlaceholder": "Boshlang‘ich manzilni kiriting",
+    "fromRequiredError": "Iltimos, boshlang‘ich manzilni kiriting!",
+    "toLabel": "Qayerga",
+    "toPlaceholder": "Manzilni kiriting",
+    "toRequiredError": "Iltimos, manzilni kiriting!",
+    "weightLabel": "Og'irlik (kg)",
+    "weightPlaceholder": "Og'irlikni kg da kiriting",
+    "weightRequiredError": "Iltimos, og'irlikni kiriting!",
+    "weightMinError": "Og'irlik 0 dan katta bo'lishi kerak",
+    "bulkLabel": "Hajm (m³)",
+    "bulkPlaceholder": "Hajmni m³ da kiriting",
+    "bulkRequiredError": "Iltimos, hajmni kiriting!",
+    "bulkMinError": "Hajm 0 dan katta bo'lishi kerak",
+    "customsCheckbox": "Bojxona talab qilinadi",
+    "submitButton": "Yuborish"
   }
 }

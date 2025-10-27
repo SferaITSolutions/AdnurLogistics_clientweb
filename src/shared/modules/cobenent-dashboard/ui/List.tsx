@@ -1,20 +1,27 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { useOrder } from '@/entities/hooks/order/hooks';
-import { useOrderDetailsStore } from '@/features/order-details/lib/store';
-import OrderDetailsModal from '@/features/order-details/ui';
-import { Empty } from 'antd';
-import { useTranslations } from 'next-intl';
-import { FaSpinner } from 'react-icons/fa';
-import DashboardCard from '../molecules/cards';
-import Pagination from '../molecules/pagination';
+import { useOrder } from "@/entities/hooks/order/hooks";
+import { useOrderDetailsStore } from "@/features/order-details/lib/store";
+import OrderDetailsModal from "@/features/order-details/ui";
+import { Empty } from "antd";
+import { useTranslations } from "next-intl";
+import { FaSpinner } from "react-icons/fa";
+import DashboardCard from "../molecules/cards";
+import Pagination from "../molecules/pagination";
 
 export default function OrdersList() {
-  const t = useTranslations('clientDashboard');
-  const { setOrderId, openModal, orderIdFilter, page, type, setLoading, setStartEndDate } =
-    useOrderDetailsStore();
+  const t = useTranslations("clientDashboard");
+  const {
+    setOrderId,
+    openModal,
+    orderIdFilter,
+    page,
+    type,
+    setLoading,
+    setStartEndDate,
+  } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
     orderId: orderIdFilter,
@@ -61,11 +68,11 @@ export default function OrdersList() {
                       id: string;
                       weight: string;
                     },
-                    index: number,
+                    index: number
                   ) => (
                     <DashboardCard
-                      key={`${card.documentnumber || 'card'}-${index}`}
-                      ETAdata={card.etadate || '-'}
+                      key={`${card.documentnumber || "card"}-${index}`}
+                      ETAdata={card.etadate || "-"}
                       OrderIdprops={card.documentnumber}
                       Quantity={Number(card.weight)}
                       Volume={Number(card.density)}
@@ -79,14 +86,14 @@ export default function OrdersList() {
                         });
                       }}
                     />
-                  ),
+                  )
                 )}
               </div>
             </>
           ) : (
             <div className="flex items-center justify-center ">
               <p className="text-gray-500">
-                <Empty description={''} />
+                <Empty description={""} />
               </p>
             </div>
           )}

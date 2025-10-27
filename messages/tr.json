@@ -276,7 +276,7 @@
     "productDetails": "Ürün Detayları",
     "from": "başlangıç",
     "to": "bitiş",
-    "eta": "Tahmini Varış:",
+    "eta": "Varış zamanı:",
     "orderId": "Sipariş ID:",
     "unpaid": "Ödenmemiş",
     "noProductsFound": "Ürünler bulunamadı",
@@ -354,5 +354,23 @@
     "hint": "Ad, rakam veya özel karakter içermemeli ve boş bırakılamaz",
     "okText": "Kaydet",
     "cancelText": "İptal Et"
+  },
+  "applyForm": {
+    "fromLabel": "Nereden (Konum)",
+    "fromPlaceholder": "Başlangıç konumunu girin",
+    "fromRequiredError": "Lütfen başlangıç konumunu girin!",
+    "toLabel": "Nereye (Konum)",
+    "toPlaceholder": "Hedef konumunu girin",
+    "toRequiredError": "Lütfen hedef konumunu girin!",
+    "weightLabel": "Ağırlık (kg)",
+    "weightPlaceholder": "Ağırlığı kg olarak girin",
+    "weightRequiredError": "Lütfen ağırlığı girin!",
+    "weightMinError": "Ağırlık 0'dan büyük olmalıdır",
+    "bulkLabel": "Hacim (m³)",
+    "bulkPlaceholder": "Hacmi m³ olarak girin",
+    "bulkRequiredError": "Lütfen hacmi girin!",
+    "bulkMinError": "Hacim 0'dan büyük olmalıdır",
+    "customsCheckbox": "Gümrük Gereklidir",
+    "submitButton": "Gönder"
   }
 }
