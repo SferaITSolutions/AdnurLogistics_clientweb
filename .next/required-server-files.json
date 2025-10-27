@@ -98,7 +98,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/home/alisher/projects/adnur-logistic",
+    "outputFileTracingRoot": "/Users/abdulazizsaidov/Desktop/AdnurLogistics_clientweb",
     "experimental": {
       "useSkewCookie": false,
       "cacheLife": {
@@ -296,10 +296,10 @@
       "resolveAlias": {
         "next-intl/config": "./src/i18n/request.ts"
       },
-      "root": "/home/alisher/projects/adnur-logistic"
+      "root": "/Users/abdulazizsaidov/Desktop/AdnurLogistics_clientweb"
     }
   },
-  "appDir": "/home/alisher/projects/adnur-logistic",
+  "appDir": "/Users/abdulazizsaidov/Desktop/AdnurLogistics_clientweb",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
