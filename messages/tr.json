@@ -348,11 +348,11 @@
     "tashkent": "Tashkent"
   },
   "editNameModal": {
-    "title": "Profilni tahrirlash",
-    "placeholder": "Ismni kiriting",
-    "validationError": "Ism bo'sh bo'lmasligi kerak",
-    "hint": "Ism raqam yoki maxsus belgilar bo'lmasin, bo'sh qoldirish mumkin emas",
-    "okText": "Saqlash",
-    "cancelText": "Bekor qilish"
+    "title": "Profili Düzenle",
+    "placeholder": "Adı girin",
+    "validationError": "Ad boş olmamalıdır",
+    "hint": "Ad, rakam veya özel karakter içermemeli ve boş bırakılamaz",
+    "okText": "Kaydet",
+    "cancelText": "İptal Et"
   }
 }
