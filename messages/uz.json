@@ -112,6 +112,7 @@
     "title": "Kirish",
     "phone": "Telefon raqamingiz",
     "phonePlaceholder": "Telefon raqamni kiriting!",
+    "phoneFormat": "Telefon formati",
     "password": "Parol",
     "passwordPlaceholder": "Parolni kiriting",
     "button": "Kirish",

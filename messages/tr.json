@@ -112,6 +112,7 @@
     "title": "Giriş Yap",
     "phone": "Telefon numaranız",
     "phonePlaceholder": "Telefon numaranızı girin!",
+    "phoneFormat": "Telefon formatı",
     "password": "Parola",
     "passwordPlaceholder": "Parolanızı girin",
     "button": "Giriş Yap",

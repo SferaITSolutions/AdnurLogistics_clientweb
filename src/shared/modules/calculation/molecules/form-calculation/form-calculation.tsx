@@ -43,8 +43,8 @@ export default function FormCalculation() {
     calculationMutation.mutate({
       fromLocation: data.from?.toUpperCase(),
       customs: data.customsPriceCalculation || false,
-      weight: data.kg,
-      cub: data.m3,
+      weight: data.kg || 0,
+      cub: data.m3 || 0,
     });
     form.resetFields();
   };

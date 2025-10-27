@@ -111,6 +111,7 @@
   "login": {
     "title": "Login",
     "phone": "Your phone number",
+    "phoneFormat": "Phone format",
     "phonePlaceholder": "Enter your phone number!",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",

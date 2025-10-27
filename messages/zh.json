@@ -118,6 +118,7 @@
     "title": "登录",
     "phone": "您的电话号码",
     "phonePlaceholder": "请输入电话号码！",
+    "phoneFormat": "电话格式",
     "password": "密码",
     "passwordPlaceholder": "请输入密码",
     "button": "登录",

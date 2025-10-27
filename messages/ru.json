@@ -111,6 +111,7 @@
   "login": {
     "title": "Вход",
     "phone": "Ваш номер телефона",
+    "phoneFormat": "Формат телефона",
     "phonePlaceholder": "Введите номер телефона!",
     "password": "Пароль",
     "passwordPlaceholder": "Введите пароль",
@@ -344,6 +345,6 @@
     "foshan": "Фосхан"
   },
   "toRegions": {
-    "tashkent": "Tashkent"
+    "tashkent": "Ташкент"
   }
 }
