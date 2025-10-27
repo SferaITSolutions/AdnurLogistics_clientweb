@@ -346,5 +346,13 @@
   },
   "toRegions": {
     "tashkent": "Tashkent"
+  },
+  "editNameModal": {
+    "title": "Edit Profile",
+    "placeholder": "Enter name",
+    "validationError": "Name must not be empty",
+    "hint": "Name should not contain numbers or special characters, and cannot be left blank",
+    "okText": "Save",
+    "cancelText": "Cancel"
   }
 }

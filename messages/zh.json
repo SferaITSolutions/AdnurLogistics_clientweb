@@ -346,5 +346,13 @@
   },
   "toRegions": {
     "tashkent": "塔什干"
+  },
+  "editNameModal": {
+    "title": "编辑资料",
+    "placeholder": "输入姓名",
+    "validationError": "姓名不能为空",
+    "hint": "姓名不应包含数字或特殊字符，且不能为空",
+    "okText": "保存",
+    "cancelText": "取消"
   }
 }

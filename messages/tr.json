@@ -346,5 +346,13 @@
   },
   "toRegions": {
     "tashkent": "Tashkent"
+  },
+  "editNameModal": {
+    "title": "Profilni tahrirlash",
+    "placeholder": "Ismni kiriting",
+    "validationError": "Ism bo'sh bo'lmasligi kerak",
+    "hint": "Ism raqam yoki maxsus belgilar bo'lmasin, bo'sh qoldirish mumkin emas",
+    "okText": "Saqlash",
+    "cancelText": "Bekor qilish"
   }
 }
