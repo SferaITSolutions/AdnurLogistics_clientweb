@@ -323,6 +323,7 @@
   },
   "calculationResult": {
     "loading": "Yükleniyor...",
+    "customsLabel": "Gümrük hizmet bedeli ile hesapla",
     "modalTitleSuccess": "Talebiniz kabul edildi!",
     "modalMessageSuccess": "Talep yöneticiye gönderildi. Yakın zamanda sizinle iletişime geçilecektir.",
     "modalButtonOk": "TAMAM",
@@ -371,6 +372,9 @@
     "bulkRequiredError": "Lütfen hacmi girin!",
     "bulkMinError": "Hacim 0'dan büyük olmalıdır",
     "customsCheckbox": "Gümrük Gereklidir",
-    "submitButton": "Gönder"
+    "submitButton": "Gönder",
+    "successModalTitle": "Başarılı",
+    "successModalText": "Talepiniz başarıyla gönderildi.",
+    "successModalCloseButton": "Kapat"
   }
 }

@@ -37,12 +37,11 @@ export const useCreatePetition = () => {
       toast.success("So'rov qoldirildi");
     },
     onError: (error: any) => {
-      message.error(error?.response?.data?.message || "Xatolik yuz berdi");
-      return error;
+      toast.error(error?.response?.data?.message || "Xatolik yuz berdi");
     },
   });
 };
-export const useApplyForm = () => {
+export const useApplyFCL = (onSuccess: () => void) => {
   return useMutation({
     mutationFn: (data: {
       fromLocation: string;
@@ -53,6 +52,7 @@ export const useApplyForm = () => {
     }) => CalculationService.applyForm(data),
     onSuccess: () => {
       toast.success("#application submitted successfully ✅");
+      onSuccess();
     },
     onError: (error: any) => {
       message.error(error?.response?.data?.message || "#something went wrong ❌");

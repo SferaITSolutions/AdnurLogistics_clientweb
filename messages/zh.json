@@ -321,6 +321,7 @@
   },
   "calculationResult": {
     "loading": "正在加载...",
+    "customsLabel": "包含报关服务费计算",
     "modalTitleSuccess": "您的请求已被接受！",
     "modalMessageSuccess": "请求已发送给管理员。他们将尽快与您联系。",
     "modalButtonOk": "确定",
@@ -371,6 +372,9 @@
     "bulkRequiredError": "请输入体积！",
     "bulkMinError": "体积必须大于 0",
     "customsCheckbox": "需要报关",
-    "submitButton": "提交"
+    "submitButton": "提交",
+    "successModalTitle": "成功",
+    "successModalText": "您的请求已成功提交。",
+    "successModalCloseButton": "关闭"
   }
 }

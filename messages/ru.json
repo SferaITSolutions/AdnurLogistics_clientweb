@@ -329,6 +329,7 @@
   },
   "calculationResult": {
     "loading": "Загрузка...",
+    "customsLabel": "Рассчитать со стоимостью таможенной услуги",
     "modalTitleSuccess": "Ваша заявка принята!",
     "modalMessageSuccess": "Запрос отправлен администратору. С вами свяжутся в ближайшее время.",
     "modalButtonOk": "ОК",
@@ -371,6 +372,9 @@
     "bulkRequiredError": "Пожалуйста, введите объем!",
     "bulkMinError": "Объем должен быть больше 0",
     "customsCheckbox": "Требуется Таможенное оформление",
-    "submitButton": "Отправить"
+    "submitButton": "Отправить",
+    "successModalTitle": "Успешно",
+    "successModalText": "Ваш запрос успешно отправлен.",
+    "successModalCloseButton": "Закрыть"
   }
 }

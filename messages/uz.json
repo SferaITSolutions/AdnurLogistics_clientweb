@@ -326,6 +326,7 @@
   },
   "calculationResult": {
     "loading": "Yuklanmoqda...",
+    "customsLabel": "Bojxona xizmat narxi bilan hisoblash",
     "modalTitleSuccess": "So’rovingiz qabul qilindi!",
     "modalMessageSuccess": "Adminga so’rov yuborildi. Yaqin orada siz bilan bog'lanishadi.",
     "modalButtonOk": "OK",
@@ -374,6 +375,9 @@
     "bulkRequiredError": "Iltimos, hajmni kiriting!",
     "bulkMinError": "Hajm 0 dan katta bo'lishi kerak",
     "customsCheckbox": "Bojxona talab qilinadi",
-    "submitButton": "Yuborish"
+    "submitButton": "Yuborish",
+    "successModalTitle": "Tasdiqlash muvoffaqiyatli bo'ldi",
+    "successModalText": "So‘rovingiz muvaffaqiyatli yuborildi.",
+    "successModalCloseButton": "Yopish"
   }
 }

@@ -324,6 +324,7 @@
   },
   "calculationResult": {
     "loading": "Loading...",
+    "customsLabel": "Calculate with customs service price",
     "modalTitleSuccess": "Your request has been accepted!",
     "modalMessageSuccess": "The request has been sent to the administrator. They will contact you shortly.",
     "modalButtonOk": "OK",
@@ -366,7 +367,10 @@
     "bulkRequiredError": "Please input bulk!",
     "bulkMinError": "Bulk must be greater than 0",
     "customsCheckbox": "Customs Required",
-    "submitButton": "Submit"
+    "submitButton": "Submit",
+    "successModalTitle": "Success",
+    "successModalText": "Your request has been successfully submitted.",
+    "successModalCloseButton": "Close"
   },
   "editNameModal": {
     "title": "Edit Profile",

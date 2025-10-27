@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { Button, Checkbox, Form, InputNumber, Radio, Select } from 'antd';
+import { Button, Checkbox, Form, InputNumber, Radio, Select } from "antd";
 
-import { useCalculation } from '@/entities/hooks/calculation/hooks';
-import { useCalculationStore } from '@/entities/hooks/calculation/store';
-import { useRegions, useToRegions } from '@/shared/constants';
-import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import { FaSpinner } from 'react-icons/fa';
-import { LiaWeightSolid } from 'react-icons/lia';
-import { useFormStore } from '../../store/store';
+import { useCalculation } from "@/entities/hooks/calculation/hooks";
+import { useCalculationStore } from "@/entities/hooks/calculation/store";
+import { useRegions, useToRegions } from "@/shared/constants";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { LiaWeightSolid } from "react-icons/lia";
+import { useFormStore } from "../../store/store";
 
 const { Option } = Select;
 
 export default function FormCalculation() {
-  const t = useTranslations('calculationPage');
+  const t = useTranslations("calculationPage");
   const { values, setValue, resetForm } = useFormStore();
   const { setResponse } = useCalculationStore();
   const calculationMutation = useCalculation((data: any) => {
@@ -66,14 +66,14 @@ export default function FormCalculation() {
       className="w-full"
     >
       <Form.Item
-        label={t('fromLabel')}
+        label={t("fromLabel")}
         name="from"
-        rules={[{ required: true, message: t('fromPlaceholder') }]}
+        rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
         <Select
-          style={{ borderRadius: '8px' }}
+          style={{ borderRadius: "8px" }}
           className="!rounded-xl"
-          placeholder={t('fromPlaceholder')}
+          placeholder={t("fromPlaceholder")}
           value={values.from}
           size="large"
         >
@@ -85,14 +85,14 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label={t('toLabel')}
+        label={t("toLabel")}
         name="to"
-        rules={[{ required: true, message: t('toPlaceholder') }]}
+        rules={[{ required: true, message: t("toPlaceholder") }]}
       >
         <Select
-          style={{ borderRadius: '8px' }}
+          style={{ borderRadius: "8px" }}
           className="!rounded-xl"
-          placeholder={t('toPlaceholder')}
+          placeholder={t("toPlaceholder")}
           value={values.to}
           size="large"
         >
@@ -104,22 +104,22 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label={t('weightLabel')}
+        label={t("weightLabel")}
         name="kg"
         rules={[
-          { required: true, message: t('weightPlaceholder') },
+          { required: true, message: t("weightPlaceholder") },
           {
-            type: 'number',
+            type: "number",
             min: 0.01,
-            message: t('valueGreaterThanZero'),
+            message: t("valueGreaterThanZero"),
           },
         ]}
       >
         <InputNumber
           className="!rounded-xl"
           prefix={<LiaWeightSolid color="blue" size={18} />}
-          style={{ width: '100%' }}
-          placeholder={t('weightPlaceholder')}
+          style={{ width: "100%" }}
+          placeholder={t("weightPlaceholder")}
           min={0.01}
           size="large"
         />
@@ -150,68 +150,49 @@ export default function FormCalculation() {
         />
       </Form.Item> */}
       <Form.Item
-        label={t('volumeLabel')}
+        label={t("volumeLabel")}
         name="m3"
         rules={[
-          { required: true, message: t('volumePlaceholder') },
+          { required: true, message: t("volumePlaceholder") },
           {
-            type: 'number',
+            type: "number",
             min: 0.01,
-            message: t('valueGreaterThanZero'),
+            message: t("valueGreaterThanZero"),
           },
         ]}
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
           className="!rounded-xl !w-full"
-          placeholder={t('volumePlaceholder')}
+          placeholder={t("volumePlaceholder")}
           min={0.01}
           value={values.m3}
-          onChange={(val) => setValue('m3', val)}
+          onChange={(val) => setValue("m3", val)}
           size="large"
         />
       </Form.Item>
-      <Form.Item
-        label={t('typeLabel')}
+      {/* <Form.Item
+        label={t("typeLabel")}
         name="containerType"
         className="!pb-0"
-        rules={[{ required: true, message: t('containerTypePlaceholder') }]}
+        rules={[{ required: true, message: t("containerTypePlaceholder") }]}
       >
         <Radio.Group
           size="large"
           value={values.containerType}
-          onChange={(e) => setValue('containerType', e.target.value)}
+          onChange={(e) => setValue("containerType", e.target.value)}
         >
-          <Radio value="ICL">{t('typeIcl')}</Radio>
-          <Radio value="FCL">{t('typeFcl')}</Radio>
+          <Radio value="ICL">{t("typeIcl")}</Radio>
+          <Radio value="FCL">{t("typeFcl")}</Radio>
         </Radio.Group>
-      </Form.Item>
-      <Form.Item
-        name="customsPriceCalculation"
-        valuePropName="checked"
-        // rules={[
-        //   {
-        //     validator(_, value) {
-        //       if (value) return Promise.resolve();
-        //       return Promise.reject(new Error(t('customsAgreement')));
-        //     },
-        //   },
-        // ]}
-      >
-        <Checkbox
-          checked={values.customsPriceCalculation}
-          onChange={(e) => setValue('customsPriceCalculation', e.target.checked)}
-        >
-          {t('customsLabel')}
-        </Checkbox>
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item className="mt-3">
         <Button
           type="primary"
           className="bg-secondary-blue-color !py-5 w-full !rounded-xl"
           htmlType="submit"
         >
-          {t('calculateButton')}
+          {t("calculateButton")}
         </Button>
       </Form.Item>
     </Form>
