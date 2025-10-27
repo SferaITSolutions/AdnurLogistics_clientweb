@@ -23,7 +23,7 @@ const Pagination: React.FC<PaginationProps> = ({ dataLength }) => {
       <button
         onClick={handlePrev}
         disabled={page === 0}
-        className={`px-4 py-2 rounded bg-blue-500 text-white transition disabled:bg-gray-300`}
+        className={`px-4 py-2 cursor-pointer rounded-xl bg-blue-500 text-white transition disabled:bg-gray-300`}
       >
         <FaArrowLeft className="text-white" />
       </button>
@@ -31,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({ dataLength }) => {
       <button
         onClick={handleNext}
         disabled={dataLength === 0}
-        className={`px-4 py-2 rounded bg-blue-500 text-white transition disabled:bg-gray-300`}
+        className={`px-4 py-2 cursor-pointer rounded-xl bg-blue-500 text-white transition disabled:bg-gray-300`}
       >
         <FaArrowRight className="text-white" />
       </button>

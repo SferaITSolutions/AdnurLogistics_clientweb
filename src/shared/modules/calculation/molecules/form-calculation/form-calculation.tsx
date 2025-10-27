@@ -74,6 +74,7 @@ export default function FormCalculation() {
           className="!rounded-xl"
           placeholder={t('fromPlaceholder')}
           value={values.from}
+          size="large"
         >
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
@@ -100,6 +101,7 @@ export default function FormCalculation() {
           style={{ width: '100%' }}
           placeholder={t('weightPlaceholder')}
           min={0.01}
+          size="large"
         />
       </Form.Item>
 
@@ -146,6 +148,7 @@ export default function FormCalculation() {
           min={0.01}
           value={values.m3}
           onChange={(val) => setValue('m3', val)}
+          size="large"
         />
       </Form.Item>
       <Form.Item
@@ -155,6 +158,7 @@ export default function FormCalculation() {
         rules={[{ required: true, message: t('containerTypePlaceholder') }]}
       >
         <Radio.Group
+          size="large"
           value={values.containerType}
           onChange={(e) => setValue('containerType', e.target.value)}
         >
@@ -184,7 +188,7 @@ export default function FormCalculation() {
       <Form.Item className="mt-3">
         <Button
           type="primary"
-          className="bg-secondary-blue-color !p-4 w-full !rounded-xl"
+          className="bg-secondary-blue-color !py-5 w-full !rounded-xl"
           htmlType="submit"
         >
           {t('calculateButton')}

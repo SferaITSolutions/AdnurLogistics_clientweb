@@ -16,6 +16,7 @@ export default function FilterPersonalNumber() {
         value={orderIdFilter || ''}
         onChange={(e) => setOrderIdFilter(e.target.value)}
         placeholder={t('orderId')}
+        size="large"
       />
     </div>
   );

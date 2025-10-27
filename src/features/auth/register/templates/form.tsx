@@ -1,24 +1,24 @@
 'use client';
 
+import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
+import { Form, Input } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { FaInfoCircle, FaSpinner } from 'react-icons/fa';
-import { Form, Input } from 'antd';
-import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
 
-import { ButtonPrimary } from '@/shared/components/dump/atoms';
 import { Link } from '@/i18n/routing';
-import RegisterErrorlabel from '../molecules/errorLabel';
-import SelectBefore from '@/shared/components/dump/atoms/select-before';
-import { extractErrorMessage } from '@/shared/utils';
-import { registerSchema } from '@/shared/schemas/registerSchema';
-import { setLocalItem } from '@/shared/utils/storage';
-import { useGlobalStore } from '@/shared/store/globalStore';
 import { useRegisterMutation } from '@/services/auth/hook';
-import { useRegisterStore } from '../store/registerStore';
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { z } from 'zod';
+import { ButtonPrimary } from '@/shared/components/dump/atoms';
+import SelectBefore from '@/shared/components/dump/atoms/select-before';
+import { registerSchema } from '@/shared/schemas/registerSchema';
+import { useGlobalStore } from '@/shared/store/globalStore';
+import { extractErrorMessage } from '@/shared/utils';
+import { setLocalItem } from '@/shared/utils/storage';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { z } from 'zod';
+import RegisterErrorlabel from '../molecules/errorLabel';
+import { useRegisterStore } from '../store/registerStore';
 
 export default function RegisterForm() {
   const t = useTranslations();
@@ -146,14 +146,16 @@ export default function RegisterForm() {
         <Form.Item>
           <ButtonPrimary
             type="primary"
-            Icon={registerMutation.isPending && <FaSpinner className="animate-spin" />}
+            Icon={
+              registerMutation.isPending && <FaSpinner className="animate-spin text-blue-500" />
+            }
             label={t('register.getId')}
             classNameDy="w-full justify-center"
             disabled={registerMutation.isPending}
           />
         </Form.Item>
       </Form>
-      <p className="hover:underline text-sm">
+      <p className="underline text-blue-500 text-sm">
         <Link href="/auth/log-in">{t('register.alreadyRegistered')}</Link>
       </p>
     </div>

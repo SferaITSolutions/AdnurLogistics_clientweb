@@ -110,13 +110,13 @@ export default function SignInUI() {
             <ButtonPrimary
               classNameDy="w-full justify-center !py-3 !mt-5"
               type="primary"
-              Icon={loginMutation.isPending && <FaSpinner className="animate-spin text-white" />}
+              Icon={loginMutation.isPending && <FaSpinner className="animate-spin text-blue-500" />}
               label={t('button')}
               disabled={loginMutation.isPending}
             />
           </Form.Item>
         </Form>
-        <p className="hover:underline text-sm">
+        <p className="underline text-blue-500 text-sm">
           <Link href="/auth/register">{t('register')}</Link>
         </p>
       </div>
