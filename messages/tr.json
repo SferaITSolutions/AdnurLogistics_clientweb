@@ -271,7 +271,7 @@
     "pendingPayment": "Ödeme Bekleniyor",
     "dashboard": "Kontrol Paneli",
     "calculation": "Hesaplama",
-      "itemsBeingCollected": "Ürünler Toplanıyor",
+    "itemsBeingCollected": "Ürünler Toplanıyor",
     "productDetails": "Ürün Detayları",
     "from": "başlangıç",
     "to": "bitiş",
@@ -331,6 +331,12 @@
     "sendRequestButton": "Yöneticiye Talep Gönder",
     "errorNeedCalculationTitle": "Talep göndermek için önce hesaplama yapın!",
     "errorNeedCalculationMessage": "Lütfen hesaplama sonucunu almak için öncelikle formdaki tüm alanları doldurup hesaplama yapmalısınız."
+  },
+  "logoutModal": {
+    "title": "Sistemden Çıkış Yap",
+    "cancelText": "Hayır",
+    "okText": "Evet",
+    "confirmationMessage": "Sistemden çıkış yapmayı onaylıyor musunuz?"
   },
   "regions": {
     "horgos": "Horgos",

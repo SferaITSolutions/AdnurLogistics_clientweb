@@ -332,9 +332,15 @@
     "errorNeedCalculationTitle": "So'rov qoldirish uchun avval hisoblashni amalga oshiring!",
     "errorNeedCalculationMessage": "Iltimos, hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak."
   },
+  "logoutModal": {
+    "title": "Tizimdan chiqish",
+    "cancelText": "Yo'q",
+    "okText": "Ha",
+    "confirmationMessage": "Tizimdan chiqishni tasdiqlaysizmi?"
+  },
   "regions": {
     "horgos": "Horgos",
     "yiwu": "Yiwu",
     "foshan": "Foshan"
   }
-} 
+}

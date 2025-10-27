@@ -1,28 +1,40 @@
-import { useRouter } from '@/i18n/routing';
-import { authService } from '@/services/auth/auth.service';
-import { useGlobalStore } from '@/shared/store/globalStore';
-import { Modal } from 'antd';
+import { useRouter } from "@/i18n/routing";
+import { authService } from "@/services/auth/auth.service";
+import { ButtonPrimary } from "@/shared/components/dump/atoms";
+import { useGlobalStore } from "@/shared/store/globalStore";
+import { Button, Modal } from "antd";
+import { useTranslations } from "next-intl";
 
 const LogoutModal = () => {
   const { isLogout, setIslogout } = useGlobalStore();
   const router = useRouter();
+  const t = useTranslations("logoutModal");
   return (
     <Modal
-      title="Tizimdan chiqish"
-      closable={{ 'aria-label': 'Custom Close Button' }}
+      title={t("title")}
+      closable={{ "aria-label": "Custom Close Button" }}
       open={isLogout}
       okType="danger"
       centered
-      cancelText="Yo'q"
-      okText="Ha"
-      onOk={async () => {
-        await authService.clearStorage();
-        router.push('/');
-        setIslogout(false);
-      }}
       onCancel={() => setIslogout(false)}
+      footer={
+        <div className="flex gap-2">
+          <button
+            type="button"
+            className="bg-secondary-blue-color px-6 py-2 !text-white rounded-xl"
+            onClick={async () => { 
+              await authService.clearStorage();
+              router.push("/");
+              setIslogout(false);
+            }}
+          >{t("okText")}</button>
+          <Button className="px-6 py-2" type="text" onClick={() => setIslogout(false)}>
+            {t("cancelText")}
+          </Button>
+        </div>
+      }
     >
-      <p>Tizimdan chiqishni tasdiqlaysizmi?</p>
+      <p>{t("confirmationMessage")}</p>
     </Modal>
   );
 };
