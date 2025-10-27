@@ -53,12 +53,12 @@ export const ApplyModal = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // setOpen(true);
-    }, 1000000000000000);
+      setOpen(true);
+    }, 10000);
 
     setInterval(() => {
-      // setOpen(true);
-    }, 3000000000000000);
+      setOpen(true);
+    }, 30000);
   }, []);
 
   return (
@@ -208,18 +208,6 @@ export const ApplyModal = () => {
         <Form.Item
           label={
             <span className="global-label-size">
-              {t("fields.weight.label")}
-            </span>
-          }
-          name="weight"
-          rules={[{ required: true, message: t("fields.weight.required") }]}
-        >
-          <Input placeholder={t("fields.weight.placeholder")} />
-        </Form.Item>
-
-        <Form.Item
-          label={
-            <span className="global-label-size">
               {t("fields.description.label")}
             </span>
           }
@@ -244,7 +232,6 @@ export const ApplyModal = () => {
           type="primary"
           loading={applyRequest.isPending}
           className="
-            w-full 
             bg-primary-blue-color 
             cursor-pointer 
             hover:!text-[#004F98] 
