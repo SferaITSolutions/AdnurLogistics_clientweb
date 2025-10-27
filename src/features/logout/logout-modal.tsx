@@ -12,9 +12,13 @@ const LogoutModal = () => {
       closable={{ 'aria-label': 'Custom Close Button' }}
       open={isLogout}
       okType="danger"
-      onOk={() => {
-        authService.clearStorage();
+      centered
+      cancelText="Yo'q"
+      okText="Ha"
+      onOk={async () => {
+        await authService.clearStorage();
         router.push('/');
+        setIslogout(false);
       }}
       onCancel={() => setIslogout(false)}
     >

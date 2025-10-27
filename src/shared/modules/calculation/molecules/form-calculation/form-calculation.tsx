@@ -169,14 +169,14 @@ export default function FormCalculation() {
       <Form.Item
         name="customsPriceCalculation"
         valuePropName="checked"
-        rules={[
-          {
-            validator(_, value) {
-              if (value) return Promise.resolve();
-              return Promise.reject(new Error(t('customsAgreement')));
-            },
-          },
-        ]}
+        // rules={[
+        //   {
+        //     validator(_, value) {
+        //       if (value) return Promise.resolve();
+        //       return Promise.reject(new Error(t('customsAgreement')));
+        //     },
+        //   },
+        // ]}
       >
         <Checkbox
           checked={values.customsPriceCalculation}
