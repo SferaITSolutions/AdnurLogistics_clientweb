@@ -82,7 +82,6 @@ export default function OrdersList() {
                   ),
                 )}
               </div>
-              <Pagination dataLength={data?.data.length || 0} />
             </>
           ) : (
             <div className="flex items-center justify-center ">
@@ -91,6 +90,7 @@ export default function OrdersList() {
               </p>
             </div>
           )}
+          <Pagination dataLength={data?.data.length || 0} />
           <OrderDetailsModal />
         </>
       )}

@@ -78,7 +78,7 @@ export default function ResultCalculation({ response }: { response: any }) {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full"
+            className="w-full !py-5 !rounded-xl"
             onClick={handleCreatePetition}
             disabled={createPetitionMutation.isPending}
           >
