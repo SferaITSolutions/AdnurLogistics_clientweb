@@ -42,7 +42,7 @@ export default function FormCalculation() {
     Object.keys(data).forEach((key) => setValue(key, data[key]));
     calculationMutation.mutate({
       fromLocation: data.from?.toUpperCase(),
-      customs: data.customsPriceCalculation,
+      customs: data.customsPriceCalculation || false,
       weight: data.kg,
       cub: data.m3,
     });
