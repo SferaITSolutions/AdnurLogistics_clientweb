@@ -1,9 +1,0 @@
-{
-  "/[locale]/(lending-page)/page": "/[locale]",
-  "/[locale]/auth/log-in/page": "/[locale]/auth/log-in",
-  "/[locale]/auth/register/page": "/[locale]/auth/register",
-  "/[locale]/client/calculation/page": "/[locale]/client/calculation",
-  "/[locale]/client/dashboard/page": "/[locale]/client/dashboard",
-  "/_not-found/page": "/_not-found",
-  "/favicon.ico/route": "/favicon.ico"
-}
