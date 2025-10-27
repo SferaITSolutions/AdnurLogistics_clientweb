@@ -9,7 +9,7 @@ import {
 import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
 
 import SelectBefore from "@/shared/components/dump/atoms/select-before";
-import { FROM_OPTIONS, useRegions } from "@/shared/constants";
+import { FROM_OPTIONS, useRegions, useToRegions } from "@/shared/constants";
 import { TitleText } from "@/shared/modules/lending-page";
 import { useGlobalStore } from "@/shared/store/globalStore";
 import { ApplyRequest } from "@/shared/types/lenging-page-types";
@@ -24,6 +24,7 @@ export const ApplyModal = () => {
   const t = useTranslations("LendingPage.applyModal");
   const applyRequest = useApplyRequest();
   const [form] = Form.useForm();
+  const { TO_OPTIONS } = useToRegions();
   const handleSubmit = async (values: ApplyRequest) => {
     try {
       const { phone, bulk, density, weight, ...data } = values;
@@ -173,7 +174,7 @@ export const ApplyModal = () => {
           >
             <Select
               placeholder={t("fields.toLocation.placeholder")}
-              options={[{ label: "Toshkent", value: "TASHKENT" }]}
+              options={TO_OPTIONS}
             />
           </Form.Item>
         </div>

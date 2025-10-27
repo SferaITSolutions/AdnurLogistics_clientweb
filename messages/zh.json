@@ -342,5 +342,8 @@
     "horgos": "霍尔果斯",
     "yiwu": "义乌",
     "foshan": "佛山"
+  },
+  "toRegions": {
+    "tashkent": "塔什干"
   }
 }

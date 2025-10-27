@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, InputNumber, Radio, Select } from 'antd';
 
 import { useCalculation } from '@/entities/hooks/calculation/hooks';
 import { useCalculationStore } from '@/entities/hooks/calculation/store';
-import { useRegions } from '@/shared/constants';
+import { useRegions, useToRegions } from '@/shared/constants';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { FaSpinner } from 'react-icons/fa';
@@ -37,6 +37,7 @@ export default function FormCalculation() {
     }
   };
 
+  const { TO_OPTIONS } = useToRegions();
   const handleFinish = (data: any) => {
     Object.keys(data).forEach((key) => setValue(key, data[key]));
     calculationMutation.mutate({
@@ -77,6 +78,25 @@ export default function FormCalculation() {
           size="large"
         >
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
+            <Option key={option.value} value={option.value}>
+              {option.label}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        label={t('toLabel')}
+        name="to"
+        rules={[{ required: true, message: t('toPlaceholder') }]}
+      >
+        <Select
+          style={{ borderRadius: '8px' }}
+          className="!rounded-xl"
+          placeholder={t('toPlaceholder')}
+          value={values.to}
+          size="large"
+        >
+          {TO_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
               {option.label}
             </Option>

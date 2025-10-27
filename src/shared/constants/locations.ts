@@ -17,4 +17,10 @@ export const FROM_OPTIONS = [
   { value: "FOSHAN", label: "Foshan" },
 ];
 
-export const TO_OPTIONS = [{ value: "TASHKENT", label: "Tashkent" }];
+export const useToRegions = () => {
+  const t = useTranslations("toRegions");
+  const TO_OPTIONS = [
+    { value: "TASHKENT", label: t("tashkent") },
+  ];
+  return { TO_OPTIONS };
+};
