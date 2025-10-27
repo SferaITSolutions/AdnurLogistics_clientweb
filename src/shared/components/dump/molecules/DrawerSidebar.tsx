@@ -2,9 +2,8 @@
 
 import { FaCalculator, FaHome, FaSignOutAlt } from 'react-icons/fa';
 
-import { useRouter } from '@/i18n/routing';
-import { authService } from '@/services/auth/auth.service';
 import Logo from '@/shared/components/dump/atoms/Logo';
+import { useGlobalStore } from '@/shared/store/globalStore';
 import { Drawer } from 'antd';
 import { useTranslations } from 'next-intl';
 import MenuItem from './menu-item';
@@ -17,11 +16,9 @@ export const DrawerSidebar = ({
   isOpen: boolean;
 }) => {
   const t = useTranslations('clientDashboard');
-  const router = useRouter();
-  const logout = () => {
-    authService.clearStorage();
-    router.push('/');
-  };
+  const { setIslogout } = useGlobalStore();
+  const logout = () => setIslogout(true);
+
   return (
     <Drawer
       placement="left"

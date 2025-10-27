@@ -1,22 +1,20 @@
 'use client';
 
 import { useSidebarStore } from '@/features/auth/register/store/sidebarStore';
-import { useRouter } from '@/i18n/routing';
-import { authService } from '@/services/auth/auth.service';
+import LogoutModal from '@/features/logout/logout-modal';
 import Logo from '@/shared/components/dump/atoms/Logo';
 import { DrawerSidebar } from '@/shared/components/dump/molecules/DrawerSidebar';
 import SidebarItems from '@/shared/components/dump/molecules/sidebar-items';
+import { useGlobalStore } from '@/shared/store/globalStore';
 import { useTranslations } from 'next-intl';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 const Sidebar = () => {
   const t = useTranslations('clientDashboard');
   const { isOpen, closeSidebar } = useSidebarStore();
-  const router = useRouter();
-  const logout = () => {
-    authService.clearStorage();
-    router.push('/');
-  };
+  const { setIslogout } = useGlobalStore();
+  const logout = () => setIslogout(true);
+
   return (
     <>
       {/* Desktop Sidebar */}
@@ -38,6 +36,7 @@ const Sidebar = () => {
 
       {/* Mobile Sidebar (Drawer) */}
       <DrawerSidebar closeSidebar={closeSidebar} isOpen={isOpen} />
+      <LogoutModal />
     </>
   );
 };
