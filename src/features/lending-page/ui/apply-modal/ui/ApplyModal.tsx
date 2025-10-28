@@ -98,6 +98,7 @@ export const ApplyModal = () => {
           >
             <Input
               placeholder={t("fields.fullname.placeholder")}
+              size="large"
               onKeyPress={(e) => {
                 const regex = /^[A-Za-z\u0400-\u04FF\s'-]$/;
                 if (!regex.test(e.key)) {
@@ -127,6 +128,7 @@ export const ApplyModal = () => {
             ]}
           >
             <Input
+              size="large"
               addonBefore={<SelectBefore />}
               placeholder={
                 beforePhone === "+998" ? "90 123 45 67" : "123 123 1234"
@@ -158,6 +160,7 @@ export const ApplyModal = () => {
             <Select
               placeholder={t("fields.fromLocation.placeholder")}
               options={useRegions().FROM_OPTIONS}
+              size="large"
             />
           </Form.Item>
           <Form.Item
@@ -173,6 +176,7 @@ export const ApplyModal = () => {
             ]}
           >
             <Select
+            size="large"
               placeholder={t("fields.toLocation.placeholder")}
               options={TO_OPTIONS}
             />
@@ -190,7 +194,11 @@ export const ApplyModal = () => {
             className="flex-1"
             rules={[{ required: true, message: t("fields.bulk.required") }]}
           >
-            <Input placeholder={t("fields.bulk.placeholder")} />
+            <Input
+              size="large"
+              className="!h-[38px]"
+              placeholder={t("fields.bulk.placeholder")}
+            />
           </Form.Item>
           <Form.Item
             label={
@@ -202,7 +210,11 @@ export const ApplyModal = () => {
             className="flex-1"
             rules={[{ required: true, message: t("fields.density.required") }]}
           >
-            <Input placeholder={t("fields.density.placeholder")} />
+            <Input
+              size="large"
+              className="!h-[38px]"
+              placeholder={t("fields.density.placeholder")}
+            />
           </Form.Item>
         </div>
         {/* Message */}

@@ -55,23 +55,32 @@ export default function ApplyForm() {
         layout="vertical"
         initialValues={initialValues}
         onFinish={onFinish}
+        className="!w-full"
       >
         <Form.Item
-          label={t("fromLabel")}
+          label={<span className="global-text-size">{t("fromLabel")}</span>}
           name="from"
           rules={[{ required: true, message: t("fromRequiredError") }]}
         >
-          <Input className="!rounded-xl" placeholder={t("fromPlaceholder")} />
+          <Input
+            className="!rounded-xl global-input-height"
+            placeholder={t("fromPlaceholder")}
+            style={{ width: "100%" }}
+          />
         </Form.Item>
         <Form.Item
-          label={t("toLabel")}
+          label={<span className="global-text-size">{t("toLabel")}</span>}
           name="to"
           rules={[{ required: true, message: t("toRequiredError") }]}
         >
-          <Input className="!rounded-xl" placeholder={t("toPlaceholder")} />
+          <Input
+            className="!rounded-xl global-input-height"
+            placeholder={t("toPlaceholder")}
+            style={{ width: "100%" }}
+          />
         </Form.Item>
         <Form.Item
-          label={t("weightLabel")}
+          label={<span className="global-text-size">{t("weightLabel")}</span>}
           name="weight"
           rules={[
             { required: true, message: t("weightRequiredError") },
@@ -79,24 +88,26 @@ export default function ApplyForm() {
           ]}
         >
           <InputNumber
-            className="!rounded-xl"
+            className="!rounded-xl global-input-height !p-0"
             placeholder={t("weightPlaceholder")}
             style={{ width: "100%" }}
+            size="large"
           />
         </Form.Item>
         <Form.Item
-          label={t("bulkLabel")}
+          label={<span className="global-text-size">{t("bulkLabel")}</span>}
           name="bulk"
           rules={[
             { required: true, message: t("bulkRequiredError") },
-            { type: "number", min: 0.00001, message: t("bulkMinError") }, // 0 dan katta bo'lishi kerak
+            { type: "number", min: 0.00001, message: t("bulkMinError") },
           ]}
         >
           <InputNumber
             type="number"
-            className="!rounded-xl"
+            className="!rounded-xl global-input-height !p-0"
             placeholder={t("bulkPlaceholder")}
             style={{ width: "100%" }}
+            size="large"
             // min={1}
           />
         </Form.Item>
@@ -105,10 +116,13 @@ export default function ApplyForm() {
           valuePropName="checked"
           style={{ marginBottom: 16 }}
         >
-          <Checkbox>{t("customsCheckbox")}</Checkbox>
+          <Checkbox className="global-text-size">
+            {t("customsCheckbox")}
+          </Checkbox>
         </Form.Item>
         <Button
           type="primary"
+          className="!rounded-xl !px-4 !py-2 global-input-height"
           htmlType="submit"
           loading={applyMutation.isPending}
         >
@@ -129,7 +143,11 @@ export default function ApplyForm() {
           <div className="text-gray-500 text-center">
             {t("successModalText") || "So‘rovingiz muvaffaqiyatli yuborildi."}
           </div>
-          <Button type="primary" onClick={() => setIsModalOpen(false)}>
+          <Button
+            type="primary"
+            className="!rounded-xl !px-4 !py-2 global-input-height"
+            onClick={() => setIsModalOpen(false)}
+          >
             {t("successModalCloseButton") || "Yopish"}
           </Button>
         </div>

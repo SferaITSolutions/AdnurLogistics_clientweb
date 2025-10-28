@@ -66,13 +66,12 @@ export default function FormCalculation() {
       className="w-full"
     >
       <Form.Item
-        label={t("fromLabel")}
+        label={<span className="global-text-size">{t("fromLabel")}</span>}
         name="from"
         rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
         <Select
-          style={{ borderRadius: "8px" }}
-          className="!rounded-xl"
+          className="!rounded-xl "
           placeholder={t("fromPlaceholder")}
           value={values.from}
           size="large"
@@ -85,12 +84,11 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label={t("toLabel")}
+        label={<span className="global-text-size">{t("toLabel")}</span>}
         name="to"
         rules={[{ required: true, message: t("toPlaceholder") }]}
       >
         <Select
-          style={{ borderRadius: "8px" }}
           className="!rounded-xl"
           placeholder={t("toPlaceholder")}
           value={values.to}
@@ -104,7 +102,7 @@ export default function FormCalculation() {
         </Select>
       </Form.Item>
       <Form.Item
-        label={t("weightLabel")}
+        label={<span className="global-text-size">{t("weightLabel")}</span>}
         name="kg"
         rules={[
           { required: true, message: t("weightPlaceholder") },
@@ -116,7 +114,7 @@ export default function FormCalculation() {
         ]}
       >
         <InputNumber
-          className="!rounded-xl"
+          className="!rounded-xl !h-[38px]"
           prefix={<LiaWeightSolid color="blue" size={18} />}
           style={{ width: "100%" }}
           placeholder={t("weightPlaceholder")}
@@ -150,7 +148,7 @@ export default function FormCalculation() {
         />
       </Form.Item> */}
       <Form.Item
-        label={t("volumeLabel")}
+        label={<span className="global-text-size">{t("volumeLabel")}</span>}
         name="m3"
         rules={[
           { required: true, message: t("volumePlaceholder") },
@@ -163,12 +161,13 @@ export default function FormCalculation() {
       >
         <InputNumber
           prefix={<LiaWeightSolid color="blue" size={18} />}
-          className="!rounded-xl !w-full"
+          className="!rounded-xl !global-input-height"
           placeholder={t("volumePlaceholder")}
           min={0.01}
           value={values.m3}
           onChange={(val) => setValue("m3", val)}
           size="large"
+          style={{ width: "100%" }}
         />
       </Form.Item>
       {/* <Form.Item

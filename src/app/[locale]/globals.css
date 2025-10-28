@@ -58,6 +58,9 @@ body {
 .global-text-size {
   font-size: 18px !important;
 }
+.global-input-height {
+  height: 38px;
+}
 @media (max-width: 768px) {
   .heading-title-size {
     font-size: 30px !important;

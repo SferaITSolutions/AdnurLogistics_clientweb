@@ -10,11 +10,11 @@ export default function TabFilter() {
   const items = [
     {
       key: '0',
-      label: t('activeOrder'),
+      label: <span className="global-text-size">{t('activeOrder')}</span>,
     },
     {
       key: '1',
-      label: t('savedOrder'),
+      label: <span className="global-text-size">{t('savedOrder')}</span>,
     },
   ];
   const [activeKey, setActiveKey] = useState('0');
