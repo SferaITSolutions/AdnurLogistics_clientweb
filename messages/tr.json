@@ -126,6 +126,7 @@
     "region_not_allowed": "Maalesef bölgenizden katılım sağlanamamaktadır. Katılmak için izin verilen bölgelerden birini seçmelisiniz.",
     "verify": "Lütfen e-postanızı doğrulayın",
     "required": "Bu alan zorunludur",
+    "numberRequired": "Lütfen telefon numaranızı girin!",
     "minString": "Alan en az {min} karakter içermelidir",
     "passwordMismatch": "Şifreler eşleşmelidir",
     "passwordUppercase": "Şifre en az bir büyük harf içermelidir",
@@ -378,5 +379,8 @@
     "successModalTitle": "Başarılı",
     "successModalText": "Talepiniz başarıyla gönderildi.",
     "successModalCloseButton": "Kapat"
+  },
+  "authSuccessMessages": {
+    "loginSuccess": "Sisteme başarıyla giriş yapıldı ✅"
   }
 }

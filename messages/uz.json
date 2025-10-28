@@ -129,6 +129,7 @@
     "region_not_allowed": "Afsuski, sizning hududingizdan ishtirok etish mumkin emas. Ishtirok etish uchun ruxsat berilgan hududlardan birini tanlashingiz kerak.",
     "verify": "Iltimos, elektron pochtangizni tasdiqlang",
     "required": "Bu maydon to'ldirilishi shart",
+    "numberRequired": "Iltimos, raqamni kiriting!",
     "minString": "Maydon kamida {min} belgidan iborat bo'lishi kerak",
     "passwordMismatch": "Parollar mos kelishi kerak",
     "passwordUppercase": "Parol kamida bitta bosh harfni o'z ichiga olishi kerak",
@@ -381,5 +382,8 @@
     "successModalTitle": "Tasdiqlash muvoffaqiyatli bo'ldi",
     "successModalText": "So‘rovingiz muvaffaqiyatli yuborildi.",
     "successModalCloseButton": "Yopish"
+  },
+  "authSuccessMessages": {
+    "loginSuccess": "Tizimga muvaffaqiyatli kirdingiz ✅"
   }
 }

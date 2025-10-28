@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { deformatPhone, deformatPhoneTR } from '@/shared/utils/formatter';
-import { Form, Input } from 'antd';
-import { Controller, useForm } from 'react-hook-form';
-import { FaInfoCircle, FaSpinner } from 'react-icons/fa';
+import { deformatPhone, deformatPhoneTR } from "@/shared/utils/formatter";
+import { Form, Input } from "antd";
+import { Controller, useForm } from "react-hook-form";
+import { FaInfoCircle, FaSpinner } from "react-icons/fa";
 
-import { Link } from '@/i18n/routing';
-import { useRegisterMutation } from '@/services/auth/hook';
-import { ButtonPrimary } from '@/shared/components/dump/atoms';
-import SelectBefore from '@/shared/components/dump/atoms/select-before';
-import { registerSchema } from '@/shared/schemas/registerSchema';
-import { useGlobalStore } from '@/shared/store/globalStore';
-import { extractErrorMessage } from '@/shared/utils';
-import { setLocalItem } from '@/shared/utils/storage';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { z } from 'zod';
-import RegisterErrorlabel from '../molecules/errorLabel';
-import { useRegisterStore } from '../store/registerStore';
+import { Link } from "@/i18n/routing";
+import { useRegisterMutation } from "@/services/auth/hook";
+import { ButtonPrimary } from "@/shared/components/dump/atoms";
+import SelectBefore from "@/shared/components/dump/atoms/select-before";
+import { registerSchema } from "@/shared/schemas/registerSchema";
+import { useGlobalStore } from "@/shared/store/globalStore";
+import { extractErrorMessage } from "@/shared/utils";
+import { setLocalItem } from "@/shared/utils/storage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { z } from "zod";
+import RegisterErrorlabel from "../molecules/errorLabel";
+import { useRegisterStore } from "../store/registerStore";
 
 export default function RegisterForm() {
   const t = useTranslations();
@@ -26,7 +26,7 @@ export default function RegisterForm() {
   const { beforePhone } = useGlobalStore();
 
   const registerMutation = useRegisterMutation();
-  const [registerErrorMessage, setRegisterErrorMessage] = useState('');
+  const [registerErrorMessage, setRegisterErrorMessage] = useState("");
 
   const schema = registerSchema(t, beforePhone);
 
@@ -37,16 +37,16 @@ export default function RegisterForm() {
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      phone: '',
-      fullname: '',
-      password: '',
-      repeatedPassword: '',
+      phone: "",
+      fullname: "",
+      password: "",
+      repeatedPassword: "",
     },
   });
 
   const handleNext = () => {
     nextStep();
-    setLocalItem('stepKey', step + 1);
+    setLocalItem("stepKey", step + 1);
   };
 
   // ✅ Submit
@@ -54,7 +54,8 @@ export default function RegisterForm() {
     const { phone, ...data } = values;
     const cleanData = {
       ...data,
-      phone: beforePhone === '+998' ? deformatPhone(phone) : deformatPhoneTR(phone),
+      phone:
+        beforePhone === "+998" ? deformatPhone(phone) : deformatPhoneTR(phone),
     };
     registerMutation.mutate(cleanData, {
       onSuccess: () => handleNext(),
@@ -64,7 +65,7 @@ export default function RegisterForm() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md">
-      <h1 className="text-2xl font-semibold mb-4">{t('register.welcome')}</h1>
+      <h1 className="text-2xl font-semibold mb-4">{t("register.welcome")}</h1>
 
       {registerErrorMessage && (
         <div className="mb-5">
@@ -72,7 +73,7 @@ export default function RegisterForm() {
             icon={<FaInfoCircle />}
             variant="error"
             text={extractErrorMessage(registerErrorMessage)}
-            onClose={() => setRegisterErrorMessage('')}
+            onClose={() => setRegisterErrorMessage("")}
             closable
           />
         </div>
@@ -84,21 +85,30 @@ export default function RegisterForm() {
         className="flex flex-col gap-1 w-full"
       >
         <Form.Item
-          label={t('register.name')}
-          validateStatus={errors.fullname ? 'error' : ''}
+          label={
+            <span className="global-label-size">{t("register.name")}</span>
+          }
+          validateStatus={errors.fullname ? "error" : ""}
           help={errors.fullname?.message}
         >
           <Controller
             name="fullname"
             control={control}
             render={({ field }) => (
-              <Input {...field} placeholder={t('register.name')} size="large" />
+              <Input
+                className="global-input-height"
+                {...field}
+                placeholder={t("register.name")}
+                size="large"
+              />
             )}
           />
         </Form.Item>
         <Form.Item
-          label={t('register.phone')}
-          validateStatus={errors.phone ? 'error' : ''}
+          label={
+            <span className="global-label-size">{t("register.phone")}</span>
+          }
+          validateStatus={errors.phone ? "error" : ""}
           help={errors.phone?.message}
         >
           <Controller
@@ -108,7 +118,9 @@ export default function RegisterForm() {
               <Input
                 {...field}
                 addonBefore={<SelectBefore />}
-                placeholder={beforePhone === '+998' ? '90 123 45 67' : '123 123 1234'}
+                placeholder={
+                  beforePhone === "+998" ? "90 123 45 67" : "123 123 1234"
+                }
                 size="large"
               />
             )}
@@ -116,29 +128,43 @@ export default function RegisterForm() {
         </Form.Item>
 
         <Form.Item
-          label={t('register.password')}
-          validateStatus={errors.password ? 'error' : ''}
+          label={
+            <span className="global-label-size">{t("register.password")}</span>
+          }
+          validateStatus={errors.password ? "error" : ""}
           help={errors.password?.message}
         >
           <Controller
             name="password"
             control={control}
             render={({ field }) => (
-              <Input.Password {...field} placeholder={t('register.password')} size="large" />
+              <Input.Password
+                {...field}
+                placeholder={t("register.password")}
+                size="large"
+              />
             )}
           />
         </Form.Item>
 
         <Form.Item
-          label={t('register.repeatPassword')}
-          validateStatus={errors.repeatedPassword ? 'error' : ''}
+          label={
+            <span className="global-label-size">
+              {t("register.repeatPassword")}
+            </span>
+          }
+          validateStatus={errors.repeatedPassword ? "error" : ""}
           help={errors.repeatedPassword?.message}
         >
           <Controller
             name="repeatedPassword"
             control={control}
             render={({ field }) => (
-              <Input.Password {...field} placeholder={t('register.repeatPassword')} size="large" />
+              <Input.Password
+                {...field}
+                placeholder={t("register.repeatPassword")}
+                size="large"
+              />
             )}
           />
         </Form.Item>
@@ -147,16 +173,18 @@ export default function RegisterForm() {
           <ButtonPrimary
             type="primary"
             Icon={
-              registerMutation.isPending && <FaSpinner className="animate-spin text-blue-500" />
+              registerMutation.isPending && (
+                <FaSpinner className="animate-spin text-blue-500" />
+              )
             }
-            label={t('register.getId')}
+            label={t("register.getId")}
             classNameDy="w-full justify-center"
             disabled={registerMutation.isPending}
           />
         </Form.Item>
       </Form>
       <p className="underline text-blue-500 text-sm">
-        <Link href="/auth/log-in">{t('register.alreadyRegistered')}</Link>
+        <Link href="/auth/log-in">{t("register.alreadyRegistered")}</Link>
       </p>
     </div>
   );

@@ -5,7 +5,7 @@ import '@splidejs/splide/css';
 import 'antd/dist/reset.css';
 import './globals.css';
 
-import { Manrope, Montserrat, Nunito_Sans, Poppins, Urbanist } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
 import ThemeState from '@/context/ThemeState';
 import MainLayout from '@/providers/MainLayout';

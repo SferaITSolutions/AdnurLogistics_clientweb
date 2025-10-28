@@ -8,6 +8,7 @@ import { useError } from '@/shared/hooks/useError';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
+import { toast } from 'sonner';
 
 export const useLoginMutation = () => {
   const t = useTranslations();
@@ -18,7 +19,7 @@ export const useLoginMutation = () => {
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
       setLocalItem('refresh_token', data.data.refreshToken);
-      message.success('Tizimga muvaffaqiyatli kirdingiz ✅');
+      toast.success(t('authSuccessMessages.loginSuccess'));
     },
     onError: (error: any) => {
       handleError(error);
@@ -34,7 +35,7 @@ export const useRegisterMutation = () => {
     mutationFn: (data: z.infer<typeof formSchema>) => authService.register(data), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('identity', data.data.identity);
-      message.success('Tizimga muvaffaqiyatli kirdingiz ✅');
+      toast.success(t('authSuccessMessages.loginSuccess'));
     },
     onError: (error: any) => {
       handleError(error);
@@ -45,12 +46,13 @@ export const useRegisterMutation = () => {
 export const useCheckIdentityMutation = () => {
   const handleError = useError();
   const identity = getLocalItem('identity');
+  const t = useTranslations();
   return useMutation({
     mutationFn: (code: string) => authService.verifyCode({ code, identity: identity || '' }), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
       setLocalItem('refresh_token', data.data.refreshToken);
-      message.success('Tizimga muvaffaqiyatli kirdingiz ✅');
+      toast.success(t('authSuccessMessages.loginSuccess'));
     },
     onError: (error: any) => {
       handleError(error);

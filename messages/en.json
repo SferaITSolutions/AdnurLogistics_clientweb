@@ -129,6 +129,7 @@
     "region_not_allowed": "Unfortunately, participation from your region is not available. To participate, you must select one of the permitted regions.",
     "verify": "Please verify your email",
     "required": "This field is required",
+    "numberRequired": "Please enter your phone number!",
     "minString": "The field must contain at least {min} character",
     "passwordMismatch": "Passwords must match",
     "passwordUppercase": "Password must include at least one uppercase letter",
@@ -381,5 +382,8 @@
     "hint": "Name should not contain numbers or special characters, and cannot be left blank",
     "okText": "Save",
     "cancelText": "Cancel"
+  },
+  "authSuccessMessages": {
+    "loginSuccess": "Successfully logged into the system ✅"
   }
 }

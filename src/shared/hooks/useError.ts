@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 
 export const useError = () => {
-  const t = useTranslations("Toast");
+  const t = useTranslations();
   const handleError = useCallback((error: AxiosError) => {
     if (error.status === 400) {
       const data = error.response?.data as IError400;
@@ -37,7 +37,7 @@ export const useError = () => {
       return;
     }
 
-    toast.error(error.response?.data as string || 'Something went wrong');
+    toast.error((error.response?.data as { message: string }).message || 'Something went wrong');
   }, [t])
 
 
