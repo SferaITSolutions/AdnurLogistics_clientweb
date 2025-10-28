@@ -75,7 +75,7 @@ export default function ApplyForm() {
           name="weight"
           rules={[
             { required: true, message: t("weightRequiredError") },
-            { type: "number", min: 0.001, message: t("weightMinError") },
+            { type: "number", min: 0.00001, message: t("weightMinError") },
           ]}
         >
           <InputNumber
@@ -89,7 +89,7 @@ export default function ApplyForm() {
           name="bulk"
           rules={[
             { required: true, message: t("bulkRequiredError") },
-            { type: "number", min: 0.001, message: t("bulkMinError") }, // 0 dan katta bo'lishi kerak
+            { type: "number", min: 0.00001, message: t("bulkMinError") }, // 0 dan katta bo'lishi kerak
           ]}
         >
           <InputNumber
@@ -97,7 +97,7 @@ export default function ApplyForm() {
             className="!rounded-xl"
             placeholder={t("bulkPlaceholder")}
             style={{ width: "100%" }}
-            min={1}
+            // min={1}
           />
         </Form.Item>
         <Form.Item
