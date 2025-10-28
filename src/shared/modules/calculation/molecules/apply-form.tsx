@@ -35,7 +35,7 @@ export default function ApplyForm() {
     setValue("bulk", 0);
     setValue("customs", false);
     form.resetFields();
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   });
 
   const onFinish = (values: ApplyFormValues) => {
@@ -75,7 +75,7 @@ export default function ApplyForm() {
           name="weight"
           rules={[
             { required: true, message: t("weightRequiredError") },
-            { required: true, min: 0, message: t("weightMinError") },
+            { type: "number", min: 0.001, message: t("weightMinError") },
           ]}
         >
           <InputNumber
@@ -88,8 +88,8 @@ export default function ApplyForm() {
           label={t("bulkLabel")}
           name="bulk"
           rules={[
-            { required: true,  message: t("bulkRequiredError") },
-            { required: true, min: 0, message: t("bulkMinError") },
+            { required: true, message: t("bulkRequiredError") },
+            { type: "number", min: 0.001, message: t("bulkMinError") }, // 0 dan katta bo'lishi kerak
           ]}
         >
           <InputNumber
@@ -97,6 +97,7 @@ export default function ApplyForm() {
             className="!rounded-xl"
             placeholder={t("bulkPlaceholder")}
             style={{ width: "100%" }}
+            min={1}
           />
         </Form.Item>
         <Form.Item
@@ -106,7 +107,11 @@ export default function ApplyForm() {
         >
           <Checkbox>{t("customsCheckbox")}</Checkbox>
         </Form.Item>
-        <Button type="primary" htmlType="submit" loading={applyMutation.isPending}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={applyMutation.isPending}
+        >
           {t("submitButton")}
         </Button>
       </Form>

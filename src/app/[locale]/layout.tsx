@@ -1,3 +1,4 @@
+import 'antd/dist/reset.css';
 import '@splidejs/react-splide/css';
 import '@splidejs/react-splide/css/sea-green';
 import '@splidejs/splide/css';

@@ -1,12 +1,12 @@
 "use client";
-
+import "antd/dist/reset.css";
+import "../style/style.css";
 import { getLocalItem, setLocalItem } from "@/shared/utils/storage";
 import { LANGUAGES } from "@/shared/constants";
 import { Select } from "antd";
 import { usePathname } from "@/i18n/routing";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import "../style/style.css";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
