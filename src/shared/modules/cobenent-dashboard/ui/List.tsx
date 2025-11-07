@@ -42,7 +42,6 @@ export default function OrdersList() {
   }, [page, type, orderIdFilter]);
 
   const { data, isLoading } = useOrder({ ...filterParams, page });
-
   useEffect(() => {
     setLoading(isLoading);
   }, [isLoading]);
@@ -55,10 +54,10 @@ export default function OrdersList() {
         </div>
       ) : (
         <>
-          {data?.data ? (
+          {data?.data.content ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {data?.data.map(
+                {data?.data.content.map(
                   (
                     card: {
                       density: string;
@@ -67,6 +66,8 @@ export default function OrdersList() {
                       createddate: string | null;
                       id: string;
                       weight: string;
+                      tolocation: string | null;
+                      quantity: string | null;
                     },
                     index: number
                   ) => (
@@ -77,6 +78,8 @@ export default function OrdersList() {
                       Quantity={Number(card.weight)}
                       Volume={Number(card.density)}
                       Weight={String(card.weight)}
+                      quantity={String(card.quantity)}
+                      tolocation={String(card.tolocation)}
                       onClick={() => {
                         setOrderId(card.id);
                         openModal();
@@ -97,7 +100,7 @@ export default function OrdersList() {
               </p>
             </div>
           )}
-          <Pagination dataLength={data?.data.length || 0} />
+          <Pagination dataLength={data?.data.count || 0} />
           <OrderDetailsModal />
         </>
       )}

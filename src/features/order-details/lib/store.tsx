@@ -12,6 +12,8 @@ interface OrderDetailsStoreState {
   setType: (type: string) => void;
   page: number;
   setPage: (page: number) => void;
+  size: number;
+  setSize: (size: number) => void;
   orderIdFilter: string | null;
   setOrderIdFilter: (id: string | null) => void;
   loading: boolean;
@@ -29,14 +31,16 @@ export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
   orderIdFilter: null,
   setOrderIdFilter: (id) => set({ orderIdFilter: id }),
   openModal: () => set({ isModalOpen: true }),
-  closeModal: () => set({ isModalOpen: false, startEndDate: { end: null, start: null } }),
+  closeModal: () => set({ isModalOpen: false }),
   searchfilters: {},
   setSearchFilters: (filters) => set({ searchfilters: filters }),
   type: '0',
   setType: (type) => set({ type }),
   page: 0,
   setPage: (page) => set({ page }),
-  // startEndDate: { start: '2025/10/10', end: '2025/12/12' },
+  size: 10,
+  setSize: (size) => set({ size }),
+  // startEndDate: { start: '2025/10/10', end: '2025/12/12' },  
   startEndDate: { start: null, end: null },
   setStartEndDate: ({ start, end }) => set({ startEndDate: { start, end } }),
 }));

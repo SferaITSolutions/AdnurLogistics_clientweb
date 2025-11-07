@@ -5,14 +5,12 @@ import { Drawer, Empty, Spin } from 'antd';
 import { useOrderById } from '@/entities/hooks/order/hooks';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusProductTitle } from '../atoms';
 import { useOrderDetailsStore } from '../lib/store';
 import DeliviryStatus from '../molecules/deliviry';
 import InvoiceCard from '../molecules/invoices';
-import Products from '../molecules/products';
 
-// SSRda map yuklanmasligi uchun dynamic import
 const YandexMapWith = dynamic(
   async () => {
     return (await import('../molecules/MapWithRoute')).default;
@@ -21,11 +19,20 @@ const YandexMapWith = dynamic(
 );
 
 const OrderDetailsModal: React.FC = () => {
-  const { isModalOpen, closeModal, orderId } = useOrderDetailsStore();
+  const { isModalOpen, closeModal, orderId, startEndDate, setStartEndDate } = useOrderDetailsStore();
   const t = useTranslations('clientDashboard');
   const { data, isLoading } = useOrderById(orderId || '');
-  // const { data, isLoading } = useOrderById('32767');
   const orderData = data?.data;
+
+  useEffect(() => {
+    if (orderData?.readMap?.createddate && orderData.readMap.createddate !== startEndDate.start) {
+      setStartEndDate({ 
+        start: orderData.readMap.createddate, 
+        end: startEndDate.end 
+      });
+    }
+  }, [orderData?.readMap?.createddate]);
+
   if (isLoading) return <Spin />;
   return (
     <Drawer
@@ -41,16 +48,16 @@ const OrderDetailsModal: React.FC = () => {
         {orderId ? (
           <>
             <YandexMapWith
-              origin={orderData?.orderRoadMap?.fromLocation ? 'Yiwu, Zhejiang, China' : ''}
-              destination={orderData?.orderRoadMap?.toLocation ?? ''}
+              origin={orderData?.readMap?.fromlocation ?? ''}
+              destination={orderData?.readMap?.tolocation ?? ''}
             />
             <div className="text-gray-800 mb-2 text-xl font-bold border-t border-gray-100 pt-4">
-              <DeliviryStatus deliviryStatus={orderData?.orderRoadMap || {}} />
+              <DeliviryStatus deliviryStatus={orderData?.readMap || {}} />
             </div>
             <div className="grid grid-cols-2 gap-3"></div>
             <StatusProductTitle title={t('productDetails')} />
 
-            {orderData?.products ? (
+            {/* {orderData?.products ? (
               orderData?.products?.map((product: any, index: number) => (
                 <Products
                   key={`${product.documentNumber || 'prod'}-${index}`}
@@ -59,7 +66,7 @@ const OrderDetailsModal: React.FC = () => {
               ))
             ) : (
               <Empty description={t('noProductsFound')} />
-            )}
+            )} */}
 
             {orderData?.invoices ? (
               orderData?.invoices?.map((invoice: any, index: number) => (

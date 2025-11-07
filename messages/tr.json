@@ -278,6 +278,8 @@
     "from": "başlangıç",
     "to": "bitiş",
     "eta": "Varış zamanı:",
+    "WarehousePendingArrival": "Depo varışı bekliyor",
+    "countOfProducts": "adet",
     "orderId": "Sipariş ID:",
     "unpaid": "Ödenmemiş",
     "noProductsFound": "Ürünler bulunamadı",

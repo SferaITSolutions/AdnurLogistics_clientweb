@@ -13,13 +13,44 @@ interface Props {
   speedKmH?: number;
 }
 
+// Qisqa nomlarni to'liq manzilga o'zgartirish uchun mapping
+const locationMapping: Record<string, string> = {
+  'Horgos': 'Horgos, Xinjiang, China',
+  'HORGOS': 'Horgos, Xinjiang, China',
+  'Yiwu': 'Yiwu, Zhejiang, China',
+  'YIWU': 'Yiwu, Zhejiang, China',
+  'Factory': 'Factory, China',
+  'FACTORY': 'Factory, China',
+  'Foshan': 'Foshan, Guangdong, China',
+  'FOSHAN': 'Foshan, Guangdong, China',
+  'Tashkent': 'Tashkent, Uzbekistan',
+  'TASHKENT': 'Tashkent, Uzbekistan',
+};
+
+// Qisqa nomni to'liq manzilga o'zgartirish funksiyasi
+const normalizeLocation = (location: string): string => {
+  if (!location) return '';
+  const trimmed = location.trim();
+  // Agar mappingda bor bo'lsa, to'liq nomni qaytaradi
+  if (locationMapping[trimmed]) {
+    return locationMapping[trimmed];
+  }
+  // Agar allaqachon to'liq nom bo'lsa (vergul bilan), o'zgartirmaydi
+  if (trimmed.includes(',')) {
+    return trimmed;
+  }
+  // Aks holda o'zgartirmaydi (Yandex Maps o'zi topishi mumkin)
+  return trimmed;
+};
+
 const YandexMapWithTruck: React.FC<Props> = ({
   height = 400,
   origin = 'Yiwu, China',
   destination = 'Tashkent, Uzbekistan',
   speedKmH = 200,
 }) => {
-  const { startEndDate } = useOrderDetailsStore();
+  // const { startEndDate } = useOrderDetailsStore();
+  let startEndDate = { start: '2025-11-07', end: '2025-11-10' };
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
@@ -32,11 +63,18 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const [currentProgress, setCurrentProgress] = useState<number>(0);
   const [isMapReady, setIsMapReady] = useState(false); // Yangi state
 
-  const referencePoints = [
-    origin?.trim() ? origin : null,
-    destination?.trim() ? destination : null,
-  ].filter(Boolean);
+  // Qisqa nomlarni to'liq manzilga o'zgartirish
+  const normalizedOrigin = normalizeLocation(origin || '');
+  const normalizedDestination = normalizeLocation(destination || '');
 
+  const referencePoints = [
+    normalizedOrigin || null,
+    normalizedDestination || null,
+  ].filter(Boolean);
+  
+  console.log('Original locations:', { origin, destination });
+  console.log('Normalized referencePoints:', referencePoints);
+  
   const calculateCurrentFraction = () => {
     const startDate = new Date(startEndDate.start?.replace(/\//g, '-') || '');
     const endDate = new Date(startEndDate.end?.replace(/\//g, '-') || '');
@@ -185,6 +223,15 @@ const YandexMapWithTruck: React.FC<Props> = ({
   // 1️⃣ YMaps va Map yuklanganda yo‘lni yaratish
 
   useEffect(() => {
+    // Origin yoki destination o'zgarganda eski route ni tozalash
+    if (mapRef.current && multiRouteRef.current) {
+      mapRef.current.geoObjects.remove(multiRouteRef.current);
+      multiRouteRef.current = null;
+      routeCoordsRef.current = [];
+      setDistanceKm(null);
+      setIsMapReady(false);
+    }
+
     let checkReady: any;
 
     const waitForYmapsAndMap = () => {
@@ -198,7 +245,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
     // Har 300ms da tekshiradi
     checkReady = setInterval(waitForYmapsAndMap, 300);
 
-    return () => clearInterval(checkReady);
+    return () => {
+      clearInterval(checkReady);
+    };
   }, [origin, destination]);
 
   // Map tayyor bo‘lganda animatsiyani boshlash

@@ -287,6 +287,8 @@
     "from": "from",
     "to": "to",
     "eta": " Arrival time:",
+    "WarehousePendingArrival": "Warehouse pending arrival",
+    "countOfProducts": "pcs",
     "orderId": "Order ID:",
     "unpaid": "Unpaid",
     "noProductsFound": "No products found",

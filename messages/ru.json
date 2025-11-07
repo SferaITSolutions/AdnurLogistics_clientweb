@@ -292,6 +292,8 @@
     "from": "от",
     "to": "до",
     "eta": "Время прибытия:",
+    "WarehousePendingArrival": "Склад ожидает прибытия",
+    "countOfProducts": "шт.",
     "orderId": "ID Заказа:",
     "unpaid": "Неоплаченный",
     "noProductsFound": "Товары не найдены",

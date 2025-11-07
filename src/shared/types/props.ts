@@ -5,6 +5,7 @@ export interface MenuItemProps {
     currentPath?: string;
 }
 export type QuantityOrderProps = {
+    quantity: string | null;
     Weight: string | number;
     Volume: number;
   };

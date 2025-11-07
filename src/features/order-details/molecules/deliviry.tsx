@@ -9,14 +9,14 @@ import { useTranslations } from 'next-intl';
 interface DeliviryStatusProps {
   deliviryStatus: {
     status: string;
-    fromLocation?: string;
-    toLocation?: string;
+    fromlocation?: string;
+    tolocation?: string;
   };
 }
 
 export default function DeliviryStatus({ deliviryStatus }: DeliviryStatusProps) {
-  const from = deliviryStatus?.fromLocation ? 'Yiwu, China' : null;
-  const to = deliviryStatus?.toLocation;
+  const from = deliviryStatus?.fromlocation ? 'Yiwu, China' : null;
+  const to = deliviryStatus?.tolocation;
   const t = useTranslations('clientDashboard');
   const isLoading = !from && !to;
 

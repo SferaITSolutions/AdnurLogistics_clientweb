@@ -284,6 +284,8 @@
     "from": "从",
     "to": "到",
     "eta": "到达时间:",
+    "WarehousePendingArrival": "倉庫待到貨",
+    "countOfProducts": "件",
     "orderId": "订单编号:",
     "unpaid": "未付款",
     "noProductsFound": "未找到产品",

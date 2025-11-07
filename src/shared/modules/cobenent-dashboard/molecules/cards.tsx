@@ -5,6 +5,7 @@ import { FaTruck } from 'react-icons/fa';
 import ETA from '../atoms/ETA';
 import OrderId from '../atoms/order-id';
 import QuantityOrder from '../atoms/quentity-order';
+import ToLocation from '../atoms/tolacation';
 
 interface DashboardCardProps {
   ETAdata?: number | string;
@@ -13,6 +14,8 @@ interface DashboardCardProps {
   Volume?: number | string;
   Weight?: number | string;
   Status?: number | string;
+  quantity?: string | null;
+  tolocation?: string | null;
   onClick?: () => void;
 }
 
@@ -23,6 +26,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   Volume,
   Weight,
   Status,
+  quantity,
+  tolocation,
   onClick,
 }) => {
   return (
@@ -39,8 +44,9 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         {/* Ma'lumotlar */}
         <div className="flex flex-col text-sm text-gray-700 leading-6">
           <ETA ETA={String(ETAdata)} />
+          <ToLocation tolocation={String(tolocation)} />
           <OrderId OrderId={String(OrderIdprops)} />
-          <QuantityOrder Volume={Number(Volume)} Weight={Number(Weight)} />
+          <QuantityOrder Volume={Number(Volume)} Weight={Number(Weight)} quantity={String(quantity)} />
         </div>
       </div>
 
