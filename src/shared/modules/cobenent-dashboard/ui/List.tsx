@@ -68,6 +68,7 @@ export default function OrdersList() {
                       weight: string;
                       tolocation: string | null;
                       quantity: string | null;
+                      salesorderstatus: string | null;
                     },
                     index: number
                   ) => (
@@ -80,6 +81,7 @@ export default function OrdersList() {
                       Weight={String(card.weight)}
                       quantity={String(card.quantity)}
                       tolocation={String(card.tolocation)}
+                      status={String(card.salesorderstatus)}
                       onClick={() => {
                         setOrderId(card.id);
                         openModal();

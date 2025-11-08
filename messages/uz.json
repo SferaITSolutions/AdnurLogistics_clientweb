@@ -387,5 +387,8 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "Tizimga muvaffaqiyatli kirdingiz ✅"
-  }
+  },
+  "Pending_Approval": "Tasdiqlash kutilmoqda",
+  "Closed": "Buyurtma yopilgan",
+  "Pending_Billing": "To’lovlar kutilmoqda"
 }

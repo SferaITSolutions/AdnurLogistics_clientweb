@@ -384,5 +384,8 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "Вы успешно вошли в систему ✅"
-  }
+  },
+  "Pending_Approval": "Ожидается одобрение",
+  "Closed": "Закрыт",
+  "Pending_Billing": "Ожидается оплата"
 }

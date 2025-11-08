@@ -384,5 +384,8 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "Sisteme başarıyla giriş yapıldı ✅"
-  }
+  },
+  "Pending_Approval": "Beklemede Onay",
+  "Closed": "Kapalı",
+  "Pending_Billing": "Beklemede Ödeme"
 }

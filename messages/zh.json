@@ -384,5 +384,8 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "成功登录系统 ✅"
-  }
+  },
+  "Pending_Approval": "待批准",
+  "Closed": "已关闭",
+  "Pending_Billing": "待付款"
 }

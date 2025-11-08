@@ -387,5 +387,8 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "Successfully logged into the system ✅"
-  }
+  },
+  "Pending_Approval": "Pending Approval",
+  "Closed": "Closed",
+  "Pending_Billing": "Pending Billing"
 }

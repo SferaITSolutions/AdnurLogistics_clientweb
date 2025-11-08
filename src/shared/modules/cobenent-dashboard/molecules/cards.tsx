@@ -6,6 +6,7 @@ import ETA from '../atoms/ETA';
 import OrderId from '../atoms/order-id';
 import QuantityOrder from '../atoms/quentity-order';
 import ToLocation from '../atoms/tolacation';
+import StatusOrder from '../atoms/status-order';
 
 interface DashboardCardProps {
   ETAdata?: number | string;
@@ -13,7 +14,7 @@ interface DashboardCardProps {
   Quantity?: number | string;
   Volume?: number | string;
   Weight?: number | string;
-  Status?: number | string;
+  status?: number | string;
   quantity?: string | null;
   tolocation?: string | null;
   onClick?: () => void;
@@ -25,7 +26,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   Quantity,
   Volume,
   Weight,
-  Status,
+  status,
   quantity,
   tolocation,
   onClick,
@@ -36,7 +37,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       className="relative w-full cursor-pointer flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:-translate-y-[2px] transition-all duration-200"
     >
       {/* Chapdagi rasm */}
-      <div className="flex items-center gap-4 p-4">
+      <div className="flex items-center gap-4 py-6 pl-4 pr-4">
         <div className="flex items-center justify-center min-w-14 h-14 rounded-full bg-gray-100">
           <FaTruck className="text-gray-700 text-2xl" />
         </div>
@@ -46,11 +47,14 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <ETA ETA={String(ETAdata)} />
           <ToLocation tolocation={String(tolocation)} />
           <OrderId OrderId={String(OrderIdprops)} />
-          <QuantityOrder Volume={Number(Volume)} Weight={Number(Weight)} quantity={String(quantity)} />
+          <div className='mt-4'>
+            <QuantityOrder Volume={Number(Volume)} Weight={Number(Weight)} quantity={String(quantity)} />
+            <StatusOrder status={String(status)} />
+          </div>
         </div>
       </div>
 
-      {/* <StatusOrder status={Status} /> */}
+
     </div>
   );
 };
