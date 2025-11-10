@@ -1,26 +1,30 @@
 "use client";
-import { Input, Popconfirm } from "antd";
+import { Input, Modal, Button } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { useUpdateMe } from "@/widgets/headers/navbar-cabinet/hook/hook";
 import { useTranslations } from "next-intl";
+import { useResetModalStore } from "@/features/reset-password/lib/store";
+import ResetPasswordModal from "@/features/reset-password/ui";
 
 interface Props {
   userName: string;
   userPhone: string;
 }
 
-const EditablePopconfirm: React.FC<Props> = ({ userName, userPhone }) => {
+const EditableModal: React.FC<Props> = ({ userName, userPhone }) => {
   const t = useTranslations();
   const updateData = useUpdateMe();
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState(userName);
+  const { open: openResetPasswordModal } = useResetModalStore();
 
   useEffect(() => {
     if (open) setInputValue(userName);
-  }, [open]);
+  }, [open, userName]);
 
-  const handleConfirm = async () => {
+  const handleOk = async () => {
+    if (!inputValue.trim()) return;
     await updateData.mutateAsync(inputValue);
     setOpen(false);
   };
@@ -31,11 +35,42 @@ const EditablePopconfirm: React.FC<Props> = ({ userName, userPhone }) => {
   };
 
   return (
-    <Popconfirm
-      icon={null}
-      placement="bottom"
-      title={t("editNameModal.title")}
-      description={
+    <>
+      <div className="cursor-pointer" onClick={() => setOpen(true)}>
+        <h1 className="global-label-size font-semibold !mb-0">{userName}</h1>
+        <p className="global-text-size !mb-0">{userPhone}</p>
+      </div>
+      <Modal
+        title={t("editNameModal.title")}
+        open={open}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button
+            key="cancel"
+            onClick={handleCancel}
+            disabled={updateData.isPending}
+          >
+            {t("editNameModal.cancelText")}
+          </Button>,
+          <Button
+            key="resetPassword"
+            onClick={() => openResetPasswordModal()}
+            disabled={updateData.isPending}
+          >
+            {t("resetPasswordPage.pageTitle")}
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={updateData.isPending}
+            onClick={handleOk}
+            disabled={!inputValue.trim()}
+          >
+            {t("editNameModal.okText")}
+          </Button>,
+        ]}
+      >
         <div className="flex flex-col gap-2">
           <Input
             placeholder={t("editNameModal.placeholder")}
@@ -58,21 +93,10 @@ const EditablePopconfirm: React.FC<Props> = ({ userName, userPhone }) => {
           )}
           <p className="text-xs text-gray-400">{t("editNameModal.hint")}</p>
         </div>
-      }
-      okText={t("editNameModal.okText")}
-      cancelText={t("editNameModal.cancelText")}
-      open={open}
-      onOpenChange={setOpen}
-      onConfirm={handleConfirm}
-      onCancel={handleCancel}
-      okButtonProps={{ loading: updateData.isPending }}
-    >
-      <div className="cursor-pointer">
-        <h1 className="text-md font-semibold !mb-0">{userName}</h1>
-        <p className="text-sm !mb-0 text-gray-500">{userPhone}</p>
-      </div>
-    </Popconfirm>
+      </Modal>
+      <ResetPasswordModal/>
+    </>
   );
 };
 
-export default EditablePopconfirm;
+export default EditableModal;

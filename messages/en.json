@@ -388,6 +388,26 @@
   "authSuccessMessages": {
     "loginSuccess": "Successfully logged into the system ✅"
   },
+  "resetPasswordPage": {
+    "pageTitle": "Change Password",
+    "oldPasswordLabel": "Old Password",
+    "oldPasswordPlaceholder": "Enter old password",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmNewPasswordLabel": "Confirm New Password",
+    "confirmNewPasswordPlaceholder": "Re-enter new password",
+    "submitButton": "Change Password",
+
+    "validation": {
+      "oldPasswordRequired": "Old password is required.",
+      "newPasswordRequired": "New password is required.",
+      "confirmPasswordRequired": "Password confirmation is required.",
+      "passwordsDoNotMatch": "New passwords do not match."
+    },
+    "success": {
+      "message": "Your password has been successfully changed!"
+    }
+  },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",
   "Pending_Billing": "Pending Billing"

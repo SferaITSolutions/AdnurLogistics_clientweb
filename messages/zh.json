@@ -385,6 +385,26 @@
   "authSuccessMessages": {
     "loginSuccess": "成功登录系统 ✅"
   },
+  "resetPasswordPage": {
+    "pageTitle": "更改密码",
+    "oldPasswordLabel": "旧密码",
+    "oldPasswordPlaceholder": "输入旧密码",
+    "newPasswordLabel": "新密码",
+    "newPasswordPlaceholder": "输入新密码",
+    "confirmNewPasswordLabel": "确认新密码",
+    "confirmNewPasswordPlaceholder": "重新输入新密码",
+    "submitButton": "更改密码",
+
+    "validation": {
+      "oldPasswordRequired": "需要旧密码。",
+      "newPasswordRequired": "需要新密码。",
+      "confirmPasswordRequired": "需要确认密码。",
+      "passwordsDoNotMatch": "新密码不匹配。"
+    },
+    "success": {
+      "message": "您的密码已成功更改!"
+    }
+  },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",
   "Pending_Billing": "待付款"

@@ -382,6 +382,26 @@
     "successModalText": "Ваш запрос успешно отправлен.",
     "successModalCloseButton": "Закрыть"
   },
+  "resetPasswordPage": {
+    "pageTitle": "Смена Пароля",
+    "oldPasswordLabel": "Старый Пароль",
+    "oldPasswordPlaceholder": "Введите старый пароль",
+    "newPasswordLabel": "Новый Пароль",
+    "newPasswordPlaceholder": "Введите новый пароль",
+    "confirmNewPasswordLabel": "Подтвердите Новый Пароль",
+    "confirmNewPasswordPlaceholder": "Повторно введите новый пароль",
+    "submitButton": "Сменить Пароль",
+
+    "validation": {
+      "oldPasswordRequired": "Требуется старый пароль.",
+      "newPasswordRequired": "Требуется новый пароль.",
+      "confirmPasswordRequired": "Требуется подтверждение пароля.",
+      "passwordsDoNotMatch": "Новые пароли не совпадают."
+    },
+    "success": {
+      "message": "Ваш пароль успешно изменен!"
+    }
+  },
   "authSuccessMessages": {
     "loginSuccess": "Вы успешно вошли в систему ✅"
   },

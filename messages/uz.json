@@ -292,7 +292,7 @@
     "WarehousePendingArrival": "Kelishi kutilayotgan ombor",
     "countOfProducts": "dona",
     "orderId": "Buyurtma ID:",
-    "unpaid": "To'lov qilinmagan", 
+    "unpaid": "To'lov qilinmagan",
     "noProductsFound": "Mahsulotlar topilmadi",
     "noOrderSelected": "Buyurtma tanlanmagan",
     "invoiceNumber": "Faktura raqami",
@@ -387,6 +387,26 @@
   },
   "authSuccessMessages": {
     "loginSuccess": "Tizimga muvaffaqiyatli kirdingiz ✅"
+  },
+  "resetPasswordPage": {
+    "pageTitle": "Parolni o'zgartirish",
+    "oldPasswordLabel": "Eski Parol",
+    "oldPasswordPlaceholder": "Eski parolni kiriting",
+    "newPasswordLabel": "Yangi Parol",
+    "newPasswordPlaceholder": "Yangi parolni kiriting",
+    "confirmNewPasswordLabel": "Yangi Parolni Tasdiqlash",
+    "confirmNewPasswordPlaceholder": "Yangi parolni qayta kiriting",
+    "submitButton": "Parolni o'zgartirish",
+
+    "validation": {
+      "oldPasswordRequired": "Eski parol talab qilinadi.",
+      "newPasswordRequired": "Yangi parol talab qilinadi.",
+      "confirmPasswordRequired": "Parolni tasdiqlash talab qilinadi.",
+      "passwordsDoNotMatch": "Yangi parollar mos kelmadi."
+    },
+    "success": {
+      "message": "Parolingiz muvaffaqiyatli o'zgartirildi!"
+    }
   },
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",

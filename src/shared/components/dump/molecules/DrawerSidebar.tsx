@@ -12,6 +12,7 @@ import { Drawer } from "antd";
 import { useTranslations } from "next-intl";
 import MenuItem from "./menu-item";
 import { formatPhone } from "@/shared/utils/formatter";
+import UserDetails from "@/widgets/headers/navbar-cabinet/molecules/get-me";
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -48,9 +49,13 @@ export const DrawerSidebar = ({
             icon={<FaCalculator color="white" size={26} />}
           />
         </nav>
-        <div className="flex flex-col gap-2 mt-10 p-3 rounded-lg bg-primary-blue-color/10">
-          <span className="global-label-size text-white">{userInfo?.fullname || "-"}</span>
-          <span className="global-text-size text-gray-200 truncate">{formatPhone(userInfo?.phone || "")}</span>
+        <div className="flex flex-col gap-2 mt-10 !text-white px-4 py-2 border rounded-lg">
+          {/* <span className="global-label-size text-white">{userInfo?.fullname || "-"}</span>
+          <span className="global-text-size text-gray-200 truncate">{formatPhone(userInfo?.phone || "")}</span> */}
+          <UserDetails
+            userName={userInfo?.fullname || "-"}
+            userPhone={formatPhone(userInfo?.phone || "-")}
+          />
         </div>
         <div className="flex flex-col justify-end gap-3 mt-auto items-start">
           <button

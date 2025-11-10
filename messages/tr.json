@@ -385,6 +385,26 @@
   "authSuccessMessages": {
     "loginSuccess": "Sisteme başarıyla giriş yapıldı ✅"
   },
+  "resetPasswordPage": {
+    "pageTitle": "Şifre Değiştirme",
+    "oldPasswordLabel": "Eski Şifre",
+    "oldPasswordPlaceholder": "Eski şifreyi girin",
+    "newPasswordLabel": "Yeni Şifre",
+    "newPasswordPlaceholder": "Yeni şifreyi girin",
+    "confirmNewPasswordLabel": "Yeni Şifreyi Onayla",
+    "confirmNewPasswordPlaceholder": "Yeni şifreyi tekrar girin",
+    "submitButton": "Şifreyi Değiştir",
+
+    "validation": {
+      "oldPasswordRequired": "Eski şifre zorunludur.",
+      "newPasswordRequired": "Yeni şifre zorunludur.",
+      "confirmPasswordRequired": "Şifre onayı zorunludur.",
+      "passwordsDoNotMatch": "Yeni şifreler eşleşmiyor."
+    },
+    "success": {
+      "message": "Şifreniz başarıyla değiştirildi!"
+    }
+  },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",
   "Pending_Billing": "Beklemede Ödeme"
