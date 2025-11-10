@@ -394,7 +394,7 @@
     "confirmNewPasswordLabel": "确认新密码",
     "confirmNewPasswordPlaceholder": "重新输入新密码",
     "submitButton": "更改密码",
-
+    "minLength": "至少 5 个字符",
     "validation": {
       "oldPasswordRequired": "需要旧密码。",
       "newPasswordRequired": "需要新密码。",

@@ -391,7 +391,7 @@
     "confirmNewPasswordLabel": "Подтвердите Новый Пароль",
     "confirmNewPasswordPlaceholder": "Повторно введите новый пароль",
     "submitButton": "Сменить Пароль",
-
+    "minLength": "минимум 5 символов",
     "validation": {
       "oldPasswordRequired": "Требуется старый пароль.",
       "newPasswordRequired": "Требуется новый пароль.",

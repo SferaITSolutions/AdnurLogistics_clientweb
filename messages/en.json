@@ -397,7 +397,7 @@
     "confirmNewPasswordLabel": "Confirm New Password",
     "confirmNewPasswordPlaceholder": "Re-enter new password",
     "submitButton": "Change Password",
-
+    "minLength": "minimum 5 characters",
     "validation": {
       "oldPasswordRequired": "Old password is required.",
       "newPasswordRequired": "New password is required.",

@@ -394,7 +394,7 @@
     "confirmNewPasswordLabel": "Yeni Şifreyi Onayla",
     "confirmNewPasswordPlaceholder": "Yeni şifreyi tekrar girin",
     "submitButton": "Şifreyi Değiştir",
-
+    "minLength": "en az 5 karakter",
     "validation": {
       "oldPasswordRequired": "Eski şifre zorunludur.",
       "newPasswordRequired": "Yeni şifre zorunludur.",

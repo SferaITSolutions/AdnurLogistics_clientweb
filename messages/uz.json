@@ -397,7 +397,7 @@
     "confirmNewPasswordLabel": "Yangi Parolni Tasdiqlash",
     "confirmNewPasswordPlaceholder": "Yangi parolni qayta kiriting",
     "submitButton": "Parolni o'zgartirish",
-
+    "minLength": "kamida 5 ta belgidan iborat bo'lishi kerak",
     "validation": {
       "oldPasswordRequired": "Eski parol talab qilinadi.",
       "newPasswordRequired": "Yangi parol talab qilinadi.",

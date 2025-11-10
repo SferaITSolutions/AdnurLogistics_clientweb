@@ -54,13 +54,6 @@ const EditableModal: React.FC<Props> = ({ userName, userPhone }) => {
             {t("editNameModal.cancelText")}
           </Button>,
           <Button
-            key="resetPassword"
-            onClick={() => openResetPasswordModal()}
-            disabled={updateData.isPending}
-          >
-            {t("resetPasswordPage.pageTitle")}
-          </Button>,
-          <Button
             key="submit"
             type="primary"
             loading={updateData.isPending}
@@ -92,9 +85,17 @@ const EditableModal: React.FC<Props> = ({ userName, userPhone }) => {
             </p>
           )}
           <p className="text-xs text-gray-400">{t("editNameModal.hint")}</p>
+          <Button
+            key="resetPassword"
+            onClick={() => openResetPasswordModal()}
+            disabled={updateData.isPending}
+            className="w-fit"
+          >
+            {t("resetPasswordPage.pageTitle")}
+          </Button>
         </div>
       </Modal>
-      <ResetPasswordModal/>
+      <ResetPasswordModal />
     </>
   );
 };
