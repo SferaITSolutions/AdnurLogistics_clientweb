@@ -20,8 +20,8 @@ export default function SidebarItem({ path, icon, label }: SidebarItemProps) {
         'group flex items-center gap-3 px-4 py-3 rounded-r-2xl text-sm font-medium transition-all duration-100',
         'text-gray-300 hover:text-white',
         isActive
-          ? 'bg-[#104AE4E3] shadow-md scale-[1.02] text-white rounded-r-2xl'
-          : 'hover:bg-primary-blue-color/40 shadow-sm hover:scale-[1.02]',
+          ? '!bg-[#104AE4E3] shadow-md scale-[1.02] !text-white !rounded-r-2xl'
+          : 'hover:!bg-primary-blue-color/40 shadow-sm hover:scale-[1.02]',
       )}
     >
       {/* Icon qismi */}
