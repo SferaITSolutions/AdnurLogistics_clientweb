@@ -88,3 +88,16 @@ export function formatNumber(num: number) {
 
   return limitedDecimal ? `${formattedInt}.${limitedDecimal}` : formattedInt;
 }
+export function formatNumberThreeDigits(num: number) {
+  if (isNaN(num)) return "0";
+
+  const [integerPart, decimalPart] = num.toString().split(".");
+
+  const formattedInt = new Intl.NumberFormat("en-US").format(
+    Number(integerPart)
+  );
+
+  const limitedDecimal = decimalPart ? decimalPart.slice(0, 3) : null;
+
+  return limitedDecimal ? `${formattedInt}.${limitedDecimal}` : formattedInt;
+}
