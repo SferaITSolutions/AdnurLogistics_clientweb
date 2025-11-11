@@ -2,10 +2,10 @@ import React from "react";
 import {
   DocumentNumber,
   InvoiceNumber,
-  InvoiceStatus,
   TotalAmount,
 } from "../atoms";
 import { useTranslations } from "next-intl";
+import StatusOrder from "@/shared/modules/cobenent-dashboard/atoms/status-order";
 
 type InvoiceProps = {
   amountPaid: string;
@@ -31,7 +31,9 @@ export default function InvoiceCard({
     <div className="max-w-md mx-auto bg-white rounded-xl shadow p-6 border border-gray-100 font-sans">
       <InvoiceNumber invoiceNumber={invoiceNumber} />
       <DocumentNumber documentNumber={documentNumber} />
-      <InvoiceStatus invoiceStatus={invoiceStatus} />
+
+      {/* StatusOrder ishlatilmoqda */}
+      <StatusOrder status={invoiceStatus} />
 
       <div className="grid grid-cols-2 gap-3 mt-4">
         <div className="flex flex-col gap-1">

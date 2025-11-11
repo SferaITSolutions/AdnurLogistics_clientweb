@@ -102,7 +102,7 @@ export default function OrdersList() {
               </p>
             </div>
           )}
-          <Pagination dataLength={data?.data.count || 0} />
+          <Pagination dataLength={data?.data.totalElements } />
           <OrderDetailsModal />
         </>
       )}
