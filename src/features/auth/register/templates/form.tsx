@@ -117,7 +117,7 @@ export default function RegisterForm() {
             render={({ field }) => (
               <Input
                 {...field}
-                addonBefore={<SelectBefore />}
+                addonBefore={<SelectBefore className="min-w-[100px]" />}
                 placeholder={
                   beforePhone === "+998" ? "90 123 45 67" : "123 123 1234"
                 }

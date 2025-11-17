@@ -40,7 +40,7 @@ const SelectBefore = ({ className }: { className?: string }) => {
 
   return (
     <Select
-      className={className}
+      className={className + " min-w-[100px]"}
       value={beforePhone}
       onChange={(e) => setBeforePhone(e)}
       options={options}
