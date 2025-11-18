@@ -3,9 +3,11 @@ import { z } from "zod";
 
 export const registerSchema = (t: TranslationsType, param?: string) => {
   function getPhoneRegex(status: string) {
+    console.log(status);
+    
     if (status === "+998") {
       // 🇺🇿 O'zbekiston raqamlar: 9xx xxx xx xx
-      return /^9\d{8}$/;
+      return /^9\d{11}$/;
     } else if (status === "+90") {
       // 🇹🇷 Turkiya raqamlar: 5xx xxx xx xx
       return /^\d{10}$/;
@@ -23,13 +25,13 @@ export const registerSchema = (t: TranslationsType, param?: string) => {
         .string({
           error: t("Schemas.number"),
         })
-        .regex(getPhoneRegex(param || ""), {
-          message: t(
-            param === "+90"
-              ? "Schemas.numberFormat"
-              : "Schemas.turkishNumberFormat"
-          ),
-        })
+        // .regex(getPhoneRegex(param || ""), {
+        //   message: t(
+        //     param === "+998"
+        //       ? "Schemas.numberFormat"
+        //       : "Schemas.turkishNumberFormat"
+        //   ),
+        // })
         .min(1, { message: t("Schemas.numberRequired") }),
       password: z
         .string({ error: t("Schemas.required") })

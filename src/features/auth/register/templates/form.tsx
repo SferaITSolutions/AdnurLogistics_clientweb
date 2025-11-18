@@ -1,6 +1,11 @@
 "use client";
 
-import { deformatPhone, deformatPhoneTR } from "@/shared/utils/formatter";
+import {
+  deformatPhone,
+  deformatPhoneTR,
+  formatPhone,
+  formatPhoneTR,
+} from "@/shared/utils/formatter";
 import { Form, Input } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { FaInfoCircle, FaSpinner } from "react-icons/fa";
@@ -121,6 +126,14 @@ export default function RegisterForm() {
                 placeholder={
                   beforePhone === "+998" ? "90 123 45 67" : "123 123 1234"
                 }
+                onChange={(e) => {
+                  const formatted =
+                    beforePhone === "+998"
+                      ? formatPhone(e.target.value, true)
+                      : formatPhoneTR(e.target.value, true);
+                  console.log(beforePhone);
+                  field.onChange(formatted);
+                }}
                 size="large"
               />
             )}
