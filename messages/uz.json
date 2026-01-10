@@ -408,6 +408,14 @@
       "message": "Parolingiz muvaffaqiyatli o'zgartirildi!"
     }
   },
+  "deliveryTracking": {
+    "distance": "Masofa",
+    "speed": "Tezlik",
+    "progress": "Jarayon",
+    "status": "Holat",
+    "eta": "Kutilayotgan vaqt",
+    "delivered": "Yetkazildi"
+  },
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",
   "Pending_Billing": "To’lovlar kutilmoqda"

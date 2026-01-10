@@ -405,6 +405,14 @@
       "message": "您的密码已成功更改!"
     }
   },
+  "deliveryTracking": {
+    "distance": "距离",
+    "speed": "速度",
+    "progress": "进度",
+    "status": "状态",
+    "eta": "预计到达时间",
+    "delivered": "已送达"
+  },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",
   "Pending_Billing": "待付款"

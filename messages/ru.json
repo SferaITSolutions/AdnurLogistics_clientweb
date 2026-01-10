@@ -405,6 +405,14 @@
   "authSuccessMessages": {
     "loginSuccess": "Вы успешно вошли в систему ✅"
   },
+  "deliveryTracking": {
+    "distance": "Расстояние",
+    "speed": "Скорость",
+    "progress": "Прогресс",
+    "status": "Статус",
+    "eta": "Ожид. время",
+    "delivered": "Доставлено"
+  },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",
   "Pending_Billing": "Ожидается оплата"

@@ -408,6 +408,14 @@
       "message": "Your password has been successfully changed!"
     }
   },
+  "deliveryTracking": {
+    "distance": "Distance",
+    "speed": "Speed",
+    "progress": "Progress",
+    "status": "Status",
+    "eta": "ETA",
+    "delivered": "Delivered"
+  },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",
   "Pending_Billing": "Pending Billing"

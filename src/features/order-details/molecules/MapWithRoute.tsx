@@ -1,10 +1,17 @@
-'use client';
+"use client";
 
-import { Map, YMaps } from '@pbe/react-yandex-maps';
-import React, { useEffect, useRef, useState } from 'react';
+import { Map, YMaps } from "@pbe/react-yandex-maps";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  FaRoute,
+  FaTachometerAlt,
+  FaCalendarAlt,
+  FaCheckCircle,
+} from "react-icons/fa";
 
-import { useOrderDetailsStore } from '@/features/order-details/lib/store';
-import { Tag } from 'antd';
+import { useOrderDetailsStore } from "@/features/order-details/lib/store";
+import { Tag } from "antd";
+import { useTranslations } from "next-intl";
 
 interface Props {
   height?: number | string;
@@ -15,28 +22,28 @@ interface Props {
 
 // Qisqa nomlarni to'liq manzilga o'zgartirish uchun mapping
 const locationMapping: Record<string, string> = {
-  'Horgos': 'Horgos, Xinjiang, China',
-  'HORGOS': 'Horgos, Xinjiang, China',
-  'Yiwu': 'Yiwu, Zhejiang, China',
-  'YIWU': 'Yiwu, Zhejiang, China',
-  'Factory': 'Factory, China',
-  'FACTORY': 'Factory, China',
-  'Foshan': 'Foshan, Guangdong, China',
-  'FOSHAN': 'Foshan, Guangdong, China',
-  'Tashkent': 'Tashkent, Uzbekistan',
-  'TASHKENT': 'Tashkent, Uzbekistan',
+  Horgos: "Horgos, Xinjiang, China",
+  HORGOS: "Horgos, Xinjiang, China",
+  Yiwu: "Yiwu, Zhejiang, China",
+  YIWU: "Yiwu, Zhejiang, China",
+  Factory: "Factory, China",
+  FACTORY: "Factory, China",
+  Foshan: "Foshan, Guangdong, China",
+  FOSHAN: "Foshan, Guangdong, China",
+  Tashkent: "Tashkent, Uzbekistan",
+  TASHKENT: "Tashkent, Uzbekistan",
 };
 
 // Qisqa nomni to'liq manzilga o'zgartirish funksiyasi
 const normalizeLocation = (location: string): string => {
-  if (!location) return '';
+  if (!location) return "";
   const trimmed = location.trim();
   // Agar mappingda bor bo'lsa, to'liq nomni qaytaradi
   if (locationMapping[trimmed]) {
     return locationMapping[trimmed];
   }
   // Agar allaqachon to'liq nom bo'lsa (vergul bilan), o'zgartirmaydi
-  if (trimmed.includes(',')) {
+  if (trimmed.includes(",")) {
     return trimmed;
   }
   // Aks holda o'zgartirmaydi (Yandex Maps o'zi topishi mumkin)
@@ -45,12 +52,12 @@ const normalizeLocation = (location: string): string => {
 
 const YandexMapWithTruck: React.FC<Props> = ({
   height = 400,
-  origin = 'Yiwu, China',
-  destination = 'Tashkent, Uzbekistan',
+  origin = "Yiwu, China",
+  destination = "Tashkent, Uzbekistan",
   speedKmH = 200,
 }) => {
   // const { startEndDate } = useOrderDetailsStore();
-  let startEndDate = { start: '2025-11-07', end: '2025-11-10' };
+  let startEndDate = { start: "2025-11-07", end: "2025-11-10" };
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
@@ -64,20 +71,21 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const [isMapReady, setIsMapReady] = useState(false); // Yangi state
 
   // Qisqa nomlarni to'liq manzilga o'zgartirish
-  const normalizedOrigin = normalizeLocation(origin || '');
-  const normalizedDestination = normalizeLocation(destination || '');
+  const t = useTranslations("");
+  const normalizedOrigin = normalizeLocation(origin || "");
+  const normalizedDestination = normalizeLocation(destination || "");
 
   const referencePoints = [
     normalizedOrigin || null,
     normalizedDestination || null,
   ].filter(Boolean);
-  
-  console.log('Original locations:', { origin, destination });
-  console.log('Normalized referencePoints:', referencePoints);
-  
+
+  console.log("Original locations:", { origin, destination });
+  console.log("Normalized referencePoints:", referencePoints);
+
   const calculateCurrentFraction = () => {
-    const startDate = new Date(startEndDate.start?.replace(/\//g, '-') || '');
-    const endDate = new Date(startEndDate.end?.replace(/\//g, '-') || '');
+    const startDate = new Date(startEndDate.start?.replace(/\//g, "-") || "");
+    const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
     const now = new Date();
 
     const totalMs = endDate.getTime() - startDate.getTime();
@@ -85,7 +93,11 @@ const YandexMapWithTruck: React.FC<Props> = ({
     return Math.max(0, Math.min(1, passedMs / totalMs));
   };
 
-  const getPositionAtFraction = (fraction: number, coords: number[][], ymaps: any) => {
+  const getPositionAtFraction = (
+    fraction: number,
+    coords: number[][],
+    ymaps: any
+  ) => {
     const targetDistance = fraction * totalDistanceRef.current;
     let currentDistance = 0;
     let prevPoint = coords[0];
@@ -130,14 +142,14 @@ const YandexMapWithTruck: React.FC<Props> = ({
         {
           hintContent: `Yo'lning ${(fraction * 100).toFixed(1)}%`,
           balloonContent: `Tezlik: ${speedKmH} km/h`,
-          iconContent: 'Truck',
+          iconContent: "Truck",
         },
         {
-          iconLayout: 'default#image',
-          iconImageHref: '/truck.png',
+          iconLayout: "default#image",
+          iconImageHref: "/truck.png",
           iconImageSize: [40, 40],
           iconImageOffset: [-20, -20],
-        },
+        }
       );
 
       carRef.current = marker;
@@ -167,18 +179,18 @@ const YandexMapWithTruck: React.FC<Props> = ({
           boundsAutoApply: true,
           wayPointVisible: true,
           routeActiveStrokeWidth: 5,
-          routeActiveStrokeColor: '#1976d2',
-        },
+          routeActiveStrokeColor: "#1976d2",
+        }
       );
 
       multiRouteRef.current = multiRoute;
       map.geoObjects.add(multiRoute);
 
-      multiRoute.model.events.add('requestsuccess', () => {
+      multiRoute.model.events.add("requestsuccess", () => {
         const activeRoute = multiRoute.getActiveRoute();
         if (!activeRoute) return;
 
-        const distance = activeRoute.properties.get('distance').value;
+        const distance = activeRoute.properties.get("distance").value;
         const distanceKm = distance / 1000;
         setDistanceKm(distanceKm);
         totalDistanceRef.current = distance;
@@ -205,18 +217,21 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
         // Har 1 soniyada yangilash (test uchun)
         if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
-        updateIntervalRef.current = window.setInterval(updateTruckPosition, 1000);
+        updateIntervalRef.current = window.setInterval(
+          updateTruckPosition,
+          1000
+        );
       });
 
-      multiRoute.model.events.add('requestfail', (e: any) => {
-        console.error('Route xato:', e.get('error'));
+      multiRoute.model.events.add("requestfail", (e: any) => {
+        console.error("Route xato:", e.get("error"));
       });
     });
   };
 
   useEffect(() => {
     if (ymapsRef.current && mapRef.current && !multiRouteRef.current) {
-      console.log('✅ Map va YMaps tayyor, yo‘l yaratilmoqda...');
+      console.log("✅ Map va YMaps tayyor, yo‘l yaratilmoqda...");
       createRoute();
     }
   }, [ymapsRef.current, mapRef.current]);
@@ -236,7 +251,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
     const waitForYmapsAndMap = () => {
       if (ymapsRef.current && mapRef.current) {
-        console.log('✅ YMaps va Map tayyor!');
+        console.log("✅ YMaps va Map tayyor!");
         clearInterval(checkReady);
         createRoute();
       }
@@ -271,8 +286,8 @@ const YandexMapWithTruck: React.FC<Props> = ({
     <div className="rounded-xl overflow-hidden border border-gray-300 shadow-sm">
       <YMaps
         query={{
-          load: 'package.full',
-          lang: 'en_RU',
+          load: "package.full",
+          lang: "en_RU",
           apikey: process.env.NEXT_PUBLIC_YANDEX_API_KEY,
         }}
       >
@@ -280,7 +295,11 @@ const YandexMapWithTruck: React.FC<Props> = ({
           defaultState={{ center: [40.7831, 65.9667], zoom: 5 }}
           width="100%"
           height={height}
-          modules={['multiRouter.MultiRoute', 'control.ZoomControl', 'coordSystem.geo']}
+          modules={[
+            "multiRouter.MultiRoute",
+            "control.ZoomControl",
+            "coordSystem.geo",
+          ]}
           instanceRef={mapRef}
           onLoad={(ymaps) => {
             ymapsRef.current = ymaps;
@@ -289,10 +308,120 @@ const YandexMapWithTruck: React.FC<Props> = ({
       </YMaps>
 
       {distanceKm && (
-        <div className="p-3 text-center text-sm text-gray-700 bg-gray-50 border-t">
-          Masofa: <b>{distanceKm.toFixed(1)} km</b> | Tezlik: <b>{speedKmH} km/h</b> | Progress:{' '}
-          <b>{(currentProgress * 100).toFixed(1)}%</b> |{' '}
-          {isDelivered ? <Tag color="green">Yetkazib berilgan</Tag> : <b>{startEndDate.end}</b>}
+        <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 border-t-2 border-blue-200/60">
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl" />
+
+          <div className="relative p-5">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+              {/* Distance */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 shadow-md shadow-blue-500/30">
+                  <FaRoute className="text-white text-lg" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {t("deliveryTracking.distance")}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {distanceKm.toFixed(1)} km
+                  </span>
+                </div>
+              </div>
+
+              {/* Speed */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-green-200/60 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 shadow-md shadow-green-500/30">
+                  <FaTachometerAlt className="text-white text-lg" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {t("deliveryTracking.speed")}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {speedKmH} km/h
+                  </span>
+                </div>
+              </div>
+
+              {/* Progress */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 shadow-md shadow-purple-500/30">
+                  <div className="relative">
+                    <svg className="w-6 h-6" viewBox="0 0 36 36">
+                      <path
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="#e5e7eb"
+                        strokeWidth="3"
+                      />
+                      <path
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="3"
+                        strokeDasharray={`${currentProgress * 100}, 100`}
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {t("deliveryTracking.progress")}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {(currentProgress * 100).toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+
+              {/* Delivery Status */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm hover:shadow-md transition-all duration-200">
+                <div
+                  className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${
+                    isDelivered
+                      ? "bg-gradient-to-br from-green-500 to-emerald-600 shadow-green-500/30"
+                      : "bg-gradient-to-br from-orange-500 to-orange-600 shadow-orange-500/30"
+                  }`}
+                >
+                  {isDelivered ? (
+                    <FaCheckCircle className="text-white text-lg" />
+                  ) : (
+                    <FaCalendarAlt className="text-white text-lg" />
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {isDelivered ? t("deliveryTracking.status") : t("deliveryTracking.eta")}
+                  </span>
+                  {isDelivered ? (
+                    <Tag
+                      color="green"
+                      className="!m-0 !px-2 !py-0.5 !text-xs !font-bold !rounded-lg"
+                    >
+                      {t("deliveryTracking.delivered")}
+                    </Tag>
+                  ) : (
+                    <span className="text-sm font-bold text-gray-900">
+                      {startEndDate.end}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+              <div
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${currentProgress * 100}%` }}
+              >
+                <div className="absolute inset-0 bg-white/30 animate-pulse" />
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -405,6 +405,14 @@
       "message": "Şifreniz başarıyla değiştirildi!"
     }
   },
+  "deliveryTracking": {
+    "distance": "Mesafe",
+    "speed": "Hız",
+    "progress": "İlerleme",
+    "status": "Durum",
+    "eta": "Tahmini Varış",
+    "delivered": "Teslim Edildi"
+  },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",
   "Pending_Billing": "Beklemede Ödeme"
