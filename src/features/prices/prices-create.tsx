@@ -168,7 +168,6 @@ export default function DeliveryPriceCreateForm({
               placeholder={t("maxPlaceholder")}
               min={0}
               maxLength={13}
-              allowClear
               style={{ width: "100%" }}
             />
           </Form.Item>
@@ -188,13 +187,16 @@ export default function DeliveryPriceCreateForm({
 
       {/* Narx (so‘m) */}
       <Form.Item label={t("priceLabel")} name="price">
-        <InputNumber
-          min={0}
+        <InputNumber<number>
           style={{ width: "100%" }}
+          min={0}
           formatter={(value) =>
             `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }
-          parser={(value) => value!.replace(/\s/g, "")}
+          parser={(value) => {
+            const cleaned = value?.replace(/\s/g, "") || "";
+            return cleaned ? Number(cleaned) : 0;
+          }}
         />
       </Form.Item>
 

@@ -8,6 +8,7 @@ export const useCalculation = (onSuccess: (data: any) => void) => {
     mutationFn: (data: {
       fromLocation: string;
       customs: boolean;
+      toLocation:string;
       weight: number;
       cub: number;
     }) => CalculationService.calculate(data),

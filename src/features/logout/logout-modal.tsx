@@ -21,7 +21,7 @@ const LogoutModal = () => {
         <div className="flex justify-end gap-2">
           <Button
             className="!px-6 !py-4 !rounded-xl"
-            type=""
+            type="default"
 
             onClick={() => setIslogout(false)}
           >

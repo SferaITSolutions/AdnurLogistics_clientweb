@@ -247,8 +247,8 @@
     "productName": "Mahsulot nomi:",
     "description": "Tasnifi:",
     "quantity": "Soni:",
-    "priceSum": "Narx (so'm):",
-    "totalAmount": "Jami summa (so'm):"
+    "priceSum": "Narx:",
+    "totalAmount": "Jami summa:"
   },
   "register": {
     "welcome": "Hush kelibsiz 😊",
@@ -426,7 +426,7 @@
     "fromTo": "Dan → Gacha",
     "weight": "Og'irlik (kg)",
     "volume": "Kub (m³) narxi",
-    "priceSum": "Narx (so'm)",
+    "priceSum": "Narx ",
     "actions": "Amallar",
     "noData": "Ma'lumot yo'q"
   },
@@ -436,7 +436,7 @@
       "route": "Qayerdan → Qayerga",
       "weight": "Og'irlik (kg)",
       "volume": "Kub (m³) narxi",
-      "price": "Narx (so'm)",
+      "price": "Narx",
       "actions": "Amallar"
     },
     "actions": {
@@ -489,7 +489,7 @@
     "maxWeightError": "Max > Min bo‘lishi kerak",
     "cubLabel": "Kub (m³) narxi",
     "cubRequired": "Kub majburiy",
-    "priceLabel": "Narx (so'm)",
+    "priceLabel": "Narx",
     "priceRequired": "Narx majburiy",
     "multipliersLabel": "Ko'paytirgichlar (ixtiyoriy)",
     "cubMultiplierPlaceholder": "Cub × (bo‘sh = null)",

@@ -149,7 +149,6 @@ export default function DeliveryPriceUpdateForm({
             <InputNumber
               placeholder={t("maxWeightPlaceholder")}
               min={0}
-              allowClear
               className="!w-full"
             />
           </Form.Item>
@@ -177,11 +176,14 @@ export default function DeliveryPriceUpdateForm({
           { type: "number", min: 0, message: t("mustBePositive") },
         ]}
       >
-        <InputNumber
+        <InputNumber<number>
           min={0}
           className="!w-full"
           formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-          parser={(v) => v!.replace(/\s/g, "")}
+          parser={(value) => {
+            const cleaned = value?.replace(/\s/g, "") || "";
+            return cleaned ? Number(cleaned) : 0;
+          }}
         />
       </Form.Item>
 
@@ -192,7 +194,6 @@ export default function DeliveryPriceUpdateForm({
             <InputNumber
               step={0.1}
               placeholder={t("cubMultiplierPlaceholder")}
-              allowClear
               className="!w-full"
             />
           </Form.Item>
@@ -200,7 +201,6 @@ export default function DeliveryPriceUpdateForm({
             <InputNumber
               step={0.1}
               placeholder={t("priceMultiplierPlaceholder")}
-              allowClear
               className="!w-full"
             />
           </Form.Item>

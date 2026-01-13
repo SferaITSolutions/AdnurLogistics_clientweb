@@ -18,7 +18,7 @@ export interface DeliveryPrice {
 
 // GET paginated response uchun tip
 interface PageResponse {
-  content: DeliveryPrice[];
+  result: DeliveryPrice[];
   totalElements: number;
   totalPages: number;
   number: number; // current page (0-based)
@@ -27,14 +27,12 @@ interface PageResponse {
 
 // ===================== GET (Pagination bilan) =====================
 export const useGetDeliveryPrices = (page: number = 0, size: number = 10) => {
-  return useQuery<PageResponse>({
+  return useQuery<any>({
     queryKey: ["delivery-prices", page, size],
     queryFn: async () => {
       const response = await pricesService.getToPriceService({ page, size });
       return response.data;
     },
-    keepPreviousData: true,
-    staleTime: 2 * 60 * 1000,
   });
 };
 export const useGetToList = () => {
