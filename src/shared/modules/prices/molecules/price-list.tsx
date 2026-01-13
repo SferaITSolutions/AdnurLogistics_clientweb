@@ -70,9 +70,9 @@ export default function DeliveryPricesPage() {
       key: "locations",
       render: (_, record) => (
         <Space>
-          <Tag color="blue">{record.fromLocationName || record.fromLocation}</Tag>
+          <Tag color="blue">{record?.fromLocationName || record?.fromLocation}</Tag>
           →
-          <Tag color="green">{record.toLocationName || record.toLocation}</Tag>
+          <Tag color="green">{record?.toLocationName || record?.toLocation}</Tag>
         </Space>
       ),
     },
@@ -82,7 +82,7 @@ export default function DeliveryPricesPage() {
       align: "center" as const,
       render: (_, record) => (
         <span>
-          {record.minWeight} {record.maxWeight !== null ? `– ${record.maxWeight}` : "+"}
+          {record?.minWeight} {record?.maxWeight !== null ? `– ${record?.maxWeight}` : "+"}
         </span>
       ),
     },
@@ -90,14 +90,14 @@ export default function DeliveryPricesPage() {
       title: t("columns.volume"),
       dataIndex: "cub3",
       align: "center" as const,
-      render: (value) => value.toFixed(2),
+      render: (value) => value?.toFixed(2),
     },
-    {
-      title: t("columns.price"),
-      dataIndex: "price",
-      align: "right" as const,
-      render: (value) => value?.toLocaleString("uz-UZ"),
-    },
+    // {
+    //   title: t("columns.price"),
+    //   dataIndex: "price",
+    //   align: "right" as const,
+    //   render: (value) => value?.toLocaleString("uz-UZ"),
+    // },
     {
       title: t("columns.actions"),
       key: "actions",
@@ -120,15 +120,15 @@ export default function DeliveryPricesPage() {
             description={
               <>
                 <strong>
-                  {record.fromLocationName || record.fromLocation} →{" "}
-                  {record.toLocationName || record.toLocation}
+                  {record?.fromLocationName || record?.fromLocation} →{" "}
+                  {record?.toLocationName || record?.toLocation}
                 </strong>{" "}
                 {t("deleteConfirm.description")}
                 <br />
                 {t("deleteConfirm.warning")}
               </>
             }
-            onConfirm={() => deletePrice(record.id)}
+            onConfirm={() => deletePrice(record?.id)}
             okText={t("deleteConfirm.okText")}
             cancelText={t("deleteConfirm.cancelText")}
             okButtonProps={{
