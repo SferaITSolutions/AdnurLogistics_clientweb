@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 const Sidebar = () => {
-  const t = useTranslations('clientDashboard');
+  const t = useTranslations('');
   const { isOpen, closeSidebar } = useSidebarStore();
   const { setIslogout } = useGlobalStore();
   const logout = () => setIslogout(true);
@@ -43,7 +43,7 @@ const Sidebar = () => {
               <FaSignOutAlt className="text-red-400 group-hover:text-red-300" size={20} />
             </div>
             <span className="text-base font-semibold group-hover:translate-x-1 transition-transform duration-300">
-              {t('logout')}
+              {t('pricesTable.logout')}
             </span>
           </button>
         </div>

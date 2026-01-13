@@ -416,6 +416,95 @@
     "eta": "ETA",
     "delivered": "Delivered"
   },
+  "pricesTable": {
+    "prices": "Prices",
+    "locations": "Locations",
+    "logout": "Logout",
+    "personalNumber": "Your Personal Number:",
+    "deliveryRates": "Delivery Prices",
+    "fromTo": "From → To",
+    "weight": "Weight (kg)",
+    "volume": "Volume (m³)",
+    "priceSum": "Price (UZS)",
+    "add": "Qo'shish",
+    "actions": "Actions",
+    "noData": "No data"
+  },
+  "deliveryPrices": {
+    "columns": {
+      "number": "#",
+      "route": "From → To",
+      "weight": "Weight (kg)",
+      "volume": "Volume (m³)",
+      "price": "Price (UZS)",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "deleteConfirm": {
+      "title": "Delete Price",
+      "description": "The price for {route} will be deleted. This action cannot be undone.",
+      "okText": "Yes, delete",
+      "cancelText": "No"
+    },
+    "editModal": {
+      "title": "Edit Price",
+      "successMessage": "Updated successfully!"
+    }
+  },
+  "deliveryPriceCreateForm": {
+    "weightRangeLabel": "Weight Range (kg)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max (optional, leave empty for infinite)",
+    "cubLabel": "Volume (m³)",
+    "priceLabel": "Base Price (UZS)",
+    "cubMultiplierLabel": "Cub Multiplier (after max kg)",
+    "priceMultiplierLabel": "Price Multiplier (after max kg)",
+    "fromLocationLabel": "Departure (From)",
+    "toLocationLabel": "Destination (To)",
+    "selectPlaceholder": "Select",
+    "locationNotFound": "Location not found",
+    "cancelButton": "Cancel",
+    "saveButton": "Add Price",
+    "savingButton": "Saving...",
+    "validation": {
+      "minWeightRequired": "Please enter minimal weight",
+      "mustBePositive": "Must be a positive number",
+      "maxWeightError": "Max weight must be greater than min",
+      "fromLocationRequired": "Please select departure location",
+      "toLocationRequired": "Please select destination location"
+    },
+    "messages": {
+      "success": "New price added successfully",
+      "error": "Error occurred while adding price"
+    }
+  },
+  "deliveryPriceUpdateForm": {
+    "weightRangeLabel": "Weight Range (kg)",
+    "minWeightRequired": "Min weight is required",
+    "mustBePositive": "Must be a positive number",
+    "maxWeightPlaceholder": "Empty for infinite",
+    "maxWeightError": "Max must be > Min",
+    "cubLabel": "Volume (m³)",
+    "cubRequired": "Volume is required",
+    "priceLabel": "Price (UZS)",
+    "priceRequired": "Price is required",
+    "multipliersLabel": "Multipliers (Optional)",
+    "cubMultiplierPlaceholder": "Cub × (empty = null)",
+    "priceMultiplierPlaceholder": "Price × (empty = null)",
+    "fromLocationLabel": "Departure (From)",
+    "fromLocationRequired": "Select departure location",
+    "toLocationLabel": "Destination (To)",
+    "toLocationRequired": "Select destination location",
+    "selectPlaceholder": "Select",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "updatingButton": "Updating...",
+    "successMessage": "Price updated successfully",
+    "errorMessage": "Update error: "
+  },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",
   "Pending_Billing": "Pending Billing"

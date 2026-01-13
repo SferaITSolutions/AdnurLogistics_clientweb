@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Form, InputNumber, Select, Button, message, Space, Spin } from "antd";
-import { useUpdateDeliveryPrice } from "@/entities/hooks/Prices/hooks";
-import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
+import { Form, InputNumber, Select, Button, Space, Spin } from "antd";
+import { useUpdateDeliveryPrice, useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const { Option } = Select;
 
@@ -31,6 +31,7 @@ export default function DeliveryPriceUpdateForm({
   onSuccess,
   onCancel,
 }: DeliveryPriceUpdateFormProps) {
+  const t = useTranslations("deliveryPriceUpdateForm");
   const [form] = Form.useForm<DeliveryPrice>();
   const { mutate: updatePrice, isPending } = useUpdateDeliveryPrice();
 
@@ -49,26 +50,21 @@ export default function DeliveryPriceUpdateForm({
   }, [initialValues, form]);
 
   const onFinish = (values: DeliveryPrice) => {
-    console.log("Update form values:", values); // ← DEBUG: Konsolda ko‘rinadi
-
-    const payload = {
-      ...values,
-      id: initialValues.id,
-      maxWeight: values.maxWeight ?? null,
-      cubMultiplier: values.cubMultiplier ?? null,
-      priceMultiplier: values.priceMultiplier ?? null,
-    };
-
-    updatePrice(values, {
-      onSuccess: () => {
-        toast.success("Narx muvaffaqiyatli yangilandi");
-        onSuccess?.();
+    updatePrice(
+      {
+        ...values,
+        id: initialValues.id,
       },
-      onError: (error: any) => {
-        toast.error("Update error:");
-        console.log("Yangilashda xatolik: " + (error?.message || "Server xatosi"));
-      },
-    });
+      {
+        onSuccess: () => {
+          toast.success(t("successMessage"));
+          onSuccess?.();
+        },
+        onError: (error: any) => {
+          toast.error(t("errorMessage") + (error?.message || "Server error"));
+        },
+      }
+    );
   };
 
   return (
@@ -77,16 +73,16 @@ export default function DeliveryPriceUpdateForm({
       layout="vertical"
       onFinish={onFinish}
       autoComplete="off"
-      preserve={false} // modal yopilganda tozalanadi
+      preserve={false}
     >
       {/* Og‘irlik oralig‘i */}
-      <Form.Item label="Og‘irlik oralig‘i (kg)" required>
+      <Form.Item label={t("weightRangeLabel")} required>
         <Space.Compact className="!w-full">
           <Form.Item
             name="minWeight"
             rules={[
-              { required: true, message: "Min og‘irlik majburiy" },
-              { type: "number", min: 0, message: "Musbat son" },
+              { required: true, message: t("minWeightRequired") },
+              { type: "number", min: 0, message: t("mustBePositive") },
             ]}
             className="!mb-0 !w-full"
           >
@@ -96,11 +92,11 @@ export default function DeliveryPriceUpdateForm({
           <Form.Item
             name="maxWeight"
             rules={[
-              { type: "number", min: 0, message: "Musbat son" },
+              { type: "number", min: 0, message: t("mustBePositive") },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (value && getFieldValue("minWeight") >= value) {
-                    return Promise.reject(new Error("Max > Min bo‘lishi kerak"));
+                    return Promise.reject(new Error(t("maxWeightError")));
                   }
                   return Promise.resolve();
                 },
@@ -109,7 +105,7 @@ export default function DeliveryPriceUpdateForm({
             className="!mb-0 !w-full"
           >
             <InputNumber
-              placeholder="Cheksiz bo‘lsa bo‘sh"
+              placeholder={t("maxWeightPlaceholder")}
               min={0}
               allowClear
               className="!w-full"
@@ -120,11 +116,11 @@ export default function DeliveryPriceUpdateForm({
 
       {/* Kub */}
       <Form.Item
-        label="Kub (m³)"
+        label={t("cubLabel")}
         name="cub3"
         rules={[
-          { required: true, message: "Kub majburiy" },
-          { type: "number", min: 0, message: "Musbat son" },
+          { required: true, message: t("cubRequired") },
+          { type: "number", min: 0, message: t("mustBePositive") },
         ]}
       >
         <InputNumber min={0} step={0.01} precision={2} className="!w-full" />
@@ -132,11 +128,11 @@ export default function DeliveryPriceUpdateForm({
 
       {/* Narx */}
       <Form.Item
-        label="Narx (so'm)"
+        label={t("priceLabel")}
         name="price"
         rules={[
-          { required: true, message: "Narx majburiy" },
-          { type: "number", min: 0, message: "Musbat son" },
+          { required: true, message: t("priceRequired") },
+          { type: "number", min: 0, message: t("mustBePositive") },
         ]}
       >
         <InputNumber
@@ -147,13 +143,13 @@ export default function DeliveryPriceUpdateForm({
         />
       </Form.Item>
 
-      {/* Ko'paytirgichlar - ixtiyoriy */}
-      <Form.Item label="Ko'paytirgichlar (ixtiyoriy)">
+      {/* Ko'paytirgichlar */}
+      <Form.Item label={t("multipliersLabel")}>
         <Space.Compact className="!w-full">
           <Form.Item name="cubMultiplier" className="!mb-0 !w-full">
             <InputNumber
               step={0.1}
-              placeholder="Cub × (bo‘sh = null)"
+              placeholder={t("cubMultiplierPlaceholder")}
               allowClear
               className="!w-full"
             />
@@ -161,7 +157,7 @@ export default function DeliveryPriceUpdateForm({
           <Form.Item name="priceMultiplier" className="!mb-0 !w-full">
             <InputNumber
               step={0.1}
-              placeholder="Price × (bo‘sh = null)"
+              placeholder={t("priceMultiplierPlaceholder")}
               allowClear
               className="!w-full"
             />
@@ -171,15 +167,15 @@ export default function DeliveryPriceUpdateForm({
 
       {/* From */}
       <Form.Item
-        label="Jo'nash joyi (From)"
+        label={t("fromLocationLabel")}
         name="fromLocation"
-        rules={[{ required: true, message: "From joyini tanlang" }]}
+        rules={[{ required: true, message: t("fromLocationRequired") }]}
       >
         <Select
           loading={fromLoading}
           showSearch
           optionFilterProp="children"
-          placeholder="Tanlang"
+          placeholder={t("selectPlaceholder")}
         >
           {fromData?.result?.map((loc: any) => (
             <Option key={loc.id} value={loc.id}>
@@ -191,15 +187,15 @@ export default function DeliveryPriceUpdateForm({
 
       {/* To */}
       <Form.Item
-        label="Borish joyi (To)"
+        label={t("toLocationLabel")}
         name="toLocation"
-        rules={[{ required: true, message: "To joyini tanlang" }]}
+        rules={[{ required: true, message: t("toLocationRequired") }]}
       >
         <Select
           loading={toLoading}
           showSearch
           optionFilterProp="children"
-          placeholder="Tanlang"
+          placeholder={t("selectPlaceholder")}
         >
           {toData?.result?.map((loc: any) => (
             <Option key={loc.id} value={loc.id}>
@@ -211,10 +207,10 @@ export default function DeliveryPriceUpdateForm({
 
       <div className="flex justify-end gap-3 mt-6">
         <Button onClick={onCancel} disabled={isPending}>
-          Bekor qilish
+          {t("cancelButton")}
         </Button>
         <Button type="primary" htmlType="submit" loading={isPending}>
-          {isPending ? "Yangilanmoqda..." : "Saqlash"}
+          {isPending ? t("updatingButton") : t("saveButton")}
         </Button>
       </div>
     </Form>

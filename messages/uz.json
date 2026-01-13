@@ -416,6 +416,95 @@
     "eta": "Kutilayotgan vaqt",
     "delivered": "Yetkazildi"
   },
+  "pricesTable": {
+    "prices": "Narxlar",
+    "locations": "Manzillar",
+    "logout": "Chiqish",
+    "add": "Qo'shish",
+    "personalNumber": "Shaxsiy raqamingiz:",
+    "deliveryRates": "Yetkazib berish narxlari",
+    "fromTo": "Dan → Gacha",
+    "weight": "Og'irlik (kg)",
+    "volume": "Kub (m³)",
+    "priceSum": "Narx (so'm)",
+    "actions": "Amallar",
+    "noData": "Ma'lumot yo'q"
+  },
+  "deliveryPrices": {
+    "columns": {
+      "number": "#",
+      "route": "Qayerdan → Qayerga",
+      "weight": "Og'irlik (kg)",
+      "volume": "Kub (m³)",
+      "price": "Narx (so'm)",
+      "actions": "Amallar"
+    },
+    "actions": {
+      "edit": "Tahrirlash",
+      "delete": "O'chirish"
+    },
+    "deleteConfirm": {
+      "title": "Narxni o‘chirish",
+      "description": "{route} narxi o‘chiriladi. Bu amalni ortga qaytarib bo‘lmaydi.",
+      "okText": "Ha, o‘chirish",
+      "cancelText": "Yo‘q"
+    },
+    "editModal": {
+      "title": "Narxni tahrirlash",
+      "successMessage": "Yangilandi!"
+    }
+  },
+  "deliveryPriceCreateForm": {
+    "weightRangeLabel": "Og‘irlik oralig‘i (kg)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max (ixtiyoriy, cheksiz bo‘lsa bo‘sh qoldiring)",
+    "cubLabel": "Kub (m³)",
+    "priceLabel": "Asosiy narx (so‘m)",
+    "cubMultiplierLabel": "Max kg dan keyingi ko'paytiriladigan Cub",
+    "priceMultiplierLabel": "Max kg dan keyingi ko'paytiriladigan narx",
+    "fromLocationLabel": "Jo'nash joyi (From)",
+    "toLocationLabel": "Borish joyi (To)",
+    "selectPlaceholder": "Tanlang",
+    "locationNotFound": "Joy topilmadi",
+    "cancelButton": "Bekor qilish",
+    "saveButton": "Narxni qo‘shish",
+    "savingButton": "Saqlanmoqda...",
+    "validation": {
+      "minWeightRequired": "Minimal og‘irlikni kiriting",
+      "mustBePositive": "Musbat son bo‘lishi kerak",
+      "maxWeightError": "Max og‘irlik min dan katta bo‘lishi kerak",
+      "fromLocationRequired": "Jo'nash joyini tanlang",
+      "toLocationRequired": "Borish joyini tanlang"
+    },
+    "messages": {
+      "success": "Yangi narx muvaffaqiyatli qo'shildi",
+      "error": "Narx qo'shishda xatolik yuz berdi"
+    }
+  },
+  "deliveryPriceUpdateForm": {
+    "weightRangeLabel": "Og‘irlik oralig‘i (kg)",
+    "minWeightRequired": "Min og‘irlik majburiy",
+    "mustBePositive": "Musbat son",
+    "maxWeightPlaceholder": "Cheksiz bo‘lsa bo‘sh",
+    "maxWeightError": "Max > Min bo‘lishi kerak",
+    "cubLabel": "Kub (m³)",
+    "cubRequired": "Kub majburiy",
+    "priceLabel": "Narx (so'm)",
+    "priceRequired": "Narx majburiy",
+    "multipliersLabel": "Ko'paytirgichlar (ixtiyoriy)",
+    "cubMultiplierPlaceholder": "Cub × (bo‘sh = null)",
+    "priceMultiplierPlaceholder": "Price × (bo‘sh = null)",
+    "fromLocationLabel": "Jo'nash joyi (From)",
+    "fromLocationRequired": "From joyini tanlang",
+    "toLocationLabel": "Borish joyi (To)",
+    "toLocationRequired": "To joyini tanlang",
+    "selectPlaceholder": "Tanlang",
+    "cancelButton": "Bekor qilish",
+    "saveButton": "Saqlash",
+    "updatingButton": "Yangilanmoqda...",
+    "successMessage": "Narx muvaffaqiyatli yangilandi",
+    "errorMessage": "Yangilashda xatolik: "
+  },  
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",
   "Pending_Billing": "To’lovlar kutilmoqda"

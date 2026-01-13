@@ -21,7 +21,6 @@ const Navbar: React.FC = () => {
       setUserInfo(info);
     }
   }, [info]);
-  localStorage.setItem("roleName", info?.roleName)
   return (
     <header
       className="fixed top-0 right-0 lg:!pl-[320px] flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 lg:px-10 w-full !z-30"

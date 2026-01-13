@@ -14,9 +14,10 @@ import {
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useDeleteDeliveryPrice, useGetDeliveryPrices } from "@/entities/hooks/Prices/hooks";
-import { MdDelete, MdModeEditOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import DeliveryPriceUpdateForm from "@/features/prices/prices-update";
+import { useTranslations } from "next-intl"; // Tarjima uchun hook
 
 interface DeliveryPrice {
   id: string;
@@ -28,9 +29,12 @@ interface DeliveryPrice {
   priceMultiplier: number;
   fromLocation: string;
   toLocation: string;
+  fromLocationName?: string;
+  toLocationName?: string;
 }
 
 export default function DeliveryPricesPage() {
+  const t = useTranslations("deliveryPrices"); // JSON dagi 'deliveryPrices' bo'limini ishlatamiz
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -38,13 +42,11 @@ export default function DeliveryPricesPage() {
     currentPage - 1,
     pageSize
   );
+  
   const { mutate: deletePrice, isPending: isDeleting } = useDeleteDeliveryPrice();
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [selectedPrice, setSelectedPrice] = useState<DeliveryPrice | null>(
-    null
-  );
+  const [selectedPrice, setSelectedPrice] = useState<DeliveryPrice | null>(null);
 
-  // Edit handler
   const handleEdit = (record: DeliveryPrice) => {
     setSelectedPrice(record);
     setEditModalOpen(true);
@@ -54,15 +56,16 @@ export default function DeliveryPricesPage() {
     setEditModalOpen(false);
     setSelectedPrice(null);
   };
+
   const columns: ColumnsType<DeliveryPrice> = [
     {
-      title: "#",
+      title: t("columns.number"),
       width: 60,
       render: (_, __, index) => index + 1 + (currentPage - 1) * pageSize,
       align: "center",
     },
     {
-      title: "From → To",
+      title: t("columns.route"),
       key: "locations",
       render: (_, record) => (
         <Space>
@@ -72,7 +75,7 @@ export default function DeliveryPricesPage() {
       ),
     },
     {
-      title: "Og'irlik (kg)",
+      title: t("columns.weight"),
       key: "weight",
       align: "center",
       render: (_, record) => (
@@ -82,40 +85,19 @@ export default function DeliveryPricesPage() {
       ),
     },
     {
-      title: "Kub (m³)",
+      title: t("columns.volume"),
       dataIndex: "cub3",
       align: "center",
       render: (value) => value.toFixed(2),
     },
     {
-      title: "Narx (so'm)",
+      title: t("columns.price"),
       dataIndex: "price",
       align: "right",
-      render: (value) => value.toLocaleString("uz-UZ"),
+      render: (value) => value.toLocaleString(),
     },
-    // {
-    //   title: "Amallar",
-    //   key: "actions",
-    //   width: 120,
-    //   align: "center",
-    //   render: (_, record) => (
-    //     <Space>
-    //       <Button
-    //         type="text"
-    //         icon={<FaEdit />}
-    //         onClick={() => message.info(`Edit: ${record.id}`)}
-    //       />
-    //       <Button
-    //         type="text"
-    //         danger
-    //         icon={<MdDelete />}
-    //         onClick={() => message.info(`Delete: ${record.id}`)}
-    //       />
-    //     </Space>
-    //   ),
-    // },
     {
-      title: "Amallar",
+      title: t("columns.actions"),
       key: "actions",
       width: 140,
       align: "center",
@@ -125,26 +107,20 @@ export default function DeliveryPricesPage() {
             type="text"
             icon={<FaEdit />}
             onClick={() => handleEdit(record)}
-            title="Tahrirlash"
+            title={t("actions.edit")}
           />
-          {/* <Button
-            type="text"
-            danger
-            icon={<MdDelete />}
-            onClick={() => message.info(`Delete: ${record.id}`)}
-            title="O'chirish"
-          /> */}
           <Popconfirm
-            title="Narxni o‘chirish"
+            title={t("deleteConfirm.title")}
             description={
               <span>
-                <strong>{record.fromLocation} → {record.toLocation}</strong> narxi o‘chiriladi. <br />
-                Bu amalni ortga qaytarib bo‘lmaydi.
+                <strong>{record.fromLocationName} → {record.toLocationName}</strong> {t("deleteConfirm.description").replace("{route}", "")}
+                <br />
+                {/* Agar descriptionda 'ortga qaytarib bo'lmaydi' qismi alohida bo'lsa JSON dan kelaveradi */}
               </span>
             }
             onConfirm={() => deletePrice(record.id)}
-            okText="Ha, o‘chirish"
-            cancelText="Yo‘q"
+            okText={t("deleteConfirm.okText")}
+            cancelText={t("deleteConfirm.cancelText")}
             okButtonProps={{
               danger: true,
               loading: isDeleting,
@@ -160,7 +136,7 @@ export default function DeliveryPricesPage() {
               icon={<MdDelete />}
               loading={isDeleting}
               disabled={isDeleting}
-              title="O‘chirish"
+              title={t("actions.delete")}
             />
           </Popconfirm>
         </Space>
@@ -204,8 +180,9 @@ export default function DeliveryPricesPage() {
           />
         </div>
       )}
+
       <Modal
-        title="Narxni tahrirlash"
+        title={t("editModal.title")}
         open={editModalOpen}
         onCancel={handleModalClose}
         footer={null}
@@ -216,7 +193,7 @@ export default function DeliveryPricesPage() {
           <DeliveryPriceUpdateForm
             initialValues={selectedPrice}
             onSuccess={() => {
-              message.success("Yangilandi!");
+              message.success(t("editModal.successMessage"));
               handleModalClose();
             }}
             onCancel={handleModalClose}

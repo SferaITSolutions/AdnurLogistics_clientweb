@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import { Button, Modal, message } from "antd";
 import DeliveryPricesPage from "../molecules/price-list";
 import DeliveryPriceCreateForm from "@/features/prices/prices-create";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function PricesUi() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+ const t = useTranslations("pricesTable") 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -18,7 +20,7 @@ export default function PricesUi() {
 
   const handleCreateSuccess = () => {
     setIsModalOpen(false);
-    message.success("Yangi narx muvaffaqiyatli qo'shildi!");
+    toast.success("Yangi narx muvaffaqiyatli qo'shildi!");
   };
 
   return (
@@ -26,7 +28,7 @@ export default function PricesUi() {
       {/* Header + Tugma */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 className="text-2xl md:text-3xl !font-bold text-gray-800 !mb-0">
-          Yetkazib berish narxlari
+          {t("deliveryRates")}
         </h1>
 
         <Button
@@ -34,8 +36,8 @@ export default function PricesUi() {
           size="large"
           onClick={handleOpenModal}
         >
-          + Yangi narx qo'shish
-        </Button>
+          <b>+</b> {t("add")}
+        </Button> 
       </div>
 
       {/* Jadval */}

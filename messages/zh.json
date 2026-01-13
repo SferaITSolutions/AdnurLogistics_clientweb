@@ -413,6 +413,95 @@
     "eta": "预计到达时间",
     "delivered": "已送达"
   },
+  "pricesTable": {
+    "prices": "价格",
+    "locations": "地点",
+    "logout": "退出",
+    "personalNumber": "您的个人号码:",
+    "deliveryRates": "运费价格",
+    "fromTo": "从 → 到",
+    "weight": "重量 (公斤)",
+    "volume": "体积 (立方米)",
+    "add": "添加",
+    "priceSum": "价格 (苏姆)",
+    "actions": "操作",
+    "noData": "暂无数据"
+  },
+  "deliveryPrices": {
+    "columns": {
+      "number": "#",
+      "route": "出发地 → 目的地",
+      "weight": "重量 (公斤)",
+      "volume": "体积 (立方米)",
+      "price": "价格 (苏姆)",
+      "actions": "操作"
+    },
+    "actions": {
+      "edit": "编辑",
+      "delete": "删除"
+    },
+    "deleteConfirm": {
+      "title": "删除价格",
+      "description": "{route} 的价格将被删除。此操作无法撤销。",
+      "okText": "是的，删除",
+      "cancelText": "否"
+    },
+    "editModal": {
+      "title": "编辑价格",
+      "successMessage": "更新成功！"
+    }
+  },
+  "deliveryPriceCreateForm": {
+    "weightRangeLabel": "重量范围 (公斤)",
+    "minPlaceholder": "最小",
+    "maxPlaceholder": "最大 (可选，无限请留空)",
+    "cubLabel": "体积 (立方米)",
+    "priceLabel": "基本价格 (苏姆)",
+    "cubMultiplierLabel": "体积乘数 (超过最大重量后)",
+    "priceMultiplierLabel": "价格乘数 (超过最大重量后)",
+    "fromLocationLabel": "出发地 (从)",
+    "toLocationLabel": "目的地 (到)",
+    "selectPlaceholder": "选择",
+    "locationNotFound": "未找到地点",
+    "cancelButton": "取消",
+    "saveButton": "添加价格",
+    "savingButton": "正在保存...",
+    "validation": {
+      "minWeightRequired": "请输入最小重量",
+      "mustBePositive": "必须是正数",
+      "maxWeightError": "最大重量必须大于最小重量",
+      "fromLocationRequired": "请选择出发地",
+      "toLocationRequired": "请选择目的地"
+    },
+    "messages": {
+      "success": "新价格添加成功",
+      "error": "添加价格时出错"
+    }
+  },
+  "deliveryPriceUpdateForm": {
+    "weightRangeLabel": "重量范围 (公斤)",
+    "minWeightRequired": "最小重量是必填项",
+    "mustBePositive": "必须是正数",
+    "maxWeightPlaceholder": "无限制请留空",
+    "maxWeightError": "最大值必须大于最小值",
+    "cubLabel": "体积 (立方米)",
+    "cubRequired": "体积是必填项",
+    "priceLabel": "价格 (苏姆)",
+    "priceRequired": "价格是必填项",
+    "multipliersLabel": "乘数 (可选)",
+    "cubMultiplierPlaceholder": "体积 × (留空 = null)",
+    "priceMultiplierPlaceholder": "价格 × (留空 = null)",
+    "fromLocationLabel": "出发地 (从)",
+    "fromLocationRequired": "请选择出发地",
+    "toLocationLabel": "目的地 (到)",
+    "toLocationRequired": "请选择目的地",
+    "selectPlaceholder": "选择",
+    "cancelButton": "取消",
+    "saveButton": "保存",
+    "updatingButton": "正在更新...",
+    "successMessage": "价格已成功更新",
+    "errorMessage": "更新错误: "
+  },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",
   "Pending_Billing": "待付款"

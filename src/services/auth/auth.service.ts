@@ -10,6 +10,7 @@ export const authService = {
     removeLocalItem('access_token');
     removeLocalItem('refresh_token');
     removeLocalItem('identity');
+    removeLocalItem('roleName');
     // if (typeof window !== 'undefined') window.location.href = '/';
   },
 

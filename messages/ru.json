@@ -413,6 +413,95 @@
     "eta": "Ожид. время",
     "delivered": "Доставлено"
   },
+  "pricesTable": {
+    "prices": "Цены",
+    "locations": "Локации",
+    "logout": "Выход",
+    "personalNumber": "Ваш персональный номер:",
+    "deliveryRates": "Цены на доставку",
+    "fromTo": "От → До",
+    "weight": "Вес (кг)",
+    "add": "Добавлять",
+    "volume": "Объем (м³)",
+    "priceSum": "Цена (сум)",
+    "actions": "Действия",
+    "noData": "Нет данных"
+  },
+  "deliveryPrices": {
+    "columns": {
+      "number": "#",
+      "route": "От → До",
+      "weight": "Вес (кг)",
+      "volume": "Куб (м³)",
+      "price": "Цена (сум)",
+      "actions": "Действия"
+    },
+    "actions": {
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "deleteConfirm": {
+      "title": "Удалить цену",
+      "description": "Цена для {route} будет удалена. Это действие нельзя отменить.",
+      "okText": "Да, удалить",
+      "cancelText": "Нет"
+    },
+    "editModal": {
+      "title": "Редактировать цену",
+      "successMessage": "Обновлено!"
+    }
+  },
+  "deliveryPriceCreateForm": {
+    "weightRangeLabel": "Диапазон веса (кг)",
+    "minPlaceholder": "Мин",
+    "maxPlaceholder": "Макс (опционально, оставьте пустым для бесконечности)",
+    "cubLabel": "Объем (м³)",
+    "priceLabel": "Базовая цена (сум)",
+    "cubMultiplierLabel": "Множитель объема (после макс. кг)",
+    "priceMultiplierLabel": "Множитель цены (после макс. кг)",
+    "fromLocationLabel": "Место отправления (Из)",
+    "toLocationLabel": "Место назначения (В)",
+    "selectPlaceholder": "Выберите",
+    "locationNotFound": "Место не найдено",
+    "cancelButton": "Отмена",
+    "saveButton": "Добавить цену",
+    "savingButton": "Сохранение...",
+    "validation": {
+      "minWeightRequired": "Введите минимальный вес",
+      "mustBePositive": "Должно быть положительным числом",
+      "maxWeightError": "Макс. вес должен быть больше мин.",
+      "fromLocationRequired": "Выберите место отправления",
+      "toLocationRequired": "Выберите место назначения"
+    },
+    "messages": {
+      "success": "Новая цена успешно добавлена",
+      "error": "Ошибка при добавлении цены"
+    }
+  },
+  "deliveryPriceUpdateForm": {
+    "weightRangeLabel": "Диапазон веса (кг)",
+    "minWeightRequired": "Мин. вес обязателен",
+    "mustBePositive": "Должно быть положительным",
+    "maxWeightPlaceholder": "Пусто для бесконечности",
+    "maxWeightError": "Макс. должен быть > Мин.",
+    "cubLabel": "Куб (м³)",
+    "cubRequired": "Куб обязателен",
+    "priceLabel": "Цена (сум)",
+    "priceRequired": "Цена обязательна",
+    "multipliersLabel": "Множители (опционально)",
+    "cubMultiplierPlaceholder": "Куб × (пусто = null)",
+    "priceMultiplierPlaceholder": "Цена × (пусто = null)",
+    "fromLocationLabel": "Место отправления (Из)",
+    "fromLocationRequired": "Выберите место отправления",
+    "toLocationLabel": "Место назначения (В)",
+    "toLocationRequired": "Выберите место назначения",
+    "selectPlaceholder": "Выбрать",
+    "cancelButton": "Отмена",
+    "saveButton": "Сохранить",
+    "updatingButton": "Обновление...",
+    "successMessage": "Цена успешно обновлена",
+    "errorMessage": "Ошибка обновления: "
+  },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",
   "Pending_Billing": "Ожидается оплата"

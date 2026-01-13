@@ -413,6 +413,95 @@
     "eta": "Tahmini Varış",
     "delivered": "Teslim Edildi"
   },
+  "pricesTable": {
+    "prices": "Fiyatlar",
+    "locations": "Konumlar",
+    "logout": "Çıkış",
+    "personalNumber": "Kişisel numaranız:",
+    "deliveryRates": "Teslimat fiyatları",
+    "fromTo": "Nereden → Nereye",
+    "weight": "Ağırlık (kg)",
+    "volume": "Hacim (m³)",
+    "add": "Eklemek",
+    "priceSum": "Fiyat (som)",
+    "actions": "İşlemler",
+    "noData": "Veri yok"
+  },
+  "deliveryPrices": {
+    "columns": {
+      "number": "#",
+      "route": "Nereden → Nereye",
+      "weight": "Ağırlık (kg)",
+
+      "volume": "Hacim (m³)",
+      "price": "Fiyat (som)",
+      "actions": "İşlemler"
+    },
+    "actions": {
+      "edit": "Düzenle",
+      "delete": "Sil"
+    },
+    "deleteConfirm": {
+      "title": "Fiyatı Sil",
+      "description": "{route} fiyatı silinecektir. Bu işlem geri alınamaz.",
+      "okText": "Evet, sil",
+      "cancelText": "Hayır"
+    },
+    "editModal": {
+      "title": "Fiyatı Düzenle",
+      "successMessage": "Güncellendi!"
+    }
+  },
+  "deliveryPriceCreateForm": {
+    "weightRangeLabel": "Ağırlık Aralığı (kg)",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Maks (isteğe bağlı, sonsuz için boş bırakın)",
+    "cubLabel": "Hacim (m³)",
+    "priceLabel": "Temel Fiyat (som)",
+    "cubMultiplierLabel": "Hacim Çarpanı (maks kg'dan sonra)",
+    "priceMultiplierLabel": "Fiyat Çarpanı (maks kg'dan sonra)",
+    "fromLocationLabel": "Çıkış Noktası (Nereden)",
+    "toLocationLabel": "Varış Noktası (Nereye)",
+    "selectPlaceholder": "Seçiniz",
+    "locationNotFound": "Konum bulunamadı",
+    "cancelButton": "İptal Et",
+    "saveButton": "Fiyat Ekle",
+    "savingButton": "Kaydediliyor...",
+    "validation": {
+      "minWeightRequired": "Lütfen minimum ağırlığı girin",
+      "mustBePositive": "Pozitif bir sayı olmalıdır",
+      "maxWeightError": "Maks ağırlık min ağırlıktan büyük olmalıdır",
+      "fromLocationRequired": "Lütfen çıkış noktasını seçin",
+      "toLocationRequired": "Lütfen varış noktasını seçin"
+    },
+    "messages": {
+      "success": "Yeni fiyat başarıyla eklendi",
+      "error": "Fiyat eklenirken bir hata oluştu"
+    }
+  },"deliveryPriceUpdateForm": {
+    "weightRangeLabel": "Ağırlık Aralığı (kg)",
+    "minWeightRequired": "Minimum ağırlık zorunludur",
+    "mustBePositive": "Pozitif bir sayı olmalıdır",
+    "maxWeightPlaceholder": "Sonsuz ise boş bırakın",
+    "maxWeightError": "Maks ağırlık, Min ağırlıktan büyük olmalıdır",
+    "cubLabel": "Hacim (m³)",
+    "cubRequired": "Hacim alanı zorunludur",
+    "priceLabel": "Fiyat (som)",
+    "priceRequired": "Fiyat alanı zorunludur",
+    "multipliersLabel": "Çarpanlar (İsteğe bağlı)",
+    "cubMultiplierPlaceholder": "Hacim × (boş = null)",
+    "priceMultiplierPlaceholder": "Fiyat × (boş = null)",
+    "fromLocationLabel": "Çıkış Noktası (Nereden)",
+    "fromLocationRequired": "Lütfen çıkış noktasını seçin",
+    "toLocationLabel": "Varış Noktası (Nereye)",
+    "toLocationRequired": "Lütfen varış noktasını seçin",
+    "selectPlaceholder": "Seçiniz",
+    "cancelButton": "İptal",
+    "saveButton": "Kaydet",
+    "updatingButton": "Güncelleniyor...",
+    "successMessage": "Fiyat başarıyla güncellendi",
+    "errorMessage": "Güncelleme hatası: "
+  },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",
   "Pending_Billing": "Beklemede Ödeme"

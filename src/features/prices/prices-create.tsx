@@ -1,10 +1,9 @@
-// features/delivery-price/create/DeliveryPriceCreateForm.tsx
 "use client";
 
 import React from "react";
 import { Form, InputNumber, Select, Button, message, Space, Spin } from "antd";
-import { useCreateDeliveryPrice } from "@/entities/hooks/Prices/hooks";
-import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks"; // sizning hooklaringiz
+import { useCreateDeliveryPrice, useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
+import { useTranslations } from "next-intl";
 
 const { Option } = Select;
 
@@ -28,24 +27,22 @@ export default function DeliveryPriceCreateForm({
   onSuccess,
   onCancel,
 }: DeliveryPriceCreateFormProps) {
+  const t = useTranslations("deliveryPriceCreateForm");
   const [form] = Form.useForm<CreatePriceFormValues>();
-  const { mutate: createPrice, isPending: isCreating } =
-    useCreateDeliveryPrice();
+  const { mutate: createPrice, isPending: isCreating } = useCreateDeliveryPrice();
 
-  // From va To locationlarni olish
   const { data: fromData, isLoading: fromLoading } = useGetFromList();
   const { data: toData, isLoading: toLoading } = useGetToList();
 
   const onFinish = (values: CreatePriceFormValues) => {
-    // minWeight >= maxWeight tekshiruvi form validatoriga o'tkazilgan (quyida)
     createPrice(values, {
       onSuccess: () => {
-        message.success("Yangi narx muvaffaqiyatli qo'shildi");
+        message.success(t("messages.success"));
         form.resetFields();
         onSuccess?.();
       },
       onError: () => {
-        message.error("Narx qo'shishda xatolik yuz berdi");
+        message.error(t("messages.error"));
       },
     });
   };
@@ -64,17 +61,17 @@ export default function DeliveryPriceCreateForm({
       autoComplete="off"
     >
       {/* Og‘irlik oralig‘i */}
-      <Form.Item label="Og‘irlik oralig‘i (kg)" required>
+      <Form.Item label={t("weightRangeLabel")} required>
         <Space.Compact style={{ width: "100%" }}>
           <Form.Item
             name="minWeight"
             rules={[
-              { required: true, message: "Minimal og‘irlikni kiriting" },
-              { type: "number", min: 0, message: "Musbat son bo‘lishi kerak" },
+              { required: true, message: t("validation.minWeightRequired") },
+              { type: "number", min: 0, message: t("validation.mustBePositive") },
             ]}
             style={{ flex: 1 }}
           >
-            <InputNumber placeholder="Min" min={0} style={{ width: "100%" }} />
+            <InputNumber placeholder={t("minPlaceholder")} min={0} style={{ width: "100%" }} />
           </Form.Item>
 
           <span className="px-2">—</span>
@@ -82,18 +79,15 @@ export default function DeliveryPriceCreateForm({
           <Form.Item
             name="maxWeight"
             rules={[
-              { type: "number", min: 0, message: "Musbat son bo‘lishi kerak" },
+              { type: "number", min: 0, message: t("validation.mustBePositive") },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  // Agar maxWeight kiritilgan bo‘lsa, minWeight dan katta bo‘lishi shart
                   if (
                     value !== undefined &&
                     value !== null &&
                     getFieldValue("minWeight") >= value
                   ) {
-                    return Promise.reject(
-                      new Error("Max og‘irlik min dan katta bo‘lishi kerak")
-                    );
+                    return Promise.reject(new Error(t("validation.maxWeightError")));
                   }
                   return Promise.resolve();
                 },
@@ -102,7 +96,7 @@ export default function DeliveryPriceCreateForm({
             style={{ flex: 1 }}
           >
             <InputNumber
-              placeholder="Max (ixtiyoriy, cheksiz bo‘lsa bo‘sh qoldiring)"
+              placeholder={t("maxPlaceholder")}
               min={0}
               allowClear
               style={{ width: "100%" }}
@@ -112,7 +106,7 @@ export default function DeliveryPriceCreateForm({
       </Form.Item>
 
       {/* Kub (m³) */}
-      <Form.Item label="Kub (m³)" name="cub3">
+      <Form.Item label={t("cubLabel")} name="cub3">
         <InputNumber
           min={0}
           step={0.01}
@@ -122,78 +116,68 @@ export default function DeliveryPriceCreateForm({
       </Form.Item>
 
       {/* Narx (so‘m) */}
-      <Form.Item label="Asosiy narx (so‘m)" name="price">
+      <Form.Item label={t("priceLabel")} name="price">
         <InputNumber
           min={0}
           style={{ width: "100%" }}
-          formatter={(value) =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-          }
+          formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
           parser={(value) => value!.replace(/\s/g, "")}
         />
       </Form.Item>
 
       {/* Ko‘paytirgichlar */}
-      <Form.Item required>
-        <Space.Compact style={{ width: "100%" }}>
-          <Form.Item
-            name="cubMultiplier"
-            label="Max kg dan keyingi ko'paytiriladigan Cub"
-            style={{ flex: 1 }}
-          >
-            <InputNumber placeholder="Cub ×" style={{ width: "100%" }} />
-          </Form.Item>
+      <div className="flex flex-col md:flex-row gap-4">
+        <Form.Item
+          name="cubMultiplier"
+          label={t("cubMultiplierLabel")}
+          style={{ flex: 1 }}
+        >
+          <InputNumber placeholder="Cub ×" style={{ width: "100%" }} />
+        </Form.Item>
 
-          <Form.Item
-            name="priceMultiplier"
-            label="Max kg dan keyingi ko'paytiriladigan narx"
-            style={{ flex: 1 }}
-          >
-            <InputNumber placeholder="Price ×" style={{ width: "100%" }} />
-          </Form.Item>
-        </Space.Compact>
-      </Form.Item>
+        <Form.Item
+          name="priceMultiplier"
+          label={t("priceMultiplierLabel")}
+          style={{ flex: 1 }}
+        >
+          <InputNumber placeholder="Price ×" style={{ width: "100%" }} />
+        </Form.Item>
+      </div>
 
-      {/* From Location - Dinamik */}
+      {/* From Location */}
       <Form.Item
-        label="Jo'nash joyi (From)"
+        label={t("fromLocationLabel")}
         name="fromLocation"
-        rules={[{ required: true, message: "Jo'nash joyini tanlang" }]}
+        rules={[{ required: true, message: t("validation.fromLocationRequired") }]}
       >
         <Select
-          placeholder="Tanlang"
+          placeholder={t("selectPlaceholder")}
           loading={fromLoading}
-          notFoundContent={
-            fromLoading ? <Spin size="small" /> : "Joy topilmadi"
-          }
+          notFoundContent={fromLoading ? <Spin size="small" /> : t("locationNotFound")}
           showSearch
           optionFilterProp="children"
         >
           {fromData?.result?.map((loc: any) => (
-            <Option key={loc.id} value={loc.id}>
-              {loc.name}
-            </Option>
+            <Option key={loc.id} value={loc.id}>{loc.name}</Option>
           ))}
         </Select>
       </Form.Item>
 
-      {/* To Location - Dinamik */}
+      {/* To Location */}
       <Form.Item
-        label="Borish joyi (To)"
+        label={t("toLocationLabel")}
         name="toLocation"
-        rules={[{ required: true, message: "Borish joyini tanlang" }]}
+        rules={[{ required: true, message: t("validation.toLocationRequired") }]}
       >
         <Select
-          placeholder="Tanlang"
+          placeholder={t("selectPlaceholder")}
           loading={toLoading}
-          notFoundContent={toLoading ? <Spin size="small" /> : "Joy topilmadi"}
+          notFoundContent={toLoading ? <Spin size="small" /> : t("locationNotFound")}
           showSearch
           optionFilterProp="children"
         >
           {toData?.result?.map((loc: any) => (
-            <Option key={loc.id} value={loc.id}>
-              {loc.name}
-            </Option>
+            <Option key={loc.id} value={loc.id}>{loc.name}</Option>
           ))}
         </Select>
       </Form.Item>
@@ -203,7 +187,7 @@ export default function DeliveryPriceCreateForm({
         <div className="flex justify-end gap-3 mt-6">
           {onCancel && (
             <Button onClick={onCancel} disabled={isCreating}>
-              Bekor qilish
+              {t("cancelButton")}
             </Button>
           )}
           <Button
@@ -212,7 +196,7 @@ export default function DeliveryPriceCreateForm({
             loading={isCreating}
             disabled={isCreating}
           >
-            {isCreating ? "Saqlanmoqda..." : "Narxni qo‘shish"}
+            {isCreating ? t("savingButton") : t("saveButton")}
           </Button>
         </div>
       </Form.Item>
