@@ -29,7 +29,7 @@ export default function SignInUI() {
   const loginMutation = useLoginMutation();
   const { beforePhone } = useGlobalStore();
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
-
+  const role = localStorage.getItem("roleName")
   const schema = loginSchema(t);
   const [form] = Form.useForm();
 
@@ -42,7 +42,11 @@ export default function SignInUI() {
     };
 
     loginMutation.mutate(cleanData, {
-      onSuccess: () => navigate.push("/client/dashboard"),
+      onSuccess: () => {
+        role !== "ROLE_SUPER_ADMIN" ? 
+        navigate.push("/client/dashboard") :
+        navigate.push("/client/admin/prices")
+      },
       onError: (err) => setLoginErrorMessage(err),
     });
   };

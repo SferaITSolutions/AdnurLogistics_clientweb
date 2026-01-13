@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 export default function SidebarItems() {
   const t = useTranslations('');
-
+  const role = localStorage.getItem("roleName")
   return (
     <nav className="flex flex-col gap-3 mt-12 text-white z-50">
       {/* Section Title */}
@@ -17,26 +17,26 @@ export default function SidebarItems() {
         </span>
       </div> */}
       
-      <MenuItem
+      {role !== "ROLE_SUPER_ADMIN" && <MenuItem
         label={t('clientDashboard.dashboard')}
         path={`/client/dashboard`}
         icon={<FaHome size={22} />}
-      />
-      <MenuItem
+      />}
+      {role !== "ROLE_SUPER_ADMIN" && <MenuItem
         label={t('clientDashboard.calculation')}
         path={`/client/calculation`}
         icon={<FaCalculator size={22} />}
-      />
-      <MenuItem
+      />}
+      {role === "ROLE_SUPER_ADMIN" && <MenuItem
         label={'prices'}
         path={`/client/admin/prices`}
         icon={<FaHome size={22} />}
-      />
-      <MenuItem
+      />}
+      {role === "ROLE_SUPER_ADMIN" && <MenuItem
         label={'locations'}
         path={`/client/admin/locations`}
         icon={<FaCalculator size={22} />}
-      />
+      />}
     </nav>
   );
 }
