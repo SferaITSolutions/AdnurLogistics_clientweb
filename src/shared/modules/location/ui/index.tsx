@@ -6,6 +6,7 @@ import FromLocationTable from '../molecules/fromLocationTable';
 import ToLocationTable from '../molecules/toLocationTable';
 import { FaPlus } from 'react-icons/fa';
 import CreateLocations from '@/features/create-locations';
+import { toast } from 'sonner';
 
 const { TabPane } = Tabs;
 
@@ -24,7 +25,7 @@ export default function LocationsUi() {
   // Modal yopilganda yoki muvaffaqiyatli saqlanganda chaqiriladi
   const afterLocationCreated = () => {
     setIsModalOpen(false);
-    // Bu yerda kerak bo'lsa qo'shimcha refresh yoki boshqa amallar
+    toast.success("yangi manzil yaratildi!")
   };
 
   return (

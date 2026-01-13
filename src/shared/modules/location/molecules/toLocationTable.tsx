@@ -101,7 +101,6 @@ export default function ToLocationTable() {
             cancelText="Bekor qilish"
             okButtonProps={{
               danger: true,
-              loading: isDeleting,
             }}
             cancelButtonProps={{
               disabled: isDeleting,
@@ -113,7 +112,6 @@ export default function ToLocationTable() {
               danger
               icon={<MdDelete size={16} />}
               title="O'chirish"
-              loading={isDeleting}
               disabled={isDeleting}
               className="text-red-600 hover:text-red-800"
             />

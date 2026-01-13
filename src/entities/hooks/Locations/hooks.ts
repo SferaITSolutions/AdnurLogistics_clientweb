@@ -28,7 +28,7 @@ export const useGetToLocations = () => {
 
 /* ===================== CREATE ===================== */
 
-export const useCreateLocation = () => {
+export const useCreateLocation = (onSuccess?: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -36,6 +36,7 @@ export const useCreateLocation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["from-locations"] });
       queryClient.invalidateQueries({ queryKey: ["to-locations"] });
+      onSuccess?.();
     },
   });
 };

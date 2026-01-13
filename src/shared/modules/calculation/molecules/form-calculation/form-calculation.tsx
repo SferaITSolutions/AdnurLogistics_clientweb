@@ -61,7 +61,6 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
-            <FaMapMarkerAlt className="text-blue-500" />
             {t("fromLabel")}
           </div>
         }
@@ -91,7 +90,6 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
-            <FaMapMarkerAlt className="text-green-500" />
             {t("toLabel")}
           </div>
         }
@@ -121,7 +119,6 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
-            <FaWeightHanging className="text-blue-600" />
             {t("weightLabel")}
           </div>
         }
@@ -145,7 +142,6 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
-            <FaCube className="text-purple-600" />
             {t("volumeLabel")}
           </div>
         }

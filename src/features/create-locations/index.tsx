@@ -13,10 +13,9 @@ interface LocationFormValues {
   type: "FROM" | "TO";
 }
 
-export default function CreateLocations() {
+export default function CreateLocations({ onSuccess, onCancel }: any) {
   const [form] = Form.useForm();
   const { mutate: createLocation, isPending } = useCreateLocation();
-
   const onFinish = (values: LocationFormValues) => {
     const payload = {
       name: values.name.trim(),
@@ -28,6 +27,7 @@ export default function CreateLocations() {
       onSuccess: () => {
         message.success("Joylashuv muvaffaqiyatli qo'shildi!");
         form.resetFields();
+        onSuccess?.(); // ← BU YERDA MODAL YOPILADI!
       },
       onError: (error) => {
         message.error("Joylashuv qo'shishda xatolik yuz berdi");
@@ -35,7 +35,6 @@ export default function CreateLocations() {
       },
     });
   };
-
   return (
     <Form
       form={form}
@@ -105,15 +104,9 @@ export default function CreateLocations() {
       <Form.Item
         label="Joylashuv turi"
         name="type"
-        rules={[
-          { required: true, message: "Joylashuv turini tanlang!" },
-        ]}
+        rules={[{ required: true, message: "Joylashuv turini tanlang!" }]}
       >
-        <Select
-          size="large"
-          placeholder="Turini tanlang"
-          disabled={isPending}
-        >
+        <Select size="large" placeholder="Turini tanlang" disabled={isPending}>
           <Option value="FROM">From (Jo'nash joyi)</Option>
           <Option value="TO">To (Borish joyi)</Option>
         </Select>
