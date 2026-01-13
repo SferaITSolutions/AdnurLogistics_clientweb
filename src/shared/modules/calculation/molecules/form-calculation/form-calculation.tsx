@@ -1,14 +1,12 @@
 "use client";
 
-import { Button, Checkbox, Form, InputNumber, Radio, Select } from "antd";
-
+import { Button, Form, InputNumber, Select } from "antd";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
 import { useRegions, useToRegions } from "@/shared/constants";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
-import { FaSpinner } from "react-icons/fa";
-import { LiaWeightSolid } from "react-icons/lia";
+import { FaSpinner, FaMapMarkerAlt, FaWeightHanging, FaCube } from "react-icons/fa";
 import { useFormStore } from "../../store/store";
 
 const { Option } = Select;
@@ -22,13 +20,12 @@ export default function FormCalculation() {
   });
   const [form] = Form.useForm();
   const { FROM_OPTIONS } = useRegions();
+  const { TO_OPTIONS } = useToRegions();
 
-  // Sync all store values into form fields when store values change
   useEffect(() => {
     form.setFieldsValue(values);
   }, [values, form]);
 
-  // When the form fields change, keep the store values in sync
   const handleFieldsChange = (changedFields: any, allFields: any) => {
     if (changedFields && changedFields.length) {
       changedFields.forEach((field: any) => {
@@ -37,7 +34,6 @@ export default function FormCalculation() {
     }
   };
 
-  const { TO_OPTIONS } = useToRegions();
   const handleFinish = (data: any) => {
     Object.keys(data).forEach((key) => setValue(key, data[key]));
     calculationMutation.mutate({
@@ -48,10 +44,13 @@ export default function FormCalculation() {
     });
     form.resetFields();
   };
+
   if (calculationMutation.isPending) {
     return (
-      <div className="absolute top-0 left-0 w-full h-full flex items-center bg-black/50 justify-center !z-50">
-        <FaSpinner color="white" size={50} className="animate-spin" />
+      <div className="absolute top-0 left-0 w-full h-full flex items-center bg-black/50 justify-center !z-50 rounded-2xl">
+        <div className="flex flex-col items-center gap-4">
+          <FaSpinner color="white" size={50} className="animate-spin" />
+        </div>
       </div>
     );
   }
@@ -65,16 +64,22 @@ export default function FormCalculation() {
       onFieldsChange={handleFieldsChange}
       className="w-full"
     >
+      {/* From Location */}
       <Form.Item
-        label={<span className="global-text-size">{t("fromLabel")}</span>}
+        label={
+          <div className="flex items-center gap-2 global-text-size font-semibold">
+            {t("fromLabel")}
+          </div>
+        }
         name="from"
         rules={[{ required: true, message: t("fromPlaceholder") }]}
       >
         <Select
-          className="!rounded-xl "
+          className="!rounded-xl"
           placeholder={t("fromPlaceholder")}
           value={values.from}
           size="large"
+          suffixIcon={<FaMapMarkerAlt className="text-gray-400" />}
         >
           {FROM_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
@@ -83,8 +88,14 @@ export default function FormCalculation() {
           ))}
         </Select>
       </Form.Item>
+
+      {/* To Location */}
       <Form.Item
-        label={<span className="global-text-size">{t("toLabel")}</span>}
+        label={
+          <div className="flex items-center gap-2 global-text-size font-semibold">
+            {t("toLabel")}
+          </div>
+        }
         name="to"
         rules={[{ required: true, message: t("toPlaceholder") }]}
       >
@@ -93,6 +104,7 @@ export default function FormCalculation() {
           placeholder={t("toPlaceholder")}
           value={values.to}
           size="large"
+          suffixIcon={<FaMapMarkerAlt className="text-gray-400" />}
         >
           {TO_OPTIONS.map((option: { value: string; label: string }) => (
             <Option key={option.value} value={option.value}>
@@ -101,21 +113,23 @@ export default function FormCalculation() {
           ))}
         </Select>
       </Form.Item>
+
+      {/* Weight */}
       <Form.Item
-        label={<span className="global-text-size">{t("weightLabel")}</span>}
+        label={
+          <div className="flex items-center gap-2 global-text-size font-semibold">
+            {t("weightLabel")}
+          </div>
+        }
         name="kg"
         rules={[
           { required: true, message: t("weightPlaceholder") },
-          {
-            type: "number",
-            min: 0.01,
-            message: t("valueGreaterThanZero"),
-          },
+          { type: "number", min: 0.01, message: t("valueGreaterThanZero") },
         ]}
       >
         <InputNumber
-          className="!rounded-xl !h-[38px]"
-          prefix={<LiaWeightSolid color="blue" size={18} />}
+          className="!rounded-xl"
+          prefix={<FaWeightHanging className="text-blue-600" />}
           style={{ width: "100%" }}
           placeholder={t("weightPlaceholder")}
           min={0.01}
@@ -123,45 +137,23 @@ export default function FormCalculation() {
         />
       </Form.Item>
 
-      {/* <Form.Item
-        label={t("densityLabel")}
-        name="kgm3"
-        rules={[
-          {
-            required: true,
-            message: t("densityPlaceholder"),
-          },
-          {
-            type: "number",
-            min: 0.01,
-            message: t("valueGreaterThanZero"),
-          },
-        ]}
-      >
-        <InputNumber
-          prefix={<LiaWeightSolid color="blue" size={18} />}
-          style={{ width: "100%" }}
-          placeholder={t("densityPlaceholder")}
-          min={0.01}
-          value={values.kgm3}
-          onChange={(val) => setValue("kgm3", val)}
-        />
-      </Form.Item> */}
+      {/* Volume */}
       <Form.Item
-        label={<span className="global-text-size">{t("volumeLabel")}</span>}
+        label={
+          <div className="flex items-center gap-2 global-text-size font-semibold">
+            {/* <FaCube className="text-purple-600" /> */}
+            {t("volumeLabel")}
+          </div>
+        }
         name="m3"
         rules={[
           { required: true, message: t("volumePlaceholder") },
-          {
-            type: "number",
-            min: 0.01,
-            message: t("valueGreaterThanZero"),
-          },
+          { type: "number", min: 0.01, message: t("valueGreaterThanZero") },
         ]}
       >
         <InputNumber
-          prefix={<LiaWeightSolid color="blue" size={18} />}
-          className="!rounded-xl !global-input-height"
+          prefix={<FaCube className="text-purple-600" />}
+          className="!rounded-xl"
           placeholder={t("volumePlaceholder")}
           min={0.01}
           value={values.m3}
@@ -170,25 +162,12 @@ export default function FormCalculation() {
           style={{ width: "100%" }}
         />
       </Form.Item>
-      {/* <Form.Item
-        label={t("typeLabel")}
-        name="containerType"
-        className="!pb-0"
-        rules={[{ required: true, message: t("containerTypePlaceholder") }]}
-      >
-        <Radio.Group
-          size="large"
-          value={values.containerType}
-          onChange={(e) => setValue("containerType", e.target.value)}
-        >
-          <Radio value="ICL">{t("typeIcl")}</Radio>
-          <Radio value="FCL">{t("typeFcl")}</Radio>
-        </Radio.Group>
-      </Form.Item> */}
-      <Form.Item className="mt-3">
+
+      {/* Submit Button */}
+      <Form.Item className="mt-6">
         <Button
           type="primary"
-          className="bg-secondary-blue-color !py-5 w-full !rounded-xl"
+          className="!bg-gradient-to-r !from-blue-500 !to-blue-600 hover:!from-blue-600 hover:!to-blue-700 !border-0 !shadow-lg !shadow-blue-500/30 hover:!shadow-xl hover:!shadow-blue-500/40 !py-6 w-full !rounded-xl !font-semibold !text-base hover:!scale-[1.02] !transition-all !duration-300"
           htmlType="submit"
         >
           {t("calculateButton")}
@@ -197,3 +176,4 @@ export default function FormCalculation() {
     </Form>
   );
 }
+

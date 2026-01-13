@@ -26,11 +26,11 @@ export default function LanguageSwitcher() {
       value={getLocalItem("lang") || "uz"}
       onChange={handleChange}
       className="custom-lang-select flex justify-center items-center min-w-[160px] !min-h-[50px]"
-      dropdownStyle={{
-        padding: "10px 6px ",
-        borderRadius: "10px",
-      }}
-      popupClassName="custom-lang-dropdown"
+      // dropdownStyle={{
+      //   padding: "10px 6px ",
+      //   borderRadius: "10px",
+      // }}
+      // popupClassName="custom-lang-dropdown"
     >
       {LANGUAGES.map((lang) => (
         <Select.Option key={lang.code} value={lang.code}>

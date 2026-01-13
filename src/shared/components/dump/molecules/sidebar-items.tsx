@@ -5,7 +5,7 @@ import MenuItem from '@/shared/components/dump/molecules/menu-item';
 import { useTranslations } from 'next-intl';
 
 export default function SidebarItems() {
-  const t = useTranslations('clientDashboard');
+  const t = useTranslations('');
 
   return (
     <nav className="flex flex-col gap-3 mt-12 text-white z-50">
@@ -18,13 +18,23 @@ export default function SidebarItems() {
       </div> */}
       
       <MenuItem
-        label={t('dashboard')}
+        label={t('clientDashboard.dashboard')}
         path={`/client/dashboard`}
         icon={<FaHome size={22} />}
       />
       <MenuItem
-        label={t('calculation')}
+        label={t('clientDashboard.calculation')}
         path={`/client/calculation`}
+        icon={<FaCalculator size={22} />}
+      />
+      <MenuItem
+        label={'prices'}
+        path={`/client/admin/prices`}
+        icon={<FaHome size={22} />}
+      />
+      <MenuItem
+        label={'locations'}
+        path={`/client/admin/locations`}
         icon={<FaCalculator size={22} />}
       />
     </nav>
