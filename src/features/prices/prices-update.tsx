@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { Form, InputNumber, Select, Button, Space, Spin } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, InputNumber, Select, Button, Space, Checkbox } from "antd";
 import {
   useUpdateDeliveryPrice,
   useGetFromList,
@@ -38,6 +38,7 @@ export default function DeliveryPriceUpdateForm({
   const t = useTranslations("deliveryPriceUpdateForm");
   const [form] = Form.useForm<DeliveryPrice>();
   const { mutate: updatePrice, isPending } = useUpdateDeliveryPrice();
+  const [isUnlimitedWeight, setIsUnlimitedWeight] = useState(false);
 
   const { data: fromData, isLoading: fromLoading } = useGetFromList();
   const { data: toData, isLoading: toLoading } = useGetToList();
@@ -50,8 +51,23 @@ export default function DeliveryPriceUpdateForm({
         cubMultiplier: initialValues.cubMultiplier ?? null,
         priceMultiplier: initialValues.priceMultiplier ?? null,
       });
+      
+      // Check if initial values match unlimited weight criteria
+      if (initialValues.minWeight === 1000 && initialValues.maxWeight === null) {
+        setIsUnlimitedWeight(true);
+      }
     }
   }, [initialValues, form]);
+
+  const handleUnlimitedWeightChange = (checked: boolean) => {
+    setIsUnlimitedWeight(checked);
+    if (checked) {
+      form.setFieldsValue({
+        minWeight: 1000,
+        maxWeight: null,
+      });
+    }
+  };
 
   const onFinish = (values: DeliveryPrice) => {
     updatePrice(
@@ -117,7 +133,18 @@ export default function DeliveryPriceUpdateForm({
           ))}
         </Select>
       </Form.Item>
-      {/* Og‘irlik oralig‘i */}
+
+      {/* Checkbox for unlimited weight */}
+      <Form.Item>
+        <Checkbox 
+          checked={isUnlimitedWeight} 
+          onChange={(e) => handleUnlimitedWeightChange(e.target.checked)}
+        >
+          {t("unlimitedWeightLabel") || "Cheksiz og'irlik (1000 kg dan yuqori)"}
+        </Checkbox>
+      </Form.Item>
+
+      {/* Og'irlik oralig'i */}
       <Form.Item label={t("weightRangeLabel")} required>
         <Space.Compact className="!w-full">
           <Form.Item
@@ -128,7 +155,11 @@ export default function DeliveryPriceUpdateForm({
             ]}
             className="!mb-0 !w-full"
           >
-            <InputNumber min={0} className="!w-full" />
+            <InputNumber<number> 
+              min={0} 
+              className="!w-full" 
+              disabled={isUnlimitedWeight}
+            />
           </Form.Item>
           <span className="px-2 self-center">—</span>
           <Form.Item
@@ -146,10 +177,11 @@ export default function DeliveryPriceUpdateForm({
             ]}
             className="!mb-0 !w-full"
           >
-            <InputNumber
+            <InputNumber<number>
               placeholder={t("maxWeightPlaceholder")}
               min={0}
               className="!w-full"
+              disabled={isUnlimitedWeight}
             />
           </Form.Item>
         </Space.Compact>
@@ -164,47 +196,7 @@ export default function DeliveryPriceUpdateForm({
           { type: "number", min: 0, message: t("mustBePositive") },
         ]}
       >
-        <InputNumber min={0} step={0.01} precision={2} className="!w-full" />
-      </Form.Item>
-
-      {/* Narx */}
-      <Form.Item
-        label={t("priceLabel")}
-        name="price"
-        rules={[
-          { required: true, message: t("priceRequired") },
-          { type: "number", min: 0, message: t("mustBePositive") },
-        ]}
-      >
-        <InputNumber<number>
-          min={0}
-          className="!w-full"
-          formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-          parser={(value) => {
-            const cleaned = value?.replace(/\s/g, "") || "";
-            return cleaned ? Number(cleaned) : 0;
-          }}
-        />
-      </Form.Item>
-
-      {/* Ko'paytirgichlar */}
-      <Form.Item label={t("multipliersLabel")}>
-        <Space.Compact className="!w-full">
-          <Form.Item name="cubMultiplier" className="!mb-0 !w-full">
-            <InputNumber
-              step={0.1}
-              placeholder={t("cubMultiplierPlaceholder")}
-              className="!w-full"
-            />
-          </Form.Item>
-          <Form.Item name="priceMultiplier" className="!mb-0 !w-full">
-            <InputNumber
-              step={0.1}
-              placeholder={t("priceMultiplierPlaceholder")}
-              className="!w-full"
-            />
-          </Form.Item>
-        </Space.Compact>
+        <InputNumber<number> min={0} step={0.01} precision={2} className="!w-full" />
       </Form.Item>
 
       <div className="flex justify-end gap-3 mt-6">

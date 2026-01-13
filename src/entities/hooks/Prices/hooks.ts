@@ -59,7 +59,7 @@ export const useCreateDeliveryPrice = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: Omit<DeliveryPrice, "id">) =>
+    mutationFn: (data: any) =>
       pricesService.createPriceService(data),
 
     onSuccess: () => {

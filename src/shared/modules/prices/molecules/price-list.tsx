@@ -178,7 +178,7 @@ export default function DeliveryPricesPage() {
           rowKey="id"
           pagination={false}
           size="middle"
-          locale={{ emptyText: t("emptyText") || "Hozircha narxlar mavjud emas" }}
+          locale={{ emptyText: "Hozircha narxlar mavjud emas" }}
           rowClassName={() => "hover:bg-gray-50 transition-colors"}
         />
       </div>

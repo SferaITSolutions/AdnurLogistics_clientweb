@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { Form, InputNumber, Select, Button, message, Space, Spin } from "antd";
+import React, { useState } from "react";
+import { Form, InputNumber, Select, Button, message, Space, Spin, Checkbox } from "antd";
 import {
   useCreateDeliveryPrice,
   useGetFromList,
@@ -13,7 +13,7 @@ const { Option } = Select;
 
 type CreatePriceFormValues = {
   minWeight: number;
-  maxWeight: number;
+  maxWeight: number | null;
   cub3: number;
   price: number;
   cubMultiplier: number;
@@ -33,17 +33,37 @@ export default function DeliveryPriceCreateForm({
 }: DeliveryPriceCreateFormProps) {
   const t = useTranslations("deliveryPriceCreateForm");
   const [form] = Form.useForm<CreatePriceFormValues>();
+  const [isUnlimitedWeight, setIsUnlimitedWeight] = useState(false);
+  
   const { mutate: createPrice, isPending: isCreating } =
     useCreateDeliveryPrice();
 
   const { data: fromData, isLoading: fromLoading } = useGetFromList();
   const { data: toData, isLoading: toLoading } = useGetToList();
 
+  const handleUnlimitedWeightChange = (checked: boolean) => {
+    setIsUnlimitedWeight(checked);
+    if (checked) {
+      form.setFieldsValue({
+        minWeight: 1000,
+        maxWeight: null,
+      });
+    }
+  };
+
   const onFinish = (values: CreatePriceFormValues) => {
-    createPrice(values, {
+    // Ensure values are set correctly when unlimited weight is checked
+    const submitValues = {
+      ...values,
+      minWeight: isUnlimitedWeight ? 1000 : values.minWeight,
+      maxWeight: isUnlimitedWeight ? null : values.maxWeight,
+    };
+
+    createPrice(submitValues, {
       onSuccess: () => {
         message.success(t("messages.success"));
         form.resetFields();
+        setIsUnlimitedWeight(false); // Reset checkbox state
         onSuccess?.();
       },
       onError: () => {
@@ -114,7 +134,18 @@ export default function DeliveryPriceCreateForm({
           ))}
         </Select>
       </Form.Item>
-      {/* Og‘irlik oralig‘i */}
+
+      {/* Checkbox for unlimited weight */}
+      <Form.Item>
+        <Checkbox 
+          checked={isUnlimitedWeight} 
+          onChange={(e) => handleUnlimitedWeightChange(e.target.checked)}
+        >
+          {"1000 kg dan yuqori"}
+        </Checkbox>
+      </Form.Item>
+
+      {/* Og'irlik oralig'i */}
       <Form.Item label={t("weightRangeLabel")} required>
         <Space.Compact style={{ width: "100%" }}>
           <Form.Item
@@ -129,11 +160,12 @@ export default function DeliveryPriceCreateForm({
             ]}
             style={{ flex: 1 }}
           >
-            <InputNumber
+            <InputNumber<number>
               placeholder={t("minPlaceholder")}
               min={0}
               maxLength={13}
               style={{ width: "100%" }}
+              disabled={isUnlimitedWeight}
             />
           </Form.Item>
 
@@ -164,11 +196,12 @@ export default function DeliveryPriceCreateForm({
             ]}
             style={{ flex: 1 }}
           >
-            <InputNumber
+            <InputNumber<number>
               placeholder={t("maxPlaceholder")}
               min={0}
               maxLength={13}
               style={{ width: "100%" }}
+              disabled={isUnlimitedWeight}
             />
           </Form.Item>
         </Space.Compact>
@@ -176,7 +209,7 @@ export default function DeliveryPriceCreateForm({
 
       {/* Kub (m³) */}
       <Form.Item label={t("cubLabel")} name="cub3">
-        <InputNumber
+        <InputNumber<number>
           min={0}
           step={0.01}
           maxLength={13}
@@ -184,40 +217,6 @@ export default function DeliveryPriceCreateForm({
           style={{ width: "100%" }}
         />
       </Form.Item>
-
-      {/* Narx (so‘m) */}
-      <Form.Item label={t("priceLabel")} name="price">
-        <InputNumber<number>
-          style={{ width: "100%" }}
-          min={0}
-          formatter={(value) =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-          }
-          parser={(value) => {
-            const cleaned = value?.replace(/\s/g, "") || "";
-            return cleaned ? Number(cleaned) : 0;
-          }}
-        />
-      </Form.Item>
-
-      {/* Ko‘paytirgichlar */}
-      <div className="flex flex-col md:flex-row gap-4">
-        <Form.Item
-          name="cubMultiplier"
-          label={t("cubMultiplierLabel")}
-          style={{ flex: 1 }}
-        >
-          <InputNumber placeholder="Cub ×" style={{ width: "100%" }} />
-        </Form.Item>
-
-        <Form.Item
-          name="priceMultiplier"
-          label={t("priceMultiplierLabel")}
-          style={{ flex: 1 }}
-        >
-          <InputNumber placeholder="Price ×" style={{ width: "100%" }} />
-        </Form.Item>
-      </div>
 
       {/* Tugmalar */}
       <Form.Item className="mb-0 text-right">

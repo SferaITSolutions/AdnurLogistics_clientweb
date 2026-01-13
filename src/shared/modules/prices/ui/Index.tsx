@@ -9,7 +9,8 @@ import { useTranslations } from "next-intl";
 
 export default function PricesUi() {
   const [isModalOpen, setIsModalOpen] = useState(false);
- const t = useTranslations("pricesTable") 
+  const t = useTranslations("pricesTable");
+  
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -50,7 +51,7 @@ export default function PricesUi() {
         onCancel={handleCloseModal}
         footer={null}
         width={800}                
-        destroyOnClose           
+        destroyOnHidden           
         centered
       >
         <DeliveryPriceCreateForm
