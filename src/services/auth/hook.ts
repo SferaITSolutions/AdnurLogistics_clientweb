@@ -16,9 +16,9 @@ export const useLoginMutation = () => {
   const handleError = useError();
   return useMutation({
     mutationFn: (data: z.infer<typeof formSchema>) => authService.login(data), // asosiy API call
-    onSuccess: (data) => {
+    onSuccess:async (data)  => {
       setLocalItem('access_token', data.data.accessToken);
-      setLocalItem('rolename', data.data.roleName);
+      await setLocalItem('roleName', data.data.roleName);
       setLocalItem('refresh_token', data.data.refreshToken);
       toast.success(t('authSuccessMessages.loginSuccess'));
     },

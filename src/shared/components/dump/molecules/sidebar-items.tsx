@@ -28,12 +28,12 @@ export default function SidebarItems() {
         icon={<FaCalculator size={22} />}
       />}
       {role === "ROLE_SUPER_ADMIN" && <MenuItem
-        label={'prices'}
+        label={t('pricesTable.prices')}
         path={`/client/admin/prices`}
         icon={<FaHome size={22} />}
       />}
       {role === "ROLE_SUPER_ADMIN" && <MenuItem
-        label={'locations'}
+        label={t('pricesTable.locations')}
         path={`/client/admin/locations`}
         icon={<FaCalculator size={22} />}
       />}

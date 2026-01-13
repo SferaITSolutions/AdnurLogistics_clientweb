@@ -19,7 +19,7 @@ import { useGlobalStore } from "@/shared/store/globalStore";
 import { extractErrorMessage } from "@/shared/utils";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import LoginErrorlabel from "../molecules/errorLabel";
 
@@ -43,14 +43,12 @@ export default function SignInUI() {
 
     loginMutation.mutate(cleanData, {
       onSuccess: () => {
-        role !== "ROLE_SUPER_ADMIN" ? 
-        navigate.push("/client/dashboard") :
-        navigate.push("/client/admin/prices")
+        if(role !== "ROLE_SUPER_ADMIN") navigate.push("/client/dashboard") 
+        else navigate.push("/client/admin/prices")
       },
       onError: (err) => setLoginErrorMessage(err),
     });
   };
-
   return (
     <div className="flex justify-between gap-10 min-h-screen">
       <Image
