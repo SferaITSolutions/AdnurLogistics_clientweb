@@ -55,6 +55,7 @@ export default function DeliveryPriceCreateForm({
     // Ensure values are set correctly when unlimited weight is checked
     const submitValues = {
       ...values,
+      overPrice: isUnlimitedWeight,
       minWeight: isUnlimitedWeight ? 1000 : values.minWeight,
       maxWeight: isUnlimitedWeight ? null : values.maxWeight,
     };
@@ -78,10 +79,10 @@ export default function DeliveryPriceCreateForm({
       layout="vertical"
       onFinish={onFinish}
       initialValues={{
-        minWeight: 0,
-        maxWeight: 10,
-        cub3: 0,
-        price: 0,
+        minWeight: null,
+        maxWeight: null,
+        cub3: null,
+        price: null,
       }}
       autoComplete="off"
     >

@@ -73,6 +73,7 @@ export default function DeliveryPriceUpdateForm({
     updatePrice(
       {
         ...values,
+        overPrice: isUnlimitedWeight,
         id: initialValues.id,
       },
       {
