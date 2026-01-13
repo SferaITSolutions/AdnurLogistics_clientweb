@@ -80,7 +80,7 @@ export default function DeliveryPriceCreateForm({
       initialValues={{
         minWeight: 0,
         maxWeight: 10,
-        cub3: 1,
+        cub3: 0,
         price: 0,
       }}
       autoComplete="off"
