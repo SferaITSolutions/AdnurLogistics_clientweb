@@ -96,7 +96,7 @@ export default function DeliveryPricesPage() {
       title: t("columns.price"),
       dataIndex: "price",
       align: "right" as const,
-      render: (value) => value.toLocaleString("uz-UZ"),
+      render: (value) => value?.toLocaleString("uz-UZ"),
     },
     {
       title: t("columns.actions"),
