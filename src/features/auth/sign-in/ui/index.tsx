@@ -42,10 +42,6 @@ export default function SignInUI() {
     };
 
     loginMutation.mutate(cleanData, {
-      onSuccess: () => {
-        if(role !== "ROLE_SUPER_ADMIN") navigate.push("/client/dashboard") 
-        else navigate.push("/client/admin/prices")
-      },
       onError: (err) => setLoginErrorMessage(err),
     });
   };

@@ -57,13 +57,13 @@ export default function LocationsUi() {
           }}
         >
           <TabPane tab="Junash joylari" key="from">
-            <div className="p-6">
+            <div className="py-6 px-2">
               <FromLocationTable />
             </div>
           </TabPane>
 
           <TabPane tab="Kelish joylari" key="to">
-            <div className="p-6">
+            <div className="py-6 px-2">
               <ToLocationTable />
             </div>
           </TabPane>

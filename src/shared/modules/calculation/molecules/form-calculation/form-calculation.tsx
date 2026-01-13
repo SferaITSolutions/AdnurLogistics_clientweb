@@ -1,56 +1,45 @@
 "use client";
 
-import { Button, Form, InputNumber, Select } from "antd";
+import React from "react";
+import { Form, InputNumber, Select, Button, Spin } from "antd";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
-import { useRegions, useToRegions } from "@/shared/constants";
-import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import { FaSpinner, FaMapMarkerAlt, FaWeightHanging, FaCube } from "react-icons/fa";
 import { useFormStore } from "../../store/store";
+import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks"; // ← sizning hooklaringiz
+import { useTranslations } from "next-intl";
+import { FaSpinner, FaMapMarkerAlt, FaWeightHanging, FaCube } from "react-icons/fa";
 
 const { Option } = Select;
 
 export default function FormCalculation() {
   const t = useTranslations("calculationPage");
-  const { values, setValue, resetForm } = useFormStore();
+  const { values, setValue } = useFormStore();
   const { setResponse } = useCalculationStore();
   const calculationMutation = useCalculation((data: any) => {
     setResponse(data);
   });
+
   const [form] = Form.useForm();
-  const { FROM_OPTIONS } = useRegions();
-  const { TO_OPTIONS } = useToRegions();
 
-  useEffect(() => {
-    form.setFieldsValue(values);
-  }, [values, form]);
+  // API dan joylashuvlarni olish
+  const { data: fromData, isLoading: fromLoading } = useGetFromList();
+  const { data: toData, isLoading: toLoading } = useGetToList();
 
-  const handleFieldsChange = (changedFields: any, allFields: any) => {
-    if (changedFields && changedFields.length) {
-      changedFields.forEach((field: any) => {
-        setValue(field.name[0], field.value);
-      });
-    }
-  };
-
-  const handleFinish = (data: any) => {
-    Object.keys(data).forEach((key) => setValue(key, data[key]));
+  const onFinish = (data: any) => {
     calculationMutation.mutate({
-      fromLocation: data.from?.toUpperCase(),
+      fromLocation: data.from,
+      toLocation: data.to,
       customs: data.customsPriceCalculation || false,
       weight: data.kg || 0,
       cub: data.m3 || 0,
     });
-    form.resetFields();
   };
 
-  if (calculationMutation.isPending) {
+  // Loading holati
+  if (fromLoading || toLoading) {
     return (
-      <div className="absolute top-0 left-0 w-full h-full flex items-center bg-black/50 justify-center !z-50 rounded-2xl">
-        <div className="flex flex-col items-center gap-4">
-          <FaSpinner color="white" size={50} className="animate-spin" />
-        </div>
+      <div className="flex justify-center items-center h-64">
+        <Spin size="large" tip="Joylashuvlar yuklanmoqda..." />
       </div>
     );
   }
@@ -60,14 +49,19 @@ export default function FormCalculation() {
       form={form}
       layout="vertical"
       initialValues={values}
-      onFinish={handleFinish}
-      onFieldsChange={handleFieldsChange}
+      onFinish={onFinish}
+      onFieldsChange={(_, allFields) => {
+        allFields.forEach((field) => {
+          if (field.name) setValue(field.name[0], field.value);
+        });
+      }}
       className="w-full"
     >
-      {/* From Location */}
+      {/* From Location - Dinamik API dan */}
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
+            <FaMapMarkerAlt className="text-blue-500" />
             {t("fromLabel")}
           </div>
         }
@@ -77,22 +71,27 @@ export default function FormCalculation() {
         <Select
           className="!rounded-xl"
           placeholder={t("fromPlaceholder")}
-          value={values.from}
           size="large"
-          suffixIcon={<FaMapMarkerAlt className="text-gray-400" />}
+          showSearch
+          optionFilterProp="children"
+          loading={fromLoading}
+          notFoundContent={
+            fromLoading ? <Spin size="small" /> : t("noLocationsFound")
+          }
         >
-          {FROM_OPTIONS.map((option: { value: string; label: string }) => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
+          {fromData?.result?.map((loc: any) => (
+            <Option key={loc.id} value={loc.id}>
+              {loc.name}
             </Option>
           ))}
         </Select>
       </Form.Item>
 
-      {/* To Location */}
+      {/* To Location - Dinamik API dan */}
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
+            <FaMapMarkerAlt className="text-green-500" />
             {t("toLabel")}
           </div>
         }
@@ -102,13 +101,17 @@ export default function FormCalculation() {
         <Select
           className="!rounded-xl"
           placeholder={t("toPlaceholder")}
-          value={values.to}
           size="large"
-          suffixIcon={<FaMapMarkerAlt className="text-gray-400" />}
+          showSearch
+          optionFilterProp="children"
+          loading={toLoading}
+          notFoundContent={
+            toLoading ? <Spin size="small" /> : t("noLocationsFound")
+          }
         >
-          {TO_OPTIONS.map((option: { value: string; label: string }) => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
+          {toData?.result?.map((loc: any) => (
+            <Option key={loc.id} value={loc.id}>
+              {loc.name}
             </Option>
           ))}
         </Select>
@@ -118,6 +121,7 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
+            <FaWeightHanging className="text-blue-600" />
             {t("weightLabel")}
           </div>
         }
@@ -141,7 +145,7 @@ export default function FormCalculation() {
       <Form.Item
         label={
           <div className="flex items-center gap-2 global-text-size font-semibold">
-            {/* <FaCube className="text-purple-600" /> */}
+            <FaCube className="text-purple-600" />
             {t("volumeLabel")}
           </div>
         }
@@ -152,12 +156,10 @@ export default function FormCalculation() {
         ]}
       >
         <InputNumber
-          prefix={<FaCube className="text-purple-600" />}
+          prefix={<FaCube className="text-blue-600" />}
           className="!rounded-xl"
           placeholder={t("volumePlaceholder")}
           min={0.01}
-          value={values.m3}
-          onChange={(val) => setValue("m3", val)}
           size="large"
           style={{ width: "100%" }}
         />
@@ -169,11 +171,12 @@ export default function FormCalculation() {
           type="primary"
           className="!bg-gradient-to-r !from-blue-500 !to-blue-600 hover:!from-blue-600 hover:!to-blue-700 !border-0 !shadow-lg !shadow-blue-500/30 hover:!shadow-xl hover:!shadow-blue-500/40 !py-6 w-full !rounded-xl !font-semibold !text-base hover:!scale-[1.02] !transition-all !duration-300"
           htmlType="submit"
+          loading={calculationMutation.isPending}
+          disabled={calculationMutation.isPending}
         >
-          {t("calculateButton")}
+          {calculationMutation.isPending ? t("calculating") : t("calculateButton")}
         </Button>
       </Form.Item>
     </Form>
   );
 }
-

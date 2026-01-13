@@ -24,10 +24,10 @@ export default function PricesUi() {
   };
 
   return (
-    <div className="p-4 md:p-6">
+    <div className="">
       {/* Header + Tugma */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl md:text-3xl !font-bold text-gray-800 !mb-0">
+      <div className="!mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between items-center gap-4">
+        <h1 className="text-xl md:text-2xl !font-bold text-gray-800 !mb-0">
           {t("deliveryRates")}
         </h1>
 

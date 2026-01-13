@@ -2,7 +2,11 @@
 
 import React from "react";
 import { Form, InputNumber, Select, Button, message, Space, Spin } from "antd";
-import { useCreateDeliveryPrice, useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
+import {
+  useCreateDeliveryPrice,
+  useGetFromList,
+  useGetToList,
+} from "@/entities/hooks/Prices/hooks";
 import { useTranslations } from "next-intl";
 
 const { Option } = Select;
@@ -29,7 +33,8 @@ export default function DeliveryPriceCreateForm({
 }: DeliveryPriceCreateFormProps) {
   const t = useTranslations("deliveryPriceCreateForm");
   const [form] = Form.useForm<CreatePriceFormValues>();
-  const { mutate: createPrice, isPending: isCreating } = useCreateDeliveryPrice();
+  const { mutate: createPrice, isPending: isCreating } =
+    useCreateDeliveryPrice();
 
   const { data: fromData, isLoading: fromLoading } = useGetFromList();
   const { data: toData, isLoading: toLoading } = useGetToList();
@@ -60,6 +65,55 @@ export default function DeliveryPriceCreateForm({
       }}
       autoComplete="off"
     >
+      {/* From Location */}
+      <Form.Item
+        label={t("fromLocationLabel")}
+        name="fromLocation"
+        rules={[
+          { required: true, message: t("validation.fromLocationRequired") },
+        ]}
+      >
+        <Select
+          placeholder={t("selectPlaceholder")}
+          loading={fromLoading}
+          notFoundContent={
+            fromLoading ? <Spin size="small" /> : t("locationNotFound")
+          }
+          showSearch
+          optionFilterProp="children"
+        >
+          {fromData?.result?.map((loc: any) => (
+            <Option key={loc.id} value={loc.id}>
+              {loc.name}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+
+      {/* To Location */}
+      <Form.Item
+        label={t("toLocationLabel")}
+        name="toLocation"
+        rules={[
+          { required: true, message: t("validation.toLocationRequired") },
+        ]}
+      >
+        <Select
+          placeholder={t("selectPlaceholder")}
+          loading={toLoading}
+          notFoundContent={
+            toLoading ? <Spin size="small" /> : t("locationNotFound")
+          }
+          showSearch
+          optionFilterProp="children"
+        >
+          {toData?.result?.map((loc: any) => (
+            <Option key={loc.id} value={loc.id}>
+              {loc.name}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
       {/* Og‘irlik oralig‘i */}
       <Form.Item label={t("weightRangeLabel")} required>
         <Space.Compact style={{ width: "100%" }}>
@@ -67,11 +121,20 @@ export default function DeliveryPriceCreateForm({
             name="minWeight"
             rules={[
               { required: true, message: t("validation.minWeightRequired") },
-              { type: "number", min: 0, message: t("validation.mustBePositive") },
+              {
+                type: "number",
+                min: 0,
+                message: t("validation.mustBePositive"),
+              },
             ]}
             style={{ flex: 1 }}
           >
-            <InputNumber placeholder={t("minPlaceholder")} min={0} style={{ width: "100%" }} />
+            <InputNumber
+              placeholder={t("minPlaceholder")}
+              min={0}
+              maxLength={13}
+              style={{ width: "100%" }}
+            />
           </Form.Item>
 
           <span className="px-2">—</span>
@@ -79,7 +142,11 @@ export default function DeliveryPriceCreateForm({
           <Form.Item
             name="maxWeight"
             rules={[
-              { type: "number", min: 0, message: t("validation.mustBePositive") },
+              {
+                type: "number",
+                min: 0,
+                message: t("validation.mustBePositive"),
+              },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (
@@ -87,7 +154,9 @@ export default function DeliveryPriceCreateForm({
                     value !== null &&
                     getFieldValue("minWeight") >= value
                   ) {
-                    return Promise.reject(new Error(t("validation.maxWeightError")));
+                    return Promise.reject(
+                      new Error(t("validation.maxWeightError"))
+                    );
                   }
                   return Promise.resolve();
                 },
@@ -98,6 +167,7 @@ export default function DeliveryPriceCreateForm({
             <InputNumber
               placeholder={t("maxPlaceholder")}
               min={0}
+              maxLength={13}
               allowClear
               style={{ width: "100%" }}
             />
@@ -110,6 +180,7 @@ export default function DeliveryPriceCreateForm({
         <InputNumber
           min={0}
           step={0.01}
+          maxLength={13}
           precision={2}
           style={{ width: "100%" }}
         />
@@ -120,7 +191,9 @@ export default function DeliveryPriceCreateForm({
         <InputNumber
           min={0}
           style={{ width: "100%" }}
-          formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+          formatter={(value) =>
+            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+          }
           parser={(value) => value!.replace(/\s/g, "")}
         />
       </Form.Item>
@@ -143,44 +216,6 @@ export default function DeliveryPriceCreateForm({
           <InputNumber placeholder="Price ×" style={{ width: "100%" }} />
         </Form.Item>
       </div>
-
-      {/* From Location */}
-      <Form.Item
-        label={t("fromLocationLabel")}
-        name="fromLocation"
-        rules={[{ required: true, message: t("validation.fromLocationRequired") }]}
-      >
-        <Select
-          placeholder={t("selectPlaceholder")}
-          loading={fromLoading}
-          notFoundContent={fromLoading ? <Spin size="small" /> : t("locationNotFound")}
-          showSearch
-          optionFilterProp="children"
-        >
-          {fromData?.result?.map((loc: any) => (
-            <Option key={loc.id} value={loc.id}>{loc.name}</Option>
-          ))}
-        </Select>
-      </Form.Item>
-
-      {/* To Location */}
-      <Form.Item
-        label={t("toLocationLabel")}
-        name="toLocation"
-        rules={[{ required: true, message: t("validation.toLocationRequired") }]}
-      >
-        <Select
-          placeholder={t("selectPlaceholder")}
-          loading={toLoading}
-          notFoundContent={toLoading ? <Spin size="small" /> : t("locationNotFound")}
-          showSearch
-          optionFilterProp="children"
-        >
-          {toData?.result?.map((loc: any) => (
-            <Option key={loc.id} value={loc.id}>{loc.name}</Option>
-          ))}
-        </Select>
-      </Form.Item>
 
       {/* Tugmalar */}
       <Form.Item className="mb-0 text-right">

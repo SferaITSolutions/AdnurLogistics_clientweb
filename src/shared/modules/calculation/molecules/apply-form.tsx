@@ -70,7 +70,7 @@ export default function ApplyForm() {
           <Input
             className="!rounded-xl global-input-height"
             placeholder={t("fromPlaceholder")}
-            prefix={<FaMapMarkerAlt className="text-green-600" />}
+            prefix={<FaMapMarkerAlt className="text-blue-600" />}
             style={{ width: "100%" }}
           />
         </Form.Item>
@@ -88,7 +88,7 @@ export default function ApplyForm() {
           <Input
             className="!rounded-xl global-input-height"
             placeholder={t("toPlaceholder")}
-            prefix={<FaMapMarkerAlt className="text-red-600" />}
+            prefix={<FaMapMarkerAlt className="text-blue-600" />}
             style={{ width: "100%" }}
           />
         </Form.Item>
@@ -132,7 +132,7 @@ export default function ApplyForm() {
             type="number"
             className="!rounded-xl global-input-height"
             placeholder={t("bulkPlaceholder")}
-            prefix={<FaCube className="text-purple-600" />}
+            prefix={<FaCube className="text-blue-600" />}
             style={{ width: "100%" }}
             size="large"
           />

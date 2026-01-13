@@ -15,6 +15,7 @@ const Navbar: React.FC = () => {
   const { isOpen, toggleSidebar } = useSidebarStore();
   const { data } = useMe();
   const { setUserInfo } = useGlobalStore();
+  const role = localStorage.getItem("roleName")
   const info = data?.data;
   useEffect(() => {
     if (info) {
@@ -32,9 +33,9 @@ const Navbar: React.FC = () => {
             <MdMenu className="text-2xl text-primary-blue-color cursor-pointer" />
           </button>
         )}
-        <h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
+        {role !== "ROLE_SUPER_ADMIN" &&<h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
           {t("label")}: {info?.code ?? "-"}
-        </h1>
+        </h1>}
       </div>
       <div className="items-center gap-5 flex">
         <div className="hidden lg:block">

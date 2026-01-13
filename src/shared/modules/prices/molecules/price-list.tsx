@@ -17,16 +17,16 @@ import { useDeleteDeliveryPrice, useGetDeliveryPrices } from "@/entities/hooks/P
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import DeliveryPriceUpdateForm from "@/features/prices/prices-update";
-import { useTranslations } from "next-intl"; // Tarjima uchun hook
+import { useTranslations } from "next-intl";
 
 interface DeliveryPrice {
   id: string;
   minWeight: number;
-  maxWeight: number;
+  maxWeight: number | null;
   cub3: number;
   price: number;
-  cubMultiplier: number;
-  priceMultiplier: number;
+  cubMultiplier: number | null;
+  priceMultiplier: number | null;
   fromLocation: string;
   toLocation: string;
   fromLocationName?: string;
@@ -34,7 +34,7 @@ interface DeliveryPrice {
 }
 
 export default function DeliveryPricesPage() {
-  const t = useTranslations("deliveryPrices"); // JSON dagi 'deliveryPrices' bo'limini ishlatamiz
+  const t = useTranslations("deliveryPrices");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -42,8 +42,9 @@ export default function DeliveryPricesPage() {
     currentPage - 1,
     pageSize
   );
-  
+
   const { mutate: deletePrice, isPending: isDeleting } = useDeleteDeliveryPrice();
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState<DeliveryPrice | null>(null);
 
@@ -59,64 +60,73 @@ export default function DeliveryPricesPage() {
 
   const columns: ColumnsType<DeliveryPrice> = [
     {
-      title: t("columns.number"),
+      title: "#",
       width: 60,
+      align: "center" as const,
       render: (_, __, index) => index + 1 + (currentPage - 1) * pageSize,
-      align: "center",
     },
     {
       title: t("columns.route"),
       key: "locations",
       render: (_, record) => (
         <Space>
-          <Tag color="blue">{record.fromLocationName}</Tag>→
-          <Tag color="green">{record.toLocationName}</Tag>
+          <Tag color="blue">{record.fromLocationName || record.fromLocation}</Tag>
+          →
+          <Tag color="green">{record.toLocationName || record.toLocation}</Tag>
         </Space>
       ),
     },
     {
       title: t("columns.weight"),
       key: "weight",
-      align: "center",
+      align: "center" as const,
       render: (_, record) => (
         <span>
-          {record.minWeight} – {record.maxWeight}
+          {record.minWeight} {record.maxWeight !== null ? `– ${record.maxWeight}` : "+"}
         </span>
       ),
     },
     {
       title: t("columns.volume"),
       dataIndex: "cub3",
-      align: "center",
+      align: "center" as const,
       render: (value) => value.toFixed(2),
     },
     {
       title: t("columns.price"),
       dataIndex: "price",
-      align: "right",
-      render: (value) => value.toLocaleString(),
+      align: "right" as const,
+      render: (value) => value.toLocaleString("uz-UZ"),
     },
     {
       title: t("columns.actions"),
       key: "actions",
       width: 140,
-      align: "center",
+      align: "center" as const,
       render: (_, record) => (
-        <Space>
+        <div className="flex items-center justify-center gap-2">
+          {/* Edit Button */}
           <Button
             type="text"
-            icon={<FaEdit />}
+            icon={<FaEdit size={16} />}
             onClick={() => handleEdit(record)}
             title={t("actions.edit")}
+            className="text-blue-600 hover:text-blue-800"
           />
+
+          {/* Delete Button with Popconfirm */}
           <Popconfirm
             title={t("deleteConfirm.title")}
             description={
-              <span>
-                <strong>{record.fromLocationName} → {record.toLocationName}</strong> {t("deleteConfirm.description").replace("{route}", "")}
+              <>
+                <strong>
+                  {record.fromLocationName || record.fromLocation} →{" "}
+                  {record.toLocationName || record.toLocation}
+                </strong>{" "}
+                {t("deleteConfirm.description")}
                 <br />
-                {/* Agar descriptionda 'ortga qaytarib bo'lmaydi' qismi alohida bo'lsa JSON dan kelaveradi */}
-              </span>
+                {t("deleteConfirm.warning")}
+              </>
             }
             onConfirm={() => deletePrice(record.id)}
             okText={t("deleteConfirm.okText")}
@@ -133,13 +143,14 @@ export default function DeliveryPricesPage() {
             <Button
               type="text"
               danger
-              icon={<MdDelete />}
+              icon={<MdDelete size={16} />}
+              title={t("actions.delete")}
               loading={isDeleting}
               disabled={isDeleting}
-              title={t("actions.delete")}
+              className="text-red-600 hover:text-red-800"
             />
           </Popconfirm>
-        </Space>
+        </div>
       ),
     },
   ];
@@ -158,29 +169,35 @@ export default function DeliveryPricesPage() {
   }
 
   return (
-    <div className="overflow-x-auto overflow-y-hidden">
-      <Table
-        columns={columns}
-        dataSource={data?.result?.content || []}
-        rowKey="id"
-        loading={isFetching}
-        pagination={false}
-        size="middle"
-        bordered
-      />
+    <>
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <Table
+          loading={isFetching}
+          columns={columns}
+          dataSource={data?.result?.content || []}
+          rowKey="id"
+          pagination={false}
+          size="middle"
+          locale={{ emptyText: t("emptyText") || "Hozircha narxlar mavjud emas" }}
+          rowClassName={() => "hover:bg-gray-50 transition-colors"}
+        />
+      </div>
 
-      {data && (
+      {data && data.result?.totalElements > 0 && (
         <div className="mt-6 flex justify-center">
           <Pagination
             current={currentPage}
             pageSize={pageSize}
-            total={data?.result?.totalElements}
+            total={data.result?.totalElements}
             showSizeChanger
+            showQuickJumper
+            // showTotal={(total) => total}
             onChange={handleTableChange}
           />
         </div>
-      )}
+      )}  
 
+      {/* Edit Modal */}
       <Modal
         title={t("editModal.title")}
         open={editModalOpen}
@@ -188,6 +205,7 @@ export default function DeliveryPricesPage() {
         footer={null}
         width={800}
         destroyOnClose
+        centered
       >
         {selectedPrice && (
           <DeliveryPriceUpdateForm
@@ -200,6 +218,6 @@ export default function DeliveryPricesPage() {
           />
         )}
       </Modal>
-    </div>
+    </>
   );
 }
