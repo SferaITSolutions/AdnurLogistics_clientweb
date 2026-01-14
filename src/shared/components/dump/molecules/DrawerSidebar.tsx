@@ -44,16 +44,6 @@ export const DrawerSidebar = ({
         header:
           "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white",
       }}
-      // styles={{
-      //   body: {
-      //     background: 'linear-gradient(to bottom, #0A2463, #0D47A1, #1565C0)',
-      //     padding: '24px'
-      //   },
-      //   header: {
-      //     background: 'linear-gradient(to right, #0A2463, #0D47A1)',
-      //     borderBottom: '1px solid rgba(255,255,255,0.1)'
-      //   }
-      // }}
     >
       <div className="flex flex-col h-full  relative">
         {/* Background decorations */}
@@ -75,14 +65,14 @@ export const DrawerSidebar = ({
 
           {role !== "ROLE_SUPER_ADMIN" && (
             <MenuItem
-              label={t("clientDashboard.dashboard")}
+              label={t("dashboard")}
               path={`/client/dashboard`}
               icon={<FaHome size={22} />}
             />
           )}
           {role !== "ROLE_SUPER_ADMIN" && (
             <MenuItem
-              label={t("clientDashboard.calculation")}
+              label={t("calculation")}
               path={`/client/calculation`}
               icon={<FaCalculator size={22} />}
             />
