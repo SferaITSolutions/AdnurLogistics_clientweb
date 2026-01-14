@@ -141,7 +141,7 @@ export default function DeliveryPriceUpdateForm({
           checked={isUnlimitedWeight} 
           onChange={(e) => handleUnlimitedWeightChange(e.target.checked)}
         >
-          {t("unlimitedWeightLabel") || "Cheksiz og'irlik (1000 kg dan yuqori)"}
+          {"Cheksiz og'irlik (1000 kg dan yuqori)"}
         </Checkbox>
       </Form.Item>
 
@@ -197,7 +197,7 @@ export default function DeliveryPriceUpdateForm({
           { type: "number", min: 0, message: t("mustBePositive") },
         ]}
       >
-        <InputNumber<number> min={0} step={0.01} precision={2} className="!w-full" />
+        <InputNumber<number> placeholder="USD" min={0} step={0.01} precision={2} className="!w-full" />
       </Form.Item>
 
       <div className="flex justify-end gap-3 mt-6">

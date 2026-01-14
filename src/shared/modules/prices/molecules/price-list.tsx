@@ -90,7 +90,7 @@ export default function DeliveryPricesPage() {
       title: t("columns.volume"),
       dataIndex: "cub3",
       align: "center" as const,
-      render: (value) => value?.toFixed(2),
+      render: (value) => value?.toFixed(2) + " USD",
     },
     // {
     //   title: t("columns.price"),

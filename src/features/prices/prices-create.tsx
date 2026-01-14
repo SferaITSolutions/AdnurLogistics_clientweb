@@ -211,6 +211,7 @@ export default function DeliveryPriceCreateForm({
       {/* Kub (m³) */}
       <Form.Item label={t("cubLabel")} name="cub3">
         <InputNumber<number>
+          placeholder="USD"
           min={0}
           step={0.01}
           maxLength={13}
