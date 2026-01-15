@@ -297,8 +297,8 @@
     "status": "Status",
     "totalAmount": "Total Amount",
     "paidAmount": "Paid Amount",
-    "remainingAmount": "Remaining Amount",
-    "logout": "Logout",
+    "remainingAmount": "Amount of debt",
+    "logout": "Logout", 
     "activeOrder": "Active Orders",
     "savedOrder": "Accepted Orders"
   },
@@ -409,7 +409,7 @@
     }
   },
   "deliveryTracking": {
-    "distance": "Distance",
+    "distance": "Total distance",
     "speed": "Speed",
     "progress": "Progress",
     "status": "Status",
@@ -504,6 +504,16 @@
     "updatingButton": "Updating...",
     "successMessage": "Price updated successfully",
     "errorMessage": "Update error: "
+  },
+  "yandexMap": {
+    "totalDistance": "Total Distance",
+    "remainingDistance": "Remaining Distance",
+    "status": "Status",
+    "deliveryDate": "Delivery Date",
+    "delivered": "Delivered",
+    "onWay": "{percent}% of the way",
+    "speed": "Speed: {speed} km/h",
+    "truck": "Truck"
   },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",

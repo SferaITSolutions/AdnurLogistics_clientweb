@@ -294,7 +294,7 @@
     "status": "状态",
     "totalAmount": "总金额",
     "paidAmount": "已付金额",
-    "remainingAmount": "剩余金额",
+    "remainingAmount": "債務金額",
     "logout": "退出",
     "activeOrder": "活跃订单",
     "savedOrder": "已接受订单"
@@ -406,7 +406,7 @@
     }
   },
   "deliveryTracking": {
-    "distance": "距离",
+    "distance": "總距離",
     "speed": "速度",
     "progress": "进度",
     "status": "状态",
@@ -501,6 +501,16 @@
     "updatingButton": "正在更新...",
     "successMessage": "价格已成功更新",
     "errorMessage": "更新错误: "
+  },
+  "yandexMap": {
+    "totalDistance": "总距离",
+    "remainingDistance": "剩余距离",
+    "status": "状态",
+    "deliveryDate": "送达日期",
+    "delivered": "已送达",
+    "onWay": "已完成 {percent}%",
+    "speed": "速度: {speed} 公里/小时",
+    "truck": "货车"
   },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",

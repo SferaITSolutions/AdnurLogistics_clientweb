@@ -62,7 +62,7 @@ export default function InvoiceCard({
           <div className="flex flex-col gap-2 p-4 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50/50 border border-green-200/60">
             <div className="flex items-center gap-2">
               <FaDollarSign className="w-4 h-4 text-green-600" />
-              <span className="text-xs font-medium text-green-700 uppercase tracking-wide">
+              <span className="text-sm font-medium text-green-700 uppercase tracking-wide">
                 {t("paidAmount")}
               </span>
             </div>

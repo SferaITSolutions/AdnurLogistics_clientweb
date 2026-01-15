@@ -4,12 +4,11 @@ import { Map, YMaps } from "@pbe/react-yandex-maps";
 import React, { useEffect, useRef, useState } from "react";
 import {
   FaRoute,
-  FaTachometerAlt,
   FaCalendarAlt,
   FaCheckCircle,
+  FaMapMarkerAlt,
+  FaClock,
 } from "react-icons/fa";
-
-import { useOrderDetailsStore } from "@/features/order-details/lib/store";
 import { Tag } from "antd";
 import { useTranslations } from "next-intl";
 
@@ -20,7 +19,6 @@ interface Props {
   speedKmH?: number;
 }
 
-// Qisqa nomlarni to'liq manzilga o'zgartirish uchun mapping
 const locationMapping: Record<string, string> = {
   Horgos: "Horgos, Xinjiang, China",
   HORGOS: "Horgos, Xinjiang, China",
@@ -34,19 +32,10 @@ const locationMapping: Record<string, string> = {
   TASHKENT: "Tashkent, Uzbekistan",
 };
 
-// Qisqa nomni to'liq manzilga o'zgartirish funksiyasi
 const normalizeLocation = (location: string): string => {
   if (!location) return "";
   const trimmed = location.trim();
-  // Agar mappingda bor bo'lsa, to'liq nomni qaytaradi
-  if (locationMapping[trimmed]) {
-    return locationMapping[trimmed];
-  }
-  // Agar allaqachon to'liq nom bo'lsa (vergul bilan), o'zgartirmaydi
-  if (trimmed.includes(",")) {
-    return trimmed;
-  }
-  // Aks holda o'zgartirmaydi (Yandex Maps o'zi topishi mumkin)
+  if (locationMapping[trimmed]) return locationMapping[trimmed];
   return trimmed;
 };
 
@@ -56,8 +45,11 @@ const YandexMapWithTruck: React.FC<Props> = ({
   destination = "Tashkent, Uzbekistan",
   speedKmH = 200,
 }) => {
-  // const { startEndDate } = useOrderDetailsStore();
+  const t = useTranslations("yandexMap"); // Tillar uchun hook
+
+  // Real loyihada buni props yoki store'dan olasiz deb o'ylayman
   let startEndDate = { start: "2025-11-07", end: "2025-11-10" };
+
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
@@ -66,12 +58,12 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const totalDistanceRef = useRef<number>(0);
   const updateIntervalRef = useRef<number | null>(null);
 
+  const [remainingTime, setRemainingTime] = useState<string | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
+  const [remainingKm, setRemainingKm] = useState<number | null>(null);
   const [currentProgress, setCurrentProgress] = useState<number>(0);
-  const [isMapReady, setIsMapReady] = useState(false); // Yangi state
+  const [isMapReady, setIsMapReady] = useState(false);
 
-  // Qisqa nomlarni to'liq manzilga o'zgartirish
-  const t = useTranslations("");
   const normalizedOrigin = normalizeLocation(origin || "");
   const normalizedDestination = normalizeLocation(destination || "");
 
@@ -80,14 +72,10 @@ const YandexMapWithTruck: React.FC<Props> = ({
     normalizedDestination || null,
   ].filter(Boolean);
 
-  console.log("Original locations:", { origin, destination });
-  console.log("Normalized referencePoints:", referencePoints);
-
   const calculateCurrentFraction = () => {
     const startDate = new Date(startEndDate.start?.replace(/\//g, "-") || "");
     const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
     const now = new Date();
-
     const totalMs = endDate.getTime() - startDate.getTime();
     const passedMs = now.getTime() - startDate.getTime();
     return Math.max(0, Math.min(1, passedMs / totalMs));
@@ -106,7 +94,6 @@ const YandexMapWithTruck: React.FC<Props> = ({
     for (let i = 1; i < coords.length; i++) {
       const point = coords[i];
       const segmentDist = ymaps.coordSystem.geo.getDistance(prevPoint, point);
-
       if (currentDistance + segmentDist >= targetDistance) {
         const remaining = targetDistance - currentDistance;
         const ratio = remaining / segmentDist;
@@ -115,11 +102,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
         currentPosition = [lat, lng];
         break;
       }
-
       currentDistance += segmentDist;
       prevPoint = point;
     }
-
     if (fraction >= 1) currentPosition = coords[coords.length - 1];
     return currentPosition;
   };
@@ -128,11 +113,32 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const ymaps = ymapsRef.current;
     const map = mapRef.current;
     const coords = routeCoordsRef.current;
-
     if (!ymaps || !map || coords.length === 0 || !multiRouteRef.current) return;
 
     const fraction = calculateCurrentFraction();
     setCurrentProgress(fraction);
+
+    const totalKm = totalDistanceRef.current / 1000;
+    const remaining = totalKm * (1 - fraction);
+    setRemainingKm(remaining);
+
+    // ✅ QOLGAN VAQTNI HISOBLASH
+    const remainingHours = remaining / speedKmH; // qolgan soatlar
+    const days = Math.floor(remainingHours / 24); // kunlar
+    const hours = Math.floor(remainingHours % 24); // soatlar
+    const minutes = Math.floor((remainingHours * 60) % 60); // daqiqalar
+
+    // String formatga o'tkazish
+    let timeStr = "";
+    if (days > 0) timeStr += `${days}d `;
+    if (hours > 0) timeStr += `${hours}h `;
+    if (minutes > 0 || timeStr === "") timeStr += `${minutes}m`;
+    setRemainingTime(timeStr.trim());
+
+    if (!ymaps || !map || coords.length === 0 || !multiRouteRef.current) return;
+
+    setCurrentProgress(fraction);
+    setRemainingKm(remaining);
 
     const currentPosition = getPositionAtFraction(fraction, coords, ymaps);
 
@@ -140,9 +146,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
       const marker = new ymaps.Placemark(
         currentPosition,
         {
-          hintContent: `Yo'lning ${(fraction * 100).toFixed(1)}%`,
-          balloonContent: `Tezlik: ${speedKmH} km/h`,
-          iconContent: "Truck",
+          hintContent: t("onWay", { percent: (fraction * 100).toFixed(1) }),
+          balloonContent: t("speed", { speed: speedKmH }),
+          iconContent: t("truck"),
         },
         {
           iconLayout: "default#image",
@@ -151,11 +157,15 @@ const YandexMapWithTruck: React.FC<Props> = ({
           iconImageOffset: [-20, -20],
         }
       );
-
       carRef.current = marker;
       map.geoObjects.add(marker);
     } else {
       carRef.current.geometry.setCoordinates(currentPosition);
+      // Balloon va hintni ham yangilash mumkin
+      carRef.current.properties.set(
+        "hintContent",
+        t("onWay", { percent: (fraction * 100).toFixed(1) })
+      );
     }
 
     if (fraction < 0.01 && map.getZoom() < 10) {
@@ -166,12 +176,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const createRoute = () => {
     const ymaps = ymapsRef.current;
     const map = mapRef.current;
-
-    if (!ymaps || !map || referencePoints.length < 2 || multiRouteRef.current) {
+    if (!ymaps || !map || referencePoints.length < 2 || multiRouteRef.current)
       return;
-    }
 
-    // YMaps to'liq yuklanganini kutish
     ymaps.ready(() => {
       const multiRoute = new ymaps.multiRouter.MultiRoute(
         { referencePoints },
@@ -182,22 +189,18 @@ const YandexMapWithTruck: React.FC<Props> = ({
           routeActiveStrokeColor: "#1976d2",
         }
       );
-
       multiRouteRef.current = multiRoute;
       map.geoObjects.add(multiRoute);
 
       multiRoute.model.events.add("requestsuccess", () => {
         const activeRoute = multiRoute.getActiveRoute();
         if (!activeRoute) return;
-
         const distance = activeRoute.properties.get("distance").value;
-        const distanceKm = distance / 1000;
-        setDistanceKm(distanceKm);
+        setDistanceKm(distance / 1000);
         totalDistanceRef.current = distance;
 
         const allCoords: number[][] = [];
         const paths = activeRoute.getPaths();
-
         for (let i = 0; i < paths.getLength(); i++) {
           const path = paths.get(i);
           const segments = path.getSegments();
@@ -206,79 +209,37 @@ const YandexMapWithTruck: React.FC<Props> = ({
             allCoords.push(...segment.geometry.getCoordinates());
           }
         }
-
         routeCoordsRef.current = allCoords;
-
-        // Map tayyor ekanligini bildirish
         setIsMapReady(true);
-
-        // Birinchi marta marker qo‘yish
-        updateTruckPosition();
-
-        // Har 1 soniyada yangilash (test uchun)
-        if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
-        updateIntervalRef.current = window.setInterval(
-          updateTruckPosition,
-          1000
-        );
-      });
-
-      multiRoute.model.events.add("requestfail", (e: any) => {
-        console.error("Route xato:", e.get("error"));
       });
     });
   };
 
   useEffect(() => {
-    if (ymapsRef.current && mapRef.current && !multiRouteRef.current) {
-      console.log("✅ Map va YMaps tayyor, yo‘l yaratilmoqda...");
+    if (ymapsRef.current && mapRef.current && !multiRouteRef.current)
       createRoute();
-    }
   }, [ymapsRef.current, mapRef.current]);
-  // 1️⃣ YMaps va Map yuklanganda yo‘lni yaratish
 
   useEffect(() => {
-    // Origin yoki destination o'zgarganda eski route ni tozalash
-    if (mapRef.current && multiRouteRef.current) {
-      mapRef.current.geoObjects.remove(multiRouteRef.current);
-      multiRouteRef.current = null;
-      routeCoordsRef.current = [];
-      setDistanceKm(null);
-      setIsMapReady(false);
-    }
-
-    let checkReady: any;
-
-    const waitForYmapsAndMap = () => {
+    let checkReady = setInterval(() => {
       if (ymapsRef.current && mapRef.current) {
-        console.log("✅ YMaps va Map tayyor!");
         clearInterval(checkReady);
         createRoute();
       }
-    };
-
-    // Har 300ms da tekshiradi
-    checkReady = setInterval(waitForYmapsAndMap, 300);
-
-    return () => {
-      clearInterval(checkReady);
-    };
+    }, 300);
+    return () => clearInterval(checkReady);
   }, [origin, destination]);
 
-  // Map tayyor bo‘lganda animatsiyani boshlash
   useEffect(() => {
     if (isMapReady) {
       updateTruckPosition();
+      if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
+      updateIntervalRef.current = window.setInterval(updateTruckPosition, 1000);
     }
-  }, [isMapReady]);
-
-  // Cleanup
-  useEffect(() => {
     return () => {
       if (updateIntervalRef.current) clearInterval(updateIntervalRef.current);
-      if (mapRef.current) mapRef.current.geoObjects.removeAll();
     };
-  }, []);
+  }, [isMapReady]);
 
   const isDelivered = currentProgress >= 1;
 
@@ -309,21 +270,16 @@ const YandexMapWithTruck: React.FC<Props> = ({
 
       {distanceKm && (
         <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 border-t-2 border-blue-200/60">
-          {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl" />
-
           <div className="relative p-5">
-            {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-              {/* Distance */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow-sm hover:shadow-md transition-all duration-200">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 shadow-md shadow-blue-500/30">
+              {/* Umumiy masofa */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600">
                   <FaRoute className="text-white text-lg" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {t("deliveryTracking.distance")}
+                    {t("totalDistance")}
                   </span>
                   <span className="text-sm font-bold text-gray-900">
                     {distanceKm.toFixed(1)} km
@@ -331,59 +287,42 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
               </div>
 
-              {/* Speed */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-green-200/60 shadow-sm hover:shadow-md transition-all duration-200">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 shadow-md shadow-green-500/30">
-                  <FaTachometerAlt className="text-white text-lg" />
+              {/* Qolgan masofa */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-amber-200/60 shadow-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600">
+                  <FaMapMarkerAlt className="text-white text-lg" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {t("deliveryTracking.speed")}
+                    {t("remainingDistance")}
                   </span>
                   <span className="text-sm font-bold text-gray-900">
-                    {speedKmH} km/h
+                    {remainingKm !== null
+                      ? `${remainingKm.toFixed(1)} km`
+                      : "—"}
                   </span>
                 </div>
               </div>
-
-              {/* Progress */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm hover:shadow-md transition-all duration-200">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 shadow-md shadow-purple-500/30">
-                  <div className="relative">
-                    <svg className="w-6 h-6" viewBox="0 0 36 36">
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="#e5e7eb"
-                        strokeWidth="3"
-                      />
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="white"
-                        strokeWidth="3"
-                        strokeDasharray={`${currentProgress * 100}, 100`}
-                      />
-                    </svg>
-                  </div>
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
+                  <FaClock className="text-white text-lg" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {t("deliveryTracking.progress")}
+                    Qolgan vaqt
                   </span>
                   <span className="text-sm font-bold text-gray-900">
-                    {(currentProgress * 100).toFixed(1)}%
+                    {remainingTime || "—"}
                   </span>
                 </div>
               </div>
-
-              {/* Delivery Status */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm hover:shadow-md transition-all duration-200">
+              {/* Status/Yetkazish sanasi */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm">
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${
                     isDelivered
-                      ? "bg-gradient-to-br from-green-500 to-emerald-600 shadow-green-500/30"
-                      : "bg-gradient-to-br from-orange-500 to-orange-600 shadow-orange-500/30"
+                      ? "bg-gradient-to-br from-green-500 to-emerald-600"
+                      : "bg-gradient-to-br from-orange-500 to-orange-600"
                   }`}
                 >
                   {isDelivered ? (
@@ -394,14 +333,14 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {isDelivered ? t("deliveryTracking.status") : t("deliveryTracking.eta")}
+                    {isDelivered ? t("status") : t("deliveryDate")}
                   </span>
                   {isDelivered ? (
                     <Tag
                       color="green"
                       className="!m-0 !px-2 !py-0.5 !text-xs !font-bold !rounded-lg"
                     >
-                      {t("deliveryTracking.delivered")}
+                      {t("delivered")}
                     </Tag>
                   ) : (
                     <span className="text-sm font-bold text-gray-900">
@@ -415,7 +354,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
             {/* Progress Bar */}
             <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden shadow-inner">
               <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 ease-out"
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500"
                 style={{ width: `${currentProgress * 100}%` }}
               >
                 <div className="absolute inset-0 bg-white/30 animate-pulse" />

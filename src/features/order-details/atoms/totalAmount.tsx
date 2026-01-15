@@ -12,7 +12,7 @@ export default function TotalAmount({
   const t = useTranslations("clientDashboard");
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs text-gray-500">{t("totalAmount")}</span>
+      <span className="text-sm text-gray-500">{t("totalAmount")}</span>
       <span className="font-bold text-primary-blue text-lg">
         {Number(invoiceTotalAmount).toLocaleString("en-US", {
           minimumFractionDigits: 2,

@@ -70,12 +70,12 @@ export default function FilterPersonalNumber() {
         </div>
 
         {/* Helper text */}
-        {!orderIdFilter && (
+        {/* {!orderIdFilter && (
           <p className="text-xs text-gray-500 m-0 flex items-center gap-1.5">
             <span className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" />
             Enter order ID to filter results
           </p>
-        )}
+        )} */}
       </div>
     </div>
   );

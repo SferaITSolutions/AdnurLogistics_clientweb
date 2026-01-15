@@ -302,7 +302,7 @@
     "status": "Статус",
     "totalAmount": "Общая сумма",
     "paidAmount": "Оплаченная сумма",
-    "remainingAmount": "Оставшаяся сумма",
+    "remainingAmount": "Сумма долга",
     "logout": "Выйти",
     "activeOrder": "Активные заказы",
     "savedOrder": "Принятые заказы"
@@ -406,7 +406,7 @@
     "loginSuccess": "Вы успешно вошли в систему ✅"
   },
   "deliveryTracking": {
-    "distance": "Расстояние",
+    "distance": "Общее расстояние",
     "speed": "Скорость",
     "progress": "Прогресс",
     "status": "Статус",
@@ -501,6 +501,16 @@
     "updatingButton": "Обновление...",
     "successMessage": "Цена успешно обновлена",
     "errorMessage": "Ошибка обновления: "
+  },
+  "yandexMap": {
+    "totalDistance": "Общая дистанция",
+    "remainingDistance": "Оставшееся расстояние",
+    "status": "Статус",
+    "deliveryDate": "Дата доставки",
+    "delivered": "Доставлено",
+    "onWay": "{percent}% пути",
+    "speed": "Скорость: {speed} км/ч",
+    "truck": "Грузовик"
   },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",

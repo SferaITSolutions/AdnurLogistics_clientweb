@@ -299,7 +299,7 @@
     "status": "Status",
     "totalAmount": "Jami summa",
     "paidAmount": "To'langan summa",
-    "remainingAmount": "Qolgan summa",
+    "remainingAmount": "Qarzdolik miqdori",
     "logout": "Chiqish",
     "activeOrder": "Faol buyurtmalar",
     "savedOrder": "Qabul qilingan buyurtmalar"
@@ -409,7 +409,7 @@
     }
   },
   "deliveryTracking": {
-    "distance": "Masofa",
+    "distance": "Umumiy masofa",
     "speed": "Tezlik",
     "progress": "Jarayon",
     "status": "Holat",
@@ -505,6 +505,16 @@
     "successMessage": "Narx muvaffaqiyatli yangilandi",
     "errorMessage": "Yangilashda xatolik: "
   },  
+  "yandexMap": {
+    "totalDistance": "Umumiy masofa",
+    "remainingDistance": "Qolgan masofa",
+    "status": "Status",
+    "deliveryDate": "Yetkazish sanasi",
+    "delivered": "Yetkazildi",
+    "onWay": "Yo'lning {percent}%",
+    "speed": "Tezlik: {speed} km/soat",
+    "truck": "Yuk mashinasi"
+  },
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",
   "Pending_Billing": "To’lovlar kutilmoqda"

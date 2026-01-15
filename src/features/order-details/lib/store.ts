@@ -31,7 +31,7 @@ export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
   orderIdFilter: null,
   setOrderIdFilter: (id) => set({ orderIdFilter: id }),
   openModal: () => set({ isModalOpen: true }),
-  closeModal: () => set({ isModalOpen: false }),
+  closeModal: () => set({ isModalOpen: false, orderId: null, }),
   searchfilters: {},
   setSearchFilters: (filters) => set({ searchfilters: filters }),
   type: '0',

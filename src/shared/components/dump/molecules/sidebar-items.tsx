@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import { FaCalculator, FaHome } from 'react-icons/fa';
-import MenuItem from '@/shared/components/dump/molecules/menu-item';
-import { useTranslations } from 'next-intl';
+import { FaCalculator, FaHome } from "react-icons/fa";
+import MenuItem from "@/shared/components/dump/molecules/menu-item";
+import { useTranslations } from "next-intl";
+import { MdNotifications } from "react-icons/md";
 
 export default function SidebarItems() {
-  const t = useTranslations('');
-  const role = localStorage.getItem("roleName")
+  const t = useTranslations("");
+  const role = localStorage.getItem("roleName");
   return (
     <nav className="flex flex-col gap-3 mt-12 text-white z-50">
       {/* Section Title */}
@@ -16,27 +17,42 @@ export default function SidebarItems() {
           Navigation
         </span>
       </div> */}
-      
-      {role !== "ROLE_SUPER_ADMIN" && <MenuItem
-        label={t('clientDashboard.dashboard')}
-        path={`/client/dashboard`}
-        icon={<FaHome size={22} />}
-      />}
-      {role !== "ROLE_SUPER_ADMIN" && <MenuItem
-        label={t('clientDashboard.calculation')}
-        path={`/client/calculation`}
-        icon={<FaCalculator size={22} />}
-      />}
-      {role === "ROLE_SUPER_ADMIN" && <MenuItem
-        label={t('pricesTable.prices')}
-        path={`/client/admin/prices`}
-        icon={<FaHome size={22} />}
-      />}
-      {role === "ROLE_SUPER_ADMIN" && <MenuItem
-        label={t('pricesTable.locations')}
-        path={`/client/admin/locations`}
-        icon={<FaCalculator size={22} />}
-      />}
+
+      {role !== "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={t("clientDashboard.dashboard")}
+          path={`/client/dashboard`}
+          icon={<FaHome size={22} />}
+        />
+      )}
+      {role !== "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={t("clientDashboard.calculation")}
+          path={`/client/calculation`}
+          icon={<FaCalculator size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={t("pricesTable.prices")}
+          path={`/client/admin/prices`}
+          icon={<FaHome size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={t("pricesTable.locations")}
+          path={`/client/admin/locations`}
+          icon={<FaCalculator size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={"Notifications"}
+          path={`/client/admin/notifications`}
+          icon={<MdNotifications size={22} />}
+        />
+      )}
     </nav>
   );
 }

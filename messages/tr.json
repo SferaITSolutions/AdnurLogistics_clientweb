@@ -288,7 +288,7 @@
     "status": "Durum",
     "totalAmount": "Toplam Tutar",
     "paidAmount": "Ödenen Tutar",
-    "remainingAmount": "Kalan Tutar",
+    "remainingAmount": "Borç miktarı",
     "logout": "Çıkış Yap",
     "activeOrder": "Aktif Siparişler",
     "savedOrder": "Kabul Edilen Siparişler"
@@ -406,7 +406,7 @@
     }
   },
   "deliveryTracking": {
-    "distance": "Mesafe",
+    "distance": "Toplam mesafe",
     "speed": "Hız",
     "progress": "İlerleme",
     "status": "Durum",
@@ -501,6 +501,16 @@
     "updatingButton": "Güncelleniyor...",
     "successMessage": "Fiyat başarıyla güncellendi",
     "errorMessage": "Güncelleme hatası: "
+  },
+  "yandexMap": {
+    "totalDistance": "Toplam Mesafe",
+    "remainingDistance": "Kalan Mesafe",
+    "status": "Durum",
+    "deliveryDate": "Teslimat Tarihi",
+    "delivered": "Teslim Edildi",
+    "onWay": "Yolun %{percent}'i",
+    "speed": "Hız: {speed} km/sa",
+    "truck": "Kamyon"
   },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",
