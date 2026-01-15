@@ -19,6 +19,10 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
   const onFinish = (values: LocationFormValues) => {
     const payload = {
       name: values.name.trim(),
+      nameTr: values.name.trim(),
+      nameEn: values.name.trim(),
+      nameRu: values.name.trim(),
+      nameZh: values.name.trim(),
       description: values.description?.trim() || null,
       type: values.type,
     };
@@ -47,8 +51,124 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
     >
       {/* Nomi */}
       <Form.Item
-        label="Joylashuv nomi"
+        label="Joylashuv nomi UZ (O'zbekcha)"
         name="name"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi EN (Ingilizcha)"
+        name="nameEn"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />    
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi RU (Ruscha)"
+        name="nameRu"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi (TR)"
+        name="nameTr"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi ZH(Hitoycha)"
+        name="nameZh"
         rules={[
           { required: true, message: "Joylashuv nomini kiriting!" },
           { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },

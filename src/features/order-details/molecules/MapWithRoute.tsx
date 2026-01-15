@@ -309,7 +309,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    Qolgan vaqt
+                    {t("timeLeft")}
                   </span>
                   <span className="text-sm font-bold text-gray-900">
                     {remainingTime || "—"}

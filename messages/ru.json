@@ -508,6 +508,7 @@
     "status": "Статус",
     "deliveryDate": "Дата доставки",
     "delivered": "Доставлено",
+    "timeLeft": "Оставшееся время",
     "onWay": "{percent}% пути",
     "speed": "Скорость: {speed} км/ч",
     "truck": "Грузовик"

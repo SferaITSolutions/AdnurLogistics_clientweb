@@ -512,6 +512,7 @@
     "deliveryDate": "Delivery Date",
     "delivered": "Delivered",
     "onWay": "{percent}% of the way",
+    "timeLeft": "Time left",
     "speed": "Speed: {speed} km/h",
     "truck": "Truck"
   },

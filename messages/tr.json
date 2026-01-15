@@ -507,6 +507,8 @@
     "remainingDistance": "Kalan Mesafe",
     "status": "Durum",
     "deliveryDate": "Teslimat Tarihi",
+    "timeLeft": "Kalan zaman",
+
     "delivered": "Teslim Edildi",
     "onWay": "Yolun %{percent}'i",
     "speed": "Hız: {speed} km/sa",

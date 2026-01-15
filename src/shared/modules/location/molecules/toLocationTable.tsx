@@ -50,9 +50,24 @@ export default function ToLocationTable() {
       render: (_: any, __: any, index: number) => index + 1,
     },
     {
-      title: "Nomi",
+      title: "O'zbekcha nomi",
       dataIndex: "name",
-      key: "name",
+    },
+    {
+      title: "Ingilizcha nomi",
+      dataIndex: "nameEn",
+    },
+    {
+      title: "Ruscha nomi",
+      dataIndex: "nameRu",
+    },
+    {
+      title: "Xitoycha nomi",
+      dataIndex: "nameZh",
+    },
+    {
+      title: "Turkcha nomi",
+      dataIndex: "nameTr",
     },
     {
       title: "Tavsif",
@@ -127,6 +142,7 @@ export default function ToLocationTable() {
         <Table
           loading={isPending}
           columns={columns}
+          scroll={{ x: "max-content" }}
           dataSource={
             data?.result?.map((item: any) => ({ ...item, key: item.id })) || []
           }
@@ -150,8 +166,12 @@ export default function ToLocationTable() {
             id={selectedLocation.id}
             initialValues={{
               name: selectedLocation.name,
+              nameTr: selectedLocation.nameTr,
+              nameEn: selectedLocation.nameEn,
+              nameZh: selectedLocation.nameZh,
+              nameRu: selectedLocation.nameRu,
               description: selectedLocation.description || "",
-              type: selectedLocation.type as "FROM" | "TO",
+              type: selectedLocation.type,
             }}
             onSuccess={() => {
               message.success("Joylashuv muvaffaqiyatli yangilandi");

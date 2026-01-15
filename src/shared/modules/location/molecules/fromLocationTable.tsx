@@ -47,12 +47,29 @@ export default function FromLocationTable() {
       render: (_: any, __: any, index: number) => index + 1,
     },
     {
-      title: "Nomi",
+      title: "O'zbekcha nomi",
       dataIndex: "name",
+    },
+    {
+      title: "Ingilizcha nomi",
+      dataIndex: "nameEn",
+    },
+    {
+      title: "Ruscha nomi",
+      dataIndex: "nameRu",
+    },
+    {
+      title: "Xitoycha nomi",
+      dataIndex: "nameZh",
+    },
+    {
+      title: "Turkcha nomi",
+      dataIndex: "nameTr",
     },
     {
       title: "Tavsif",
       dataIndex: "description",
+      width: 120,
       render: (text: string | null) => text || "—",
     },
     {
@@ -119,6 +136,7 @@ export default function FromLocationTable() {
         <Table
           loading={isPending}
           columns={columns}
+          scroll={{ x: "max-content" }}
           dataSource={
             data?.result?.map((item: any) => ({ ...item, key: item.id })) || []
           }
@@ -143,6 +161,10 @@ export default function FromLocationTable() {
             id={selectedLocation.id}
             initialValues={{
               name: selectedLocation.name,
+              nameTr: selectedLocation.nameTr,
+              nameEn: selectedLocation.nameEn,
+              nameZh: selectedLocation.nameZh,
+              nameRu: selectedLocation.nameRu,
               description: selectedLocation.description || "",
               type: selectedLocation.type,
             }}

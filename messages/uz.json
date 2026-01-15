@@ -511,6 +511,7 @@
     "status": "Status",
     "deliveryDate": "Yetkazish sanasi",
     "delivered": "Yetkazildi",
+    "timeLeft": "Qolgan vaqt",
     "onWay": "Yo'lning {percent}%",
     "speed": "Tezlik: {speed} km/soat",
     "truck": "Yuk mashinasi"

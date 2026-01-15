@@ -508,6 +508,7 @@
     "status": "状态",
     "deliveryDate": "送达日期",
     "delivered": "已送达",
+    "timeLeft": "剩餘時間",
     "onWay": "已完成 {percent}%",
     "speed": "速度: {speed} 公里/小时",
     "truck": "货车"

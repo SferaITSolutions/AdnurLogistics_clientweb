@@ -9,11 +9,7 @@ const { Option } = Select;
 
 interface UpdateLocationFormProps {
   id: string;
-  initialValues: {
-    name: string;
-    description: string | null;
-    type: "FROM" | "TO";
-  };
+  initialValues: any;
   onSuccess?: () => void;
   onCancel?: () => void;
 }
@@ -24,13 +20,18 @@ export default function UpdateLocationForm({
   onSuccess,
   onCancel,
 }: UpdateLocationFormProps) {
+  console.log(initialValues,"inited");
   const [form] = Form.useForm();
   const { mutate: updateLocation, isPending } = useUpdateLocation();
 
   useEffect(() => {
     form.setFieldsValue({
       name: initialValues.name,
-      description: initialValues.description || "",
+      nameTr: initialValues.nameTr,
+      nameEn: initialValues.nameEn,
+      nameZh: initialValues.nameZh,
+      nameRu: initialValues.nameRu,
+      description: initialValues.description,
       type: initialValues.type,
     });
   }, [initialValues, form]);
@@ -38,7 +39,11 @@ export default function UpdateLocationForm({
   const onFinish = (values: any) => {
     const payload = {
       id,
-      name: values.name.trim(),
+      name: values.name?.trim(),
+      nameEn: values.nameEn?.trim(),
+      nameRu: values.nameRu?.trim() || null,
+      nameTr: values.nameTr?.trim(),
+      nameZh: values.nameZh?.trim(),
       description: values.description?.trim() || null,
       type: values.type,
     };
@@ -65,8 +70,124 @@ export default function UpdateLocationForm({
     >
       {/* Nomi */}
       <Form.Item
-        label="Joylashuv nomi"
+        label="Joylashuv nomi UZ (O'zbekcha)"
         name="name"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi EN (Ingilizcha)"
+        name="nameEn"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi RU (Ruscha)"
+        name="nameRu"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi (TR)"
+        name="nameTr"
+        rules={[
+          { required: true, message: "Joylashuv nomini kiriting!" },
+          { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
+          {
+            min: 2,
+            message: "Nom kamida 2 ta belgidan iborat bo'lishi kerak",
+          },
+          {
+            max: 100,
+            message: "Nom 100 ta belgidan oshmasligi kerak",
+          },
+          {
+            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
+            message:
+              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
+          },
+        ]}
+        tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
+      >
+        <Input
+          placeholder="Masalan: Toshkent markazi"
+          size="large"
+          maxLength={100}
+          allowClear
+        />
+      </Form.Item>
+      <Form.Item
+        label="Joylashuv nomi ZH(Hitoycha)"
+        name="nameZh"
         rules={[
           { required: true, message: "Joylashuv nomini kiriting!" },
           { whitespace: true, message: "Faqat bo'sh joy kiritib bo'lmaydi!" },
@@ -122,9 +243,7 @@ export default function UpdateLocationForm({
       <Form.Item
         label="Joylashuv turi"
         name="type"
-        rules={[
-          { required: true, message: "Joylashuv turini tanlang!" },
-        ]}
+        rules={[{ required: true, message: "Joylashuv turini tanlang!" }]}
       >
         <Select size="large" disabled={isPending}>
           <Option value="FROM">From (Jo'nash joyi)</Option>
@@ -136,10 +255,7 @@ export default function UpdateLocationForm({
       <Form.Item className="mb-0 text-right">
         <div className="flex justify-end gap-3 mt-6">
           {onCancel && (
-            <Button 
-              onClick={onCancel} 
-              disabled={isPending}
-            >
+            <Button onClick={onCancel} disabled={isPending}>
               Bekor qilish
             </Button>
           )}
