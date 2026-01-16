@@ -18,7 +18,9 @@ axiosWithAuth.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
       const locale = getLocalItem('locale') || 'en';
+      const lang = getLocalItem('lang')?.toString()?.toLocaleUpperCase();
       config.headers['Accept-Language'] = locale;
+      config.headers['X-Lang'] = lang;
     }
     const token = getLocalItem('access_token');
     if (token) {

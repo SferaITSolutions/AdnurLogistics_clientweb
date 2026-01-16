@@ -35,18 +35,21 @@ export const useGetDeliveryPrices = (page: number = 0, size: number = 10) => {
     },
   });
 };
-export const useGetToList = () => {
+export const useGetToList = (Language: any) => {
+  console.log(Language,11)
+
   return useQuery<PageResponse>({
-    queryKey: ["to-list"],
+    queryKey: ["to-list",Language],
     queryFn: async () => {
       const response = await pricesService.toLocationsList();
       return response.data;
     },
   });
 };
-export const useGetFromList = () => {
+export const useGetFromList = (Language: any) => {
+  console.log(Language,12)
   return useQuery<PageResponse>({
-    queryKey: ["from-list"],
+    queryKey: ["from-list", Language],
     queryFn: async () => {
       const response = await pricesService.fromLocationsList();
       return response.data;

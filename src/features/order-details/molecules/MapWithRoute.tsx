@@ -17,6 +17,8 @@ interface Props {
   origin?: string;
   destination?: string;
   speedKmH?: number;
+  startDate?: any;
+  endDate?: any;
 }
 
 const locationMapping: Record<string, string> = {
@@ -43,12 +45,17 @@ const YandexMapWithTruck: React.FC<Props> = ({
   height = 400,
   origin = "Yiwu, China",
   destination = "Tashkent, Uzbekistan",
-  speedKmH = 200,
+  speedKmH = 100,
+  startDate,
+  endDate
 }) => {
-  const t = useTranslations("yandexMap"); // Tillar uchun hook
-
-  // Real loyihada buni props yoki store'dan olasiz deb o'ylayman
-  let startEndDate = { start: "2025-11-07", end: "2025-11-10" };
+  const t = useTranslations("yandexMap");
+  const formattedStart = startDate?.split("/")?.join("-");
+  const formattedEnd = endDate?.split("/")?.join("-");
+  let startEndDate = {
+    start: formattedStart,
+    end: formattedEnd,
+  };
 
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);

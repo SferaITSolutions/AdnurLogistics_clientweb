@@ -8,6 +8,7 @@ import { useFormStore } from "../../store/store";
 import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks"; // ← sizning hooklaringiz
 import { useTranslations } from "next-intl";
 import { FaSpinner, FaMapMarkerAlt, FaWeightHanging, FaCube } from "react-icons/fa";
+import { getLocalItem } from "@/shared/utils/storage";
 
 const { Option } = Select;
 
@@ -18,13 +19,14 @@ export default function FormCalculation() {
   const calculationMutation = useCalculation((data: any) => {
     setResponse(data);
   });
-
+  const lang = getLocalItem('lang')?.toString()
   const [form] = Form.useForm();
 
   // API dan joylashuvlarni olish
-  const { data: fromData, isLoading: fromLoading } = useGetFromList();
-  const { data: toData, isLoading: toLoading } = useGetToList();
-
+  const { data: fromData, isLoading: fromLoading } = useGetFromList(lang);
+  const { data: toData, isLoading: toLoading } = useGetToList(lang);
+  console.log(lang);
+  
   const onFinish = (data: any) => {
     calculationMutation.mutate({
       fromLocation: data.from,
