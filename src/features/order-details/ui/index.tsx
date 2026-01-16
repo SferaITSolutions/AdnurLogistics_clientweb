@@ -34,6 +34,7 @@ const OrderDetailsModal: React.FC = () => {
   }, [orderData?.readMap?.createddate]);
 
   if (isLoading) return <Spin />;
+  console.log(orderData?.readMap, "readMap");
   
   return (
     <Drawer

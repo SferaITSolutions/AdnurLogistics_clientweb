@@ -12,11 +12,12 @@ interface DeliviryStatusProps {
 }
 
 export default function DeliviryStatus({ deliviryStatus }: DeliviryStatusProps) {
-  const from = deliviryStatus?.fromlocation ? 'Yiwu, China' : null;
+  const from = deliviryStatus?.fromlocation;
   const to = deliviryStatus?.tolocation;
   const t = useTranslations('clientDashboard');
   const isLoading = !from && !to;
-
+  console.log(deliviryStatus);
+  
   return (
     <div className="flex flex-col gap-4">
       {isLoading ? (
