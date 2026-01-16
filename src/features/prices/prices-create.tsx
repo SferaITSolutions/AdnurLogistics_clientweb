@@ -31,6 +31,7 @@ export default function DeliveryPriceCreateForm({
   onSuccess,
   onCancel,
 }: DeliveryPriceCreateFormProps) {
+  const lang = localStorage.getItem("rolName")
   const t = useTranslations("deliveryPriceCreateForm");
   const [form] = Form.useForm<CreatePriceFormValues>();
   const [isUnlimitedWeight, setIsUnlimitedWeight] = useState(false);
@@ -38,8 +39,8 @@ export default function DeliveryPriceCreateForm({
   const { mutate: createPrice, isPending: isCreating } =
     useCreateDeliveryPrice();
 
-  const { data: fromData, isLoading: fromLoading } = useGetFromList();
-  const { data: toData, isLoading: toLoading } = useGetToList();
+  const { data: fromData, isLoading: fromLoading } = useGetFromList(lang);
+  const { data: toData, isLoading: toLoading } = useGetToList(lang);
 
   const handleUnlimitedWeightChange = (checked: boolean) => {
     setIsUnlimitedWeight(checked);

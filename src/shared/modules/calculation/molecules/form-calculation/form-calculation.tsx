@@ -5,7 +5,7 @@ import { Form, InputNumber, Select, Button, Spin } from "antd";
 import { useCalculation } from "@/entities/hooks/calculation/hooks";
 import { useCalculationStore } from "@/entities/hooks/calculation/store";
 import { useFormStore } from "../../store/store";
-import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks"; // ← sizning hooklaringiz
+import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
 import { useTranslations } from "next-intl";
 import { FaSpinner, FaMapMarkerAlt, FaWeightHanging, FaCube } from "react-icons/fa";
 import { getLocalItem } from "@/shared/utils/storage";

@@ -35,13 +35,14 @@ export default function DeliveryPriceUpdateForm({
   onSuccess,
   onCancel,
 }: DeliveryPriceUpdateFormProps) {
+  const lang = localStorage.getItem("rolName")
   const t = useTranslations("deliveryPriceUpdateForm");
   const [form] = Form.useForm<DeliveryPrice>();
   const { mutate: updatePrice, isPending } = useUpdateDeliveryPrice();
   const [isUnlimitedWeight, setIsUnlimitedWeight] = useState(false);
 
-  const { data: fromData, isLoading: fromLoading } = useGetFromList();
-  const { data: toData, isLoading: toLoading } = useGetToList();
+  const { data: fromData, isLoading: fromLoading } = useGetFromList(lang);
+  const { data: toData, isLoading: toLoading } = useGetToList(lang);
 
   useEffect(() => {
     if (initialValues) {
