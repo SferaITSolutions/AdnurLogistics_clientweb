@@ -98,7 +98,7 @@ export default function SalesOrdersList() {
           ) : (
             <div className="flex items-center justify-center ">
               <p className="text-gray-500">
-                <Empty description={filterParams.userNumber ?"Buyurtmalar Topilmadi": "Foydalanuvchi tanlanmagan"} />
+                <Empty description={filterParams.userNumber ? "Buyurtmalar Topilmadi" : "Foydalanuvchi tanlanmagan"} />
               </p>
             </div>
           )}

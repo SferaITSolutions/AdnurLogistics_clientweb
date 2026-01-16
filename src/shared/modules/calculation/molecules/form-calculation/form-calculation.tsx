@@ -172,7 +172,7 @@ export default function FormCalculation() {
           loading={calculationMutation.isPending}
           disabled={calculationMutation.isPending}
         >
-          {calculationMutation.isPending ? t("calculating") : t("calculateButton")}
+          {t("calculateButton")}
         </Button>
       </Form.Item>
     </Form>
