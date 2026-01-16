@@ -16,7 +16,7 @@ export default function SalesManager() {
   // })
   useEffect(() => {
     const rolename = role
-    if (rolename === "ROLE_SUPER_ADMIN") {
+    if (rolename !== "ROLE_CONTROLLER") {
       router.replace("/403");
     }
   }, [router,role]);
