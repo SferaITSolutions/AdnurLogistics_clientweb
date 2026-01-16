@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCalculator, FaHome } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome } from "react-icons/fa";
 import MenuItem from "@/shared/components/dump/molecules/menu-item";
 import { useTranslations } from "next-intl";
 import { MdNotifications } from "react-icons/md";
@@ -18,14 +18,14 @@ export default function SidebarItems() {
         </span>
       </div> */}
 
-      {role !== "ROLE_SUPER_ADMIN" && (
+      {role === "ROLE_USER" && (
         <MenuItem
           label={t("clientDashboard.dashboard")}
           path={`/client/dashboard`}
           icon={<FaHome size={22} />}
         />
       )}
-      {role !== "ROLE_SUPER_ADMIN" && (
+      {role === "ROLE_USER" && (
         <MenuItem
           label={t("clientDashboard.calculation")}
           path={`/client/calculation`}
@@ -48,9 +48,16 @@ export default function SidebarItems() {
       )}
       {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
-          label={"Notifications"}
+          label={"Xabarnoma"}
           path={`/client/admin/notifications`}
           icon={<MdNotifications size={22} />}
+        />
+      )}
+      {role === "ROLE_CONTROLLER" && (
+        <MenuItem
+          label={"Savdo buyurtmalari"}
+          path={`/client/sales-manager`}
+          icon={<FaDollarSign size={22} />}
         />
       )}
     </nav>

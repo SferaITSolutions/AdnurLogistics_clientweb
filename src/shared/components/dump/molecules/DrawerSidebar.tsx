@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCalculator, FaHome, FaSignOutAlt } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome, FaSignOutAlt } from "react-icons/fa";
 import Logo from "@/shared/components/dump/atoms/Logo";
 import { useGlobalStore } from "@/shared/store/globalStore";
 import { Drawer } from "antd";
@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import MenuItem from "./menu-item";
 import { formatPhone } from "@/shared/utils/formatter";
 import UserDetails from "@/widgets/headers/navbar-cabinet/molecules/get-me";
+import { MdNotifications } from "react-icons/md";
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -16,7 +17,7 @@ export const DrawerSidebar = ({
   closeSidebar: () => void;
   isOpen: boolean;
 }) => {
-  const role = localStorage.getItem("roleName")
+  const role = localStorage.getItem("roleName");
   const tr = useTranslations("personalNumberPage");
   const t = useTranslations("clientDashboard");
   const { setIslogout } = useGlobalStore();
@@ -63,32 +64,46 @@ export const DrawerSidebar = ({
             </span>
           </div> */}
 
-          {role !== "ROLE_SUPER_ADMIN" && (
+          {role === "ROLE_USER" && (
             <MenuItem
-              label={t("dashboard")}
+              label={t("clientDashboard.dashboard")}
               path={`/client/dashboard`}
               icon={<FaHome size={22} />}
             />
           )}
-          {role !== "ROLE_SUPER_ADMIN" && (
+          {role === "ROLE_USER" && (
             <MenuItem
-              label={t("calculation")}
+              label={t("clientDashboard.calculation")}
               path={`/client/calculation`}
               icon={<FaCalculator size={22} />}
             />
           )}
           {role === "ROLE_SUPER_ADMIN" && (
             <MenuItem
-              label={"prices"}
+              label={t("pricesTable.prices")}
               path={`/client/admin/prices`}
               icon={<FaHome size={22} />}
             />
           )}
           {role === "ROLE_SUPER_ADMIN" && (
             <MenuItem
-              label={"locations"}
+              label={t("pricesTable.locations")}
               path={`/client/admin/locations`}
               icon={<FaCalculator size={22} />}
+            />
+          )}
+          {role === "ROLE_SUPER_ADMIN" && (
+            <MenuItem
+              label={"Xabarnoma"}
+              path={`/client/admin/notifications`}
+              icon={<MdNotifications size={22} />}
+            />
+          )}
+          {role === "ROLE_CONTROLLER" && (
+            <MenuItem
+              label={"Savdo buyurtmalari"}
+              path={`/client/sales-manager`}
+              icon={<FaDollarSign size={22} />}
             />
           )}
         </nav>

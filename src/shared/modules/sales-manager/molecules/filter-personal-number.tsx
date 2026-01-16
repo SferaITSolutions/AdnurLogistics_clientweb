@@ -24,7 +24,8 @@ export default function FilterPersonalNumber() {
             htmlFor="personal-number" 
             className="text-base font-bold text-gray-800 m-0"
           >
-            {t('orderId')}
+            {/* {t('orderId')} */}
+            Foydalanuvchi ID raqami
           </label>
         </div>
 
@@ -42,7 +43,7 @@ export default function FilterPersonalNumber() {
             className="!rounded-xl !pl-12 !pr-4 !py-3 !border-2 !border-gray-200 hover:!border-blue-400 focus:!border-blue-500 !shadow-sm hover:!shadow-md focus:!shadow-lg !transition-all !duration-200 !bg-white"
             value={orderIdFilter || ''}
             onChange={(e) => setOrderIdFilter(e.target.value)}
-            placeholder={`${t('orderId')}...`}
+            placeholder={``}
             size="large"
           />
           

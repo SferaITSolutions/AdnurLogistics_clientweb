@@ -30,9 +30,11 @@ export const useLoginMutation = () => {
       if (roleName === "ROLE_SUPER_ADMIN") {
         toast.success(t("authSuccessMessages.loginSuccess"));
         router.push("/client/admin/prices"); 
-      } else {
+      } else if (roleName === "ROLE_USER") {
         toast.success(t("authSuccessMessages.loginSuccess"));
         router.push("/client/dashboard");
+      }else {
+        router.push("/client/sales-manager");
       }
     },
 

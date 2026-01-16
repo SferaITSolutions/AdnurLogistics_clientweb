@@ -13,7 +13,7 @@ export default function DashboardClient() {
 
   useEffect(() => {
     const rolename = role
-    if (rolename === "ROLE_SUPER_ADMIN") {
+    if (rolename !== "ROLE_USER") {
       router.replace("/403");
     }
   }, [router,role]);
