@@ -19,7 +19,8 @@ const YandexMapWith = dynamic(
 );
 
 const OrderDetailsModal: React.FC = () => {
-  const { isModalOpen, closeModal, orderId, startEndDate, setStartEndDate } = useOrderDetailsStore();
+  const { isModalOpen, closeModal, orderId, startEndDate,statusOfInvoice,setStatusOfInvoice, setStartEndDate } = useOrderDetailsStore();
+
   const t = useTranslations('clientDashboard');
   const { data, isLoading } = useOrderById(orderId || '');
   const orderData = data?.data;
@@ -34,7 +35,7 @@ const OrderDetailsModal: React.FC = () => {
   }, [orderData?.readMap?.createddate]);
 
   if (isLoading) return <Spin />;
-  console.log(orderData?.readMap, "readMap");
+  console.log(orderData, "readMap");
   
   return (
     <Drawer
@@ -54,7 +55,7 @@ const OrderDetailsModal: React.FC = () => {
               destination={orderData?.readMap?.tolocation ?? ''}
               startDate={startEndDate?.start}
               endDate={startEndDate?.end}
-              statusProps={orderData?.invoiceStatus}
+              statusProps={statusOfInvoice}
             />
             <div className="text-gray-800 mb-2 text-xl font-bold border-t border-gray-100 pt-4">
               <DeliviryStatus deliviryStatus={orderData?.readMap || {}} />

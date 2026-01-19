@@ -432,7 +432,6 @@
       "number": "#",
       "route": "Nereden → Nereye",
       "weight": "Ağırlık (kg)",
-
       "volume": "Hacim (m³)",
       "price": "Fiyat (som)",
       "actions": "İşlemler"
@@ -478,7 +477,8 @@
       "success": "Yeni fiyat başarıyla eklendi",
       "error": "Fiyat eklenirken bir hata oluştu"
     }
-  },"deliveryPriceUpdateForm": {
+  },
+  "deliveryPriceUpdateForm": {
     "weightRangeLabel": "Ağırlık Aralığı (kg)",
     "minWeightRequired": "Minimum ağırlık zorunludur",
     "mustBePositive": "Pozitif bir sayı olmalıdır",
@@ -508,7 +508,9 @@
     "status": "Durum",
     "deliveryDate": "Teslimat Tarihi",
     "timeLeft": "Kalan zaman",
-
+    "pendingConfirmation": "Onay Bekleniyor",
+    "closedDelivered": "Kapandı / Teslim Edildi",
+    "pendingPayment": "Ödeme Bekleniyor",
     "delivered": "Teslim Edildi",
     "onWay": "Yolun %{percent}'i",
     "speed": "Hız: {speed} km/sa",

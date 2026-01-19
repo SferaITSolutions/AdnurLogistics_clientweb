@@ -13,6 +13,7 @@ import Pagination from "../molecules/pagination";
 
 export default function OrdersList() {
   const t = useTranslations("clientDashboard");
+  
   const {
     setOrderId,
     openModal,
@@ -21,6 +22,8 @@ export default function OrdersList() {
     type,
     setLoading,
     setStartEndDate,
+    statusOfInvoice,
+    setStatusOfInvoice
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
@@ -82,14 +85,15 @@ export default function OrdersList() {
                       quantity={String(card.quantity)}
                       tolocation={String(card.tolocation)}
                       status={String(card.salesorderstatus)}
-                      onClick={() => {
-                        setOrderId(card.id);
-                        openModal();
-                        setStartEndDate({
-                          start: card.createddate,
-                          end: card.etadate,
-                        });
-                      }}
+                        onClick={() => {
+                          setOrderId(card.id);
+                          openModal();
+                          setStatusOfInvoice(card?.salesorderstatus || "")
+                          setStartEndDate({
+                            start: card.createddate,
+                            end: card.etadate,
+                          });
+                        }}
                     />
                   )
                 )}

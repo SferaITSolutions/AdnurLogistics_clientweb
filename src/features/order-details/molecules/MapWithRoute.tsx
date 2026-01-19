@@ -292,7 +292,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                     {t("totalDistance")}
                   </span>
                   <span className="text-sm font-bold text-gray-900">
-                    {distanceKm.toFixed(1)} km
+                    {distanceKm?.toFixed(1) || 0} km
                   </span>
                 </div>
               </div>
@@ -308,12 +308,12 @@ const YandexMapWithTruck: React.FC<Props> = ({
                   </span>
                   <span className="text-sm font-bold text-gray-900">
                     {remainingKm !== null
-                      ? `${remainingKm.toFixed(1)} km`
+                      ? `${remainingKm?.toFixed(1)} km`
                       : "—"}
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
+              {/* <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
                   <FaClock className="text-white text-lg" />
                 </div>
@@ -325,7 +325,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                     {remainingTime || "—"}
                   </span>
                 </div>
-              </div>
+              </div> */}
               {/* Status */}
               {/* <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
@@ -357,7 +357,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {isDelivered ? t("status") : t("deliveryDate")}
+                    {t("deliveryDate")}
                   </span>
                   {isDelivered ? (
                     <Tag

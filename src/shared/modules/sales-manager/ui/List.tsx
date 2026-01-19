@@ -22,6 +22,8 @@ export default function SalesOrdersList() {
     type,
     setLoading,
     setStartEndDate,
+    statusOfInvoice,
+    setStatusOfInvoice
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
@@ -85,6 +87,7 @@ export default function SalesOrdersList() {
                       onClick={() => {
                         setOrderId(card.id);
                         openModal();
+                        setStatusOfInvoice(card?.salesorderstatus || "")
                         setStartEndDate({
                           start: card.createddate,
                           end: card.etadate,

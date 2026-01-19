@@ -514,6 +514,9 @@
     "onWay": "{percent}% of the way",
     "timeLeft": "Time left",
     "speed": "Speed: {speed} km/h",
+    "pendingConfirmation": "Pending Confirmation",
+    "closedDelivered": "Closed / Delivered",
+    "pendingPayment": "Pending Payment",
     "truck": "Truck"
   },
   "Pending_Approval": "Pending Approval",

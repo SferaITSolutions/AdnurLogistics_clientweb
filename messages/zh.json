@@ -511,7 +511,10 @@
     "timeLeft": "剩餘時間",
     "onWay": "已完成 {percent}%",
     "speed": "速度: {speed} 公里/小时",
-    "truck": "货车"
+    "truck": "货车",
+    "pendingConfirmation": "等待确认",
+    "closedDelivered": "已关闭 / 已送达",
+    "pendingPayment": "等待付款"
   },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",

@@ -511,7 +511,10 @@
     "timeLeft": "Оставшееся время",
     "onWay": "{percent}% пути",
     "speed": "Скорость: {speed} км/ч",
-    "truck": "Грузовик"
+    "truck": "Грузовик",
+    "pendingConfirmation": "Ожидает подтверждения",
+    "closedDelivered": "Закрыто / Доставлено",
+    "pendingPayment": "Ожидает оплаты"
   },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",
