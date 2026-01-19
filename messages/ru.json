@@ -512,9 +512,13 @@
     "onWay": "{percent}% пути",
     "speed": "Скорость: {speed} км/ч",
     "truck": "Грузовик",
-    "pendingConfirmation": "Ожидает подтверждения",
-    "closedDelivered": "Закрыто / Доставлено",
-    "pendingPayment": "Ожидает оплаты"
+   "pendingConfirmation": "Ожидает подтверждения",
+    "pendingFulfillment": "Ожидает выполнения",
+    "partiallyFulfilled": "Частично выполнен",
+    "pendingBillingPartially": "Ожидает оплаты / Частично выполнен",
+    "pendingPayment": "Ожидает оплаты",
+    "billed": "Счет выставлен",
+    "closedDelivered": "Закрыто / Доставлено"
   },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",

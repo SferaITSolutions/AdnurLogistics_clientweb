@@ -515,9 +515,13 @@
     "onWay": "Yo'lning {percent}%",
     "speed": "Tezlik: {speed} km/soat",
     "truck": "Yuk mashinasi",
-    "pendingConfirmation": "Tasdiqlash kutilmoqda",
-    "closedDelivered": "Yopilgan / Yetkazib berilgan",
-    "pendingPayment": "To‘lov kutilmoqda"
+   "pendingConfirmation": "Tasdiqlash kutilmoqda",
+    "pendingFulfillment": "Bajarilishi kutilmoqda",
+    "partiallyFulfilled": "Qisman bajarildi",
+    "pendingBillingPartially": "To'lov kutilmoqda / Qisman bajarildi",
+    "pendingPayment": "To'lov kutilmoqda",
+    "billed": "Hisob-fakturaga yuborildi",
+    "closedDelivered": "Yopilgan / Yetkazib berilgan"
   },
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",

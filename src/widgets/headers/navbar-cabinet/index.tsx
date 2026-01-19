@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             <MdMenu className="text-2xl text-primary-blue-color cursor-pointer" />
           </button>
         )}
-        {role !== "ROLE_SUPER_ADMIN" &&<h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
+        {role === "ROLE_USER" &&<h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
           {t("label")}: {info?.code ?? "-"}
         </h1>}
       </div>

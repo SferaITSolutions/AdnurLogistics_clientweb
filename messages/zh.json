@@ -512,9 +512,13 @@
     "onWay": "已完成 {percent}%",
     "speed": "速度: {speed} 公里/小时",
     "truck": "货车",
-    "pendingConfirmation": "等待确认",
-    "closedDelivered": "已关闭 / 已送达",
-    "pendingPayment": "等待付款"
+"pendingConfirmation": "等待批准",
+    "pendingFulfillment": "等待履约",
+    "partiallyFulfilled": "部分完成",
+    "pendingBillingPartially": "等待开票 / 部分完成",
+    "pendingPayment": "等待开票",
+    "billed": "已开票",
+    "closedDelivered": "已关闭 / 已送达"
   },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",
