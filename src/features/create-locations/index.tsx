@@ -9,6 +9,10 @@ const { Option } = Select;
 
 interface LocationFormValues {
   name: string;
+  nameEn: string;
+  nameTr: string;
+  nameRu: string;
+  nameZh: string;
   description?: string;
   type: "FROM" | "TO";
 }
@@ -19,10 +23,10 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
   const onFinish = (values: LocationFormValues) => {
     const payload = {
       name: values.name.trim(),
-      nameTr: values.name.trim(),
-      nameEn: values.name.trim(),
-      nameRu: values.name.trim(),
-      nameZh: values.name.trim(),
+      nameTr: values.nameTr.trim(),
+      nameEn: values.nameEn.trim(),
+      nameRu: values.nameRu.trim(),
+      nameZh: values.nameZh.trim(),
       description: values.description?.trim() || null,
       type: values.type,
     };
@@ -64,11 +68,6 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -92,11 +91,6 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
           {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
-          },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
           },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
@@ -122,11 +116,6 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -151,11 +140,6 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -179,11 +163,6 @@ export default function CreateLocations({ onSuccess, onCancel }: any) {
           {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
-          },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
           },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"

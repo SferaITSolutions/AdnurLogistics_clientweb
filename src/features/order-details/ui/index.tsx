@@ -23,8 +23,7 @@ const OrderDetailsModal: React.FC = () => {
   const t = useTranslations('clientDashboard');
   const { data, isLoading } = useOrderById(orderId || '');
   const orderData = data?.data;
-  console.log(startEndDate, 33);
-  
+
   useEffect(() => {
     if (orderData?.readMap?.createddate && orderData.readMap.createddate !== startEndDate.start) {
       setStartEndDate({ 
@@ -55,6 +54,7 @@ const OrderDetailsModal: React.FC = () => {
               destination={orderData?.readMap?.tolocation ?? ''}
               startDate={startEndDate?.start}
               endDate={startEndDate?.end}
+              statusProps={orderData?.invoiceStatus}
             />
             <div className="text-gray-800 mb-2 text-xl font-bold border-t border-gray-100 pt-4">
               <DeliviryStatus deliviryStatus={orderData?.readMap || {}} />

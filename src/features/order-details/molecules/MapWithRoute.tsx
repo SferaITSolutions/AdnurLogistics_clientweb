@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Tag } from "antd";
 import { useTranslations } from "next-intl";
+import StatusBadge from "../atoms/status-colored";
 
 interface Props {
   height?: number | string;
@@ -19,6 +20,7 @@ interface Props {
   speedKmH?: number;
   startDate?: any;
   endDate?: any;
+  statusProps: any;
 }
 
 const locationMapping: Record<string, string> = {
@@ -47,6 +49,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
   destination = "Tashkent, Uzbekistan",
   speedKmH = 100,
   startDate,
+  statusProps,
   endDate
 }) => {
   const t = useTranslations("yandexMap");
@@ -323,14 +326,28 @@ const YandexMapWithTruck: React.FC<Props> = ({
                   </span>
                 </div>
               </div>
+              {/* Status */}
+              {/* <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
+                 <FaCheckCircle className="text-white text-lg" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 font-medium">
+                    {t("status")}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {remainingTime || "—"}
+                  </span>
+                </div>
+              </div> */}
+              <StatusBadge status={statusProps} />
               {/* Status/Yetkazish sanasi */}
               <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm">
                 <div
-                  className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${
-                    isDelivered
+                  className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${isDelivered
                       ? "bg-gradient-to-br from-green-500 to-emerald-600"
                       : "bg-gradient-to-br from-orange-500 to-orange-600"
-                  }`}
+                    }`}
                 >
                   {isDelivered ? (
                     <FaCheckCircle className="text-white text-lg" />

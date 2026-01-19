@@ -83,11 +83,6 @@ export default function UpdateLocationForm({
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -111,11 +106,6 @@ export default function UpdateLocationForm({
           {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
-          },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
           },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
@@ -141,11 +131,6 @@ export default function UpdateLocationForm({
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -170,11 +155,6 @@ export default function UpdateLocationForm({
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
           },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
-          },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
       >
@@ -198,11 +178,6 @@ export default function UpdateLocationForm({
           {
             max: 100,
             message: "Nom 100 ta belgidan oshmasligi kerak",
-          },
-          {
-            pattern: /^[a-zA-Z0-9\s.,\-'’]+$/u,
-            message:
-              "Faqat harf, raqam, bo'shliq, nuqta, vergul, chiziqcha va tirnoqqa ruxsat beriladi",
           },
         ]}
         tooltip="Masalan: Toshkent markazi, Samarqand aeroporti"
