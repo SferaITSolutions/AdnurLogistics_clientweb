@@ -308,7 +308,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                   </span>
                   <span className="text-sm font-bold text-gray-900">
                     {remainingKm !== null
-                      ? `${remainingKm?.toFixed(1)} km`
+                      ? `${remainingKm?.toFixed(1) || "0"} km`
                       : "—"}
                   </span>
                 </div>
@@ -368,7 +368,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                     </Tag>
                   ) : (
                     <span className="text-sm font-bold text-gray-900">
-                      {startEndDate.end}
+                      {startEndDate.end ?? "-"}
                     </span>
                   )}
                 </div>

@@ -18,6 +18,8 @@ interface OrderDetailsStoreState {
   setSize: (size: number) => void;
   orderIdFilter: string | null;
   setOrderIdFilter: (id: string | null) => void;
+  orderIdFilterSaller: string | null;
+  setOrderIdFilterSaller: (id: string | null) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
   startEndDate: { start: string | null; end: string | null };
@@ -34,6 +36,9 @@ export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
   isModalOpen: false,
   orderIdFilter: null,
   setOrderIdFilter: (id) => set({ orderIdFilter: id }),
+  orderIdFilterSaller: null,
+  setOrderIdFilterSaller: (orderId: string | null) =>
+    set({ orderIdFilterSaller: orderId }),
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false, orderId: null }),
   searchfilters: {},

@@ -3,6 +3,10 @@ import React from 'react'
 
 export default function Notifications() {
   return (
-    <div className='container'> <AutoNotificationsPage/></div>
+    <div className='container'>
+      <title>
+        Admin | Notifications
+      </title>
+       <AutoNotificationsPage/></div>
   )
 }

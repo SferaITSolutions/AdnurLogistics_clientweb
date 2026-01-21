@@ -19,6 +19,9 @@ export default function DashboardClient() {
   }, [router,role]);
   return (
     <div className="flex flex-col gap-2.5 container max-w-full">
+      <title>
+        Sales orders
+      </title>
       <h1 className="text-2xl !font-bold">{t('title')}</h1>
       <Filters />
       <List />

@@ -17,7 +17,7 @@ export default function SalesOrdersList() {
   const {
     setOrderId,
     openModal,
-    orderIdFilter,
+    orderIdFilterSaller,
     page,
     type,
     setLoading,
@@ -27,21 +27,21 @@ export default function SalesOrdersList() {
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
-    userNumber: orderIdFilter,
+    userNumber: orderIdFilterSaller,
   });
 
   React.useEffect(() => {
     const handler = setTimeout(() => {
       setFilterParams({
         search: Number(type),
-        userNumber: orderIdFilter,
+        userNumber: orderIdFilterSaller,
       });
     }, 500);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [page, type, orderIdFilter]);
+  }, [page, type, orderIdFilterSaller]);
 
   const { data, isLoading } = useGetSelesOrders({ ...filterParams, page });
   useEffect(() => {

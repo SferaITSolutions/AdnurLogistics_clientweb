@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { FaSearch, FaHashtag, FaTimes } from 'react-icons/fa';
 
 export default function FilterPersonalNumber() {
-  const { setOrderIdFilter, orderIdFilter } = useOrderDetailsStore();
+  const { setOrderIdFilterSaller, orderIdFilterSaller } = useOrderDetailsStore();
   const t = useTranslations('clientDashboard');
   
   return (
@@ -41,16 +41,16 @@ export default function FilterPersonalNumber() {
           <Input
             id="personal-number"
             className="!rounded-xl !pl-12 !pr-4 !py-3 !border-2 !border-gray-200 hover:!border-blue-400 focus:!border-blue-500 !shadow-sm hover:!shadow-md focus:!shadow-lg !transition-all !duration-200 !bg-white"
-            value={orderIdFilter || ''}
-            onChange={(e) => setOrderIdFilter(e.target.value)}
+            value={orderIdFilterSaller || ''}
+            onChange={(e) => setOrderIdFilterSaller(e.target.value)}
             placeholder={``}
             size="large"
           />
           
           {/* Clear button */}
-          {orderIdFilter && (
+          {orderIdFilterSaller && (
             <button
-              onClick={() => setOrderIdFilter('')}
+              onClick={() => setOrderIdFilterSaller('')}
               className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-6 h-6 rounded-full bg-gray-200 hover:bg-red-100 text-gray-500 hover:text-red-600 transition-all duration-200 hover:scale-110"
             >
               <svg 

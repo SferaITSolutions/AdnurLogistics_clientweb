@@ -15,6 +15,11 @@ export default function Locations() {
   }, [router,role]);
 
   return (
-    <div className='container'><LocationsUi/></div>
+    <div className='container'>
+      <title>
+        Admin | Location
+      </title>
+      <LocationsUi/>
+      </div>
   )
 }

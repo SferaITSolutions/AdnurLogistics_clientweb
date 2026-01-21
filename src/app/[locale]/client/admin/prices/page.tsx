@@ -17,6 +17,9 @@ export default function Prices() {
 
   return (
     <div className='container'>
+      <title>
+        Admin | Prices
+      </title>
       <PricesUi/>
     </div>
   )

@@ -15,6 +15,9 @@ export default function CalculationPage() {
   }, [router,role]);
   return (
     <div className="container">
+      <title>
+        Calculation & Send request
+      </title>
       <CalculationUI />
     </div>
   );

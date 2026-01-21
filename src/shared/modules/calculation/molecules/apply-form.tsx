@@ -23,16 +23,16 @@ export default function ApplyForm() {
   const initialValues: ApplyFormValues = {
     from: values?.from ?? "",
     to: values?.to ?? "",
-    weight: values?.weight ?? 0,
-    bulk: values?.bulk ?? 0,
+    weight: values?.weight ?? null,
+    bulk: values?.bulk ?? null,
     customs: values?.customs ?? false,
   };
 
   const applyMutation = useApplyFCL(() => {
     setValue("from", "");
     setValue("to", "");
-    setValue("weight", 0);
-    setValue("bulk", 0);
+    setValue("weight",null);
+    setValue("bulk", null);
     setValue("customs", false);
     form.resetFields();
     setIsModalOpen(true);
@@ -42,8 +42,8 @@ export default function ApplyForm() {
     applyMutation.mutate({
       fromLocation: values.from ?? "",
       toLocation: values.to ?? "",
-      weight: values.weight ?? 0,
-      bulk: values.bulk ?? 0,
+      weight: values.weight ?? "",
+      bulk: values.bulk ?? "",
       customs: values.customs || false,
     });
   };
@@ -105,6 +105,7 @@ export default function ApplyForm() {
             { required: true, message: t("weightRequiredError") },
             { type: "number", min: 0.00001, message: t("weightMinError") },
           ]}
+
         >
           <InputNumber
             className="!rounded-xl global-input-height"
@@ -127,6 +128,7 @@ export default function ApplyForm() {
             { required: true, message: t("bulkRequiredError") },
             { type: "number", min: 0.00001, message: t("bulkMinError") },
           ]}
+          normalize={(value) => (value === '' ? null : value)}
         >
           <InputNumber
             type="number"
@@ -135,6 +137,7 @@ export default function ApplyForm() {
             prefix={<FaCube className="text-blue-600" />}
             style={{ width: "100%" }}
             size="large"
+            defaultValue={""}
           />
         </Form.Item>
 

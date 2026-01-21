@@ -55,7 +55,7 @@ export const ApplyModal = () => {
   useEffect(() => {
     setTimeout(() => {
       setOpen(true);
-    }, 10000);
+    }, 30000);
 
     setInterval(() => {
       setOpen(true);
