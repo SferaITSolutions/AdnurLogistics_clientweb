@@ -508,7 +508,7 @@
     "status": "Durum",
     "deliveryDate": "Teslimat Tarihi",
     "timeLeft": "Kalan zaman",
-"pendingConfirmation": "Onay Bekleniyor",
+    "pendingConfirmation": "Onay Bekleniyor",
     "pendingFulfillment": "Yerine Getirilmesi Bekleniyor",
     "partiallyFulfilled": "Kısmen Tamamlandı",
     "pendingBillingPartially": "Fatura Bekleniyor / Kısmen Tamamlandı",
@@ -518,7 +518,12 @@
     "delivered": "Teslim Edildi",
     "onWay": "Yolun %{percent}'i",
     "speed": "Hız: {speed} km/sa",
-    "truck": "Kamyon"
+    "truck": "Kamyon",
+    "toBePaid": "Sipariş tutarı"
+  },
+  "common": {
+    "userId": "Kullanıcı ID No",
+    "salesManager": "Satış Müdürü Paneli"
   },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",

@@ -23,7 +23,8 @@ export default function SalesOrdersList() {
     setLoading,
     setStartEndDate,
     statusOfInvoice,
-    setStatusOfInvoice
+    setStatusOfInvoice,
+    setTotalprice
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
@@ -68,6 +69,7 @@ export default function SalesOrdersList() {
                       createddate: string | null;
                       id: string;
                       weight: string;
+                      totalprice: any,
                       tolocation: string | null;
                       quantity: string | null;
                       salesorderstatus: string | null;
@@ -87,7 +89,10 @@ export default function SalesOrdersList() {
                       onClick={() => {
                         setOrderId(card.id);
                         openModal();
-                        setStatusOfInvoice(card?.salesorderstatus || "")
+                        setStatusOfInvoice(card?.salesorderstatus)
+                        setTotalprice(card?.totalprice)
+                        console.log(card?.totalprice, "price");
+                        
                         setStartEndDate({
                           start: card.createddate,
                           end: card.etadate,
@@ -101,7 +106,7 @@ export default function SalesOrdersList() {
           ) : (
             <div className="flex items-center justify-center ">
               <p className="text-gray-500">
-                <Empty description={filterParams.userNumber ? "Buyurtmalar Topilmadi" : "Foydalanuvchi tanlanmagan"} />
+                <Empty description={""} />
               </p>
             </div>
           )}

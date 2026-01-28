@@ -3,9 +3,13 @@ import { create } from 'zustand';
 interface OrderDetailsStoreState {
   orderId: string | null;
   isModalOpen: boolean;
-  statusOfInvoice: string | null; // Remove the ?
-  setStatusOfInvoice: (statusOfInvoice: string | null) => void; // Remove the ? and fix the type
+  statusOfInvoice: string | null;
+  setStatusOfInvoice: (statusOfInvoice: string | null) => void;
   setOrderId: (id: string | null) => void;
+
+  totalPrice: string | number | null; // ✅ Optional belgisini olib tashladik
+  setTotalprice: (totalPrice: string | number | null) => void; // ✅ Optional belgisini olib tashladik
+
   openModal: () => void;
   closeModal: () => void;
   searchfilters: any;
@@ -33,6 +37,10 @@ export const useOrderDetailsStore = create<OrderDetailsStoreState>((set) => ({
   setOrderId: (id) => set({ orderId: id }),
   statusOfInvoice: null,
   setStatusOfInvoice: (status) => set({ statusOfInvoice: status }),
+  
+  totalPrice: null, // ✅ Default qiymat
+  setTotalprice: (totalPrice) => set({ totalPrice }), // ✅ Qisqartirilgan syntax
+
   isModalOpen: false,
   orderIdFilter: null,
   setOrderIdFilter: (id) => set({ orderIdFilter: id }),

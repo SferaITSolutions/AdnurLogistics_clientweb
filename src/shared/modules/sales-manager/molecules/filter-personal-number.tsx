@@ -7,7 +7,7 @@ import { FaSearch, FaHashtag, FaTimes } from 'react-icons/fa';
 
 export default function FilterPersonalNumber() {
   const { setOrderIdFilterSaller, orderIdFilterSaller } = useOrderDetailsStore();
-  const t = useTranslations('clientDashboard');
+  const t = useTranslations('common');
   
   return (
     <div className="group relative">
@@ -25,7 +25,7 @@ export default function FilterPersonalNumber() {
             className="text-base font-bold text-gray-800 m-0"
           >
             {/* {t('orderId')} */}
-            Foydalanuvchi ID raqami
+            {t("userId")}
           </label>
         </div>
 

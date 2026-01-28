@@ -6,7 +6,7 @@ import {
   formatPhone,
   formatPhoneTR,
 } from "@/shared/utils/formatter";
-import { Button, Checkbox, Form, Input, Modal, Select, message } from "antd";
+import { Button, Checkbox, Empty, Form, Input, Modal, Select, Spin, message } from "antd";
 
 import SelectBefore from "@/shared/components/dump/atoms/select-before";
 import { FROM_OPTIONS, useRegions, useToRegions } from "@/shared/constants";
@@ -17,14 +17,21 @@ import { useEffect } from "react";
 import { useApplyRequest } from "../lib/hooks/hooks";
 import { useApplyModalStore } from "../model/useApplyModalStore";
 import { useTranslations } from "next-intl";
+import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
+
 
 export const ApplyModal = () => {
+  const { Option } = Select;
   const { open, setOpen } = useApplyModalStore();
   const { beforePhone } = useGlobalStore();
   const t = useTranslations("LendingPage.applyModal");
+  const tr = useTranslations("calculationPage");
   const applyRequest = useApplyRequest();
+  const lang = localStorage.getItem("roleName")
   const [form] = Form.useForm();
   const { TO_OPTIONS } = useToRegions();
+  const { data: fromData, isLoading: fromLoading } = useGetFromList(lang);
+  const { data: toData, isLoading: toLoading } = useGetToList(lang);
   const handleSubmit = async (values: ApplyRequest) => {
     try {
       const { phone, bulk, density, weight, ...data } = values;
@@ -36,12 +43,10 @@ export const ApplyModal = () => {
             ? deformatPhone(phone)
             : deformatPhoneTR(phone),
         bulk: bulk !== undefined && bulk !== null ? Number(bulk) : undefined,
-        density:
-          density !== undefined && density !== null
-            ? Number(density)
-            : undefined,
         weight:
-          weight !== undefined && weight !== null ? Number(weight) : undefined,
+          weight !== undefined && weight !== null
+            ? Number(weight)
+            : undefined,
       };
       await applyRequest.mutateAsync(cleanData);
       message.success(t("success"));
@@ -119,11 +124,10 @@ export const ApplyModal = () => {
               { required: true, message: t("fields.phone.required") },
               {
                 pattern: /^(?:\+998\s|\+90\s)?\d{2,3}\s\d{3}\s\d{2}\s\d{2}$/,
-                message: `${t("fields.phone.patternUz")} ${
-                  beforePhone === "+998"
+                message: `${t("fields.phone.patternUz")} ${beforePhone === "+998"
                     ? "+998 90 123 45 67"
                     : "+90 123 123 1234"
-                }`,
+                  }`,
               },
             ]}
           >
@@ -144,42 +148,65 @@ export const ApplyModal = () => {
             />
           </Form.Item>
         </div>
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 !w-full">
           <Form.Item
             label={
-              <span className="global-label-size">
-                {t("fields.fromLocation.label")}
-              </span>
+              <div className="global-label-size">
+                {tr("fromLabel")}
+              </div>
             }
             name="fromLocation"
             className="flex-1"
-            rules={[
-              { required: true, message: t("fields.fromLocation.required") },
-            ]}
+
+            rules={[{ required: true, message: tr("fromPlaceholder") }]}
           >
             <Select
-              placeholder={t("fields.fromLocation.placeholder")}
-              options={useRegions().FROM_OPTIONS}
+              className=""
+              placeholder={tr("fromPlaceholder")}
               size="large"
-            />
+              showSearch
+              optionFilterProp="children"
+              loading={fromLoading}
+              notFoundContent={
+                fromLoading ? <Spin size="small" /> : <Empty description=""/>
+              }
+            >
+              {fromData?.result?.map((loc: any) => (
+                <Option key={loc.id} value={loc.name}>
+                  {loc.name}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
+
+          {/* To Location - Dinamik API dan */}
           <Form.Item
             label={
-              <span className="global-label-size">
-                {t("fields.toLocation.label")}
-              </span>
+              <div className="global-label-size">
+                {tr("toLabel")}
+              </div>
             }
             name="toLocation"
             className="flex-1"
-            rules={[
-              { required: true, message: t("fields.toLocation.required") },
-            ]}
+            rules={[{ required: true, message: tr("toPlaceholder") }]}
           >
             <Select
-            size="large"
-              placeholder={t("fields.toLocation.placeholder")}
-              options={TO_OPTIONS}
-            />
+              className="!w-full"
+              placeholder={tr("toPlaceholder")}
+              size="large"
+              showSearch
+              optionFilterProp="children"
+              loading={toLoading}
+              notFoundContent={
+                toLoading ? <Spin size="small" /> : <Empty description=""/>
+              }
+            >
+              {toData?.result?.map((loc: any) => (
+                <Option key={loc.id} value={loc.id}>
+                  {loc.name}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
         </div>
 
@@ -206,7 +233,7 @@ export const ApplyModal = () => {
                 {t("fields.density.label")}
               </span>
             }
-            name="density"
+            name="weight"
             className="flex-1"
             rules={[{ required: true, message: t("fields.density.required") }]}
           >
@@ -236,7 +263,7 @@ export const ApplyModal = () => {
         </Form.Item>
         <Form.Item
           name="isAgree"
-          // rules={[{ required: true, message: "Rozi bo'lish shart" }]}
+        // rules={[{ required: true, message: "Rozi bo'lish shart" }]}
         >
           <Checkbox>{t("fields.isAgree.label")}</Checkbox>
         </Form.Item>

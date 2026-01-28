@@ -521,7 +521,12 @@
     "pendingPayment": "Pending Billing",
     "billed": "Billed",
     "closedDelivered": "Closed / Delivered",
-    "truck": "Truck"
+    "truck": "Truck",
+    "toBePaid": "Order amount"
+  },
+  "common": {
+    "userId": "User ID",
+    "salesManager": "Sales Manager Panel"
   },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",

@@ -15,11 +15,11 @@ export const DrawerSidebar = ({
   isOpen,
 }: {
   closeSidebar: () => void;
-  isOpen: boolean;
+  isOpen: boolean; 
 }) => {
   const role = localStorage.getItem("roleName");
   const tr = useTranslations("personalNumberPage");
-  const t = useTranslations("clientDashboard");
+  const t = useTranslations("");
   const { setIslogout } = useGlobalStore();
   const logout = () => setIslogout(true);
   const { userInfo } = useGlobalStore();

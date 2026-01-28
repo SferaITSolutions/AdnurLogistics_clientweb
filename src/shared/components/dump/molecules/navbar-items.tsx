@@ -1,13 +1,14 @@
 import LanguageSwitcher from "@/features/change-language/ui";
-import { Badge } from "antd";
 import React from "react";
-import { FaUser } from "react-icons/fa";
-import { MdNotifications } from "react-icons/md";
 
 export default function NavbarItems() {
+  const role = localStorage.getItem("roleName");
+
   return (
     <div className="flex items-center gap-6">
-      <LanguageSwitcher />
+      {["ROLE_USER", "ROLE_CONTROLLER"].includes(role ?? "") && (
+        <LanguageSwitcher />
+      )}
     </div>
   );
 }

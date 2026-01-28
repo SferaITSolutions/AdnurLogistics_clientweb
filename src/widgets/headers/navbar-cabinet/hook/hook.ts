@@ -5,10 +5,11 @@ import { toast } from 'sonner';
 
 // Get Me
 export const useMe = () => {
+  const role = localStorage.getItem("roleName")
   return useQuery({
-    queryKey: ['fetch-me'],
+    queryKey: ['fetch-me', role],
     queryFn: () => meService.me(),
-    staleTime: 5 * 60 * 1000,
+    // staleTime: 5 * 60 * 1000,
   });
 };
 

@@ -518,7 +518,12 @@
     "pendingBillingPartially": "Ожидает оплаты / Частично выполнен",
     "pendingPayment": "Ожидает оплаты",
     "billed": "Счет выставлен",
-    "closedDelivered": "Закрыто / Доставлено"
+    "closedDelivered": "Закрыто / Доставлено",
+    "toBePaid": "Сумма заказа"
+  },
+  "common": {
+    "userId": "ID пользователя",
+    "salesManager": "Панель менеджера по продажам"
   },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",

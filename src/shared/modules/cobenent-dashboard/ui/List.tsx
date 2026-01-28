@@ -23,7 +23,8 @@ export default function OrdersList() {
     setLoading,
     setStartEndDate,
     statusOfInvoice,
-    setStatusOfInvoice
+    setStatusOfInvoice,
+    setTotalprice
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({
     search: Number(type),
@@ -70,6 +71,7 @@ export default function OrdersList() {
                       id: string;
                       weight: string;
                       tolocation: string | null;
+                      totalprice: number | string | any;
                       quantity: string | null;
                       salesorderstatus: string | null;
                     },
@@ -88,7 +90,10 @@ export default function OrdersList() {
                         onClick={() => {
                           setOrderId(card.id);
                           openModal();
-                          setStatusOfInvoice(card?.salesorderstatus || "")
+                          setStatusOfInvoice(card?.salesorderstatus)
+                          setTotalprice(card?.totalprice)
+                          console.log(card?.totalprice, "price");
+                          
                           setStartEndDate({
                             start: card.createddate,
                             end: card.etadate,

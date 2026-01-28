@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
     if (info) {
       setUserInfo(info);
     }
-  }, [info]);
+  }, [info, role]);
   return (
     <header
       className="fixed top-0 right-0 lg:!pl-[320px] flex items-center bg-white justify-between bg-primery-blue-color shadow-md h-[70px] px-6 lg:px-10 w-full !z-30"
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             <MdMenu className="text-2xl text-primary-blue-color cursor-pointer" />
           </button>
         )}
-        {role === "ROLE_USER" &&<h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
+        {role === "ROLE_USER" && <h1 className="text-md hidden lg:block lg:text-lg font-semibold text-gray-500 !mb-0">
           {t("label")}: {info?.code ?? "-"}
         </h1>}
       </div>

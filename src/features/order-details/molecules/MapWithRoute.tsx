@@ -59,7 +59,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
     start: formattedStart,
     end: formattedEnd,
   };
-
+  const hasAutoCentered = useRef(false);
   const mapRef = useRef<any>(null);
   const ymapsRef = useRef<any>(null);
   const carRef = useRef<any>(null);
@@ -69,7 +69,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
   const updateIntervalRef = useRef<number | null>(null);
 
   const [remainingTime, setRemainingTime] = useState<string | null>(null);
-  const [distanceKm, setDistanceKm] = useState<number | null>(null);
+  const [distanceKm, setDistanceKm] = useState<number | null | any>(null);
   const [remainingKm, setRemainingKm] = useState<number | null>(null);
   const [currentProgress, setCurrentProgress] = useState<number>(0);
   const [isMapReady, setIsMapReady] = useState(false);
@@ -125,13 +125,21 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const coords = routeCoordsRef.current;
     if (!ymaps || !map || coords.length === 0 || !multiRouteRef.current) return;
 
-    const fraction = calculateCurrentFraction();
+    let fraction = calculateCurrentFraction();
+
+    const isPendingBilling = statusProps === "Sales Order : Pending Billing" || statusProps === "Sales Order : Billed"
+    const now = new Date();
+    const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
+    const isDatePassed = now > endDate;
+    if (isPendingBilling && isDatePassed) {
+      fraction = Math.min(distanceKm, 0.9);
+    }
+
     setCurrentProgress(fraction);
 
     const totalKm = totalDistanceRef.current / 1000;
     const remaining = totalKm * (1 - fraction);
     setRemainingKm(remaining);
-
     // ✅ QOLGAN VAQTNI HISOBLASH
     const remainingHours = remaining / speedKmH; // qolgan soatlar
     const days = Math.floor(remainingHours / 24); // kunlar
@@ -178,33 +186,35 @@ const YandexMapWithTruck: React.FC<Props> = ({
       );
     }
 
-    if (fraction < 0.01 && map.getZoom() < 10) {
+    if (fraction < 0.01 && map.getZoom() < 10 && !hasAutoCentered.current) {
       map.setCenter(currentPosition, 10);
+      hasAutoCentered.current = true;
     }
   };
 
   const createRoute = () => {
     const ymaps = ymapsRef.current;
     const map = mapRef.current;
-    if (!ymaps || !map || referencePoints.length < 2 || multiRouteRef.current)
-      return;
+    if (!ymaps || !map || referencePoints.length < 2 || multiRouteRef.current) return;
 
     ymaps.ready(() => {
       const multiRoute = new ymaps.multiRouter.MultiRoute(
         { referencePoints },
         {
-          boundsAutoApply: true,
+          // boundsAutoApply: true,  // <--- BU YERNI OLIB TASHLANG yoki false qiling
           wayPointVisible: true,
           routeActiveStrokeWidth: 5,
           routeActiveStrokeColor: "#1976d2",
         }
       );
+
       multiRouteRef.current = multiRoute;
       map.geoObjects.add(multiRoute);
 
       multiRoute.model.events.add("requestsuccess", () => {
         const activeRoute = multiRoute.getActiveRoute();
         if (!activeRoute) return;
+
         const distance = activeRoute.properties.get("distance").value;
         setDistanceKm(distance / 1000);
         totalDistanceRef.current = distance;
@@ -220,6 +230,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
           }
         }
         routeCoordsRef.current = allCoords;
+
         setIsMapReady(true);
       });
     });
@@ -259,11 +270,13 @@ const YandexMapWithTruck: React.FC<Props> = ({
         query={{
           load: "package.full",
           lang: "en_RU",
-          apikey: process.env.NEXT_PUBLIC_YANDEX_API_KEY,
+          apikey: 
+          "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
+          
         }}
       >
         <Map
-          defaultState={{ center: [40.7831, 65.9667], zoom: 5 }}
+          defaultState={{ center: [42.7831, 78.9667], zoom: 4 }}
           width="100%"
           height={height}
           modules={[
@@ -307,68 +320,27 @@ const YandexMapWithTruck: React.FC<Props> = ({
                     {t("remainingDistance")}
                   </span>
                   <span className="text-sm font-bold text-gray-900">
-                    {remainingKm !== null
-                      ? `${remainingKm?.toFixed(1) || "0"} km`
-                      : "—"}
+                    {`${remainingKm ? remainingKm?.toFixed(1) : "0"} km`}
                   </span>
                 </div>
               </div>
-              {/* <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
-                  <FaClock className="text-white text-lg" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 font-medium">
-                    {t("timeLeft")}
-                  </span>
-                  <span className="text-sm font-bold text-gray-900">
-                    {remainingTime || "—"}
-                  </span>
-                </div>
-              </div> */}
-              {/* Status */}
-              {/* <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-purple-200/60 shadow-sm">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
-                 <FaCheckCircle className="text-white text-lg" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 font-medium">
-                    {t("status")}
-                  </span>
-                  <span className="text-sm font-bold text-gray-900">
-                    {remainingTime || "—"}
-                  </span>
-                </div>
-              </div> */}
               <StatusBadge status={statusProps} />
-              {/* Status/Yetkazish sanasi */}
               <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm">
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${isDelivered
-                      ? "bg-gradient-to-br from-green-500 to-emerald-600"
-                      : "bg-gradient-to-br from-orange-500 to-orange-600"
+                    ? "bg-gradient-to-br from-green-500 to-emerald-600"
+                    : "bg-gradient-to-br from-orange-500 to-orange-600"
                     }`}
                 >
-                  {isDelivered ? (
-                    <FaCheckCircle className="text-white text-lg" />
-                  ) : (
-                    <FaCalendarAlt className="text-white text-lg" />
-                  )}
+                  <FaCalendarAlt className="text-white text-lg" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
                     {t("deliveryDate")}
                   </span>
-                  {isDelivered ? (
-                    <Tag
-                      color="green"
-                      className="!m-0 !px-2 !py-0.5 !text-xs !font-bold !rounded-lg"
-                    >
-                      {t("delivered")}
-                    </Tag>
-                  ) : (
+                  {(
                     <span className="text-sm font-bold text-gray-900">
-                      {startEndDate.end ?? "-"}
+                      {startEndDate.end || "-"}
                     </span>
                   )}
                 </div>

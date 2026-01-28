@@ -6,7 +6,7 @@ import 'antd/dist/reset.css';
 import './globals.css';
 
 import { Montserrat } from 'next/font/google';
-
+import LogoTip from "@/assets/images/logo/image_37-removebg-preview.png";
 import ThemeState from '@/context/ThemeState';
 import MainLayout from '@/providers/MainLayout';
 import { TanStackProvider } from '@/providers/TanStackProvider';
@@ -24,6 +24,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: 'Adnur logistic',
   description: 'Adnur logistic — eng ishonchli va tez logistic kampaniya.',
+  icons: {
+    icon: '/logo.png',          
+    shortcut: '/logo.png', // optional
+    // apple: '/apple-icon.png',    // iOS uchun
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
