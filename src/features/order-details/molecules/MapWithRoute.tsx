@@ -270,8 +270,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
         query={{
           load: "package.full",
           lang: "en_RU",
-          apikey: 
-          "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
+          apikey: process.env.NEXT_PUBLIC_YANDEX_API_KEY,
           
         }}
       >
