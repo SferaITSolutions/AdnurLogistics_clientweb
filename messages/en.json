@@ -246,21 +246,22 @@
     "welcome": "Welcome 😊",
     "steps": {
       "step1": "Information",
-      "step2": "Personal ID",
+      "step2": "OTP Verification",
       "step3": "Verification"
     },
     "name": "Full Name",
     "phone": "Your phone number",
     "password": "Password",
     "repeatPassword": "Repeat password",
-    "getId": "Get personal ID",
+    "getId": "Registration",
     "alreadyRegistered": "I am already registered",
     "back": "Back"
   },
   "personalNumberPage": {
-    "label": "Your Personal Number",
-    "placeholder": "Enter the number...",
-    "button": "Continue"
+    "label": "Verification code",
+    "accountNumber": "Bill number",
+    "placeholder": "Enter code...",
+    "button": "Verify"
   },
   "finelyTab": {
     "title": "Congratulations!",
@@ -298,7 +299,7 @@
     "totalAmount": "Total Amount",
     "paidAmount": "Paid Amount",
     "remainingAmount": "Amount of debt",
-    "logout": "Logout", 
+    "logout": "Logout",
     "activeOrder": "Active Orders",
     "savedOrder": "Accepted Orders"
   },
@@ -420,6 +421,7 @@
     "prices": "Prices",
     "locations": "Locations",
     "logout": "Logout",
+    "users": "Users",
     "personalNumber": "Your Personal Number:",
     "deliveryRates": "Delivery Prices",
     "fromTo": "From → To",
@@ -514,7 +516,7 @@
     "onWay": "{percent}% of the way",
     "timeLeft": "Time left",
     "speed": "Speed: {speed} km/h",
-"pendingConfirmation": "Pending Approval",
+    "pendingConfirmation": "Pending Approval",
     "pendingFulfillment": "Pending Fulfillment",
     "partiallyFulfilled": "Partially Fulfilled",
     "pendingBillingPartially": "Pending Billing / Partially Fulfilled",

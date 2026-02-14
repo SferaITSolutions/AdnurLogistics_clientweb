@@ -5,9 +5,9 @@ export const formatPhone = (value: string, withoutPrefix?: boolean): string => {
 
   let formatted = digits;
 
-  if (formatted.startsWith("998")) {
-    formatted = formatted.slice(3);
-  }
+  // if (formatted.startsWith("998")) {
+  //   formatted = formatted.slice(3);
+  // }
 
   const formattedNumber =
     (formatted.substring(0, 2) ? formatted.substring(0, 2) : "") +
@@ -43,10 +43,21 @@ export const formatPhoneTR = (
 // ✅ Telefon deformatlash (998999999 -> 998999999999)
 export const deformatPhone = (value: string): string => {
   if (!value) return "";
-  let digits = value.replace(/\D/g, "");
-  if (!digits.startsWith("998")) {
-    digits = "998" + digits;
+  
+  // Faqat raqamlarni qoldirish
+  const digits = value.replace(/\D/g, "");
+  
+  // Agar 9 ta raqam bo'lsa (prefix siz), 998 qo'shish
+  if (digits.length === 9) {
+    return "998" + digits;
   }
+  
+  // Agar 12 ta raqam bo'lsa va 998 bilan boshlansa, o'zgarishsiz qaytarish
+  if (digits.length === 12 && digits.startsWith("998")) {
+    return digits;
+  }
+  
+  // Boshqa holatlarda shunchaki raqamlarni qaytarish
   return digits;
 };
 

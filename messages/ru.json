@@ -256,14 +256,15 @@
     "phone": "Ваш номер телефона",
     "password": "Пароль",
     "repeatPassword": "Повторите пароль",
-    "getId": "Получить личный номер",
+    "getId": "Регистрация",
     "alreadyRegistered": "Я уже зарегистрирован",
     "back": "Назад"
   },
   "personalNumberPage": {
-    "label": "Ваш личный номер",
-    "placeholder": "Введите номер...",
-    "button": "Продолжить"
+    "accountNumber": "Номер счета",
+"label": "Код подтверждения",
+  "placeholder": "Введите код...",
+  "button": "Подтвердить"
   },
   "finelyTab": {
     "title": "Поздравляем!",
@@ -417,6 +418,7 @@
     "prices": "Цены",
     "locations": "Локации",
     "logout": "Выход",
+    "users": "Пользователи",
     "personalNumber": "Ваш персональный номер:",
     "deliveryRates": "Цены на доставку",
     "fromTo": "От → До",

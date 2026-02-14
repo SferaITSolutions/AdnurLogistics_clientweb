@@ -27,7 +27,7 @@ import { useRegisterStore } from "../store/registerStore";
 
 export default function RegisterForm() {
   const t = useTranslations();
-  const { nextStep, step } = useRegisterStore();
+  const { nextStep, step, phone, setPhone } = useRegisterStore();
   const { beforePhone } = useGlobalStore();
 
   const registerMutation = useRegisterMutation();
@@ -57,6 +57,7 @@ export default function RegisterForm() {
   // ✅ Submit
   const onSubmit = (values: z.infer<typeof schema>) => {
     const { phone, ...data } = values;
+    setPhone(phone)
     const cleanData = {
       ...data,
       phone:
@@ -131,7 +132,6 @@ export default function RegisterForm() {
                     beforePhone === "+998"
                       ? formatPhone(e.target.value, true)
                       : formatPhoneTR(e.target.value, true);
-                  console.log(beforePhone);
                   field.onChange(formatted);
                 }}
                 size="large"

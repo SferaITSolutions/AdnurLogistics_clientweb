@@ -17,6 +17,7 @@ export const useOrder = (data: any) => {
 
       return response;
     },
+    retry: false
   });
 };
 

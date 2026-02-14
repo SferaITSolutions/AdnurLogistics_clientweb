@@ -18,7 +18,7 @@ import { useRegisterStore } from '../store/registerStore';
 export default function PersonalNumber() {
   const t = useTranslations("personalNumberPage");
 
-  const { nextStep, step } = useRegisterStore();
+  const { nextStep, step, phone, setPhone } = useRegisterStore();
   const checkCheckIdentity = useCheckIdentityMutation();
   const [checkintertityErrorMessage, setCheckintertityErrorMessage] = useState('');
   const schema = identitySchema(t);
@@ -60,7 +60,14 @@ export default function PersonalNumber() {
             name="code"
             control={control}
             render={({ field }) => (
-              <Input {...field} placeholder={t("placeholder")} className="!h-12 !rounded-2xl" />
+              <div className="flex justify-center">
+                <Input.OTP
+                  length={4}
+                  {...field}
+                  size="large"
+                  className=" [&_.ant-otp-input]:!w-16 [&_.ant-otp-input]:!h-25 [&_.ant-otp-input]:!text-2xl [&_.ant-otp-input]:!font-bold "
+                />
+              </div>
             )}
           />
 

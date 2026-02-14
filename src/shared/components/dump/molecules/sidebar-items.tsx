@@ -1,13 +1,17 @@
 "use client";
 
-import { FaCalculator, FaDollarSign, FaHome } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome, FaUser } from "react-icons/fa";
 import MenuItem from "@/shared/components/dump/molecules/menu-item";
 import { useTranslations } from "next-intl";
 import { MdNotifications } from "react-icons/md";
+import { useMe } from "@/widgets/headers/navbar-cabinet/hook/hook";
+import { AiFillProduct } from "react-icons/ai";
 
 export default function SidebarItems() {
   const t = useTranslations("");
   const role = localStorage.getItem("roleName");
+  const { data } = useMe();
+
   return (
     <nav className="flex flex-col gap-3 mt-12 text-white z-50">
       {/* Section Title */}
@@ -18,7 +22,7 @@ export default function SidebarItems() {
         </span>
       </div> */}
 
-      {role === "ROLE_USER" && (
+      {role === "ROLE_USER" && data?.data?.code && (
         <MenuItem
           label={t("clientDashboard.dashboard")}
           path={`/client/dashboard`}
@@ -41,6 +45,13 @@ export default function SidebarItems() {
       )}
       {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
+          label={t("pricesTable.users")}
+          path={`/client/admin/users`}
+          icon={<FaUser size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
           label={t("pricesTable.locations")}
           path={`/client/admin/locations`}
           icon={<FaCalculator size={22} />}
@@ -51,6 +62,13 @@ export default function SidebarItems() {
           label={"Xabarnoma"}
           path={`/client/admin/notifications`}
           icon={<MdNotifications size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={"Mahsulotlar"}
+          path={`/client/admin/products`}
+          icon={<AiFillProduct size={22} />}
         />
       )}
       {role === "ROLE_CONTROLLER" && (

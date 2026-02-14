@@ -1,49 +1,104 @@
 "use client";
 
-import { FaCalculator, FaDollarSign, FaHome, FaSignOutAlt } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome, FaSignOutAlt, FaUser } from "react-icons/fa";
 import Logo from "@/shared/components/dump/atoms/Logo";
 import { useGlobalStore } from "@/shared/store/globalStore";
-import { Drawer } from "antd";
+import { Drawer, Select } from "antd";
 import { useTranslations } from "next-intl";
 import MenuItem from "./menu-item";
-import { formatPhone } from "@/shared/utils/formatter";
+// import { formatPhone } from "@/shared/utils/formatter";
 import UserDetails from "@/widgets/headers/navbar-cabinet/molecules/get-me";
 import { MdNotifications } from "react-icons/md";
+import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
+import { useEntityIds } from "@/services/users/hook";
+import { useMe } from "@/widgets/headers/navbar-cabinet/hook/hook";
+import { formatPhoneTR } from "@/shared/utils/formatter";
 
 export const DrawerSidebar = ({
   closeSidebar,
   isOpen,
 }: {
   closeSidebar: () => void;
-  isOpen: boolean; 
+  isOpen: boolean;
 }) => {
   const role = localStorage.getItem("roleName");
+  const { toggleSidebar, selectedEntityId, setSelectedEntityId } = useSidebarStore();
+  const { data: entityids } = useEntityIds();
+  const { data } = useMe();
+
   const tr = useTranslations("personalNumberPage");
   const t = useTranslations("");
   const { setIslogout } = useGlobalStore();
   const logout = () => setIslogout(true);
   const { userInfo } = useGlobalStore();
+  const handleEntityChange = (value: string) => {
+    setSelectedEntityId(value);
+  };
+  const formatPhone = (value: string, withoutPrefix?: boolean): string => {
+    if (!value) return "";
+    const digits = value.replace(/\D/g, "");
 
+    let formatted = digits;
+
+    if (formatted.startsWith("998")) {
+      formatted = formatted.slice(3);
+    }
+
+    const formattedNumber =
+      (formatted.substring(0, 2) ? formatted.substring(0, 2) : "") +
+      (formatted.substring(2, 5) ? " " + formatted.substring(2, 5) : "") +
+      (formatted.substring(5, 7) ? " " + formatted.substring(5, 7) : "") +
+      (formatted.substring(7, 9) ? " " + formatted.substring(7, 9) : "");
+
+    return withoutPrefix ? formattedNumber : "+998 " + formattedNumber;
+  };
   return (
     <Drawer
       placement="left"
       title={
         <div className="flex items-center justify-start gap-3">
-          <div>
+          {/* <div>
             <span className="text-white text-base font-semibold">
               {tr("label")}: {userInfo?.code ?? "-"}
             </span>
-          </div>
+          </div> */}
+          {role === "ROLE_USER" && entityids?.result?.ids && entityids.result.ids.length > 0 && (
+            <div className="hidden lg:block">
+              {t("accountNumber")}: {" "}
+              <Select
+                value={selectedEntityId}
+                onChange={handleEntityChange}
+                placeholder={t("label")}
+                style={{ minWidth: 200 }}
+                size="large"
+                className="font-semibold"
+                options={entityids.result.ids.map((id: string) => ({
+                  label: `${id}`,
+                  value: id,
+                }))}
+              />
+            </div>
+          )}
         </div>
       }
       onClose={closeSidebar}
       open={isOpen}
       width={400}
       className="lg:hidden"
+      // classNames={{
+      //   body: "bg-gradient-to-b from-blue-800 via-blue-700 to-blue-600 text-white",
+      //   header:
+      //     "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white",
+      // }}
+      closeIcon={
+        <span className="text-white text-xl hover:text-gray-300 transition-colors">
+          ✕
+        </span>
+      }
       classNames={{
         body: "bg-gradient-to-b from-blue-800 via-blue-700 to-blue-600 text-white",
         header:
-          "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white",
+          "bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white [&_.ant-drawer-close]:text-white [&_.ant-drawer-close:hover]:text-gray-200",
       }}
     >
       <div className="flex flex-col h-full  relative">
@@ -64,7 +119,7 @@ export const DrawerSidebar = ({
             </span>
           </div> */}
 
-          {role === "ROLE_USER" && (
+          {role === "ROLE_USER" && data?.data?.code && (
             <MenuItem
               label={t("clientDashboard.dashboard")}
               path={`/client/dashboard`}
@@ -83,6 +138,13 @@ export const DrawerSidebar = ({
               label={t("pricesTable.prices")}
               path={`/client/admin/prices`}
               icon={<FaHome size={22} />}
+            />
+          )}
+          {role === "ROLE_SUPER_ADMIN" && (
+            <MenuItem
+              label={t("pricesTable.users")}
+              path={`/client/admin/users`}
+              icon={<FaUser size={22} />}
             />
           )}
           {role === "ROLE_SUPER_ADMIN" && (
@@ -119,7 +181,7 @@ export const DrawerSidebar = ({
             <div className="flex-1">
               <UserDetails
                 userName={userInfo?.fullname || "-"}
-                userPhone={formatPhone(userInfo?.phone || "-")}
+                userPhone={userInfo?.phone.startsWith("998") ? formatPhone(userInfo?.phone || "-") : formatPhoneTR(userInfo?.phone || "-")}
               />
             </div>
           </div>

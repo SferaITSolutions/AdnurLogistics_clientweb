@@ -6,8 +6,9 @@ import { toast } from 'sonner';
 // Get Me
 export const useMe = () => {
   const role = localStorage.getItem("roleName")
+  const code = localStorage.getItem("code")
   return useQuery({
-    queryKey: ['fetch-me', role],
+    queryKey: ['fetch-me', role, code],
     queryFn: () => meService.me(),
     // staleTime: 5 * 60 * 1000,
   });

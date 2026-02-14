@@ -22,7 +22,7 @@ export const useLoginMutation = () => {
 
     onSuccess: async (response) => {
       const { roleName, accessToken, refreshToken } = response.data;
-
+      // localStorage.clear()
       setLocalItem("roleName", roleName);
       setLocalItem("access_token", accessToken);
       setLocalItem("refresh_token", refreshToken);
@@ -68,6 +68,7 @@ export const useCheckIdentityMutation = () => {
     mutationFn: (code: string) => authService.verifyCode({ code, identity: identity || '' }), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
+      setLocalItem('roleName', data.data.roleName);
       setLocalItem('refresh_token', data.data.refreshToken);
       toast.success(t('authSuccessMessages.loginSuccess'));
     },

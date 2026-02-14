@@ -184,7 +184,7 @@ export default function DeliveryPricesPage() {
       </div>
 
       {data && data.result?.totalElements > 0 && (
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex justify-end">
           <Pagination
             current={currentPage}
             pageSize={pageSize}

@@ -243,21 +243,22 @@
     "welcome": "Hoş geldiniz 😊",
     "steps": {
       "step1": "Bilgiler",
-      "step2": "Kişisel numara",
+      "step2": "OTP Doğrulama",
       "step3": "Doğrulama"
     },
     "name": "Adınız Soyadınız",
     "phone": "Telefon numaranız",
     "password": "Parola",
     "repeatPassword": "Parolayı tekrar girin",
-    "getId": "Kişisel numara al",
+    "getId": "Kayıt ol",
     "alreadyRegistered": "Zaten kayıt oldum",
     "back": "Geri"
   },
   "personalNumberPage": {
-    "label": "Kişisel numaranız",
-    "placeholder": "Numarayı girin...",
-    "button": "Devam et"
+    "label": "Doğrulama kodu",
+    "accountNumber": "Fatura numarası",
+    "placeholder": "Kodu girin...",
+    "button": "Doğrula"
   },
   "finelyTab": {
     "title": "Tebrikler!",
@@ -416,6 +417,7 @@
   "pricesTable": {
     "prices": "Fiyatlar",
     "locations": "Konumlar",
+    "users": "Kullanıcılar",
     "logout": "Çıkış",
     "personalNumber": "Kişisel numaranız:",
     "deliveryRates": "Teslimat fiyatları",

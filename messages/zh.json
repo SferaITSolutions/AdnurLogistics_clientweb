@@ -1,57 +1,57 @@
 {
   "LendingPage": {
     "header": {
-      "logo": "标志",
-      "login": "登录"
+      "logo": "標誌",
+      "login": "登錄"
     },
     "applyModal": {
-      "title": "申请",
-      "success": "您的申请已成功提交 ✅",
-      "error": "发生错误。请重试 ❌",
+      "title": "申請",
+      "success": "您的申請已成功提交 ✅",
+      "error": "發生錯誤。請重試 ❌",
       "fields": {
         "fullname": {
           "label": "您的姓名",
           "placeholder": "您的姓名",
-          "required": "请输入您的姓名！",
+          "required": "請輸入您的姓名！",
           "pattern": "只使用字母！"
         },
         "phone": {
-          "label": "您的电话号码",
+          "label": "您的電話號碼",
           "placeholderUz": "90 123 45 67",
           "placeholderTr": "123 123 1234",
-          "required": "请输入您的电话号码！",
-          "patternUz": "电话格式: +998 90 123 45 67",
-          "patternTr": "电话格式: +90 123 123 1234"
+          "required": "請輸入您的電話號碼！",
+          "patternUz": "電話格式: +998 90 123 45 67",
+          "patternTr": "電話格式: +90 123 123 1234"
         },
         "fromLocation": {
-          "label": "从哪里",
-          "placeholder": "从哪里",
-          "required": "请选择起点！"
+          "label": "從哪裡",
+          "placeholder": "從哪裡",
+          "required": "請選擇起點！"
         },
         "toLocation": {
-          "label": "到哪里",
-          "placeholder": "到哪里",
-          "required": "请选择目的地！"
+          "label": "到哪裡",
+          "placeholder": "到哪裡",
+          "required": "請選擇目的地！"
         },
         "bulk": {
-          "label": "体积 (m3)",
-          "placeholder": "体积 (m3)",
-          "required": "请输入体积！"
+          "label": "體積 (m3)",
+          "placeholder": "體積 (m3)",
+          "required": "請輸入體積！"
         },
         "density": {
           "label": "重量 (KG)",
           "placeholder": "重量 (KG)",
-          "required": "请输入重量！"
+          "required": "請輸入重量！"
         },
         "weight": {
           "label": "密度 (Kg/m3)",
           "placeholder": "密度 (Kg/m3)",
-          "required": "请输入密度！"
+          "required": "請輸入密度！"
         },
         "description": {
           "label": "留言",
           "placeholder": "您的留言...",
-          "required": "请输入您的留言！"
+          "required": "請輸入您的留言！"
         }
       },
       "button": {
@@ -60,472 +60,474 @@
     },
     "hero": {
       "title": "Adnur 物流",
-      "subtitle": "Adnur 物流是拥有多年经验的专业物流服务提供商。我们为您提供最佳的物流解决方案，并以最优惠的条件交付您的货物。",
-      "applyButton": "立即申请"
+      "subtitle": "Adnur 物流是擁有多年經驗的專業物流服務提供商。我們為您提供最佳的物流解決方案，並以最優惠的條件交付您的貨物。",
+      "applyButton": "立即申請"
     },
     "stats": {
       "years": "10+",
-      "experienceLabel": "多年经验",
+      "experienceLabel": "多年經驗",
       "countries": "3+",
-      "countriesLabel": "跨越国家",
+      "countriesLabel": "跨越國家",
       "services": "4+",
-      "servicesLabel": "服务类型"
+      "servicesLabel": "服務類型"
     },
     "about": {
-      "titleHead": "我们是乌兹别克斯坦的",
+      "titleHead": "我們是烏茲別克斯坦的",
       "titleRed": "#1 物流公司",
       "titleFooter": "公司",
       "highlight": "#1 物流公司",
-      "description": "我们是一家在世界范围内超过 4 个国家赢得信任的国际公司。得益于我们的服务，您的货物能够快速、安全地送达！",
-      "apply": "立即申请",
-      "watchVideo": "观看视频"
+      "description": "我們是一家在世界範圍內超過 4 個國家贏得信任的國際公司。得益於我們的服務，您的貨物能夠快速、安全地送達！",
+      "apply": "立即申請",
+      "watchVideo": "觀看視頻"
     },
     "services": {
       "title1": "您需要的",
       "title2": "一切",
-      "title3": "都在这里！",
+      "title3": "都在這裡！",
       "list": {
-        "transport": "运输与物流",
-        "inspection": "货物检验",
-        "storage": "临时仓储",
-        "customs": "海关手续"
+        "transport": "運輸與物流",
+        "inspection": "貨物檢驗",
+        "storage": "臨時倉儲",
+        "customs": "海關手續"
       }
     },
     "warehouses": {
-      "china": "中国接收批发货物的仓库",
+      "china": "中國接收批發貨物的倉庫",
       "address": "完整地址：",
       "receiver": "收件人：",
-      "labels": "商业货物的必备标志：",
-      "transport": "按运输方式分类："
+      "labels": "商業貨物的必備標誌：",
+      "transport": "按運輸方式分類："
     },
     "contact": {
-      "address": "塔什干, 奇尔奇克区, O‘qchi - 6. (塔什干城市大道附近)",
+      "address": "塔什干, 奇爾奇克區, O‘qchi - 6. (塔什干城市大道附近)",
       "phone": "+7 980 470 00958",
-      "getInTouch": "联系我们"
+      "getInTouch": "聯繫我們"
     },
     "footer": {
-      "copyright": "© 2025 Adnur 物流 - 版权所有",
-      "developedBy": "开发者: Sfera IT Solutions"
+      "copyright": "© 2025 Adnur 物流 - 版權所有",
+      "developedBy": "開發者: Sfera IT Solutions"
     }
   },
   "logoutModal": {
-    "title": "退出系统",
+    "title": "退出系統",
     "cancelText": "否",
     "okText": "是",
-    "confirmationMessage": "您确认要退出系统吗?"
+    "confirmationMessage": "您確認要退出系統嗎?"
   },
   "login": {
-    "title": "登录",
-    "phone": "您的电话号码",
-    "phonePlaceholder": "请输入电话号码！",
-    "phoneFormat": "电话格式",
-    "password": "密码",
-    "passwordPlaceholder": "请输入密码",
-    "button": "登录",
-    "register": "注册"
+    "title": "登錄",
+    "phone": "您的電話號碼",
+    "phonePlaceholder": "請輸入電話號碼！",
+    "phoneFormat": "電話格式",
+    "password": "密碼",
+    "passwordPlaceholder": "請輸入密碼",
+    "button": "登錄",
+    "register": "註冊"
   },
   "Schemas": {
-    "email": "请输入有效的电子邮件地址",
-    "number": "请输入有效的数字",
-    "numberFormat": "请输入有效的数字格式",
-    "turkishNumberFormat": "Turk 数字格式无效",
-    "region_not_allowed": "很抱歉，您的地区无法参与。如需参与，您必须选择一个允许的地区。",
-    "verify": "请验证您的电子邮件",
-    "required": "此字段为必填项",
-    "numberRequired": "请输入您的电话号码！",
-    "minString": "字段必须至少包含 {min} 个字符",
-    "passwordMismatch": "密码必须匹配",
-    "passwordUppercase": "密码必须包含至少一个大写字母",
-    "passwordLowercase": "密码必须包含至少一个小写字母",
-    "passwordNumber": "密码必须包含至少一个数字",
-    "passwordSpecial": "密码必须包含至少一个特殊字符 (@$!%*?&)",
+    "email": "請輸入有效的電子郵件地址",
+    "number": "請輸入有效的數字",
+    "numberFormat": "請輸入有效的數字格式",
+    "turkishNumberFormat": "Turk 數字格式無效",
+    "region_not_allowed": "很抱歉，您的地區無法參與。如需參與，您必須選擇一個允許的地區。",
+    "verify": "請驗證您的電子郵件",
+    "required": "此字段為必填項",
+    "numberRequired": "請輸入您的電話號碼！",
+    "minString": "字段必須至少包含 {min} 個字符",
+    "passwordMismatch": "密碼必須匹配",
+    "passwordUppercase": "密碼必須包含至少一個大寫字母",
+    "passwordLowercase": "密碼必須包含至少一個小寫字母",
+    "passwordNumber": "密碼必須包含至少一個數字",
+    "passwordSpecial": "密碼必須包含至少一個特殊字符 (@$!%*?&)",
     "industries": {
-      "min": "请至少选择一个行业。",
-      "nonempty": "行业字段不能为空。",
-      "required": "行业是必填项。"
+      "min": "請至少選擇一個行業。",
+      "nonempty": "行業字段不能為空。",
+      "required": "行業是必填項。"
     },
     "stages": {
-      "min": "请至少选择一个阶段。",
-      "nonempty": "阶段字段不能为空。",
-      "required": "阶段是必填项。"
+      "min": "請至少選擇一個階段。",
+      "nonempty": "階段字段不能為空。",
+      "required": "階段是必填項。"
     },
     "name": {
-      "min": "名称长度必须至少为 2 个字符。",
-      "required": "名称是必填项。"
+      "min": "名稱長度必須至少為 2 個字符。",
+      "required": "名稱是必填項。"
     },
     "surname": {
-      "min": "姓氏长度必须至少为 2 个字符。",
-      "required": "姓氏是必填项。"
+      "min": "姓氏長度必須至少為 2 個字符。",
+      "required": "姓氏是必填項。"
     },
     "investor_type": {
-      "invalid": "选择了无效的投资者类型。"
+      "invalid": "選擇了無效的投資者類型。"
     },
     "description": {
-      "min": "描述长度必须至少为 10 个字符。",
-      "max": "描述长度不能超过 1000 个字符。",
-      "short": "描述长度最多为 200 个字符。",
-      "dynamic_max": "描述长度最多为 {length} 个字符。",
-      "long": "描述长度最多为 1000 个字符。",
-      "required": "描述是必填项。"
+      "min": "描述長度必須至少為 10 個字符。",
+      "max": "描述長度不能超過 1000 個字符。",
+      "short": "描述長度最多為 200 個字符。",
+      "dynamic_max": "描述長度最多為 {length} 個字符。",
+      "long": "描述長度最多為 1000 個字符。",
+      "required": "描述是必填項。"
     },
     "photo": {
-      "invalid": "照片必须是 PNG 或 SVG 文件，且大小不得超过 5MB。"
+      "invalid": "照片必須是 PNG 或 SVG 文件，且大小不得超過 5MB。"
     },
     "file": {
-      "invalid": "文件必须是 {types} 文件，且大小不得超过 {size}MB。"
+      "invalid": "文件必須是 {types} 文件，且大小不得超過 {size}MB。"
     },
     "link": {
-      "invalid": "链接必须是有效的 URL。"
+      "invalid": "連結必須是有效的 URL。"
     },
     "contacts": {
-      "min": "联系方式长度必须至少为 5 个字符。",
-      "required": "联系方式是必填项。"
+      "min": "聯繫方式長度必須至少為 5 個字符。",
+      "required": "聯繫方式是必填項。"
     },
     "investment_amount": {
-      "min": "投资金额不能为空。"
+      "min": "投資金額不能為空。"
     },
     "region": {
-      "invalid": "选择了无效的地区。"
+      "invalid": "選擇了無效的地區。"
     },
     "fullname": {
-      "required": "全名是必填项。",
-      "minLength": "全名长度必须至少为 3 个字符"
+      "required": "全名是必填項。",
+      "minLength": "全名長度必須至少為 3 個字符"
     },
     "stage": {
-      "invalid": "选择了无效的阶段。"
+      "invalid": "選擇了無效的階段。"
     },
     "presentation": {
-      "invalid_type": "演示文稿必须是 PDF 文件。",
-      "max_size": "演示文稿大小必须为 5MB 或更小。",
-      "max_size_15": "演示文稿大小必须为 15MB 或更小。"
+      "invalid_type": "演示文稿必須是 PDF 文件。",
+      "max_size": "演示文稿大小必須為 5MB 或更小。",
+      "max_size_15": "演示文稿大小必須為 15MB 或更小。"
     },
     "logo": {
-      "invalid_type": "标志必须是 PNG 或 SVG 文件。",
-      "max_size": "标志大小必须为 5MB 或更小。"
+      "invalid_type": "標誌必須是 PNG 或 SVG 文件。",
+      "max_size": "標誌大小必須為 5MB 或更小。"
     },
     "logo_edit_profile": {
-      "invalid_type": "标志必须是 PNG、JPG 或 JPEG 文件。",
-      "max_size": "标志大小必须为 5MB 或更小。"
+      "invalid_type": "標誌必須是 PNG、JPG 或 JPEG 文件。",
+      "max_size": "標誌大小必須為 5MB 或更小。"
     },
     "contact": {
-      "required": "联系方式是必填项。",
-      "minLength": "联系方式长度必须至少为 9 个字符"
+      "required": "聯繫方式是必填項。",
+      "minLength": "聯繫方式長度必須至少為 9 個字符"
     },
     "organization": {
-      "required": "组织名称是必填项。",
-      "minLength": "组织名称长度必须至少为 3 个字符"
+      "required": "組織名稱是必填項。",
+      "minLength": "組織名稱長度必須至少為 3 個字符"
     },
     "position": {
-      "required": "职位是必填项。",
-      "minLength": "职位长度必须至少为 3 个字符"
+      "required": "職位是必填項。",
+      "minLength": "職位長度必須至少為 3 個字符"
     },
     "linkedin": {
-      "required": "领英（LinkedIn）是必填项。"
+      "required": "領英（LinkedIn）是必填項。"
     },
     "investment_required": {
-      "nonnegative": "所需投资必须是非负数。"
+      "nonnegative": "所需投資必須是非負數。"
     },
     "reason": {
-      "required": "理由是必填项。"
+      "required": "理由是必填項。"
     },
     "legal_name": {
-      "required": "法定名称是必填项。"
+      "required": "法定名稱是必填項。"
     },
     "tax_report": {
-      "max_size": "税务报告大小必须为 5MB 或更小。"
+      "max_size": "稅務報告大小必須為 5MB 或更小。"
     },
     "is_member": {
-      "required": "会员身份状态是必填项。"
+      "required": "會員身份狀態是必填項。"
     },
     "certificate": {
-      "required": "证书必须上传",
-      "max_size": "证书大小必须为 5MB 或更小。"
+      "required": "證書必須上傳",
+      "max_size": "證書大小必須為 5MB 或更小。"
     },
     "industry": {
-      "invalid": "选择了无效的行业。"
+      "invalid": "選擇了無效的行業。"
     }
   },
   "register": {
-    "welcome": "欢迎您 😊",
+    "welcome": "歡迎您 😊",
     "steps": {
       "step1": "信息",
-      "step2": "个人编号",
-      "step3": "验证"
+      "step2": "OTP 验证",
+      "step3": "驗證"
     },
     "name": "姓名",
-    "phone": "您的电话号码",
-    "password": "密码",
-    "repeatPassword": "重复密码",
-    "getId": "获取个人编号",
-    "alreadyRegistered": "我已经注册过了",
+    "phone": "您的電話號碼",
+    "password": "密碼",
+    "repeatPassword": "重複密碼",
+    "getId": "注册",
+    "alreadyRegistered": "我已經註冊過了",
     "back": "返回"
   },
   "personalNumberPage": {
-    "label": "您的个人号码",
-    "placeholder": "输入号码...",
-    "button": "继续"
+    "label": "验证码",
+    "accountNumber": "账单编号",
+    "placeholder": "请输入验证码...",
+    "button": "验证"
   },
   "finelyTab": {
     "title": "恭喜您!",
-    "message": "您的注册流程已成功完成。",
-    "button": "前往个人中心"
+    "message": "您的註冊流程已成功完成。",
+    "button": "前往個人中心"
   },
   "clientDashboard": {
-    "title": "客户仪表板",
+    "title": "客戶儀表板",
     "all": "所有",
     "inDelivery": "正在派送中",
     "pendingDelivery": "等待派送",
     "pendingPayment": "等待付款",
-    "dashboard": "仪表板",
-    "calculation": "计算",
-    "itemsBeingCollected": "货物正在集货中",
-    "productDetails": "产品详情",
-    "orderDetails": "订单详情",
-    "from": "从",
+    "dashboard": "儀表板",
+    "calculation": "計算",
+    "itemsBeingCollected": "貨物正在集貨中",
+    "productDetails": "產品詳情",
+    "orderDetails": "訂單詳情",
+    "from": "從",
     "to": "到",
-    "eta": "到达时间:",
+    "eta": "到達時間:",
     "WarehousePendingArrival": "倉庫待到貨",
     "countOfProducts": "件",
-    "orderId": "订单编号:",
+    "orderId": "訂單編號:",
     "unpaid": "未付款",
-    "noProductsFound": "未找到产品",
-    "noOrderSelected": "未选择订单",
-    "invoiceNumber": "发票号码",
-    "status": "状态",
-    "totalAmount": "总金额",
-    "paidAmount": "已付金额",
+    "noProductsFound": "未找到產品",
+    "noOrderSelected": "未選擇訂單",
+    "invoiceNumber": "發票號碼",
+    "status": "狀態",
+    "totalAmount": "總金額",
+    "paidAmount": "已付金額",
     "remainingAmount": "債務金額",
     "logout": "退出",
-    "activeOrder": "活跃订单",
-    "savedOrder": "已接受订单"
+    "activeOrder": "活躍訂單",
+    "savedOrder": "已接受訂單"
   },
   "calculationPage": {
-    "title": "计算订单价格",
-    "valueGreaterThanZero": "值必须大于 0",
-    "fromLabel": "从哪里",
-    "fromPlaceholder": "选择起点",
-    "toLabel": "到哪里",
-    "toPlaceholder": "选择目的地",
+    "title": "計算訂單價格",
+    "valueGreaterThanZero": "值必須大於 0",
+    "fromLabel": "從哪裡",
+    "fromPlaceholder": "選擇起點",
+    "toLabel": "到哪裡",
+    "toPlaceholder": "選擇目的地",
     "weightLabel": "重量 (KG)",
-    "weightPlaceholder": "请输入以公斤为单位的重量",
+    "weightPlaceholder": "請輸入以公斤為單位的重量",
     "densityLabel": "密度 (KG/m³)",
-    "densityPlaceholder": "请输入 1 立方米对应的重量",
-    "volumeLabel": "体积 (m³)",
-    "volumePlaceholder": "请输入以立方米为单位的体积",
-    "typeLabel": "类型",
-    "typeIcl": "LCL (拼箱/部分集装箱)",
-    "typeFcl": "FCL (整箱/满集装箱)",
-    "containerTypePlaceholder": "选择集装箱类型",
-    "customsLabel": "包含报关服务费计算",
-    "customsAgreement": "计算需要同意包含报关价格",
-    "calculateButton": "计算",
-    "errorNeedCalculation": "要提交请求，请先进行计算！",
-    "errorFillAndCalculate": "请先填写表格中的所有字段并进行计算，才能获取计算结果。",
-    "result": "计算结果: ",
+    "densityPlaceholder": "請輸入 1 立方米對應的重量",
+    "volumeLabel": "體積 (m³)",
+    "volumePlaceholder": "請輸入以立方米為單位的體積",
+    "typeLabel": "類型",
+    "typeIcl": "LCL (拼箱/部分集裝箱)",
+    "typeFcl": "FCL (整箱/滿集裝箱)",
+    "containerTypePlaceholder": "選擇集裝箱類型",
+    "customsLabel": "包含報關服務費計算",
+    "customsAgreement": "計算需要同意包含報關價格",
+    "calculateButton": "計算",
+    "errorNeedCalculation": "要提交請求，請先進行計算！",
+    "errorFillAndCalculate": "請先填寫表格中的所有字段並進行計算，才能獲取計算結果。",
+    "result": "計算結果: ",
     "additionalPayments": "Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi."
   },
   "calculationResult": {
-    "loading": "正在加载...",
-    "customsLabel": "包含报关服务费计算",
-    "modalTitleSuccess": "您的请求已被接受！",
-    "modalMessageSuccess": "请求已发送给管理员。他们将尽快与您联系。",
-    "modalButtonOk": "确定",
-    "calculatedPriceTitle": "计算价格:",
+    "loading": "正在加載...",
+    "customsLabel": "包含報關服務費計算",
+    "modalTitleSuccess": "您的請求已被接受！",
+    "modalMessageSuccess": "請求已發送給管理員。他們將盡快與您聯繫。",
+    "modalButtonOk": "確定",
+    "calculatedPriceTitle": "計算價格:",
     "priceSuffix": "USD",
-    "disclaimer": "在海关清关时，每件商品可能需要支付额外费用。以上价格不含报关费用。",
-    "sendRequestButton": "发送请求给管理员",
-    "errorNeedCalculationTitle": "要提交请求，请先进行计算！",
-    "errorNeedCalculationMessage": "请先填写表格中的所有字段并进行计算，才能获取计算结果。"
+    "disclaimer": "在海關清關時，每件商品可能需要支付額外費用。以上價格不含報關費用。",
+    "sendRequestButton": "發送請求給管理員",
+    "errorNeedCalculationTitle": "要提交請求，請先進行計算！",
+    "errorNeedCalculationMessage": "請先填寫表格中的所有字段並進行計算，才能獲取計算結果。"
   },
   "orderInfo": {
-    "orderNumber": "订单编号:",
-    "productName": "产品名称:",
-    "description": "描述/分类:",
-    "quantity": "数量:",
-    "priceSum": "价格 (苏姆):",
-    "totalAmount": "总金额 (苏姆):"
+    "orderNumber": "訂單編號:",
+    "productName": "產品名稱:",
+    "description": "描述/分類:",
+    "quantity": "數量:",
+    "priceSum": "價格 (蘇姆):",
+    "totalAmount": "總金額 (蘇姆):"
   },
   "regions": {
-    "horgos": "霍尔果斯",
-    "yiwu": "义乌",
+    "horgos": "霍爾果斯",
+    "yiwu": "義烏",
     "foshan": "佛山"
   },
   "toRegions": {
     "tashkent": "塔什干"
   },
   "editNameModal": {
-    "title": "编辑资料",
-    "placeholder": "输入姓名",
-    "validationError": "姓名不能为空",
-    "hint": "姓名不应包含数字或特殊字符，且不能为空",
+    "title": "編輯資料",
+    "placeholder": "輸入姓名",
+    "validationError": "姓名不能為空",
+    "hint": "姓名不應包含數字或特殊字符，且不能為空",
     "okText": "保存",
     "cancelText": "取消"
   },
   "applyForm": {
-    "fromLabel": "起始地点",
-    "fromPlaceholder": "输入起始地点",
-    "fromRequiredError": "请输入起始地点！",
+    "fromLabel": "起始地點",
+    "fromPlaceholder": "輸入起始地點",
+    "fromRequiredError": "請輸入起始地點！",
     "toLabel": "目的地",
-    "toPlaceholder": "输入目的地",
-    "toRequiredError": "请输入目的地！",
+    "toPlaceholder": "輸入目的地",
+    "toRequiredError": "請輸入目的地！",
     "weightLabel": "重量 (公斤)",
-    "weightPlaceholder": "输入以公斤为单位的重量",
-    "weightRequiredError": "请输入重量！",
-    "weightMinError": "重量必须大于 0",
-    "bulkLabel": "体积 (m³)",
-    "bulkPlaceholder": "输入以 m³ 为单位的体积",
-    "bulkRequiredError": "请输入体积！",
-    "bulkMinError": "体积必须大于 0",
-    "customsCheckbox": "需要报关",
+    "weightPlaceholder": "輸入以公斤為單位的重量",
+    "weightRequiredError": "請輸入重量！",
+    "weightMinError": "重量必須大於 0",
+    "bulkLabel": "體積 (m³)",
+    "bulkPlaceholder": "輸入以 m³ 為單位的體積",
+    "bulkRequiredError": "請輸入體積！",
+    "bulkMinError": "體積必須大於 0",
+    "customsCheckbox": "需要報關",
     "submitButton": "提交",
     "successModalTitle": "成功",
-    "successModalText": "您的请求已成功提交。",
-    "successModalCloseButton": "关闭"
+    "successModalText": "您的請求已成功提交。",
+    "successModalCloseButton": "關閉"
   },
   "authSuccessMessages": {
-    "loginSuccess": "成功登录系统 ✅"
+    "loginSuccess": "成功登錄系統 ✅"
   },
   "resetPasswordPage": {
-    "pageTitle": "更改密码",
-    "oldPasswordLabel": "旧密码",
-    "oldPasswordPlaceholder": "输入旧密码",
-    "newPasswordLabel": "新密码",
-    "newPasswordPlaceholder": "输入新密码",
-    "confirmNewPasswordLabel": "确认新密码",
-    "confirmNewPasswordPlaceholder": "重新输入新密码",
-    "submitButton": "更改密码",
-    "minLength": "至少 5 个字符",
+    "pageTitle": "更改密碼",
+    "oldPasswordLabel": "舊密碼",
+    "oldPasswordPlaceholder": "輸入舊密码",
+    "newPasswordLabel": "新密碼",
+    "newPasswordPlaceholder": "輸入新密碼",
+    "confirmNewPasswordLabel": "確認新密碼",
+    "confirmNewPasswordPlaceholder": "重新輸入新密碼",
+    "submitButton": "更改密碼",
+    "minLength": "至少 5 個字符",
     "validation": {
-      "oldPasswordRequired": "需要旧密码。",
-      "newPasswordRequired": "需要新密码。",
-      "confirmPasswordRequired": "需要确认密码。",
-      "passwordsDoNotMatch": "新密码不匹配。"
+      "oldPasswordRequired": "需要舊密碼。",
+      "newPasswordRequired": "需要新密碼。",
+      "confirmPasswordRequired": "需要確認密碼。",
+      "passwordsDoNotMatch": "新密碼不匹配。"
     },
     "success": {
-      "message": "您的密码已成功更改!"
+      "message": "您的密碼已成功更改!"
     }
   },
   "deliveryTracking": {
     "distance": "總距離",
     "speed": "速度",
-    "progress": "进度",
-    "status": "状态",
-    "eta": "预计到达时间",
-    "delivered": "已送达"
+    "progress": "進度",
+    "status": "狀態",
+    "eta": "預計到達時間",
+    "delivered": "已送達"
   },
   "pricesTable": {
-    "prices": "价格",
-    "locations": "地点",
+    "prices": "價格",
+    "locations": "地點",
+    "users": "用戶",
     "logout": "退出",
-    "personalNumber": "您的个人号码:",
-    "deliveryRates": "运费价格",
-    "fromTo": "从 → 到",
+    "personalNumber": "您的個人號碼:",
+    "deliveryRates": "運費價格",
+    "fromTo": "從 → 到",
     "weight": "重量 (公斤)",
-    "volume": "体积 (立方米)",
+    "volume": "體積 (立方米)",
     "add": "添加",
-    "priceSum": "价格 (苏姆)",
+    "priceSum": "價格 (蘇姆)",
     "actions": "操作",
-    "noData": "暂无数据"
+    "noData": "暫無數據"
   },
   "deliveryPrices": {
     "columns": {
       "number": "#",
-      "route": "出发地 → 目的地",
+      "route": "出發地 → 目的地",
       "weight": "重量 (公斤)",
-      "volume": "体积 (立方米)",
-      "price": "价格 (苏姆)",
+      "volume": "體積 (立方米)",
+      "price": "價格 (蘇姆)",
       "actions": "操作"
     },
     "actions": {
-      "edit": "编辑",
-      "delete": "删除"
+      "edit": "編輯",
+      "delete": "刪除"
     },
     "deleteConfirm": {
-      "title": "删除价格",
-      "description": "{route} 的价格将被删除。此操作无法撤销。",
-      "okText": "是的，删除",
+      "title": "刪除價格",
+      "description": "{route} 的價格將被刪除。此操作無法撤銷。",
+      "okText": "是的，刪除",
       "cancelText": "否"
     },
     "editModal": {
-      "title": "编辑价格",
+      "title": "編輯價格",
       "successMessage": "更新成功！"
     }
   },
   "deliveryPriceCreateForm": {
-    "weightRangeLabel": "重量范围 (公斤)",
+    "weightRangeLabel": "重量範圍 (公斤)",
     "minPlaceholder": "最小",
-    "maxPlaceholder": "最大 (可选，无限请留空)",
+    "maxPlaceholder": "最大 (可選，無限請留空)",
     "cubLabel": "每立方米價格",
-    "priceLabel": "基本价格 (苏姆)",
-    "cubMultiplierLabel": "体积乘数 (超过最大重量后)",
-    "priceMultiplierLabel": "价格乘数 (超过最大重量后)",
-    "fromLocationLabel": "出发地 (从)",
+    "priceLabel": "基本價格 (蘇姆)",
+    "cubMultiplierLabel": "體積乘數 (超過最大重量後)",
+    "priceMultiplierLabel": "價格乘數 (超過最大重量後)",
+    "fromLocationLabel": "出發地 (從)",
     "toLocationLabel": "目的地 (到)",
-    "selectPlaceholder": "选择",
-    "locationNotFound": "未找到地点",
+    "selectPlaceholder": "選擇",
+    "locationNotFound": "未找到地點",
     "cancelButton": "取消",
-    "saveButton": "添加价格",
+    "saveButton": "添加價格",
     "savingButton": "正在保存...",
     "validation": {
-      "minWeightRequired": "请输入最小重量",
-      "mustBePositive": "必须是正数",
-      "maxWeightError": "最大重量必须大于最小重量",
-      "fromLocationRequired": "请选择出发地",
-      "toLocationRequired": "请选择目的地"
+      "minWeightRequired": "請輸入最小重量",
+      "mustBePositive": "必須是正數",
+      "maxWeightError": "最大重量必須大於最小重量",
+      "fromLocationRequired": "請選擇出發地",
+      "toLocationRequired": "請選擇目的地"
     },
     "messages": {
-      "success": "新价格添加成功",
-      "error": "添加价格时出错"
+      "success": "新價格添加成功",
+      "error": "添加價格時出錯"
     }
   },
   "deliveryPriceUpdateForm": {
-    "weightRangeLabel": "重量范围 (公斤)",
-    "minWeightRequired": "最小重量是必填项",
-    "mustBePositive": "必须是正数",
-    "maxWeightPlaceholder": "无限制请留空",
-    "maxWeightError": "最大值必须大于最小值",
+    "weightRangeLabel": "重量範圍 (公斤)",
+    "minWeightRequired": "最小重量是必填項",
+    "mustBePositive": "必須是正數",
+    "maxWeightPlaceholder": "無限制請留空",
+    "maxWeightError": "最大值必須大於最小值",
     "cubLabel": "每立方米價格",
-    "cubRequired": "体积是必填项",
-    "priceLabel": "价格 (苏姆)",
-    "priceRequired": "价格是必填项",
-    "multipliersLabel": "乘数 (可选)",
-    "cubMultiplierPlaceholder": "体积 × (留空 = null)",
-    "priceMultiplierPlaceholder": "价格 × (留空 = null)",
-    "fromLocationLabel": "出发地 (从)",
-    "fromLocationRequired": "请选择出发地",
+    "cubRequired": "體積是必填項",
+    "priceLabel": "價格 (蘇姆)",
+    "priceRequired": "價格是必填項",
+    "multipliersLabel": "乘數 (可選)",
+    "cubMultiplierPlaceholder": "體積 × (留空 = null)",
+    "priceMultiplierPlaceholder": "價格 × (留空 = null)",
+    "fromLocationLabel": "出發地 (從)",
+    "fromLocationRequired": "請選擇出發地",
     "toLocationLabel": "目的地 (到)",
-    "toLocationRequired": "请选择目的地",
-    "selectPlaceholder": "选择",
+    "toLocationRequired": "請選擇目的地",
+    "selectPlaceholder": "選擇",
     "cancelButton": "取消",
     "saveButton": "保存",
     "updatingButton": "正在更新...",
-    "successMessage": "价格已成功更新",
-    "errorMessage": "更新错误: "
+    "successMessage": "價格已成功更新",
+    "errorMessage": "更新錯誤: "
   },
   "yandexMap": {
-    "totalDistance": "总距离",
-    "remainingDistance": "剩余距离",
-    "status": "状态",
-    "deliveryDate": "送达日期",
-    "delivered": "已送达",
+    "totalDistance": "總距離",
+    "remainingDistance": "剩餘距離",
+    "status": "狀態",
+    "deliveryDate": "送達日期",
+    "delivered": "已送達",
     "timeLeft": "剩餘時間",
     "onWay": "已完成 {percent}%",
-    "speed": "速度: {speed} 公里/小时",
-    "truck": "货车",
+    "speed": "速度: {speed} 公里/小時",
+    "truck": "貨車",
     "pendingConfirmation": "等待批准",
-    "pendingFulfillment": "等待履约",
+    "pendingFulfillment": "等待履約",
     "partiallyFulfilled": "部分完成",
-    "pendingBillingPartially": "等待开票 / 部分完成",
-    "pendingPayment": "等待开票",
-    "billed": "已开票",
-    "closedDelivered": "已关闭 / 已送达",
+    "pendingBillingPartially": "等待開票 / 部分完成",
+    "pendingPayment": "等待開票",
+    "billed": "已開票",
+    "closedDelivered": "已關閉 / 已送達",
     "toBePaid": "訂單金額"
   },
   "common": {
-    "userId": "用户ID号",
-    "salesManager": "销售经理面板"
+    "userId": "用戶ID號",
+    "salesManager": "銷售經理面板"
   },
   "Pending_Approval": "待批准",
-  "Closed": "已关闭",
+  "Closed": "已關閉",
   "Pending_Billing": "待付款"
 }

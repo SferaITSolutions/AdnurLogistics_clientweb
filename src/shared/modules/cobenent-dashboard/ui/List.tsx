@@ -10,10 +10,11 @@ import { useTranslations } from "next-intl";
 import { FaSpinner } from "react-icons/fa";
 import DashboardCard from "../molecules/cards";
 import Pagination from "../molecules/pagination";
+import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
 
 export default function OrdersList() {
   const t = useTranslations("clientDashboard");
-  
+  const { selectedEntityId } = useSidebarStore();
   const {
     setOrderId,
     openModal,
@@ -45,7 +46,7 @@ export default function OrdersList() {
     };
   }, [page, type, orderIdFilter]);
 
-  const { data, isLoading } = useOrder({ ...filterParams, page });
+  const { data, isLoading } = useOrder({ ...filterParams, page, entityId: selectedEntityId });
   useEffect(() => {
     setLoading(isLoading);
   }, [isLoading]);
@@ -87,18 +88,18 @@ export default function OrdersList() {
                       quantity={String(card.quantity)}
                       tolocation={String(card.tolocation)}
                       status={String(card.salesorderstatus)}
-                        onClick={() => {
-                          setOrderId(card.id);
-                          openModal();
-                          setStatusOfInvoice(card?.salesorderstatus)
-                          setTotalprice(card?.totalprice)
-                          console.log(card?.totalprice, "price");
-                          
-                          setStartEndDate({
-                            start: card.createddate,
-                            end: card.etadate,
-                          });
-                        }}
+                      onClick={() => {
+                        setOrderId(card.id);
+                        openModal();
+                        setStatusOfInvoice(card?.salesorderstatus)
+                        setTotalprice(card?.totalprice)
+                        console.log(card?.totalprice, "price");
+
+                        setStartEndDate({
+                          start: card.createddate,
+                          end: card.etadate,
+                        });
+                      }}
                     />
                   )
                 )}
@@ -111,7 +112,7 @@ export default function OrdersList() {
               </p>
             </div>
           )}
-          <Pagination dataLength={data?.data.totalElements } />
+          <Pagination dataLength={data?.data.totalElements} />
           <OrderDetailsModal />
         </>
       )}

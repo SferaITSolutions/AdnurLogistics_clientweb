@@ -172,7 +172,7 @@ export const ApplyModal = () => {
               }
             >
               {fromData?.result?.map((loc: any) => (
-                <Option key={loc.id} value={loc.name}>
+                <Option key={loc.id} value={loc.id}>
                   {loc.name}
                 </Option>
               ))}

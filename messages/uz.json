@@ -254,21 +254,22 @@
     "welcome": "Hush kelibsiz 😊",
     "steps": {
       "step1": "Ma’lumotlar",
-      "step2": "Shaxsiy raqam",
+      "step2": "OTP kodini tasdiqlash",
       "step3": "Tasdiq"
     },
-    "name": "Ism Familyangiz",
+    "name": "Ism Familiyangiz",
     "phone": "Telefon raqamingiz",
     "password": "Parol",
     "repeatPassword": "Takroriy parol",
-    "getId": "Shaxsiy raqam olish",
+    "getId": "Ro'yxatdan o'tish",
     "alreadyRegistered": "Avval ro'yhatdan o'tganman",
     "back": "Ortga"
   },
   "personalNumberPage": {
-    "label": "Shaxsiy raqamingiz",
-    "placeholder": "Raqamni kiriting...",
-    "button": "Davom etish"
+    "label": "Tasdiqlash kodi",
+    "accountNumber": "Hisob raqam",
+    "placeholder": "Kodni kiriting...",
+    "button": "Tasdiqlash"
   },
   "finelyTab": {
     "title": "Tabriklaymiz!",
@@ -422,6 +423,7 @@
     "logout": "Chiqish",
     "add": "Qo'shish",
     "personalNumber": "Shaxsiy raqamingiz:",
+    "users": "Foydalanuvchilar",
     "deliveryRates": "Yetkazib berish narxlari",
     "fromTo": "Dan → Gacha",
     "weight": "Og'irlik (kg)",
