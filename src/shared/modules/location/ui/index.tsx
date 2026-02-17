@@ -33,16 +33,6 @@ export default function LocationsUi() {
   return (
     <div className="">
       {/* Header + Add Button */}
-      {/* <div className="mb-4">
-        <Breadcrumb>
-          <Breadcrumb.Item onClick={() => router.push('/client/admin')}>
-            Hizmat turi
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            Mahsulot yo'nalishlari
-          </Breadcrumb.Item>
-        </Breadcrumb>
-      </div> */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between !items-center gap-4 mb-3">
         <h1 className="text-2xl !font-bold text-gray-800 !mb-0 ">Joylashuvlar</h1>
 
