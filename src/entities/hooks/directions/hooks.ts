@@ -60,6 +60,7 @@ export const useUpdateDirection = () => {
       productId: string;
       fromLocationId: string;
       toLocationId: string;
+      priceList: any[];
     }) => DirectionService.updateDirection(data).then(res => res.data),
 
     onSuccess: (updatedDirection, variables) => {
