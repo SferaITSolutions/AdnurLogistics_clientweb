@@ -147,7 +147,7 @@ export const useUploadImage = (
         onSuccess: (data) => {
             // muvaffaqiyatli bo'lganda imgUrl ni olish mumkin
             toast.success('Rasm muvaffaqiyatli yuklandi');
-            console.log('Uploaded URL:', data.url || data.path);
+            // console.log('Uploaded URL:', data.url || data.path);
         },
 
         onError: (error) => {

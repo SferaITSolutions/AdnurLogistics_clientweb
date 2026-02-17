@@ -271,8 +271,8 @@ const YandexMapWithTruck: React.FC<Props> = ({
           load: "package.full",
           lang: "en_RU",
           apikey: 
-          // "a041bf54-0dee-4385-816c-f3f7745a540b"
-          "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
+          "a041bf54-0dee-4385-816c-f3f7745a540b"
+          // "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
         }}
       >
         <Map

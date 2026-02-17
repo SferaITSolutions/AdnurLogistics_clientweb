@@ -18,7 +18,9 @@ export const authService = {
     const response = await axiosInstace.post('/auth/login', data);
     return response;
   },
-
+  async checkphone(number: number) {
+    return await axiosInstace.post(`/auth/check/phone?phone=${number}`)
+  },
   async refresh(token: string) {
     try {
       const response = await axiosInstace.post('/auth/refresh/token', { token });
@@ -43,25 +45,25 @@ export const authService = {
   },
 
   async verifyCode(data: { identity: string; code: string }) {
-    const res = await axiosWithAuth.post('/auth/verify/code', data);
+    const res = await axiosInstace.post('/auth/verify/code', data);
 
     return res;
   },
 
   async foreignRegister(data: IForeignRegisterData) {
-    const response = await axiosWithAuth.post('/auth/register', data);
+    const response = await axiosInstace.post('/auth/register', data);
 
     return response;
   },
 
   async register(data: RegisterSchemaType) {
-    const response = await axiosWithAuth.post('/auth/register', data);
+    const response = await axiosInstace.post('/auth/register', data);
 
     return response;
   },
 
   async verifyEmail(email: string, code: string) {
-    const res = await axiosWithAuth.post('/verify/', { code, email });
+    const res = await axiosInstace.post('/verify/', { code, email });
 
     return res;
   },
@@ -84,7 +86,7 @@ export const authService = {
   },
 
   async sendVerificationCode(email: string) {
-    const res = await axiosWithAuth.post('/verify/send-code/', { email });
+    const res = await axiosInstace.post('/verify/send-code/', { email });
     return res;
   },
 };

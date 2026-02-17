@@ -1,11 +1,11 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { Spin, Table, Button, Popconfirm, Tooltip, message } from "antd";
+import { useParams, useRouter } from "next/navigation";
+import { Spin, Table, Button, Popconfirm, Tooltip, message, Breadcrumb } from "antd";
 import { useState } from "react";
 import { useDirectionsByProduct, useDeleteDirection } from "@/entities/hooks/directions/hooks";
 import CreateDirectionModal from "../molecules/create-directions";
-import { FaDollarSign, FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { FaDollarSign, FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import EditDirectionModal from "../molecules/update-direction";
 import ViewDirectionPricesModal from "../molecules/view-directions";
 import AddDeliveryPricesModal from "../molecules/create-delevery-prices";
@@ -23,6 +23,7 @@ interface Direction {
 
 const DirectionsPage = () => {
     const params = useParams();
+    const router = useRouter();
     const [modalOpen, setModalOpen] = useState(false);
     const productId = params.productsId as string; // yoki params.productId / params["product-id"]
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -33,14 +34,14 @@ const DirectionsPage = () => {
     const [addPricesModalOpen, setAddPricesModalOpen] = useState(false);
     const [selectedDirectionForPrices, setSelectedDirectionForPrices] = useState<Direction | null>(null);
     const handleView = (record: Direction) => {
-        setViewingDirectionId(productId);
+        setViewingDirectionId(record.id);
         setViewModalOpen(true);
     };
     const handleOpenAddPrices = (record: Direction) => {
         setSelectedDirectionForPrices(record);
         setAddPricesModalOpen(true);
     };
-    console.log(productId, "productId from params");
+    // console.log(productId, "productId from params");
 
     const { data, isLoading } = useDirectionsByProduct(productId);
 
@@ -108,12 +109,12 @@ const DirectionsPage = () => {
                     />
 
                     {/* Narx qo‘shish tugmasi */}
-                    <Button
+                    {/* <Button
                         type="text"
                         icon={<FaDollarSign className="text-green-600" size={20} />}
                         onClick={() => handleOpenAddPrices(record)}
                         title="Ushbu yo‘nalish uchun narx qo‘shish"
-                    />
+                    /> */}
                 </div>
             ),
         },
@@ -161,13 +162,24 @@ const DirectionsPage = () => {
     ];
 
     return (
-        <div className="p-6">
+        <div className="">
+            <div className="mb-4 cursor-pointer">
+                <Breadcrumb>
+                    <Breadcrumb.Item onClick={() => router.push('/client/admin/products')}>
+                        Hizmat turi
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                        Mahsulot yo'nalishlari
+                    </Breadcrumb.Item>
+                </Breadcrumb>
+            </div>
             <div className="flex justify-between items-center mb-6 text-2xl font-bold text-gray-800 ">
                 {/* <div className=""> */}
+
                 <h1 className="text-2xl !font-bold !mb-0 items-center">Mahsulot yo‘nalishlari</h1>
                 {/* </div> */}
-                <Button type="primary" onClick={() => setModalOpen(true)}>
-                    + Yangi yo‘nalish qo‘shish
+                <Button type="primary" size="large" icon={<FaPlus />} onClick={() => setModalOpen(true)}>
+                    Yangi yo‘nalish qo‘shish
                 </Button>
             </div>
 

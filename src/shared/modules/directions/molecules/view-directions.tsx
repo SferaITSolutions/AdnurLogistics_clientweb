@@ -1,10 +1,9 @@
-// molecules/ViewDirectionPricesModal.tsx
 "use client";
 
-import React, { useState } from "react";
-import { Modal, Table, Spin, Button, InputNumber, Switch, Space, Popconfirm, message } from "antd";
-import { useDeliveryPricesPaginated, useUpdateDeliveryPrice, useDeleteDeliveryPrice } from "@/entities/hooks/delivery-price/hooks";
-import { FaEdit } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+import { Modal, Table, Spin, Button, InputNumber, Switch, Space, Popconfirm, message, Divider, Card, Checkbox, Form } from "antd";
+import { useDeliveryPricesPaginated, useUpdateDeliveryPrice, useDeleteDeliveryPrice, useCreateDeliveryPrice } from "@/entities/hooks/delivery-price/hooks";
+import { FaEdit, FaPlus, FaWeight, FaCube } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 interface ViewDirectionPricesModalProps {
@@ -13,6 +12,162 @@ interface ViewDirectionPricesModalProps {
   directionId: string | null;
 }
 
+interface PriceItem {
+  minWeight: number;
+  maxWeight?: number;
+  cub3: number;
+  overPrice: boolean;
+}
+
+// Price Item Card Component - AddDeliveryPricesModal'dan olindi
+const PriceItemCard: React.FC<{
+  name: number;
+  index: number;
+  restField: any;
+  fieldsLength: number;
+  onRemove: () => void;
+  onAdd: () => void;
+  form: any;
+  isLast: boolean;
+}> = ({ name, index, restField, fieldsLength, onRemove, onAdd, form, isLast }) => {
+  const isOverPrice = Form.useWatch(["priceList", name, "overPrice"], form);
+
+  return (
+    <Card
+      className="relative !p-0 transition-all border-none! shadow-none duration-300 flex justify-between items-center"
+      bodyStyle={{ padding: "10px", paddingBottom: "0px", marginBottom: "10px" }}
+    >
+      <div className="flex gap-4 !w-full md:flex-row flex-col">
+        {/* Min Weight */}
+        <Form.Item
+          {...restField}
+          name={[name, "minWeight"]}
+          className="flex-1"
+          label={index === 0 ? (
+            <span className="flex items-center gap-2 font-medium">
+              <FaWeight className="text-green-500" />
+              Minimal og'irlik (kg)
+            </span>
+          )
+            : <span className="opacity-0">Label</span>}
+          rules={[
+            { required: true, message: "Minimal og'irlikni kiriting" },
+          ]}
+        >
+          <InputNumber
+            step={0.1}
+            className="!w-full"
+            size="large"
+            disabled={isOverPrice}
+            placeholder="Masalan: 0.1"
+          />
+        </Form.Item>
+
+        {/* Max Weight */}
+        <Form.Item
+          {...restField}
+          className="flex-1"
+          name={[name, "maxWeight"]}
+          label={index === 0 ? (
+            <span className="flex items-center gap-2 font-medium">
+              <FaWeight className="text-red-500" />
+              Maksimal og'irlik (kg)
+            </span>
+          ) : <span className="opacity-0">Label</span>
+          }
+          tooltip={index === 0 ? "Cheksiz bo'lsa bo'sh qoldiring" : undefined}
+        >
+          <InputNumber
+            step={0.1}
+            className="!w-full"
+            size="large"
+            disabled={isOverPrice}
+            placeholder="Cheksiz bo'lsa bo'sh qoldiring"
+          />
+        </Form.Item>
+
+        {/* Cub Price */}
+        <Form.Item
+          {...restField}
+          name={[name, "cub3"]}
+          className="flex-1"
+          label={index === 0 ? (
+            <span className="flex items-center gap-2 font-medium">
+              <FaCube className="text-purple-500" />
+              Kub narxi ($)
+            </span>
+          ) : <span className="opacity-0">Label</span>}
+          rules={[{ required: true, message: "Kub narxini kiriting" }]}
+        >
+          <InputNumber
+            min={0}
+            step={1000}
+            className="!w-full"
+            size="large"
+            placeholder="Masalan: 50000"
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            }
+            parser={(value: any) => value!.replace(/\s?/g, "")}
+          />
+        </Form.Item>
+
+        {/* Action Buttons */}
+        <Form.Item
+          label={<span className="opacity-0">Actions</span>}
+          className="mb-0"
+        >
+          <div className="flex gap-2 items-center">
+            {fieldsLength > 1 && (
+              <Button
+                danger
+                type="text"
+                icon={<MdDelete size={20} className="!mt-1" />}
+                onClick={onRemove}
+                className="hover:bg-red-50 h-full"
+                size="large"
+              />
+            )}
+            <Button
+              type="dashed"
+              icon={<FaPlus size={20} className="!mt-1" />}
+              onClick={onAdd}
+              className="hover:border-blue-500 hover:text-blue-500 h-full"
+              size="large"
+            />
+          </div>
+        </Form.Item>
+      </div>
+
+      {/* 1000 kg dan yuqori checkbox - faqat oxirgi element uchun */}
+      {isLast && (
+        <Form.Item
+          {...restField}
+          name={[name, "overPrice"]}
+          valuePropName="checked"
+          className="mb-4"
+        >
+          <Checkbox
+            className="text-base font-medium"
+            onChange={(e) => {
+              if (e.target.checked) {
+                form.setFieldValue(["priceList", name, "minWeight"], 1000);
+                form.setFieldValue(["priceList", name, "maxWeight"], undefined);
+              } else {
+                form.setFieldValue(["priceList", name, "minWeight"], null);
+              }
+            }}
+          >
+            <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent font-semibold">
+              🚀 1000 kg dan yuqori
+            </span>
+          </Checkbox>
+        </Form.Item>
+      )}
+    </Card>
+  );
+};
+
 const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
   open,
   onClose,
@@ -20,17 +175,49 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
 }) => {
   const [editingKey, setEditingKey] = useState<string>("");
   const [editForm, setEditForm] = useState<any>({});
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [form] = Form.useForm();
+  const [priceListLength, setPriceListLength] = useState(0);
+  const priceListContainerRef = useRef<HTMLDivElement>(null);
 
-  const { data, isLoading, isError } = useDeliveryPricesPaginated({
+  const { data, isLoading, isError, refetch } = useDeliveryPricesPaginated({
     page: 0,
     size: 100,
-    productId: directionId || "",
+    directionId: directionId || "",
   });
 
   const { mutate: updatePrice, isPending: isUpdating } = useUpdateDeliveryPrice();
   const { mutate: deletePrice, isPending: isDeleting } = useDeleteDeliveryPrice();
+  const { mutate: createPrices, isPending: isCreating } = useCreateDeliveryPrice();
 
   const prices = data?.result?.content || [];
+
+  // Modal ochilganda form'ni reset qilish
+  useEffect(() => {
+    if (open && showAddForm) {
+      form.setFieldsValue({
+        priceList: [
+          {
+            minWeight: null,
+            maxWeight: undefined,
+            cub3: null,
+            overPrice: false,
+          },
+        ],
+      });
+    }
+  }, [open, showAddForm, form]);
+
+  // PriceList uzunligi o'zgarganda scroll pastga
+  useEffect(() => {
+    if (priceListLength > 0 && priceListContainerRef.current) {
+      requestAnimationFrame(() => {
+        if (priceListContainerRef.current) {
+          priceListContainerRef.current.scrollTop = priceListContainerRef.current.scrollHeight;
+        }
+      });
+    }
+  }, [priceListLength]);
 
   const isEditing = (record: any) => record.id === editingKey;
 
@@ -56,10 +243,6 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
       return;
     }
 
-    if (editForm.minWeight <= 0) {
-      message.error("Min og'irlik 0 dan katta bo'lishi kerak");
-      return;
-    }
 
     updatePrice(
       {
@@ -78,6 +261,56 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
 
   const handleDelete = (id: string) => {
     deletePrice(id);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddForm(false);
+    form.resetFields();
+  };
+
+  const onFinish = (values: { priceList: PriceItem[] }) => {
+    // Validatsiya
+    const hasError = values.priceList.some((item, idx) => {
+      if (
+        !item.overPrice &&
+        item.maxWeight !== undefined &&
+        item.maxWeight != null &&
+        item.minWeight >= item.maxWeight
+      ) {
+        message.error(
+          `${idx + 1}-oralig'da Min og'irlik Maxdan katta yoki teng bo'lmasligi kerak`
+        );
+        return true;
+      }
+      return false;
+    });
+
+    if (hasError) return;
+
+    const payload: any = {
+      priceList: values.priceList.map((item) => ({
+        ...item,
+        directionId,
+        maxWeight: item.overPrice ? null : item.maxWeight ?? null,
+      })),
+    };
+
+    createPrices(payload, {
+      onSuccess: (data: any) => {
+        if (data && (typeof data === "object") && data.success === false) {
+          const errMsg = data.message || "Server muvaffaqiyatsiz javob qaytardi";
+          message.error(`Xatolik: ${errMsg}`);
+          return;
+        }
+        message.success("Narxlar muvaffaqiyatli qo'shildi");
+        form.resetFields();
+        setShowAddForm(false);
+        refetch();
+      },
+      onError: (err: any) => {
+        message.error("Xatolik yuz berdi: " + err);
+      },
+    });
   };
 
   const columns = [
@@ -177,11 +410,10 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
         }
         return (
           <span
-            className={`px-2 py-1 rounded-full text-xs font-semibold ${
-              value
+            className={`px-2 py-1 rounded-full text-xs font-semibold ${value
                 ? "bg-orange-100 text-orange-600"
                 : "bg-gray-100 text-gray-600"
-            }`}
+              }`}
           >
             {value ? "Ha" : "Yo'q"}
           </span>
@@ -219,7 +451,7 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
               type="link"
               icon={<FaEdit />}
               onClick={() => handleEdit(record)}
-              disabled={editingKey !== ""}
+              disabled={editingKey !== "" || showAddForm}
             >
               Tahrirlash
             </Button>
@@ -229,17 +461,17 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
               onConfirm={() => handleDelete(record.id)}
               okText="Ha"
               cancelText="Yo'q"
-              okButtonProps={{ 
+              okButtonProps={{
                 danger: true,
-                loading: isDeleting 
+                loading: isDeleting
               }}
-              disabled={editingKey !== ""}
+              disabled={editingKey !== "" || showAddForm}
             >
               <Button
                 type="link"
                 danger
                 icon={<MdDelete />}
-                disabled={editingKey !== ""}
+                disabled={editingKey !== "" || showAddForm}
               >
                 O'chirish
               </Button>
@@ -253,8 +485,18 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
   return (
     <Modal
       title={
-        <div className="flex items-center gap-2 text-lg font-semibold">
-          <span>Yetkazib berish narxlari</span>
+        <div className="flex items-end justify-between !mr-6">
+          <span className="text-lg font-semibold">Yetkazib berish narxlari</span>
+          {!showAddForm && prices.length > 0 && (
+            <Button
+              type="primary"
+              icon={<FaPlus />}
+              onClick={() => setShowAddForm(true)}
+              disabled={editingKey !== ""}
+            >
+              Narx qo'shish
+            </Button>
+          )}
         </div>
       }
       open={open}
@@ -271,22 +513,111 @@ const ViewDirectionPricesModal: React.FC<ViewDirectionPricesModalProps> = ({
         <div className="text-red-600 text-center p-8">
           Narxlarni yuklashda xato yuz berdi
         </div>
-      ) : prices.length === 0 ? (
-        <div className="text-center p-8 text-gray-500">
-          Bu yo'nalish uchun narxlar hali kiritilmagan
-        </div>
       ) : (
-        <Table
-          columns={columns}
-          dataSource={prices.map((p: any, idx: number) => ({ ...p, key: p.id || idx }))}
-          rowKey={(record) => record.id}
-          pagination={false}
-          size="middle"
-          className="mt-4"
-          rowClassName={(record) =>
-            isEditing(record) ? "bg-blue-50" : "hover:bg-gray-50"
-          }
-        />
+        <>
+          {prices.length === 0 && !showAddForm ? (
+            <div className="text-center p-8">
+              <p className="text-gray-500 mb-4">Bu yo'nalish uchun narxlar hali kiritilmagan</p>
+              <Button
+                type="primary"
+                icon={<FaPlus />}
+                onClick={() => setShowAddForm(true)}
+                size="large"
+              >
+                Birinchi narxni qo'shish
+              </Button>
+            </div>
+          ) : (
+            <>
+              {(
+                <Table
+                  columns={columns}
+                  dataSource={prices.map((p: any, idx: number) => ({ ...p, key: p.id || idx }))}
+                  rowKey={(record) => record.id}
+                  pagination={false}
+                  size="middle"
+                  className="mt-4"
+                  rowClassName={(record) =>
+                    isEditing(record) ? "bg-blue-50" : "hover:bg-gray-50"
+                  }
+                />
+              )}
+
+              {/* Yangi narxlar qo'shish formi */}
+              {showAddForm && (
+                <>
+                  <Divider orientation="left" className="!mt-6 !mb-4">
+                    <span className="flex items-center gap-2 text-lg font-semibold">
+                      <FaWeight className="text-blue-500" />
+                      Yetkazib berish narxlarini qo'shish
+                    </span>
+                  </Divider>
+
+                  <Form
+                    form={form}
+                    onFinish={onFinish}
+                    layout="vertical"
+                  >
+                    <Form.List name="priceList">
+                      {(fields, { add, remove }) => {
+                        // PriceList uzunligini update qilish
+                        if (fields.length !== priceListLength) {
+                          setPriceListLength(fields.length);
+                        }
+
+                        return (
+                          <div
+                            ref={priceListContainerRef}
+                            className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 mb-4"
+                            style={{ scrollBehavior: 'smooth' }}
+                          >
+                            {fields.map((field, index) => (
+                              <PriceItemCard
+                                key={field.key}
+                                name={field.name}
+                                index={index}
+                                restField={field}
+                                fieldsLength={fields.length}
+                                onRemove={() => remove(field.name)}
+                                onAdd={() =>
+                                  add({
+                                    minWeight: null,
+                                    maxWeight: undefined,
+                                    cub3: null,
+                                    overPrice: false,
+                                  })
+                                }
+                                form={form}
+                                isLast={index === fields.length - 1}
+                              />
+                            ))}
+                          </div>
+                        );
+                      }}
+                    </Form.List>
+
+                    {/* Submit Buttons */}
+                    <Divider />
+                    <div className="flex justify-end gap-3">
+                      <Button onClick={handleCancelAdd} size="large" className="min-w-[120px]">
+                        Bekor qilish
+                      </Button>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={isCreating}
+                        size="large"
+                        className="min-w-[120px] bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+                      >
+                        {isCreating ? "Saqlanmoqda..." : "Narxlarni saqlash"}
+                      </Button>
+                    </div>
+                  </Form>
+                </>
+              )}
+            </>
+          )}
+        </>
       )}
     </Modal>
   );

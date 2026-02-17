@@ -16,12 +16,11 @@ export default function ResultCalculation({ response }: { response: any }) {
 
   const handleCreatePetition = () => {
     createPetitionMutation.mutate({
-      fromLocation: values.from || "",
-      toLocation: values.to?.toUpperCase() || "TASHKENT",
-      weight: values.kg || 0,
-      bulk: values.m3 || 0,
-      containerType: "LCL",
-      customs: values.customsPriceCalculation || false,
+      directionId: values.directionId,
+      weight: values.weight || 0,
+      bulk: values.bulk ?? values.cub ?? 0,
+      containerType: "OTHER",
+      customs: values.customs || false,
       price: Number(response?.result) || 0,
     });
   };
@@ -36,16 +35,6 @@ export default function ResultCalculation({ response }: { response: any }) {
     setIsModalOpen(false);
     createPetitionMutation.reset();
   };
-
-  if (createPetitionMutation.isPending) {
-    return (
-      <div className="absolute top-0 left-0 w-full h-full flex items-center bg-black/70 justify-center !z-50 rounded-2xl">
-        <div className="flex flex-col items-center gap-4">
-          <FaSpinner color="white" size={50} className="animate-spin" />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col gap-4">

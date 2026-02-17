@@ -114,9 +114,12 @@
   "login": {
     "title": "Login",
     "phone": "Your phone number",
+    "otpCode": "Verification code",
+    "otpConfirm": "Confirm",
     "phoneFormat": "Phone format",
     "phonePlaceholder": "Enter your phone number!",
     "password": "Password",
+    "otpRequired": "OTP code is required!",
     "passwordPlaceholder": "Enter your password",
     "button": "Login",
     "register": "Register"
@@ -275,6 +278,7 @@
     "confirmationMessage": "Do you confirm logging out of the system?"
   },
   "clientDashboard": {
+    "News": "News",
     "title": "Dashboard Client",
     "all": "All",
     "orderDetails": "Order Details",
@@ -307,6 +311,15 @@
     "title": "Calculate Order Price",
     "valueGreaterThanZero": "Value must be greater than 0",
     "fromLabel": "From",
+    "volumeRequired": "Volume is required!",
+    "productLabel": "Product",
+    "productPlaceholder": "Select a product",
+    "selectProduct": "Please select a product!",
+    "noProductsFound": "No products found",
+    "directionLabel": "Direction",
+    "directionPlaceholder": "Select a direction",
+    "directionRequired": "Direction is required!",
+    "weightRequired": "Please enter the weight!",
     "fromPlaceholder": "Select Origin",
     "toLabel": "To",
     "toPlaceholder": "Select Destination",

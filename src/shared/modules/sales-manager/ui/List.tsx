@@ -91,7 +91,7 @@ export default function SalesOrdersList() {
                         openModal();
                         setStatusOfInvoice(card?.salesorderstatus)
                         setTotalprice(card?.totalprice)
-                        console.log(card?.totalprice, "price");
+                        // console.log(card?.totalprice, "price");
                         
                         setStartEndDate({
                           start: card.createddate,

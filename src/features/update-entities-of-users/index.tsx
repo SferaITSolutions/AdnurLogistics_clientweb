@@ -14,13 +14,13 @@ interface UpdateEntitiesProps {
 export default function UpdateEntities({ user, open, onCancel, onSuccess }: UpdateEntitiesProps) {
   const [form] = Form.useForm();
 
-  console.log(user);
+  // console.log(user);
   
   const value = form.getFieldValue('entityIds')
   const { mutate: updateEntity, isPending } = useUpdateUserEntity(
     user?.userId, 
   );
-  console.log(typeof user?.userId,33);
+  // console.log(typeof user?.userId,33);
   
   // Modal ochilganda formani foydalanuvchi ma'lumotlari bilan to'ldirish 
   useEffect(() => {

@@ -1,5 +1,6 @@
 // components/ImageUploader.tsx
-import { useState } from 'react';
+"use client";
+import { useEffect, useState } from 'react';
 import { Upload, message, UploadFile, UploadProps } from 'antd';
 import { RcFile } from 'antd/es/upload';
 import { useUploadImage } from '@/entities/hooks/products-hooks/hooks';
@@ -20,6 +21,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [preview, setPreview] = useState<string | null>(initialUrl || null);
   const { mutate: uploadImage, isPending: uploading } = useUploadImage();
+
+  // initialUrl o'zgarganda preview'ni yangilash
+  useEffect(() => {
+    setPreview(initialUrl || null);
+  }, [initialUrl]);
 
   const beforeUpload = (file: RcFile) => {
     const isImage = file.type.startsWith('image/');
@@ -50,8 +56,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
     uploadImage(formData, {
       onSuccess: (response) => {
-        console.log("res image", response?.result);
-
         const uploadedUrl = response?.result;
         if (uploadedUrl) {
           onUploadSuccess?.(uploadedUrl);
@@ -82,10 +86,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   const handleRemove = () => {
     setFileList([]);
     setPreview(null);
+    onUploadSuccess?.(''); // Parent component'ga bo'sh string yuborish
   };
 
   return (
-    <div className="w-full">
+    <div className="!w-[100%]">
       {!preview ? (
         <Upload
           listType="picture"
@@ -96,10 +101,10 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
           accept="image/*"
           showUploadList={false}
           disabled={uploading}
-          className="w-full"
+          className="!w-full"
         >
-          <div className="relative group">
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 transition-all duration-300 hover:border-blue-500 hover:bg-blue-50/50 cursor-pointer">
+          <div className="relative group !w-full">
+            <div className="border-2 !w-full border-dashed border-gray-300 rounded-xl p-8 transition-all duration-300 hover:border-blue-500 hover:bg-blue-50/50 cursor-pointer">
               <div className="flex flex-col items-center justify-center space-y-3">
                 {uploading ? (
                   <>
@@ -146,7 +151,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
           </div>
         </Upload>
       ) : (
-        <div className="relative group">
+        <div className="relative group !w-full">
           <div className="relative rounded-xl overflow-hidden border-2 border-gray-200 shadow-md">
             <img
               src={preview}

@@ -1,4 +1,4 @@
-// app/news/page.tsx yoki pages/news/index.tsx
+// app/news/page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -11,14 +11,15 @@ import {
   useDeleteNews,
 } from "@/entities/hooks/news-hooks/hooks";
 import ImageUploader from "@/shared/components/dump/ui/image-upload";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 const NewsPage = () => {
-  const [isAddNewsOpen, setIsAddNewsOpen] = useState(false);
+  const [isAddNewsModalOpen, setIsAddNewsModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"view" | "edit" | "status">("view");
   const [selectedNewsId, setSelectedNewsId] = useState<string | null>(null);
+  const [uploaderKey, setUploaderKey] = useState(0); // Image uploader'ni reset qilish uchun
 
   // Create form state
   const [createForm, setCreateForm] = useState({
@@ -63,7 +64,8 @@ const NewsPage = () => {
         onSuccess: () => {
           message.success("Yangilik muvaffaqiyatli yaratildi!");
           setCreateForm({ title: "", content: "", imgUrl: "" });
-          setIsAddNewsOpen(false);
+          setUploaderKey(prev => prev + 1); // Image uploader'ni reset qilish
+          setIsAddNewsModalOpen(false);
           refetch();
         },
         onError: () => {
@@ -167,6 +169,12 @@ const NewsPage = () => {
     setIsModalOpen(true);
   };
 
+  const handleModalClose = () => {
+    setIsAddNewsModalOpen(false);
+    setCreateForm({ title: "", content: "", imgUrl: "" });
+    setUploaderKey(prev => prev + 1); // Image uploader'ni reset qilish
+  };
+
   return (
     <div className="min-h-screen from-slate-50 via-blue-50 to-indigo-50">
       <div className="max-w-7xl mx-auto">
@@ -174,7 +182,7 @@ const NewsPage = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl !font-bold text-gray-900 mb-2">
                 Yangiliklar
               </h1>
               <p className="text-gray-600">
@@ -182,93 +190,17 @@ const NewsPage = () => {
               </p>
             </div>
             <div className="flex gap-3">
-              <button
-                onClick={() => refetch()}
-                disabled={isNewsListLoading}
-                className="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium shadow-sm hover:shadow disabled:opacity-50"
+              <Button
+                type="primary"
+                size="large"
+                icon={<FaPlus />}
+                onClick={() => setIsAddNewsModalOpen(true)}
               >
-                {isNewsListLoading ? "Yuklanmoqda..." : "Yangilash"}
-              </button>
-              <button
-                onClick={() => setIsAddNewsOpen(!isAddNewsOpen)}
-                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 !text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
-              >
-                {isAddNewsOpen ? "Yopish" : "Yangi yaratish"}
-              </button>
+                Yangi yaratish
+              </Button>
             </div>
           </div>
         </div>
-
-        {/* Create News Form */}
-        {isAddNewsOpen && (
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 border border-gray-100 animate-fadeIn">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Yangi yangilik yaratish
-            </h2>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Sarlavha
-                </label>
-                <Input
-                  size="large"
-                  placeholder="Yangilik sarlavhasini kiriting..."
-                  value={createForm.title}
-                  onChange={(e) => setCreateForm({ ...createForm, title: e.target.value })}
-                  disabled={isCreating}
-                  className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Tavsif
-                  </label>
-                  <textarea
-                    rows={12}
-                    className="w-full border border-gray-300 rounded-xl p-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all resize-none"
-                    placeholder="Yangilik matnini kiriting..."
-                    value={createForm.content}
-                    onChange={(e) => setCreateForm({ ...createForm, content: e.target.value })}
-                    disabled={isCreating}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Rasm
-                  </label>
-                  <ImageUploader
-                    onUploadSuccess={(url: any) => {
-                      setCreateForm({ ...createForm, imgUrl: url });
-                    }}
-                    uploadPath="news"
-                    maxSizeMB={5}
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
-                <button
-                  onClick={() => handleCreateNews("DRAFT")}
-                  disabled={isCreating}
-                  className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isCreating ? <Spin size="small" /> : "Qoralama"}
-                </button>
-                <button
-                  onClick={() => handleCreateNews("PUBLIC")}
-                  disabled={isCreating}
-                  className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isCreating ? <Spin size="small" /> : "E'lon qilish"}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* News Grid */}
         {isNewsListLoading ? (
@@ -281,7 +213,7 @@ const NewsPage = () => {
             {newsData.map((item: any) => (
               <div
                 key={item.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full"
               >
                 {/* Image Section */}
                 <div
@@ -298,11 +230,11 @@ const NewsPage = () => {
                   />
                   <div className="absolute top-4 right-4">
                     {item.status === "PUBLIC" ? (
-                      <span className="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                      <span className="px-3 py-1 bg-green-500 !text-white text-xs font-semibold rounded-full shadow-lg">
                         E'lon qilingan
                       </span>
                     ) : (
-                      <span className="px-3 py-1 bg-amber-500 text-white text-xs font-semibold rounded-full shadow-lg">
+                      <span className="px-3 py-1 bg-amber-500 !text-white text-xs font-semibold rounded-full shadow-lg">
                         Qoralama
                       </span>
                     )}
@@ -310,7 +242,7 @@ const NewsPage = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-5 flex flex-col">
+                <div className="p-5 flex-1 flex flex-col">
                   <div
                     onClick={() => openViewModal(item)}
                     className="cursor-pointer mb-4"
@@ -322,30 +254,32 @@ const NewsPage = () => {
                       {item.content}
                     </p>
                   </div>
-
-                  {/* Footer */}
-                  <div className="flex items-center flex-col gap-3 justify-between pt-4 border-t border-gray-100">
-                    <div className="text-sm text-gray-500">
-                      {item.status === "PUBLIC" ? (
-                        new Date(item.createdAt).toLocaleDateString("uz-UZ", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })
-                      ) : (
-                        <button
-                          onClick={() => openStatusModal(item)}
-                          disabled={isUpdatingStatus && selectedNewsId === item.id}
-                          className="text-amber-600 hover:text-amber-700 font-medium transition-colors disabled:opacity-50"
-                        >
-                          {isUpdatingStatus && selectedNewsId === item.id
-                            ? "Yuklanmoqda..."
-                            : "E'lon qilish"}
-                        </button>
-                      )}
+                  <div className="flex-1"></div>
+                  <div className="pt-4 border-t border-gray-100">
+                    <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+                      <div className="text-sm text-gray-500">
+                        {item.status === "PUBLIC" ? (
+                          new Date(item.createdAt).toLocaleDateString("uz-UZ", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })
+                        ) : (
+                          <Button
+                            type="text"
+                            icon={<FaEdit />}
+                            onClick={() => openStatusModal(item)}
+                            disabled={isUpdatingStatus && selectedNewsId === item.id}
+                            className="!text-amber-600 !p-4 py-6  hover:text-amber-700 !font-medium !transition-colors disabled:opacity-50"
+                          >
+                            {isUpdatingStatus && selectedNewsId === item.id
+                              ? "Yuklanmoqda..."
+                              : "E'lon qilish"}
+                          </Button>
+                        )}
+                      </div>
                     </div>
-
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 justify-end">
                       <button
                         onClick={() => openEditModal(item)}
                         className="px-4 py-2 text-sm bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium"
@@ -390,7 +324,92 @@ const NewsPage = () => {
         )}
       </div>
 
-      {/* Modal */}
+      {/* Add News Modal */}
+      <Modal
+        open={isAddNewsModalOpen}
+        onCancel={handleModalClose}
+        centered
+        footer={
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+            <button
+              onClick={handleModalClose}
+              disabled={isCreating}
+              className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Bekor qilish
+            </button>
+            <button
+              onClick={() => handleCreateNews("DRAFT")}
+              disabled={isCreating}
+              className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isCreating ? <Spin size="small" /> : "Qoralama"}
+            </button>
+            <button
+              onClick={() => handleCreateNews("PUBLIC")}
+              disabled={isCreating}
+              className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 !text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isCreating ? <Spin size="small" /> : "E'lon qilish"}
+            </button>
+          </div>
+        }
+        width={900}
+        className="rounded-2xl overflow-hidden"
+        title={
+          <span className="text-2xl font-bold text-gray-900">
+            Yangi yangilik yaratish
+          </span>
+        }
+      >
+        <div className="space-y-6 pt-2">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Sarlavha
+            </label>
+            <Input
+              size="large"
+              placeholder="Yangilik sarlavhasini kiriting..."
+              value={createForm.title}
+              onChange={(e) => setCreateForm({ ...createForm, title: e.target.value })}
+              disabled={isCreating}
+              className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Tavsif
+              </label>
+              <textarea
+                rows={12}
+                className="w-full border border-gray-300 rounded-xl p-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all resize-none"
+                placeholder="Yangilik matnini kiriting..."
+                value={createForm.content}
+                onChange={(e) => setCreateForm({ ...createForm, content: e.target.value })}
+                disabled={isCreating}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Rasm
+              </label>
+              <ImageUploader
+                key={uploaderKey} // Bu key o'zgarganda component to'liq reset bo'ladi
+                onUploadSuccess={(url: any) => {
+                  setCreateForm({ ...createForm, imgUrl: url });
+                }}
+                uploadPath="news"
+                maxSizeMB={5}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      {/* View/Edit/Status Modal */}
       <Modal
         open={isModalOpen}
         onCancel={() => {
@@ -410,7 +429,7 @@ const NewsPage = () => {
                 Bekor qilish
               </button>
               <button
-                className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-colors font-medium shadow-lg disabled:opacity-50"
+                className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 !text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-colors font-medium shadow-lg disabled:opacity-50"
                 onClick={handleStatusUpdate}
                 disabled={isUpdatingStatus}
               >
@@ -427,7 +446,7 @@ const NewsPage = () => {
                 Bekor qilish
               </button>
               <button
-                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-colors font-medium shadow-lg disabled:opacity-50"
+                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 !text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-colors font-medium shadow-lg disabled:opacity-50"
                 onClick={handleUpdateNews}
                 disabled={isUpdating}
               >
@@ -436,7 +455,7 @@ const NewsPage = () => {
             </div>
           ) : null
         }
-        width={700}
+        width={900}
         className="rounded-2xl overflow-hidden"
       >
         {modalType === "status" ? (

@@ -4,8 +4,14 @@ class NewsService {
   async getNewsList(data: { page: number; size: number }) {
     return await axiosWithAuth.post("/news/get/page", data);
   }
-  async deleteNews(id: number) {
-    return await axiosWithAuth.delete(`/news/delete?id=${id}`);
+  async getNewsListForAdmin() {
+    return await axiosWithAuth.get("/news/get/list");
+  }
+  async getNewsOneForAdmin(id: number) {
+    return await axiosWithAuth.get(`/news/get/one?uid=${id}`);
+  }
+  async deleteNews(id: string) {
+    return await axiosWithAuth.delete(`/news/delete?uid=${id}`);
   }
   async createNews(data: {
     title: string;

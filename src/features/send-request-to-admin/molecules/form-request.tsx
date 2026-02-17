@@ -42,7 +42,7 @@ export default function FormRequest() {
     setValue('density', values.density);
     setValue('estimatedPrice', values.estimatedPrice);
     setValue('orderType', values.orderType);
-    console.log(values);
+    // console.log(values);
     resetForm();
     form.resetFields();
   };

@@ -7,7 +7,7 @@
     "applyModal": {
       "title": "Ariza Qoldirish",
       "success": "Arizangiz muvaffaqiyatli yuborildi ✅",
-      "error": "Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring ❌",
+      "error": "Xatolik yuz berdi. Qayta urinib ko‘ring ❌",
       "fields": {
         "isAgree": {
           "label": "Shaxsiy ma'lumotlarimni qayta ishlashga roziman"
@@ -15,46 +15,46 @@
         "fullname": {
           "label": "Ismingiz",
           "placeholder": "Ismingiz",
-          "required": "Iltimos, ismingizni kiriting!",
+          "required": "Ismingizni kiriting!",
           "pattern": "Faqat harflardan foydalaning!"
         },
         "phone": {
           "label": "Telefon Raqamingiz",
           "placeholderUz": "90 123 45 67",
           "placeholderTr": "123 123 1234",
-          "required": "Iltimos, telefon raqamingizni kiriting!",
+          "required": "Telefon raqamingizni kiriting!",
           "patternUz": "Telefon formati: +998 90 123 45 67",
           "patternTr": "Telefon formati: +90 123 123 1234"
         },
         "fromLocation": {
           "label": "Qayerdan",
           "placeholder": "Qayerdan",
-          "required": "Iltimos, boshlang‘ich nuqtani tanlang!"
+          "required": "Boshlang‘ich nuqtani tanlang!"
         },
         "toLocation": {
           "label": "Qayerga",
           "placeholder": "Qayerga",
-          "required": "Iltimos, manzilni tanlang!"
+          "required": "Manzilni tanlang!"
         },
         "bulk": {
           "label": "Hajm (m3)",
           "placeholder": "Hajm (m3)",
-          "required": "Iltimos, hajmni kiriting!"
+          "required": "Hajmni kiriting!"
         },
         "density": {
           "label": "Og‘irlik (KG)",
           "placeholder": "Og‘irlik (KG)",
-          "required": "Iltimos, og‘irlikni kiriting!"
+          "required": "Og‘irlikni kiriting!"
         },
         "weight": {
           "label": "Zichlik (Kg/m3)",
           "placeholder": "Zichlik (Kg/m3)",
-          "required": "Iltimos, zichlikni kiriting!"
+          "required": "Zichlikni kiriting!"
         },
         "description": {
           "label": "Xabar",
           "placeholder": "Xabaringiz...",
-          "required": "Iltimos, xabaringizni kiriting!"
+          "required": "Xabaringizni kiriting!"
         }
       },
       "button": {
@@ -113,7 +113,10 @@
   },
   "login": {
     "title": "Kirish",
+    "otpCode": "Tasdiqlash kodi",
+    "otpConfirm": "Tasdiqlash",
     "phone": "Telefon raqamingiz",
+    "otpRequired": "OTP kodini kiritish shart!",
     "phonePlaceholder": "Telefon raqamni kiriting!",
     "phoneFormat": "Telefon formati",
     "password": "Parol",
@@ -127,9 +130,9 @@
     "numberFormat": "Yaroqli raqam formatini kiriting",
     "turkishNumberFormat": "Turk raqami formatida emas",
     "region_not_allowed": "Afsuski, sizning hududingizdan ishtirok etish mumkin emas. Ishtirok etish uchun ruxsat berilgan hududlardan birini tanlashingiz kerak.",
-    "verify": "Iltimos, elektron pochtangizni tasdiqlang",
+    "verify": "Elektron pochtangizni tasdiqlang",
     "required": "Bu maydon to'ldirilishi shart",
-    "numberRequired": "Iltimos, raqamni kiriting!",
+    "numberRequired": "Rakamni kiriting!",
     "minString": "Maydon kamida {min} belgidan iborat bo'lishi kerak",
     "passwordMismatch": "Parollar mos kelishi kerak",
     "passwordUppercase": "Parol kamida bitta bosh harfni o'z ichiga olishi kerak",
@@ -137,12 +140,12 @@
     "passwordNumber": "Parol kamida bitta raqamni o'z ichiga olishi kerak",
     "passwordSpecial": "Parol kamida bitta maxsus belgini (@$!%*?&) o'z ichiga olishi kerak",
     "industries": {
-      "min": "Iltimos, kamida bitta sohani tanlang.",
+      "min": "Kamida bitta sohani tanlang.",
       "nonempty": "Soha maydoni bo'sh bo'lishi mumkin emas.",
       "required": "Soha talab qilinadi."
     },
     "stages": {
-      "min": "Iltimos, kamida bitta bosqichni tanlang.",
+      "min": "Kamida bitta bosqichni tanlang.",
       "nonempty": "Bosqich maydoni bo'sh bo'lishi mumkin emas.",
       "required": "Bosqich talab qilinadi."
     },
@@ -277,6 +280,7 @@
     "button": "Shaxsiy kabinetga kirish"
   },
   "clientDashboard": {
+    "News": "Yangiliklar",
     "title": "Bosh sahifa",
     "orderDetails": "Buyurtma ma’lumotlari",
     "all": "Barchasi",
@@ -307,17 +311,26 @@
   },
   "calculationPage": {
     "title": "Buyurtma narxini hisoblash",
+    "volumeRequired": "Hajmni kiritish shart!",
     "valueGreaterThanZero": "Qiymat 0 dan katta bo‘lishi kerak",
     "fromLabel": "Qayerdan",
     "fromPlaceholder": "Qayerdan tanlang",
+    "productLabel": "Mahsulot",
+    "productPlaceholder": "Mahsulotni tanlang",
+    "selectProduct": "Mahsulotni tanlang!",
+    "noProductsFound": "Mahsulot topilmadi",
+    "directionLabel": "Yo'nalish",
+    "directionPlaceholder": "Yo'nalishni tanlang",
+    "directionRequired": "Yo'nalish tanlanishi shart!",
+    "weightRequired": "Og‘irlikni kiritish shart!",
     "toLabel": "Qayerga",
     "toPlaceholder": "Manzilni tanlang",
     "weightLabel": "Og'irlik (KG)",
-    "weightPlaceholder": "Iltimos, og'irlikni kg da kiriting",
+    "weightPlaceholder": "Og'irlikni kg da kiriting",
     "densityLabel": "Zichlik (KG/m³)",
-    "densityPlaceholder": "Iltimos, 1 m³ uchun og'irlikni kiriting",
+    "densityPlaceholder": "1 m³ uchun og'irlikni kiriting",
     "volumeLabel": "Hajm (m³)",
-    "volumePlaceholder": "Iltimos, hajmni m³ ni kiriting",
+    "volumePlaceholder": "Hajmni m³ ni kiriting",
     "typeLabel": "Turi",
     "typeIcl": "LCL (Qisman konteyner)",
     "typeFcl": "FCL (To‘liq konteyner)",
@@ -326,7 +339,7 @@
     "customsAgreement": "Hisoblash uchun bojxona narxi bilan rozilik kerak",
     "calculateButton": "Hisoblash",
     "errorNeedCalculation": "So'rov qoldirish uchun avval hisoblashni amalga oshiring!",
-    "errorFillAndCalculate": "Iltimos, hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak.",
+    "errorFillAndCalculate": "Hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak.",
     "result": "Hisoblangan narx: ",
     "additionalPayments": "Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi."
   },
@@ -341,7 +354,7 @@
     "disclaimer": "Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi.",
     "sendRequestButton": "Adminga so’rov qoldirish",
     "errorNeedCalculationTitle": "So'rov qoldirish uchun avval hisoblashni amalga oshiring!",
-    "errorNeedCalculationMessage": "Iltimos, hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak."
+    "errorNeedCalculationMessage": "Hisob-kitob natijasini olish uchun avval formadagi barcha maydonlarni to'ldirib, hisoblashingiz kerak."
   },
   "logoutModal": {
     "title": "Tizimdan chiqish",
@@ -368,17 +381,17 @@
   "applyForm": {
     "fromLabel": "Qayerdan",
     "fromPlaceholder": "Boshlang‘ich manzilni kiriting",
-    "fromRequiredError": "Iltimos, boshlang‘ich manzilni kiriting!",
+    "fromRequiredError": "Boshlang‘ich manzilni kiriting!",
     "toLabel": "Qayerga",
     "toPlaceholder": "Manzilni kiriting",
-    "toRequiredError": "Iltimos, manzilni kiriting!",
+    "toRequiredError": "Manzilni kiriting!",
     "weightLabel": "Og'irlik (kg)",
     "weightPlaceholder": "Og'irlikni kg da kiriting",
-    "weightRequiredError": "Iltimos, og'irlikni kiriting!",
+    "weightRequiredError": "Og'irlikni kiriting!",
     "weightMinError": "Og'irlik 0 dan katta bo'lishi kerak",
     "bulkLabel": "Hajm (m³)",
     "bulkPlaceholder": "Hajmni m³ da kiriting",
-    "bulkRequiredError": "Iltimos, hajmni kiriting!",
+    "bulkRequiredError": "Hajmni kiriting!",
     "bulkMinError": "Hajm 0 dan katta bo'lishi kerak",
     "customsCheckbox": "Bojxona talab qilinadi",
     "submitButton": "Yuborish",

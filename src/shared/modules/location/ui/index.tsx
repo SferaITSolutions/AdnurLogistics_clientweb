@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Tabs, Button, Modal } from 'antd';
+import { Tabs, Button, Modal, Breadcrumb } from 'antd';
 import FromLocationTable from '../molecules/fromLocationTable';
 import ToLocationTable from '../molecules/toLocationTable';
 import { FaPlus } from 'react-icons/fa';
 import CreateLocations from '@/features/create-locations';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const { TabPane } = Tabs;
 
 export default function LocationsUi() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'from' | 'to'>('from');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,9 +33,19 @@ export default function LocationsUi() {
   return (
     <div className="">
       {/* Header + Add Button */}
+      {/* <div className="mb-4">
+        <Breadcrumb>
+          <Breadcrumb.Item onClick={() => router.push('/client/admin')}>
+            Hizmat turi
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            Mahsulot yo'nalishlari
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div> */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between !items-center gap-4 mb-3">
         <h1 className="text-2xl !font-bold text-gray-800 !mb-0 ">Joylashuvlar</h1>
-        
+
         <Button
           type="primary"
           icon={<FaPlus />}
@@ -77,10 +89,10 @@ export default function LocationsUi() {
         onCancel={handleModalCancel}
         footer={null}
         width={600}
-        destroyOnClose         
+        destroyOnClose
       >
         <CreateLocations
-          onSuccess={afterLocationCreated} 
+          onSuccess={afterLocationCreated}
           onCancel={handleModalCancel}
         />
       </Modal>

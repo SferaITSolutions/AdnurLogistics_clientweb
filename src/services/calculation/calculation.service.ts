@@ -11,11 +11,9 @@ class CalculationService {
     return response.data;
   }
   static async createPetition(data: {
-    fromLocation: string;
-    toLocation: string;
+    directionId: string;
     weight: number;
     bulk: number;
-    // density: number;
     containerType: string;
     customs: boolean;
     price: number;
@@ -23,6 +21,14 @@ class CalculationService {
     const response = await axiosWithAuth.post(`/petition/create`, data);
     return response.data;
  
+  }
+  static async getProductsList() {
+    const response = await axiosWithAuth.get(`/product/get/list`);
+    return response.data;
+  }
+  static async getDirectionList(ProductId: string) {
+    const response = await axiosWithAuth.get(`/direction/get/list?productId=${ProductId}`);
+    return response.data;
   }
   static async applyForm(data: {
     fromLocation: string;

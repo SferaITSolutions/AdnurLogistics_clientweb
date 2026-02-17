@@ -17,10 +17,11 @@ export const deliveryPriceKeys = {
 // ====================
 // 1. Sahifalangan ro'yxatni olish (pagination bilan)
 // ====================
-export const useDeliveryPricesPaginated = (params: {
+export const useDeliveryPricesPaginated = (params: any | {
   page: number;
   size: number;
-  productId: string;
+  productId?: string;
+  directionId?: string;
 }) => {
   return useQuery({
     queryKey: deliveryPriceKeys.paginated(params),
@@ -28,7 +29,7 @@ export const useDeliveryPricesPaginated = (params: {
       const res = await DeliveryPriceService.getDeliveryPrice(params);
       return res.data;
     },
-    enabled: !!params.productId,
+    enabled: !!params.productId || !!params.directionId,
     // keepPreviousData: true, // paginationda yaxshi UX uchun
     staleTime: 2 * 60 * 1000,
   });
@@ -41,24 +42,29 @@ export const useCreateDeliveryPrice = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { pricelist: Array<{
-      minWeight: number;
-      maxWeight: number;
-      cub3: number;
-      overPrice: boolean;
-      directionId: string;
-    }> }) => DeliveryPriceService.createDeliveryPrice(data).then(res => res.data),
+    mutationFn: (data:any | { 
+      priceList: Array<{
+        minWeight: number;
+        maxWeight?: number | null;
+        cub3: number;
+        overPrice: boolean;
+        directionId: string;
+      }> 
+    }) => DeliveryPriceService.createDeliveryPrice(data).then(res => res.data),
 
     onSuccess: (newPrice, variables) => {
       toast.success("Narx muvaffaqiyatli qo'shildi");
 
-      variables.pricelist.forEach(item => {
-        queryClient.invalidateQueries({
-          queryKey: deliveryPriceKeys.listByProduct(item.directionId), // agar directionId orqali bog'langan bo'lsa
+      // priceList (camelCase) ishlatiladi
+      if (variables.priceList && variables.priceList.length > 0) {
+        variables.priceList.forEach((item: any) => {
+          queryClient.invalidateQueries({
+            queryKey: deliveryPriceKeys.listByProduct(item.directionId),
+          });
         });
-      });
+      }
 
-      // yoki eng oddiy yo'l bilan
+      // Umumiy cache'ni ham yangilash
       queryClient.invalidateQueries({ queryKey: deliveryPriceKeys.all });
     },
 

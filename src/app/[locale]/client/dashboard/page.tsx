@@ -6,6 +6,7 @@ import { useMe } from '@/widgets/headers/navbar-cabinet/hook/hook';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import NewsForAdmin from '@/features/news-for-admin';
 
 export default function DashboardClient() {
   const t = useTranslations('clientDashboard');
@@ -17,8 +18,6 @@ export default function DashboardClient() {
     const rolename = role
     if (rolename !== "ROLE_USER") {
       router.replace("/403");
-    } else if (!data?.data.code) {
-      router.push("/client/calculation")
     }
   }, [router, role]);
   return (
@@ -27,8 +26,11 @@ export default function DashboardClient() {
         Sales orders
       </title>
       <h1 className="text-2xl !font-bold">{t('title')}</h1>
-      {data?.data.code && <Filters />}
-      {data?.data.code && <List />}
+      {/* <h1 className="text-2xl !font-bold">{t('News')}</h1> */}
+
+      <NewsForAdmin />
+      <Filters />
+      <List />
 
     </div>
   );

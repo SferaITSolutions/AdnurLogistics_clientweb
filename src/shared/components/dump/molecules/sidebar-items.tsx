@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCalculator, FaDollarSign, FaHome, FaUser } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome, FaNewspaper, FaUser } from "react-icons/fa";
 import MenuItem from "@/shared/components/dump/molecules/menu-item";
 import { useTranslations } from "next-intl";
 import { MdNotifications } from "react-icons/md";
@@ -22,7 +22,7 @@ export default function SidebarItems() {
         </span>
       </div> */}
 
-      {role === "ROLE_USER" && data?.data?.code && (
+      {role === "ROLE_USER" && (
         <MenuItem
           label={t("clientDashboard.dashboard")}
           path={`/client/dashboard`}
@@ -36,13 +36,13 @@ export default function SidebarItems() {
           icon={<FaCalculator size={22} />}
         />
       )}
-      {role === "ROLE_SUPER_ADMIN" && (
+      {/* {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
           label={t("pricesTable.prices")}
           path={`/client/admin/prices`}
           icon={<FaHome size={22} />}
         />
-      )}
+      )} */}
       {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
           label={t("pricesTable.users")}
@@ -57,18 +57,26 @@ export default function SidebarItems() {
           icon={<FaCalculator size={22} />}
         />
       )}
+
       {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
-          label={"Xabarnoma"}
-          path={`/client/admin/notifications`}
-          icon={<MdNotifications size={22} />}
+          label={"Hizmat turi"}
+          path={`/client/admin/products`}
+          icon={<AiFillProduct size={22} />}
         />
       )}
       {role === "ROLE_SUPER_ADMIN" && (
         <MenuItem
-          label={"Mahsulotlar"}
-          path={`/client/admin/products`}
-          icon={<AiFillProduct size={22} />}
+          label={"Yangiliklar"}
+          path={`/client/admin/news`}
+          icon={<FaNewspaper size={22} />}
+        />
+      )}
+      {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={"Versiya sozlamalari"}
+          path={`/client/admin/notifications`}
+          icon={<MdNotifications size={22} />}
         />
       )}
       {role === "ROLE_CONTROLLER" && (

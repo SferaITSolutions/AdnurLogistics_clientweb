@@ -110,7 +110,10 @@
   },
   "login": {
     "title": "Вход",
+    "otpCode": "Код подтверждения",
+    "otpConfirm": "Подтвердить",
     "phone": "Ваш номер телефона",
+    "otpRequired": "Введите код OTP!",
     "phoneFormat": "Формат телефона",
     "phonePlaceholder": "Введите номер телефона!",
     "password": "Пароль",
@@ -262,9 +265,9 @@
   },
   "personalNumberPage": {
     "accountNumber": "Номер счета",
-"label": "Код подтверждения",
-  "placeholder": "Введите код...",
-  "button": "Подтвердить"
+    "label": "Код подтверждения",
+    "placeholder": "Введите код...",
+    "button": "Подтвердить"
   },
   "finelyTab": {
     "title": "Поздравляем!",
@@ -282,6 +285,7 @@
   "clientDashboard": {
     "title": "Панель Клиента",
     "all": "Все",
+    "News": "Новости",
     "orderDetails": "Детали заказа",
     "inDelivery": "В процессе доставки",
     "pendingDelivery": "Ожидается доставка",
@@ -310,6 +314,15 @@
   },
   "calculationPage": {
     "title": "Расчет Стоимости Заказа",
+    "productLabel": "Товар",
+    "volumeRequired": "Введите объем!",
+    "productPlaceholder": "Выберите товар",
+    "selectProduct": "Пожалуйста, выберите товар!",
+    "noProductsFound": "Товар не найден",
+    "directionLabel": "Направление",
+    "directionPlaceholder": "Выберите направление",
+    "directionRequired": "Направление обязательно для выбора!",
+    "weightRequired": "Пожалуйста, введите вес!",
     "valueGreaterThanZero": "Значение должно быть больше 0",
     "fromLabel": "Откуда",
     "fromPlaceholder": "Выберите откуда",
@@ -514,7 +527,7 @@
     "onWay": "{percent}% пути",
     "speed": "Скорость: {speed} км/ч",
     "truck": "Грузовик",
-   "pendingConfirmation": "Ожидает подтверждения",
+    "pendingConfirmation": "Ожидает подтверждения",
     "pendingFulfillment": "Ожидает выполнения",
     "partiallyFulfilled": "Частично выполнен",
     "pendingBillingPartially": "Ожидает оплаты / Частично выполнен",

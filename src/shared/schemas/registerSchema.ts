@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const registerSchema = (t: TranslationsType, param?: string) => {
   function getPhoneRegex(status: string) {
-    console.log(status);
+    // console.log(status);
     
     if (status === "+998") {
       // 🇺🇿 O'zbekiston raqamlar: 9xx xxx xx xx
@@ -21,10 +21,10 @@ export const registerSchema = (t: TranslationsType, param?: string) => {
       fullname: z.string({ error: t("Schemas.name.required") }).min(5, {
         message: t("Schemas.minString", { min: 5 }),
       }),
-      phone: z
-        .string({
-          error: t("Schemas.number"),
-        })
+      // phone: z
+        // .string({
+        //   error: t("Schemas.number"),
+        // })
         // .regex(getPhoneRegex(param || ""), {
         //   message: t(
         //     param === "+998"
@@ -32,7 +32,7 @@ export const registerSchema = (t: TranslationsType, param?: string) => {
         //       : "Schemas.turkishNumberFormat"
         //   ),
         // })
-        .min(1, { message: t("Schemas.numberRequired") }),
+        // .min(1, { message: t("Schemas.numberRequired") }),
       password: z
         .string({ error: t("Schemas.required") })
         .min(1, {

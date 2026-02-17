@@ -6,7 +6,7 @@ import CreateProductModal from '../molecules/create-product';
 import { AiFillProduct } from 'react-icons/ai';
 import EditProductModal from '../molecules/update-product';
 import { FaEdit, FaTrash, FaMapMarkerAlt } from 'react-icons/fa';
-import { MdLanguage } from 'react-icons/md';
+import { MdLanguage, MdSettings } from 'react-icons/md';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -56,6 +56,8 @@ const ProductsPage = () => {
 
     return (
         <div style={{ minHeight: '100vh' }}>
+            {/* Breadcrumb */}
+
             {/* Header */}
             <div style={{
                 borderRadius: 12,
@@ -65,10 +67,10 @@ const ProductsPage = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h1 className='text-2xl !font-bold text-gray-800 !mb-1'>
-                            Mahsulotlar
+                           Hizmat turi
                         </h1>
                         <p className='text-sm text-gray-500 !mb-0'>
-                            Jami: {total} ta mahsulot
+                            Jami: {total} ta hizmat turi
                         </p>
                     </div>
                     <Button
@@ -77,7 +79,7 @@ const ProductsPage = () => {
                         onClick={() => setModalOpen(true)}
                         style={{ borderRadius: 8 }}
                     >
-                        + Yangi mahsulot
+                        + Yangi hizmat turi
                     </Button>
                 </div>
             </div>
@@ -88,7 +90,7 @@ const ProductsPage = () => {
                     <Spin size="large" />
                 </div>
             ) : products.length === 0 ? (
-                <Empty description="Mahsulot topilmadi" />
+                <Empty description="Hizmat turi topilmadi" />
             ) : (
                 <>
                     <Row gutter={[20, 20]}>
@@ -279,15 +281,15 @@ const ProductsPage = () => {
 
                                             {/* Go to Locations */}
                                             <Button
-                                                type="link"
-                                                icon={<FaMapMarkerAlt />}
+                                                type="primary"
+                                                icon={<MdSettings />}
                                                 style={{
-                                                    padding: 0,
+                                                    // padding: 0,
                                                     marginTop: 8,
                                                     fontSize: 12
                                                 }}
                                             >
-                                                Lokatsiyalar
+                                                Hizmatni sozlash
                                             </Button>
                                         </div>
                                     </Card>

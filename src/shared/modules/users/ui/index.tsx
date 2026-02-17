@@ -59,7 +59,7 @@ export default function UsersUi() {
 
   // Filtrni qo'llash
   const onFinish = (values: any) => {
-    console.log('Form values:', values);
+    // console.log('Form values:', values);
     setFilterParams({
       page: 0, // Yangi qidiruv bo'lganda birinchi sahifaga qaytish
       size: filterParams.size,

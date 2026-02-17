@@ -18,6 +18,7 @@ import { useApplyRequest } from "../lib/hooks/hooks";
 import { useApplyModalStore } from "../model/useApplyModalStore";
 import { useTranslations } from "next-intl";
 import { useGetFromList, useGetToList } from "@/entities/hooks/Prices/hooks";
+import { useGetPetitionList, useGetProductsList } from "@/entities/hooks/calculation/hooks";
 
 
 export const ApplyModal = () => {
@@ -26,15 +27,22 @@ export const ApplyModal = () => {
   const { beforePhone } = useGlobalStore();
   const t = useTranslations("LendingPage.applyModal");
   const tr = useTranslations("calculationPage");
+  // const tr = useTranslations("calculationPage");
+  const [form] = Form.useForm();
+  const { data: productsData, isLoading: productsLoading } = useGetProductsList();
+  const selectedProductId = Form.useWatch("product", form);
+  const selectedProduct = productsData?.result?.find((p: any) => p.id === selectedProductId);
+  const { data: petitionList, isLoading: petitionLoading } = useGetPetitionList(
+    selectedProductId || ""
+  );
   const applyRequest = useApplyRequest();
   const lang = localStorage.getItem("roleName")
-  const [form] = Form.useForm();
   const { TO_OPTIONS } = useToRegions();
   const { data: fromData, isLoading: fromLoading } = useGetFromList(lang);
   const { data: toData, isLoading: toLoading } = useGetToList(lang);
   const handleSubmit = async (values: ApplyRequest) => {
     try {
-      const { phone, bulk, density, weight, ...data } = values;
+      const { phone, bulk, weight, description, ...data } = values;
       // Ensure bulk, density, weight are numbers or null if not provided
       const cleanData = {
         ...data,
@@ -125,8 +133,8 @@ export const ApplyModal = () => {
               {
                 pattern: /^(?:\+998\s|\+90\s)?\d{2,3}\s\d{3}\s\d{2}\s\d{2}$/,
                 message: `${t("fields.phone.patternUz")} ${beforePhone === "+998"
-                    ? "+998 90 123 45 67"
-                    : "+90 123 123 1234"
+                  ? "+998 90 123 45 67"
+                  : "+90 123 123 1234"
                   }`,
               },
             ]}
@@ -150,60 +158,47 @@ export const ApplyModal = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-4 !w-full">
           <Form.Item
-            label={
-              <div className="global-label-size">
-                {tr("fromLabel")}
-              </div>
-            }
-            name="fromLocation"
+            label={<div className="flex w-full items-center gap-2 global-text-size font-semibold">{tr("productLabel") || "Mahsulot"}</div>}
+            name="product"
             className="flex-1"
-
-            rules={[{ required: true, message: tr("fromPlaceholder") }]}
+            rules={[{ required: true, message: tr("selectProduct") || "Mahsulotni tanlang!" }]}
           >
             <Select
-              className=""
-              placeholder={tr("fromPlaceholder")}
+              className="!rounded-xl"
+              placeholder={tr("productPlaceholder") || "Mahsulotni tanlang"}
               size="large"
               showSearch
               optionFilterProp="children"
-              loading={fromLoading}
-              notFoundContent={
-                fromLoading ? <Spin size="small" /> : <Empty description=""/>
-              }
+              loading={productsLoading}
+              notFoundContent={productsLoading ? <Spin size="small" /> : tr("noProductsFound")}
             >
-              {fromData?.result?.map((loc: any) => (
-                <Option key={loc.id} value={loc.id}>
-                  {loc.name}
+              {productsData?.result?.map((product: any) => (
+                <Option key={product.id} value={product.id}>
+                  {product.name}
                 </Option>
               ))}
             </Select>
           </Form.Item>
 
-          {/* To Location - Dinamik API dan */}
+          {/* Direction */}
           <Form.Item
-            label={
-              <div className="global-label-size">
-                {tr("toLabel")}
-              </div>
-            }
-            name="toLocation"
+            label={<div className="flex !w-full items-center gap-2 global-text-size font-semibold">{tr("directionLabel") || "Yo'nalish"}</div>}
+            name="directionId"
             className="flex-1"
-            rules={[{ required: true, message: tr("toPlaceholder") }]}
+            rules={[{ required: true, message: tr("directionRequired") || "Yo'nalish tanlanishi shart!" }]}
           >
             <Select
-              className="!w-full"
-              placeholder={tr("toPlaceholder")}
+              className="!rounded-xl"
+              placeholder={tr("directionPlaceholder") || "Yo'nalishni tanlang"}
               size="large"
               showSearch
               optionFilterProp="children"
-              loading={toLoading}
-              notFoundContent={
-                toLoading ? <Spin size="small" /> : <Empty description=""/>
-              }
+              loading={petitionLoading}
+              disabled={!selectedProduct || petitionLoading}
             >
-              {toData?.result?.map((loc: any) => (
-                <Option key={loc.id} value={loc.id}>
-                  {loc.name}
+              {petitionList?.result?.map((dir: any) => (
+                <Option key={dir.id} value={dir.id}>
+                  {dir.directionName}
                 </Option>
               ))}
             </Select>

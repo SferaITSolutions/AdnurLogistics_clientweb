@@ -29,11 +29,11 @@ export const useLoginMutation = () => {
 
       if (roleName === "ROLE_SUPER_ADMIN") {
         toast.success(t("authSuccessMessages.loginSuccess"));
-        router.push("/client/admin/prices"); 
+        router.push("/client/admin/users");
       } else if (roleName === "ROLE_USER") {
         toast.success(t("authSuccessMessages.loginSuccess"));
         router.push("/client/dashboard");
-      }else {
+      } else {
         router.push("/client/sales-manager");
       }
     },
@@ -44,6 +44,17 @@ export const useLoginMutation = () => {
   });
 };
 
+export const useCheckPhoneMutation = () => {
+  return useMutation({
+    mutationFn: (phone: any) => authService.checkphone(phone),
+    onSuccess: () => {
+      toast.success('Phone is available');
+    },
+    onError: () => {
+      toast.error('Phone is not available');
+    },
+  });
+};
 export const useRegisterMutation = () => {
   const t = useTranslations();
   const formSchema = registerSchema(t);
@@ -52,7 +63,11 @@ export const useRegisterMutation = () => {
     mutationFn: (data: z.infer<typeof formSchema>) => authService.register(data), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('identity', data.data.identity);
+      setLocalItem('access_token', data.data.accessToken);
+      setLocalItem('roleName', data.data.roleName);
+      setLocalItem('refresh_token', data.data.refreshToken);
       toast.success(t('authSuccessMessages.loginSuccess'));
+      
     },
     onError: (error: any) => {
       handleError(error);
@@ -65,7 +80,7 @@ export const useCheckIdentityMutation = () => {
   const identity = getLocalItem('identity');
   const t = useTranslations();
   return useMutation({
-    mutationFn: (code: string) => authService.verifyCode({ code, identity: identity || '' }), // asosiy API call
+    mutationFn: (data: { code: any, identity: string }) => authService.verifyCode({ code: data.code, identity: data.identity || '' }), // asosiy API call
     onSuccess: (data) => {
       setLocalItem('access_token', data.data.accessToken);
       setLocalItem('roleName', data.data.roleName);

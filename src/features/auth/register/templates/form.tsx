@@ -1,21 +1,12 @@
 "use client";
 
-import {
-  deformatPhone,
-  deformatPhoneTR,
-  formatPhone,
-  formatPhoneTR,
-} from "@/shared/utils/formatter";
 import { Form, Input } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { FaInfoCircle, FaSpinner } from "react-icons/fa";
-
 import { Link } from "@/i18n/routing";
 import { useRegisterMutation } from "@/services/auth/hook";
 import { ButtonPrimary } from "@/shared/components/dump/atoms";
-import SelectBefore from "@/shared/components/dump/atoms/select-before";
 import { registerSchema } from "@/shared/schemas/registerSchema";
-import { useGlobalStore } from "@/shared/store/globalStore";
 import { extractErrorMessage } from "@/shared/utils";
 import { setLocalItem } from "@/shared/utils/storage";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,11 +15,14 @@ import { useState } from "react";
 import { z } from "zod";
 import RegisterErrorlabel from "../molecules/errorLabel";
 import { useRegisterStore } from "../store/registerStore";
+import { useGlobalStore } from "@/shared/store/globalStore";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const t = useTranslations();
-  const { nextStep, step, phone, setPhone } = useRegisterStore();
+  const { nextStep, step } = useRegisterStore();
   const { beforePhone } = useGlobalStore();
+  const router = useRouter();
 
   const registerMutation = useRegisterMutation();
   const [registerErrorMessage, setRegisterErrorMessage] = useState("");
@@ -42,7 +36,6 @@ export default function RegisterForm() {
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      phone: "",
       fullname: "",
       password: "",
       repeatedPassword: "",
@@ -54,17 +47,24 @@ export default function RegisterForm() {
     setLocalItem("stepKey", step + 1);
   };
 
-  // ✅ Submit
+  // Telefon raqami OTP'da saqlangan (sessionStorage'da)
+  const phone_number = typeof window !== "undefined" ? sessionStorage.getItem("register_phone") : "";
+
+  // Submit
   const onSubmit = (values: z.infer<typeof schema>) => {
-    const { phone, ...data } = values;
-    setPhone(phone)
+    const { fullname, password, repeatedPassword } = values;
+    // phone ni sessionStorage'dan olib, cleanData objektiga kiritamiz
     const cleanData = {
-      ...data,
-      phone:
-        beforePhone === "+998" ? deformatPhone(phone) : deformatPhoneTR(phone),
+      fullname,
+      password,
+      repeatedPassword,
+      phone: phone_number, // phone number ishtirokida yuboriladi
     };
     registerMutation.mutate(cleanData, {
-      onSuccess: () => handleNext(),
+      onSuccess: () => {
+        handleNext();
+        router.push("/client/dashboard");
+      },
       onError: (err) => setRegisterErrorMessage(err),
     });
   };
@@ -110,35 +110,8 @@ export default function RegisterForm() {
             )}
           />
         </Form.Item>
-        <Form.Item
-          label={
-            <span className="global-label-size">{t("register.phone")}</span>
-          }
-          validateStatus={errors.phone ? "error" : ""}
-          help={errors.phone?.message}
-        >
-          <Controller
-            name="phone"
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                addonBefore={<SelectBefore className="min-w-[100px]" />}
-                placeholder={
-                  beforePhone === "+998" ? "90 123 45 67" : "123 123 1234"
-                }
-                onChange={(e) => {
-                  const formatted =
-                    beforePhone === "+998"
-                      ? formatPhone(e.target.value, true)
-                      : formatPhoneTR(e.target.value, true);
-                  field.onChange(formatted);
-                }}
-                size="large"
-              />
-            )}
-          />
-        </Form.Item>
+
+        {/* Telefon inputi bu yerda bo'lmasligi kerak! */}
 
         <Form.Item
           label={

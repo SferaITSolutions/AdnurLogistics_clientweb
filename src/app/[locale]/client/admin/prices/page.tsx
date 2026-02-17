@@ -9,18 +9,18 @@ export default function Prices() {
   const router = useRouter();
 
   useEffect(() => {
-    const rolename = role
-    if (rolename !== "ROLE_SUPER_ADMIN") {
-      router.replace("/403");
-    }
-  }, [router,role]);
+    // const rolename = role
+    // if (rolename !== "ROLE_SUPER_ADMIN") {
+    router.replace("/403");
+    // }
+  }, [router, role]);
 
   return (
     <div className='container'>
       <title>
         Admin | Prices
       </title>
-      <PricesUi/>
+      <PricesUi />
     </div>
   )
 }

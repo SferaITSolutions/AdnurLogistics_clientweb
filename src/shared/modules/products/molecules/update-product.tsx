@@ -73,7 +73,7 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
       imgUrl: values.imgUrl || null, // agar rasm o'zgarmasa → eski qiymat saqlanadi yoki null
     };
 
-    console.log("Update uchun yuborilayotgan data:", finalData);
+    // console.log("Update uchun yuborilayotgan data:", finalData);
 
     updateProduct(finalData, {
       onSuccess: () => {

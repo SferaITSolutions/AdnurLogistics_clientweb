@@ -19,6 +19,26 @@ export const useNewsList = () => {
     });
 };
 
+export const useNewsOneForAdmin = (id: number) => {
+    return useQuery({
+        queryKey: newsKeys.detail(id),
+        queryFn: async () => {
+            const response = await NewsService.getNewsOneForAdmin(id);
+            return response.data;
+        },
+        enabled: !!id,
+        retry: false,
+    });
+};
+export const useNewsListForAdmin = () => {
+    return useQuery({
+        queryKey: newsKeys.list(),
+        queryFn: async () => {
+            const response = await NewsService.getNewsListForAdmin();
+            return response.data;
+        },
+    });
+};
 // 2. Bitta yangilikni olish (agar kerak bo'lsa, hozircha komponentda ishlatilmayapti)
 export const useNewsDetail = (id: string | null) => {
     return useQuery({
@@ -103,7 +123,7 @@ export const useDeleteNews = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (id: string | number) => NewsService.deleteNews(Number(id)),
+        mutationFn: (id: any) => NewsService.deleteNews(id),
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: newsKeys.list() });

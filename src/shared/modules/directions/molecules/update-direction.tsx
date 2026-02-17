@@ -34,7 +34,7 @@ export default function EditDirectionModal({
   onSuccess,
 }: EditDirectionModalProps) {
   const t = useTranslations("calculationPage"); // yoki kerakli namespace
-  const [form] = Form.useForm();
+  const [form] = Form.useForm();  
 
   const lang = getLocalItem("lang")?.toString() || "uz";
 
@@ -61,11 +61,12 @@ export default function EditDirectionModal({
       return;
     }
 
-    const payload = {
+    const payload: any = {
       id: direction.id,
       productId: direction.productId,
       fromLocationId: values.from,
       toLocationId: values.to,
+      priceList: []
     };
 
     updateDirection(payload, {

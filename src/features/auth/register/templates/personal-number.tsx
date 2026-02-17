@@ -38,8 +38,8 @@ export default function PersonalNumber() {
     setLocalItem('stepKey', step + 1);
   };
 
-  const onFinish = (value: { code: string }) => {
-    console.log(value);
+  const onFinish = (value: { code: string } | any) => {
+    // console.log(value);
 
     checkCheckIdentity.mutate(value.code, {
       onSuccess: () => handleNext(),

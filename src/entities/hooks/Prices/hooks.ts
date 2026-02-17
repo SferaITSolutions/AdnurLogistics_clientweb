@@ -36,7 +36,7 @@ export const useGetDeliveryPrices = (page: number = 0, size: number = 10) => {
   });
 };
 export const useGetToList = (Language: any) => {
-  console.log(Language,11)
+  // console.log(Language,11)
 
   return useQuery<PageResponse>({
     queryKey: ["to-list",Language],
@@ -47,7 +47,7 @@ export const useGetToList = (Language: any) => {
   });
 };
 export const useGetFromList = (Language: any) => {
-  console.log(Language,12)
+  // console.log(Language,12)
   return useQuery<PageResponse>({
     queryKey: ["from-list", Language],
     queryFn: async () => {

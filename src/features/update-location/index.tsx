@@ -20,7 +20,7 @@ export default function UpdateLocationForm({
   onSuccess,
   onCancel,
 }: UpdateLocationFormProps) {
-  console.log(initialValues,"inited");
+  // console.log(initialValues,"inited");
   const [form] = Form.useForm();
   const { mutate: updateLocation, isPending } = useUpdateLocation();
 
