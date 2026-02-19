@@ -6,6 +6,7 @@ import ProductNameInputs from '@/shared/modules/products/molecules/ProductNameIn
 import ProductDescriptionInputs from '@/shared/modules/products/molecules/ProductDescriptionInputs';
 import ProductImageUploadField from '@/shared/modules/products/molecules/ProductImageUploadField';
 import CalculateKgField from '@/shared/modules/products/molecules/CalculateKgField';
+import ProductLanguageFields from '../molecules/ProductLanguageFields';
 
 interface CreateProductModalProps {
   open: boolean;
@@ -47,10 +48,10 @@ const CreateProductModal = ({ open, onClose, onSuccess }: CreateProductModalProp
         initialValues={{ calculateKg: false }}
         validateTrigger={['onChange', 'onBlur']}
       >
-        <ProductNameInputs />
-        <ProductImageUploadField form={form} />
+        {/* <ProductNameInputs /> */}
+        <ProductLanguageFields form={form} />
         <CalculateKgField />
-        <ProductDescriptionInputs />
+        {/* <ProductDescriptionInputs /> */}
 
         <Form.Item style={{ marginTop: 32, textAlign: 'right' }}>
           <Button onClick={onClose} style={{ marginRight: 12 }}>

@@ -1,15 +1,20 @@
-// components/ImageUploader.tsx
 "use client";
-import { useEffect, useState } from 'react';
-import { Upload, message, UploadFile, UploadProps } from 'antd';
-import { RcFile } from 'antd/es/upload';
-import { useUploadImage } from '@/entities/hooks/products-hooks/hooks';
+import { useEffect, useRef, useState } from "react";
+import { message } from "antd";
+import { useUploadImage } from "@/entities/hooks/products-hooks/hooks";
+import {
+  LuImagePlus,
+  LuTrash2,
+  LuRefreshCw,
+} from "react-icons/lu";
+import { FaCheckCircle, FaUpload } from "react-icons/fa";
 
 interface ImageUploaderProps {
   onUploadSuccess?: (url: string) => void;
   initialUrl?: string;
   maxSizeMB?: number;
   uploadPath?: string;
+  label?: string;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -17,42 +22,38 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   initialUrl,
   maxSizeMB = 5,
   uploadPath,
+  label = "Rasm yuklash",
 }) => {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(initialUrl || null);
+  const [isDragging, setIsDragging] = useState(false);
   const { mutate: uploadImage, isPending: uploading } = useUploadImage();
 
-  // initialUrl o'zgarganda preview'ni yangilash
   useEffect(() => {
     setPreview(initialUrl || null);
   }, [initialUrl]);
 
-  const beforeUpload = (file: RcFile) => {
-    const isImage = file.type.startsWith('image/');
+  const processFile = (file: File) => {
+    const isImage = file.type.startsWith("image/");
     if (!isImage) {
-      message.error('Faqat rasm fayllari yuklanishi mumkin!');
-      return Upload.LIST_IGNORE;
+      message.error("Faqat rasm fayllari yuklanishi mumkin!");
+      return;
     }
-
     const isLtMax = file.size / 1024 / 1024 < maxSizeMB;
     if (!isLtMax) {
       message.error(`Rasm hajmi ${maxSizeMB}MB dan kichik bo'lishi kerak!`);
-      return Upload.LIST_IGNORE;
+      return;
     }
 
-    // Preview uchun
+    // Local preview
     const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreview(e.target?.result as string);
-    };
+    reader.onload = (e) => setPreview(e.target?.result as string);
     reader.readAsDataURL(file);
 
+    // Upload
     const formData = new FormData();
-    formData.append('file', file);
-
-    if (uploadPath) {
-      formData.append('path', uploadPath);
-    }
+    formData.append("file", file);
+    if (uploadPath) formData.append("path", uploadPath);
 
     uploadImage(formData, {
       onSuccess: (response) => {
@@ -60,160 +61,165 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         if (uploadedUrl) {
           onUploadSuccess?.(uploadedUrl);
           setPreview(uploadedUrl);
-          setFileList([
-            {
-              uid: '-1',
-              name: file.name,
-              status: 'done',
-              url: uploadedUrl,
-            },
-          ]);
         }
       },
       onError: () => {
         setPreview(null);
-        message.error('Rasm yuklashda xatolik yuz berdi!');
+        message.error("Rasm yuklashda xatolik yuz berdi!");
       },
     });
-
-    return false;
   };
 
-  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList.slice(-1));
+  // Native input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processFile(file);
+    // Reset input value so same file can be re-selected
+    e.target.value = "";
+  };
+
+  // Drag & drop handlers
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+  const handleDragLeave = () => setIsDragging(false);
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) processFile(file);
   };
 
   const handleRemove = () => {
-    setFileList([]);
     setPreview(null);
-    onUploadSuccess?.(''); // Parent component'ga bo'sh string yuborish
+    onUploadSuccess?.("");
   };
 
   return (
-    <div className="!w-[100%]">
-      {!preview ? (
-        <Upload
-          listType="picture"
-          fileList={[]}
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-          maxCount={1}
-          accept="image/*"
-          showUploadList={false}
-          disabled={uploading}
-          className="!w-full"
-        >
-          <div className="relative group !w-full">
-            <div className="border-2 !w-full border-dashed border-gray-300 rounded-xl p-8 transition-all duration-300 hover:border-blue-500 hover:bg-blue-50/50 cursor-pointer">
-              <div className="flex flex-col items-center justify-center space-y-3">
-                {uploading ? (
-                  <>
-                    <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                    <p className="text-sm font-medium text-blue-600">
-                      Yuklanmoqda...
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <svg
-                        className="w-8 h-8 text-blue-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                        />
-                      </svg>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-semibold text-gray-700 mb-1">
-                        Rasmni yuklash
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        PNG, JPG, WEBP ({maxSizeMB}MB gacha)
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 !text-white text-sm font-medium rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg"
-                    >
-                      Tanlash
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </Upload>
-      ) : (
-        <div className="relative group !w-full">
-          <div className="relative rounded-xl overflow-hidden border-2 border-gray-200 shadow-md">
-            <img
-              src={preview}
-              alt="Preview"
-              className="w-full h-64 object-cover"
-            />
+    <div className="w-full">
+      {/* Hidden native file input */}
+      <input
+        ref={inputRef}
+        type="file"
+        placeholder="Rasm yuklash"
+        accept="image/*"
+        className="!hidden"
+        onChange={handleInputChange}
+      />
 
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <div className="flex gap-3">
-                <Upload
-                  listType="picture"
-                  fileList={[]}
-                  beforeUpload={beforeUpload}
-                  onChange={handleChange}
-                  maxCount={1}
-                  accept="image/*"
-                  showUploadList={false}
-                  disabled={uploading}
+      {!preview ? (
+        /* ── DROP ZONE ── */
+        <div
+          onClick={() => !uploading && inputRef.current?.click()}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`
+            w-full cursor-pointer rounded-2xl border-2 border-dashed
+            transition-all duration-300 select-none
+            ${
+              isDragging
+                ? "scale-[1.01] border-blue-500 bg-blue-50"
+                : "border-gray-200 bg-gray-50 hover:border-blue-400 hover:bg-blue-50/60"
+            }
+            ${uploading ? "pointer-events-none opacity-70" : ""}
+          `}
+        >
+          <div className="flex flex-col items-center justify-center gap-4 px-6 py-12">
+            {uploading ? (
+              <>
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100">
+                  <FaUpload className="h-8 w-8 animate-bounce text-blue-500" />
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-semibold text-blue-600">Yuklanmoqda...</p>
+                  <p className="mt-1 text-xs text-gray-400">Iltimos kuting</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className={`
+                    flex h-16 w-16 items-center justify-center rounded-2xl
+                    transition-all duration-300
+                    ${isDragging ? "scale-110 bg-blue-200" : "bg-blue-100"}
+                  `}
                 >
-                  <button
-                    type="button"
-                    className="px-3 py-2.5 !bg-white !text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-lg"
-                  >
-                    Almashtirish
-                  </button>
-                </Upload>
+                  <LuImagePlus
+                    className={`h-8 w-8 transition-colors duration-300 ${
+                      isDragging ? "text-blue-700" : "text-blue-500"
+                    }`}
+                  />
+                </div>
+
+                <div className="text-center">
+                  <p className="text-sm font-semibold text-gray-700">{label}</p>
+                  <p className="mt-1 text-xs text-gray-400">
+                    PNG, JPG, WEBP · {maxSizeMB}MB gacha
+                  </p>
+                  <p className="mt-0.5 text-xs text-gray-400">
+                    yoki faylni shu yerga tashlang
+                  </p>
+                </div>
 
                 <button
                   type="button"
-                  onClick={handleRemove}
-                  className="px-3 py-2.5 bg-red-500 !text-white rounded-lg font-medium hover:bg-red-600 transition-colors shadow-lg"
+                  className="rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold !text-white shadow-md transition-all duration-200 hover:bg-blue-700 hover:shadow-lg active:scale-95"
                 >
-                  O'chirish
+                  Fayl tanlash
                 </button>
-              </div>
+              </>
+            )}
+          </div>
+        </div>
+      ) : (
+        /* ── PREVIEW ── */
+        <div className="w-full">
+          <div className="group relative w-full overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
+            <img
+              src={preview}
+              alt="Preview"
+              className="h-64 w-full object-cover transition-all duration-300 group-hover:brightness-50"
+            />
+
+            {/* Action buttons on hover */}
+            <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <button
+                type="button"
+                onClick={() => inputRef.current?.click()}
+                className="flex items-center gap-2 rounded-xl bg-white/90 px-4 py-2.5 text-sm font-semibold text-gray-800 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:bg-white"
+              >
+                <LuRefreshCw className="h-4 w-4" />
+                Almashtirish
+              </button>
+
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="flex items-center gap-2 rounded-xl bg-red-500/90 px-4 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:bg-red-600"
+              >
+                <LuTrash2 className="h-4 w-4" />
+                O'chirish
+              </button>
             </div>
 
             {/* Loading overlay */}
             {uploading && (
-              <div className="absolute inset-0 bg-white/90 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                  <p className="text-sm font-medium text-gray-700">
-                    Yuklanmoqda...
-                  </p>
-                </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/90 backdrop-blur-sm">
+                <FaUpload className="h-10 w-10 animate-bounce text-blue-500" />
+                <p className="text-sm font-semibold text-gray-700">Yuklanmoqda...</p>
               </div>
             )}
           </div>
 
-          {/* Image info */}
-          <div className="mt-3 flex items-center justify-between px-2">
+          {/* Status bar */}
+          <div className="mt-3 flex items-center justify-between px-1">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full" />
-              <span className="text-xs font-medium text-gray-600">
-                Yuklangan
-              </span>
+              <FaCheckCircle className="h-4 w-4 text-green-500" />
+              <span className="text-xs font-medium text-gray-500">Yuklangan</span>
             </div>
-            <span className="text-xs text-gray-500">
-              {maxSizeMB}MB gacha
-            </span>
+            <span className="text-xs text-gray-400">{maxSizeMB}MB gacha</span>
           </div>
         </div>
       )}

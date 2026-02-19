@@ -1,4 +1,4 @@
-import { Form, Switch } from 'antd';
+import { Form, Radio, Switch } from 'antd';
 
 /**
  * "Og'irlik bo'yicha hisoblanadimi?" Switch field.
@@ -7,10 +7,13 @@ const CalculateKgField = () => {
   return (
     <Form.Item
       name="calculateKg"
-      label="Og'irlik bo'yicha hisoblanadimi?"
-      valuePropName="checked"
+      label="Hisoblash turi"
+      initialValue={true}
     >
-      <Switch checkedChildren="Ha" unCheckedChildren="Yo'q" />
+      <Radio.Group>
+        <Radio value={true}>Og'irlik bo'yicha hisoblash</Radio>
+        <Radio value={false}>Hajm bo'yicha hisoblash</Radio>
+      </Radio.Group>
     </Form.Item>
   );
 };

@@ -12,7 +12,7 @@ interface ProductImageUploadFieldProps {
  */
 const ProductImageUploadField = ({ form, initialUrl }: ProductImageUploadFieldProps) => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 !w-full !min-w-full">
       <Form.Item
         name="imgUrl"
         label="Mahsulot rasmi"
