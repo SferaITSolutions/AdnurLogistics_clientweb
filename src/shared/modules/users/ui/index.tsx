@@ -168,13 +168,13 @@ export default function UsersUi() {
       key: 'companyName',
     },
     {
-      title: 'Yuk tashish manzillari',
+      title: 'Foydalanuvchi ID lari',
       dataIndex: 'entityIds',
       key: 'entityIds',
       render: (text: string[]) => text?.join(', ') || '-',
     },
     {
-      title: 'Oracle ID',
+      title: 'Foydalanuvchi turi',
       dataIndex: 'userType',
       width: 140,
       key: 'userType',
