@@ -6,7 +6,7 @@ export default function NavbarItems() {
 
   return (
     <div className="flex items-center gap-6">
-      {["ROLE_USER", "ROLE_CONTROLLER"].includes(role ?? "") && (
+      {["ROLE_USER"].includes(role ?? "") && (
         <LanguageSwitcher />
       )}
     </div>

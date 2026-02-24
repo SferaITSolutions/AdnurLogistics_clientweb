@@ -17,6 +17,7 @@ interface Product {
   descriptionUz: string;
   imgUrl?: string;
   calculateKg: boolean;
+  calculate: boolean;
 }
 
 interface ProductCardProps {
@@ -47,7 +48,7 @@ const ProductCard = ({
   return (
     <Card
       hoverable
-      onClick={onClick}
+      onClick={product.calculate ? onClick : undefined}
       style={{
         borderRadius: 12,
         overflow: 'hidden',
@@ -79,7 +80,7 @@ const ProductCard = ({
           onToggle={handleToggle}
         />
 
-        <Button
+        {product.calculate && <Button
           type="primary"
           icon={<MdSettings />}
           style={{
@@ -88,7 +89,7 @@ const ProductCard = ({
           }}
         >
           Hizmatni sozlash
-        </Button>
+        </Button>}
       </div>
     </Card>
   );

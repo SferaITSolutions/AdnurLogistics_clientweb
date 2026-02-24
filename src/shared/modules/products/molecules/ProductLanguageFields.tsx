@@ -1,13 +1,13 @@
-import { Form, FormInstance, Input } from 'antd';
+import { Checkbox, Form, Input, Switch } from 'antd';
 import ProductImageUploadField from './ProductImageUploadField';
+import CalculateKgField from './CalculateKgField';
 
 const { TextArea } = Input;
 
-/**
- * Barcha tillar uchun nom + tavsif maydonlari.
- * Har bir til uchun nom va tavsif yonma-yon joylashadi.
- */
 const ProductLanguageFields = (form: any) => {
+  // calculate fieldini watch qilamiz
+  const calculate = Form.useWatch('calculate', form);
+
   return (
     <div className="space-y-8 grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* O'zbekcha */}
@@ -29,12 +29,7 @@ const ProductLanguageFields = (form: any) => {
           label="Ta'rif (O'zbekcha)"
           rules={[{ max: 1500, message: 'Maksimal 1500 ta belgi' }]}
         >
-          <TextArea
-            rows={3}
-            showCount
-            maxLength={1500}
-            placeholder="Mahsulot haqida batafsil..."
-          />
+          <TextArea rows={3} showCount maxLength={1500} placeholder="Mahsulot haqida batafsil..." />
         </Form.Item>
       </div>
 
@@ -129,8 +124,27 @@ const ProductLanguageFields = (form: any) => {
           <TextArea rows={3} showCount maxLength={1500} />
         </Form.Item>
       </div>
-      <div className="">
-      <ProductImageUploadField form={form} />
+
+      {/* Image upload */}
+      <div>
+        <ProductImageUploadField form={form} />
+      </div>
+
+      {/* Calculate toggle — full width */}
+      <div className="md:col-span-2">
+        <Form.Item
+          name="calculate"
+          label=""
+          valuePropName="checked"
+          initialValue={false}
+        >
+          <Checkbox className="text-sm font-medium">
+            Hisoblanishi kerakmi?
+          </Checkbox>
+        </Form.Item>
+
+        {/* calculateKg faqat calculate === true bo'lganda ko'rinadi */}
+        {calculate && <CalculateKgField />}
       </div>
     </div>
   );

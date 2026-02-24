@@ -18,7 +18,7 @@ export default function ResultCalculation({ response }: { response: any }) {
     createPetitionMutation.mutate({
       directionId: values.directionId,
       weight: values.weight || 0,
-      bulk: values.bulk ?? values.cub ?? 0,
+      bulk: values.bulk || values.cub || 0,
       containerType: "OTHER",
       customs: values.customs || false,
       price: Number(response?.result) || 0,
@@ -83,10 +83,10 @@ export default function ResultCalculation({ response }: { response: any }) {
           </div>
 
           {/* Disclaimer */}
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-yellow-50 border border-yellow-200">
+          {/* <div className="flex items-start gap-3 p-4 rounded-xl bg-yellow-50 border border-yellow-200">
             <FaExclamationTriangle className="text-yellow-600 flex-shrink-0 mt-1" />
             <p className="text-sm text-yellow-800 !mb-0">{t("disclaimer")}</p>
-          </div>
+          </div> */}
 
           {/* Customs Checkbox */}
           <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">

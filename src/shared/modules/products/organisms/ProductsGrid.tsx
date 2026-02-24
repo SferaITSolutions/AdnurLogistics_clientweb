@@ -45,9 +45,9 @@ const ProductsGrid = ({
 
   return (
     <>
-      <Row gutter={[20, 20]}>
+      <Row gutter={[16, 16]}>
         {products.map((product) => (
-          <Col xs={24} sm={12} lg={8} xl={6} key={product.id}>
+          <Col xs={24} sm={12} md={8} lg={8} xl={8} key={product.id}>
             <ProductCard
               product={product}
               isDeleting={isDeleting}

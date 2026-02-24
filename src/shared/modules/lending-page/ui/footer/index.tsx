@@ -20,10 +20,10 @@ export default function Footer() {
             Toshkent shaxar, Shayxontohur tumani, O'qchi - 6. (Mo'ljal Toshkent
             City Bulvar)
           </h1>
-          <div className="flex  items-center gap-2">
+          {/* <div className="flex  items-center gap-2">
             <TitleText redText="GET" color="white" title="IN TOUCH" />{" "}
             <FaArrowRight color="white" size={30} />
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col gap-2 w-[300px]">
           <div className="">

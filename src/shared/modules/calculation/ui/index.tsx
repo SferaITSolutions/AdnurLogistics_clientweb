@@ -23,10 +23,13 @@ export default function CalculationUI() {
         <FonImage />
 
         {/* Title Section */}
-        <div className="w-full flex justify-center items-center mb-8">
+        <div className="w-full flex justify-center items-center ">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-2xl" />
-            <TitleText title={t("title")} />
+            <div className="absolute inset-0 bg-gradient-to-r" />
+            {/* <TitleText title={t("title")} /> */}
+            <h1 className="text-black !text-bold text-4xl">
+              {t("title")}
+            </h1>
           </div>
         </div>
 

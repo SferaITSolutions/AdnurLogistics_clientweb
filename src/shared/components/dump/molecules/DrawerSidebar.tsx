@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCalculator, FaDollarSign, FaHome, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaCalculator, FaDollarSign, FaHome, FaNewspaper, FaSignOutAlt, FaUser } from "react-icons/fa";
 import Logo from "@/shared/components/dump/atoms/Logo";
 import { useGlobalStore } from "@/shared/store/globalStore";
 import { Drawer, Select } from "antd";
@@ -13,6 +13,7 @@ import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
 import { useEntityIds } from "@/services/users/hook";
 import { useMe } from "@/widgets/headers/navbar-cabinet/hook/hook";
 import { formatPhoneTR } from "@/shared/utils/formatter";
+import { AiFillProduct } from "react-icons/ai";
 
 export const DrawerSidebar = ({
   closeSidebar,
@@ -119,7 +120,14 @@ export const DrawerSidebar = ({
             </span>
           </div> */}
 
-          {role === "ROLE_USER" && data?.data?.code && (
+          {/* <div className="flex items-center gap-2 px-4 mb-2">
+        <div className="w-1 h-5 bg-gradient-to-b from-blue-400 to-purple-500 rounded-full" />
+        <span className="text-xs font-bold text-white/60 uppercase tracking-wider">
+          Navigation
+        </span>
+      </div> */}
+
+          {role === "ROLE_USER" && (
             <MenuItem
               label={t("clientDashboard.dashboard")}
               path={`/client/dashboard`}
@@ -133,13 +141,13 @@ export const DrawerSidebar = ({
               icon={<FaCalculator size={22} />}
             />
           )}
-          {role === "ROLE_SUPER_ADMIN" && (
-            <MenuItem
-              label={t("pricesTable.prices")}
-              path={`/client/admin/prices`}
-              icon={<FaHome size={22} />}
-            />
-          )}
+          {/* {role === "ROLE_SUPER_ADMIN" && (
+        <MenuItem
+          label={t("pricesTable.prices")}
+          path={`/client/admin/prices`}
+          icon={<FaHome size={22} />}
+        />
+      )} */}
           {role === "ROLE_SUPER_ADMIN" && (
             <MenuItem
               label={t("pricesTable.users")}
@@ -154,9 +162,24 @@ export const DrawerSidebar = ({
               icon={<FaCalculator size={22} />}
             />
           )}
+
           {role === "ROLE_SUPER_ADMIN" && (
             <MenuItem
-              label={"Xabarnoma"}
+              label={"Hizmat turi"}
+              path={`/client/admin/products`}
+              icon={<AiFillProduct size={22} />}
+            />
+          )}
+          {role === "ROLE_SUPER_ADMIN" && (
+            <MenuItem
+              label={"Yangiliklar"}
+              path={`/client/admin/news`}
+              icon={<FaNewspaper size={22} />}
+            />
+          )}
+          {role === "ROLE_SUPER_ADMIN" && (
+            <MenuItem
+              label={"Versiya sozlamalari"}
               path={`/client/admin/notifications`}
               icon={<MdNotifications size={22} />}
             />

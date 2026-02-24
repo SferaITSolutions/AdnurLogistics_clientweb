@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { Tag } from "antd";
 import { useTranslations } from "next-intl";
-import StatusBadge from "../atoms/status-colored";
+import { StatusBadgeForMap } from "../atoms/status-colored";
 
 interface Props {
   height?: number | string;
@@ -118,6 +118,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
     if (fraction >= 1) currentPosition = coords[coords.length - 1];
     return currentPosition;
   };
+  console.log(statusProps, "statusProps");
 
   const updateTruckPosition = () => {
     const ymaps = ymapsRef.current;
@@ -132,7 +133,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
     const isDatePassed = now > endDate;
     if (isPendingBilling && isDatePassed) {
-      fraction = Math.min(distanceKm, 0.9);
+      fraction = Math.min(distanceKm, 1);
     }
 
     setCurrentProgress(fraction);
@@ -270,9 +271,9 @@ const YandexMapWithTruck: React.FC<Props> = ({
         query={{
           load: "package.full",
           lang: "en_RU",
-          apikey: 
-          "a041bf54-0dee-4385-816c-f3f7745a540b"
-          // "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
+          apikey:
+            
+          "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
         }}
       >
         <Map
@@ -324,7 +325,8 @@ const YandexMapWithTruck: React.FC<Props> = ({
                   </span>
                 </div>
               </div>
-              <StatusBadge status={statusProps} />
+              {/* Status  */}
+              <StatusBadgeForMap status={statusProps} />
               <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm">
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${isDelivered
@@ -336,7 +338,10 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
-                    {t("deliveryDate")}
+                    {statusProps === "Sales Order : Pending Billing" ||
+                     statusProps === "Sales Order : Closed" ||
+                     statusProps === "Sales Order : Billed"
+                      ? t("deliveredDate") : t("deliveryDate")}
                   </span>
                   {(
                     <span className="text-sm font-bold text-gray-900">

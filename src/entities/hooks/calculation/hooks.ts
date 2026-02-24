@@ -8,7 +8,7 @@ export const useCalculation = (onSuccess?: (data: any) => void) => {
     mutationFn: (data: {
       fromLocation: string;
       customs: boolean;
-      toLocation:string;
+      toLocation: string;
       weight: number;
       cub: number;
     }) => CalculationService.calculate(data),
@@ -58,6 +58,7 @@ export const useApplyFCL = (onSuccess: () => void) => {
     mutationFn: (data: {
       fromLocation: string;
       toLocation: string;
+      productId: string;
       weight: number;
       bulk: number;
       customs: boolean;

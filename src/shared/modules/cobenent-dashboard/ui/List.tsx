@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useOrder } from "@/entities/hooks/order/hooks";
 import { useOrderDetailsStore } from "@/features/order-details/lib/store";
@@ -14,6 +14,7 @@ import { useSidebarStore } from "@/features/auth/register/store/sidebarStore";
 
 export default function OrdersList() {
   const t = useTranslations("clientDashboard");
+  const [currency, setCurrency] = useState<string | null>('USD');
   const { selectedEntityId } = useSidebarStore();
   const {
     setOrderId,
@@ -75,6 +76,7 @@ export default function OrdersList() {
                       totalprice: number | string | any;
                       quantity: string | null;
                       salesorderstatus: string | null;
+                      currency: string | null;
                     },
                     index: number
                   ) => (
@@ -93,7 +95,7 @@ export default function OrdersList() {
                         openModal();
                         setStatusOfInvoice(card?.salesorderstatus)
                         setTotalprice(card?.totalprice)
-                        // console.log(card?.totalprice, "price");
+                        setCurrency(card?.currency || 'USD')
 
                         setStartEndDate({
                           start: card.createddate,
@@ -113,7 +115,7 @@ export default function OrdersList() {
             </div>
           )}
           <Pagination dataLength={data?.data.totalElements} />
-          <OrderDetailsModal />
+          <OrderDetailsModal currency={currency as any} />
         </>
       )}
     </div>

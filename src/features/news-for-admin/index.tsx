@@ -46,7 +46,7 @@ export default function NewsForAdmin() {
         <div className="p-4">
             {/* News Slider - 3 cards at a time */}
             <div className="mb-8">
-                <h2 className="text-3xl font-bold mb-6">Yangiliklar</h2>
+                {/* <h2 className="text-3xl font-bold mb-6">Yangiliklar</h2> */}
                 <Swiper
                     modules={[Pagination, Autoplay]}
                     spaceBetween={20}

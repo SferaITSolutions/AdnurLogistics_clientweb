@@ -11,6 +11,7 @@ type ApplyFormValues = {
   to: string;
   weight: number;
   bulk: number;
+  productId: string;
   customs: boolean;
 };
 
@@ -26,6 +27,7 @@ export default function ApplyForm() {
     weight: values?.weight ?? null,
     bulk: values?.bulk ?? null,
     customs: values?.customs ?? false,
+    productId: values?.productId ?? "",
   };
 
   const applyMutation = useApplyFCL(() => {
@@ -44,6 +46,7 @@ export default function ApplyForm() {
       toLocation: values.to ?? "",
       weight: values.weight ?? "",
       bulk: values.bulk ?? "",
+      productId: values.productId ?? "",
       customs: values.customs || false,
     });
   };

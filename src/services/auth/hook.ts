@@ -2,42 +2,48 @@
 import { getLocalItem, setLocalItem } from '@/shared/utils/storage';
 import { authService } from './auth.service';
 import { loginSchema } from '@/shared/schemas/loginSchema';
-import { message } from 'antd';
 import { registerSchema } from '@/shared/schemas/registerSchema';
 import { useError } from '@/shared/hooks/useError';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+
+// Lang prefiksi bilan path yasovchi helper
+const getLocalizedPath = (lang: string, path: string) => `/${lang}${path}`;
+
+// URL dan lang olish uchun helper
+const getLangFromPathname = (pathname: string) => {
+  return pathname.split("/").filter(Boolean)[0] || "uz";
+};
+
+// Role ga qarab redirect path
+const getRoleBasedPath = (roleName: string, lang: string) => {
+  if (roleName === "ROLE_SUPER_ADMIN") return getLocalizedPath(lang, "/client/admin/users");
+  if (roleName === "ROLE_USER") return getLocalizedPath(lang, "/client/dashboard");
+  return getLocalizedPath(lang, "/client/sales-manager");
+};
 
 export const useLoginMutation = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations();
   const formSchema = loginSchema(t);
   const handleError = useError();
 
   return useMutation({
     mutationFn: (data: z.infer<typeof formSchema>) => authService.login(data),
-
     onSuccess: async (response) => {
       const { roleName, accessToken, refreshToken } = response.data;
-      // localStorage.clear()
       setLocalItem("roleName", roleName);
       setLocalItem("access_token", accessToken);
       setLocalItem("refresh_token", refreshToken);
 
-      if (roleName === "ROLE_SUPER_ADMIN") {
-        toast.success(t("authSuccessMessages.loginSuccess"));
-        router.push("/client/admin/users");
-      } else if (roleName === "ROLE_USER") {
-        toast.success(t("authSuccessMessages.loginSuccess"));
-        router.push("/client/dashboard");
-      } else {
-        router.push("/client/sales-manager");
-      }
+      const lang = getLangFromPathname(pathname);
+      toast.success(t("authSuccessMessages.loginSuccess"));
+      router.push(getRoleBasedPath(roleName, lang));
     },
-
     onError: (error: any) => {
       handleError(error);
     },
@@ -55,19 +61,26 @@ export const useCheckPhoneMutation = () => {
     },
   });
 };
+
 export const useRegisterMutation = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations();
   const formSchema = registerSchema(t);
   const handleError = useError();
+
   return useMutation({
-    mutationFn: (data: z.infer<typeof formSchema>) => authService.register(data), // asosiy API call
+    mutationFn: (data: z.infer<typeof formSchema>) => authService.register(data),
     onSuccess: (data) => {
-      setLocalItem('identity', data.data.identity);
-      setLocalItem('access_token', data.data.accessToken);
-      setLocalItem('roleName', data.data.roleName);
-      setLocalItem('refresh_token', data.data.refreshToken);
+      const { identity, accessToken, roleName, refreshToken } = data.data;
+      setLocalItem('identity', identity);
+      setLocalItem('access_token', accessToken);
+      setLocalItem('roleName', roleName);
+      setLocalItem('refresh_token', refreshToken);
       toast.success(t('authSuccessMessages.loginSuccess'));
-      
+
+      const lang = getLangFromPathname(pathname);
+      router.push(getRoleBasedPath(roleName, lang));
     },
     onError: (error: any) => {
       handleError(error);
@@ -76,16 +89,23 @@ export const useRegisterMutation = () => {
 };
 
 export const useCheckIdentityMutation = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const handleError = useError();
-  const identity = getLocalItem('identity');
   const t = useTranslations();
+
   return useMutation({
-    mutationFn: (data: { code: any, identity: string }) => authService.verifyCode({ code: data.code, identity: data.identity || '' }), // asosiy API call
+    mutationFn: (data: { code: any; identity: string }) =>
+      authService.verifyCode({ code: data.code, identity: data.identity || '' }),
     onSuccess: (data) => {
-      setLocalItem('access_token', data.data.accessToken);
-      setLocalItem('roleName', data.data.roleName);
-      setLocalItem('refresh_token', data.data.refreshToken);
+      const { accessToken, roleName, refreshToken } = data.data;
+      setLocalItem('access_token', accessToken);
+      setLocalItem('roleName', roleName);
+      setLocalItem('refresh_token', refreshToken);
       toast.success(t('authSuccessMessages.loginSuccess'));
+
+      const lang = getLangFromPathname(pathname);
+      router.push(getRoleBasedPath(roleName, lang));
     },
     onError: (error: any) => {
       handleError(error);

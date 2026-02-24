@@ -7,6 +7,7 @@ import ProductNameInputs from '@/shared/modules/products/molecules/ProductNameIn
 import ProductDescriptionInputs from '@/shared/modules/products/molecules/ProductDescriptionInputs';
 import ProductImageUploadField from '@/shared/modules/products/molecules/ProductImageUploadField';
 import CalculateKgField from '@/shared/modules/products/molecules/CalculateKgField';
+import ProductLanguageFields from '../molecules/ProductLanguageFields';
 
 interface Product {
   id: string;
@@ -21,6 +22,7 @@ interface Product {
   descriptionZh: string;
   descriptionTr: string;
   imgUrl: string | null;
+  calculate: boolean;
   calculateKg: boolean;
 }
 
@@ -54,13 +56,13 @@ const EditProductModal = ({
         descriptionZh: product.descriptionZh || '',
         descriptionTr: product.descriptionTr || '',
         imgUrl: product.imgUrl || undefined,
+        calculate: product.calculate ?? false,
         calculateKg: product.calculateKg ?? false,
       });
     } else {
       form.resetFields();
     }
   }, [open, product, form]);
-
   const handleFinish = (values: any) => {
     if (!product?.id) {
       message.error('Mahsulot ID topilmadi');
@@ -101,10 +103,11 @@ const EditProductModal = ({
         onFinish={handleFinish}
         validateTrigger={['onChange', 'onBlur']}
       >
-        <ProductNameInputs />
-        <ProductImageUploadField form={form} initialUrl={product?.imgUrl || undefined} />
-        <CalculateKgField />
-        <ProductDescriptionInputs />
+        {/* <ProductNameInputs /> */}
+        {/* <ProductImageUploadField form={form} initialUrl={product?.imgUrl || undefined} /> */}
+        <ProductLanguageFields form={form} />
+        {/* <CalculateKgField /> */}
+        {/* <ProductDescriptionInputs /> */}
 
         <Form.Item className="mt-10 text-right">
           <Button onClick={onClose} className="mr-3">

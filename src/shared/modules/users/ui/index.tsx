@@ -233,9 +233,9 @@ export default function UsersUi() {
             </Col>
 
             <Col xs={24} sm={12} md={8}>
-              <Form.Item name="entityId" label="Manzil (Entity)">
+              <Form.Item name="entityId" label="Foydalanuvchi ID si">
                 <Input
-                  placeholder="Manzilni kiriting"
+                  placeholder="Foydalanuvchi ID ni kiriting"
                   allowClear
                 />
               </Form.Item>

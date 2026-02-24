@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 * {
   box-sizing: border-box;
@@ -70,4 +70,26 @@ body {
   .heading-title-size {
     font-size: 30px !important;
   }
+}
+/* Select arrow icon — qora rang */
+.ant-select .ant-select-arrow {
+  color: #000 !important;
+}
+
+/* Select clear icon (x tugmasi) */
+.ant-select .ant-select-clear {
+  color: #000 !important;
+}
+
+/* Dropdown ochiq holatdagi arrow */
+.ant-select-open .ant-select-arrow {
+  color: #000 !important;
+}
+.ant-select-selection-item {
+  font-weight: 500 !important;
+}
+
+/* Dropdown ichidagi selected item */
+.ant-select-item-option-selected .ant-select-item-option-content {
+  font-weight: 500 !important;
 }

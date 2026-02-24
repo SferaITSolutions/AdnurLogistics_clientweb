@@ -19,7 +19,7 @@ const YandexMapWith = dynamic(
   { ssr: false },
 );
 
-const OrderDetailsModal: React.FC = () => {
+const OrderDetailsModal: React.FC<{ currency?: any }> = ({ currency }) => {
   const { isModalOpen, closeModal, orderId, startEndDate, statusOfInvoice, totalPrice, setStartEndDate } = useOrderDetailsStore();
 
   const t = useTranslations('clientDashboard');
@@ -112,7 +112,7 @@ const OrderDetailsModal: React.FC = () => {
                       {Number(totalPrice || 0).toLocaleString("en-US", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
-                      })}$
+                      })} {currency || 'USD'}
                     </span>
                   </div>
                 </div>

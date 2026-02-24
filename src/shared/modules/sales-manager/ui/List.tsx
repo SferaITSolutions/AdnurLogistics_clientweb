@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useOrder } from "@/entities/hooks/order/hooks";
 import { useOrderDetailsStore } from "@/features/order-details/lib/store";
@@ -14,6 +14,7 @@ import { useGetSelesOrders } from "@/entities/hooks/sales-manager/hooks";
 
 export default function SalesOrdersList() {
   const t = useTranslations("clientDashboard");
+  const [currency, setCurrency] = useState<string | null>('USD');
   const {
     setOrderId,
     openModal,
@@ -73,6 +74,7 @@ export default function SalesOrdersList() {
                       tolocation: string | null;
                       quantity: string | null;
                       salesorderstatus: string | null;
+                      currency: string | null;
                     },
                     index: number
                   ) => (
@@ -91,6 +93,7 @@ export default function SalesOrdersList() {
                         openModal();
                         setStatusOfInvoice(card?.salesorderstatus)
                         setTotalprice(card?.totalprice)
+                        setCurrency(card?.currency || 'USD')
                         // console.log(card?.totalprice, "price");
                         
                         setStartEndDate({
@@ -111,7 +114,7 @@ export default function SalesOrdersList() {
             </div>
           )}
           <Pagination dataLength={data?.data?.totalElements } />
-          <OrderDetailsModal />
+          <OrderDetailsModal currency={currency as any} />
         </>
       )}
     </div>

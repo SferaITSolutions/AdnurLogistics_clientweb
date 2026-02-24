@@ -50,7 +50,7 @@ const CreateProductModal = ({ open, onClose, onSuccess }: CreateProductModalProp
       >
         {/* <ProductNameInputs /> */}
         <ProductLanguageFields form={form} />
-        <CalculateKgField />
+        {/* <CalculateKgField /> */}
         {/* <ProductDescriptionInputs /> */}
 
         <Form.Item style={{ marginTop: 32, textAlign: 'right' }}>
