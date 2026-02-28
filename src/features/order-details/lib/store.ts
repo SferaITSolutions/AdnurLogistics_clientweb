@@ -14,8 +14,8 @@ interface OrderDetailsStoreState {
   closeModal: () => void;
   searchfilters: any;
   setSearchFilters: (filters: any) => void;
-  type: string;
-  setType: (type: string) => void;
+  type: number | string;
+  setType: (type: number | string) => void;
   page: number;
   setPage: (page: number) => void;
   size: number;

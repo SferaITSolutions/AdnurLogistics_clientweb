@@ -19,6 +19,8 @@ const CreateProductModal = ({ open, onClose, onSuccess }: CreateProductModalProp
   const { mutate: createProduct, isPending } = useCreateProduct();
 
   const handleFinish = (values: any) => {
+    console.log(values);
+    
     createProduct(values, {
       onSuccess: () => {
         message.success("Hizmat turi muvaffaqiyatli qo'shildi");

@@ -11,7 +11,8 @@ import {
 } from "react-icons/fa";
 import { Tag } from "antd";
 import { useTranslations } from "next-intl";
-import { StatusBadgeForMap } from "../atoms/status-colored";
+import { StatusBadge, StatusBadgeForMap } from "../atoms/status-colored";
+import { useOrderDetailsStore } from "../lib/store";
 
 interface Props {
   height?: number | string;
@@ -86,8 +87,14 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const startDate = new Date(startEndDate.start?.replace(/\//g, "-") || "");
     const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
     const now = new Date();
+
+    if (endDate <= startDate) {
+      return 1; // Delivered deb hisoblaymiz
+    }
+
     const totalMs = endDate.getTime() - startDate.getTime();
     const passedMs = now.getTime() - startDate.getTime();
+
     return Math.max(0, Math.min(1, passedMs / totalMs));
   };
 
@@ -119,6 +126,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
     return currentPosition;
   };
   console.log(statusProps, "statusProps");
+  const { type } = useOrderDetailsStore();
 
   const updateTruckPosition = () => {
     const ymaps = ymapsRef.current;
@@ -132,8 +140,10 @@ const YandexMapWithTruck: React.FC<Props> = ({
     const now = new Date();
     const endDate = new Date(startEndDate.end?.replace(/\//g, "-") || "");
     const isDatePassed = now > endDate;
-    if (isPendingBilling && isDatePassed) {
-      fraction = Math.min(distanceKm, 1);
+    console.log(type, type === "0", "type");
+
+    if (isPendingBilling && isDatePassed && type !== "1") {
+      fraction = Math.min(distanceKm, 0.9);
     }
 
     setCurrentProgress(fraction);
@@ -272,8 +282,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
           load: "package.full",
           lang: "en_RU",
           apikey:
-            
-          "process.env.NEXT_PUBLIC_YANDEX_API_KEY",
+          process.env.NEXT_PUBLIC_YANDEX_API_KEY,
         }}
       >
         <Map
@@ -326,7 +335,7 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 </div>
               </div>
               {/* Status  */}
-              <StatusBadgeForMap status={statusProps} />
+              {type === "1" ? <StatusBadgeForMap status={statusProps} /> : <StatusBadge status={statusProps} />}
               <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-orange-200/60 shadow-sm">
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-lg shadow-md ${isDelivered
@@ -339,8 +348,8 @@ const YandexMapWithTruck: React.FC<Props> = ({
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 font-medium">
                     {statusProps === "Sales Order : Pending Billing" ||
-                     statusProps === "Sales Order : Closed" ||
-                     statusProps === "Sales Order : Billed"
+                      statusProps === "Sales Order : Closed" ||
+                      statusProps === "Sales Order : Billed"
                       ? t("deliveredDate") : t("deliveryDate")}
                   </span>
                   {(

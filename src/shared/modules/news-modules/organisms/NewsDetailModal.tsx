@@ -1,6 +1,6 @@
 // components/organisms/NewsDetailModal.tsx
 
-import { Modal } from "antd";
+import { Image, Modal } from "antd";
 import NewsImage from "../atoms/NewsImage";
 import StatusLabel from "../atoms/StatusLabel";
 import NewsForm from "../molecules/NewsForm";
@@ -77,11 +77,24 @@ const NewsDetailModal = ({
     if (modalType === "view" && editForm) {
       return (
         <div className="p-6">
-          <NewsImage
+          {/* <NewsImage
             src={editForm.imgUrl}
             alt={editForm.title}
             className="w-full h-80 object-cover rounded-xl mb-6"
-          />
+          /> */}
+
+          <div className="w-full h-80 relative overflow-hidden rounded-xl mb-6">
+            <Image
+              src={editForm.imgUrl || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"}
+              alt={editForm.title}
+              width={800}
+              height={320}
+              className="w-full h-80 object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png";
+              }}
+            />
+          </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             {editForm.title}
           </h2>

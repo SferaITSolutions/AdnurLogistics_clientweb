@@ -23,7 +23,7 @@ axiosWithAuth.interceptors.request.use(
       config.headers['Accept-Language'] = locale;
       config.headers['X-Lang'] = lang;
     }
-    const token = getLocalItem('access_token');
+    const token = getLocalItem('access_token'); 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

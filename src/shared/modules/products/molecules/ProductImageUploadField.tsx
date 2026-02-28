@@ -1,3 +1,4 @@
+// ProductImageUploadField.tsx
 import { Form } from 'antd';
 import ImageUploader from '@/shared/components/dump/ui/image-upload';
 
@@ -6,10 +7,6 @@ interface ProductImageUploadFieldProps {
   initialUrl?: string;
 }
 
-/**
- * Rasm yuklash Form.Item + ImageUploader.
- * CreateProductModal va EditProductModal da ishlatiladi.
- */
 const ProductImageUploadField = ({ form, initialUrl }: ProductImageUploadFieldProps) => {
   return (
     <div className="mb-8 !w-full !min-w-full">
@@ -28,13 +25,33 @@ const ProductImageUploadField = ({ form, initialUrl }: ProductImageUploadFieldPr
           },
         ]}
       >
-        <ImageUploader
-          onUploadSuccess={(url) => form.setFieldsValue({ imgUrl: url })}
+        <ImageUploaderFormWrapper
           initialUrl={initialUrl}
           maxSizeMB={5}
+          form={form}
         />
       </Form.Item>
     </div>
+  );
+};
+
+// Form.Item bilan to'g'ri ishlash uchun wrapper
+const ImageUploaderFormWrapper = ({
+  value,      // Form.Item tomonidan inject qilinadi
+  onChange,   // Form.Item tomonidan inject qilinadi
+  initialUrl,
+  maxSizeMB,
+  form,
+}: any) => {
+  return (
+    <ImageUploader
+      onUploadSuccess={(url) => {
+        onChange?.(url);          // Form.Item state'ni yangilaydi ✅
+        form?.setFieldsValue({ imgUrl: url }); // qo'shimcha xavfsizlik
+      }}
+      initialUrl={value || initialUrl}  // Form value'ni ishlatamiz
+      maxSizeMB={maxSizeMB}
+    />
   );
 };
 

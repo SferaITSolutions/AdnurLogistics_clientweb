@@ -110,7 +110,7 @@ const EditProductModal = ({
         {/* <ProductDescriptionInputs /> */}
 
         <Form.Item className="mt-10 text-right">
-          <Button onClick={onClose} className="mr-3">
+          <Button onClick={onClose} className="!mr-3">
             Bekor qilish
           </Button>
           <Button type="primary" htmlType="submit" loading={isPending}>

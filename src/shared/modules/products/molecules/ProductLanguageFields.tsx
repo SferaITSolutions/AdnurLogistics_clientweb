@@ -7,7 +7,6 @@ const { TextArea } = Input;
 const ProductLanguageFields = (form: any) => {
   // calculate fieldini watch qilamiz
   const calculate = Form.useWatch('calculate', form);
-
   return (
     <div className="space-y-8 grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* O'zbekcha */}

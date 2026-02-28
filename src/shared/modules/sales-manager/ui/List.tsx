@@ -24,7 +24,7 @@ export default function SalesOrdersList() {
     setLoading,
     setStartEndDate,
     statusOfInvoice,
-    setStatusOfInvoice,
+    setStatusOfInvoice,   
     setTotalprice
   } = useOrderDetailsStore();
   const [filterParams, setFilterParams] = React.useState({

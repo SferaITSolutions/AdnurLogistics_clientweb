@@ -44,6 +44,8 @@ const NewsPage = () => {
       message.error("Barcha maydonlarni to'ldiring va rasm yuklang!");
       return;
     }
+    console.log(values);
+    
 
     createNews(
       { ...values, status },
