@@ -23,8 +23,8 @@
           "placeholderUz": "90 123 45 67",
           "placeholderTr": "123 123 1234",
           "required": "请输入您的电话号码！",
-          "patternUz": "电话格式: +998 90 123 45 67",
-          "patternTr": "电话格式: +90 123 123 1234"
+          "patternUz": "电话格式:",
+          "patternTr": "电话格式:"
         },
         "fromLocation": {
           "label": "从哪里",
@@ -102,7 +102,7 @@
       "transport": "按运输方式分类："
     },
     "contact": {
-      "address": "塔什干, 奇尔奇克区, O‘qchi - 6. (塔什干城市大道附近)",
+      "address": "塔什干, 奇尔奇克区, O'qchi - 6. (塔什干城市大道附近)",
       "phone": "+7 980 470 00958",
       "getInTouch": "联系我们"
     },
@@ -121,6 +121,7 @@
     "title": "登录",
     "phone": "您的电话号码",
     "otpCode": "验证码",
+    "forgotPassword": "忘记密码？",
     "otpRequired": "请输入验证码",
     "otpConfirm": "确认",
     "phonePlaceholder": "请输入电话号码！",
@@ -352,7 +353,7 @@
     "errorNeedCalculation": "要提交请求，请先进行计算！",
     "errorFillAndCalculate": "请先填写表格中的所有字段并进行计算，才能获取计算结果。",
     "result": "计算结果: ",
-    "additionalPayments": "Bojxonadan o’tishda har bir tavar uchun qo’shimcha to’lovlar bulishi mumkin. Yuqoridagi narx bojxona to’lovlarisiz hisoblandi."
+    "additionalPayments": "货物通过仓库时可能产生单件附加费。上述价格不含仓储服务费。"
   },
   "calculationResult": {
     "loading": "正在加载...",
@@ -560,5 +561,20 @@
   },
   "Pending_Approval": "待批准",
   "Closed": "已关闭",
-  "Pending_Billing": "待付款"
+  "Pending_Billing": "待付款",
+  "forgotPassword": {
+    "verifyTitle": "验证验证码",
+    "resetTitle": "设置新密码",
+    "otpLabel": "验证码",
+    "otpRequired": "请输入验证码！",
+    "verifyButton": "验证",
+    "newPasswordLabel": "新密码",
+    "newPasswordPlaceholder": "••••••",
+    "newPasswordRequired": "请输入新密码！",
+    "passwordMinLength": "密码长度至少为 4 个字符。",
+    "confirmPasswordLabel": "确认新密码",
+    "confirmPasswordRequired": "请再次输入密码！",
+    "passwordsNotMatch": "密码不匹配！",
+    "saveButton": "保存新密码"
+  }
 }

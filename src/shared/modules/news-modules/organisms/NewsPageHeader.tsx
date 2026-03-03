@@ -16,7 +16,7 @@ const NewsPageHeader = ({ onAdd }: NewsPageHeaderProps) => {
                         Yangiliklar
                     </h1>
                     <p className="text-gray-600">
-                        Barcha yangiliklar va e'lonlarni boshqaringx
+                        Barcha yangiliklar va e'lonlarni boshqaring
                     </p>
                 </div>
                 <div className="flex gap-3">

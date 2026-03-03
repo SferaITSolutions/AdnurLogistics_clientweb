@@ -115,6 +115,7 @@
     "title": "Giriş Yap",
     "phone": "Telefon numaranız",
     "otpCode": "Doğrulama kodu",
+    "forgotPassword": "Parolunuzu unuttunuz mu?",
     "otpConfirm": "Doğrula",
     "phonePlaceholder": "Telefon numaranızı girin!",
     "phoneFormat": "Telefon formatı",
@@ -560,5 +561,20 @@
   },
   "Pending_Approval": "Beklemede Onay",
   "Closed": "Kapalı",
-  "Pending_Billing": "Beklemede Ödeme"
+  "Pending_Billing": "Beklemede Ödeme",
+  "forgotPassword": {
+    "verifyTitle": "Kodu Doğrula",
+    "resetTitle": "Yeni Şifre Belirle",
+    "otpLabel": "Doğrulama Kodu",
+    "otpRequired": "Doğrulama kodunu giriniz!",
+    "verifyButton": "Doğrula",
+    "newPasswordLabel": "Yeni Şifre",
+    "newPasswordPlaceholder": "••••••",
+    "newPasswordRequired": "Yeni şifreyi giriniz!",
+    "passwordMinLength": "Şifre en az 4 karakter olmalıdır.",
+    "confirmPasswordLabel": "Yeni şifreyi onayla",
+    "confirmPasswordRequired": "Şifreyi tekrar giriniz!",
+    "passwordsNotMatch": "Şifreler eşleşmiyor!",
+    "saveButton": "Yeni şifreyi kaydet"
+  }
 }

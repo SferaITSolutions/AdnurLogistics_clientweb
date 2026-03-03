@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { useRouter, usePathname } from 'next/navigation';
+import { extractErrorMessage } from '@/shared/utils';
 
 // Lang prefiksi bilan path yasovchi helper
 const getLocalizedPath = (lang: string, path: string) => `/${lang}${path}`;
@@ -54,14 +55,27 @@ export const useCheckPhoneMutation = () => {
   return useMutation({
     mutationFn: (phone: any) => authService.checkphone(phone),
     onSuccess: () => {
-      toast.success('Phone is available');
+      // toast.success('Phone is available');
     },
-    onError: () => {
-      toast.error('Phone is not available');
+    onError: (error: any) => {
+      toast.error(extractErrorMessage(error?.response?.data?.message));
     },
   });
 };
 
+export const useSendCodeMutation = (onSuccess?: () => void, onError?: (error: any) => void) => {
+  return useMutation({
+    mutationFn: (phone: any) => authService.sendCode(phone),
+    onSuccess: () => {
+      // toast.success('Code sent successfully');
+      onSuccess?.();
+    },
+    onError: (error: any) => {
+      toast.error(extractErrorMessage(error?.response?.data?.message));
+      onError?.(error);
+    },
+  });
+};
 export const useRegisterMutation = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -88,7 +102,23 @@ export const useRegisterMutation = () => {
   });
 };
 
-export const useCheckIdentityMutation = () => {
+export const useResentPasswordMutation = (onSuccess?: () => void, onError?: (error: any) => void) => {
+  const router = useRouter();
+  return useMutation({
+    mutationFn: (data: { identity: string; password: string; resentPassword: string }) => authService.resentPassword(data),
+    onSuccess: () => {
+      toast.success('');
+      router.push("/auth/log-in");
+      onSuccess?.();
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message || "An error occurred");
+      onError?.(error);
+    },
+  });
+};
+
+export const useCheckIdentityMutation = (onSuccess?: () => void, onError?: (error: any) => void) => {
   const router = useRouter();
   const pathname = usePathname();
   const handleError = useError();
@@ -102,13 +132,28 @@ export const useCheckIdentityMutation = () => {
       setLocalItem('access_token', accessToken);
       setLocalItem('roleName', roleName);
       setLocalItem('refresh_token', refreshToken);
-      toast.success(t('authSuccessMessages.loginSuccess'));
+      toast.success("");
 
       const lang = getLangFromPathname(pathname);
       router.push(getRoleBasedPath(roleName, lang));
+      onSuccess?.();
     },
     onError: (error: any) => {
       handleError(error);
+    },
+  });
+};
+export const useCheckIdentityMutationForForgotPassword = ({ onSuccess, onError }: { onSuccess?: (response: any) => void, onError?: (error: any) => void }) => {
+
+  return useMutation({
+    mutationFn: (data: { code: any; identity: string }) =>
+      authService.verifyCode({ code: data.code, identity: data.identity || '' }),
+    onSuccess: (response: any) => {
+      onSuccess?.(response);
+    },
+    onError: (error: any) => {
+      toast.error(extractErrorMessage(error?.response?.data?.message));
+      // onError?.(error);
     },
   });
 };

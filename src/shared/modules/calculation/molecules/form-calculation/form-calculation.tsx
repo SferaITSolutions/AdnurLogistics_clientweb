@@ -311,8 +311,9 @@ export default function FormCalculation() {
                   checked={customs}
                   onChange={(e) => setCustoms(e.target.checked)}
                   className="global-text-size"
+                  style={{ lineHeight: "0" }}
                 >
-                  <span className="font-semibold">
+                  <span className="font-semibold" style={{ lineHeight: "1.1" }}>
                     {t("customsLabel") || "Bojsiz / customs yo'q"}
                   </span>
                 </Checkbox>

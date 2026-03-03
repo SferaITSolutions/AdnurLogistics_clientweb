@@ -114,6 +114,7 @@
   "login": {
     "title": "Kirish",
     "otpCode": "Tasdiqlash kodi",
+    "forgotPassword": "Parolni unutdingizmi?",
     "otpConfirm": "Tasdiqlash",
     "phone": "Telefon raqamingiz",
     "otpRequired": "OTP kodini kiritish shart!",
@@ -560,5 +561,20 @@
   },
   "Pending_Approval": "Tasdiqlash kutilmoqda",
   "Closed": "Buyurtma yopilgan",
-  "Pending_Billing": "To’lovlar kutilmoqda"
+  "Pending_Billing": "To’lovlar kutilmoqda",
+  "forgotPassword": {
+    "verifyTitle": "Kodni tasdiqlash",
+    "resetTitle": "Yangi parolni o'rnatish",
+    "otpLabel": "Tasdiqlash kodi",
+    "otpRequired": "Tasdiqlash kodini kiriting!",
+    "verifyButton": "Tasdiqlash",
+    "newPasswordLabel": "Yangi parol",
+    "newPasswordPlaceholder": "••••••",
+    "newPasswordRequired": "Yangi parolni kiriting!",
+    "passwordMinLength": "Parol kamida 4 belgidan iborat bo'lishi kerak.",
+    "confirmPasswordLabel": "Yangi parolni tasdiqlang",
+    "confirmPasswordRequired": "Parolni qayta kiriting!",
+    "passwordsNotMatch": "Parollar mos emas!",
+    "saveButton": "Yangi parolni saqlash"
+  }
 }

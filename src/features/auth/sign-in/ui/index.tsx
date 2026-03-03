@@ -7,7 +7,7 @@ import {
   formatPhone,
   formatPhoneTR,
 } from "@/shared/utils/formatter";
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { FaInfoCircle, FaSpinner } from "react-icons/fa";
 
 import BgImage from "@/assets/images/auth/Group 48097120.png";
@@ -15,6 +15,7 @@ import {
   useCheckPhoneMutation,
   useLoginMutation,
   useCheckIdentityMutation,
+  useSendCodeMutation,
 } from "@/services/auth/hook";
 import { ButtonPrimary } from "@/shared/components/dump/atoms";
 import SelectBefore from "@/shared/components/dump/atoms/select-before";
@@ -24,6 +25,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState, useRef } from "react";
 import LoginErrorlabel from "../molecules/errorLabel";
+import { toast } from "sonner";
 
 export default function SignInUI() {
   const t = useTranslations("login");
@@ -31,7 +33,7 @@ export default function SignInUI() {
   const checkPhoneMutation = useCheckPhoneMutation();
   const loginMutation = useLoginMutation();
   const checkIdentityMutation = useCheckIdentityMutation();
-
+  const sendCodeMutation = useSendCodeMutation();
   const { beforePhone } = useGlobalStore();
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [step, setStep] = useState<"phone" | "password" | "otp">("phone");
@@ -140,11 +142,10 @@ export default function SignInUI() {
                 { required: true, message: t("phonePlaceholder") },
                 {
                   pattern: /^(?:\+998\s|\+90\s)?\d{2,3}\s\d{3}\s\d{2}\s\d{2}$/,
-                  message: `${t("phoneFormat")}: ${
-                    beforePhone === "+998"
+                  message: `${t("phoneFormat")}: ${beforePhone === "+998"
                       ? "+998 90 123 45 67"
                       : "+90 123 123 1234"
-                  }`,
+                    }`,
                 },
               ]}
             >
@@ -243,7 +244,23 @@ export default function SignInUI() {
                 disabled={loginMutation.isPending}
               />
             </Form.Item>
+            <p className="underline text-blue-500 text-sm mt-4">
+              <Button type="link" onClick={() => {
+                const cleanPhone = getDeformattedPhone(phoneValue);
+                sendCodeMutation.mutate(cleanPhone, {
+                  onSuccess: (response: any) => {
+                    sessionStorage.setItem("forgot_identity", response?.data?.result);
+                    navigate.push("/auth/forgot-password");
+                  },
+                  onError: (error: any) => {
+                    setLoginErrorMessage(extractErrorMessage(error));
+                    toast.error(extractErrorMessage(error));
+                  },
+                });
+              }} >{t("forgotPassword")}</Button>
+            </p>
           </Form>
+
         )}
 
         {step === "otp" && (
@@ -260,7 +277,7 @@ export default function SignInUI() {
                 { required: true, message: t("otpRequired") },
               ]}
             >
-              <Input size="large" maxLength={6} />
+              <Input.OTP length={6} size="large" />
             </Form.Item>
 
             {loginErrorMessage && (

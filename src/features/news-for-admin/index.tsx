@@ -8,25 +8,12 @@ import { useNewsListForAdmin, useNewsOneForAdmin } from '@/entities/hooks/news-h
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
-function Modal({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
-    if (!open) return null
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={onClose}>
-            <div className="bg-white rounded-xl max-w-4xl w-full p-6 relative max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-                <button
-                    className="absolute top-2 right-2 text-xl text-gray-500 hover:text-gray-800 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md"
-                    onClick={onClose}
-                >
-                    ×
-                </button>
-                {children}
-            </div>
-        </div>
-    )
-}
+import { Image, Modal as AntdModal, Button } from 'antd';
+import { useTranslations } from 'next-intl';
 
 export default function NewsForAdmin() {
+    const t = useTranslations('calculationPage');
+    const tr = useTranslations('translation');
     const { data: newsList, isPending } = useNewsListForAdmin();
     const newsData = newsList?.result || [];
     const [selectedId, setSelectedId] = useState<string | null | any>(null);
@@ -73,14 +60,16 @@ export default function NewsForAdmin() {
                                 onClick={() => handleCardClick(item.id)}
                             >
                                 <div className="relative overflow-hidden">
-                                    <img
-                                        src={
-                                            item.imgUrl ||
-                                            "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
-                                        }
-                                        alt={item.title || "News thumbnail"}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
+                                    <div className="relative w-full aspect-[5/4]">
+                                        <img
+                                            src={
+                                                item.imgUrl ||
+                                                "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+                                            }
+                                            alt={item.title || "News thumbnail"}
+                                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                    </div>
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                                 </div>
                             </div>
@@ -122,46 +111,57 @@ export default function NewsForAdmin() {
                 </div>
             </div> */}
 
-            {/* Modal with Image Slider */}
-            <Modal open={!!selectedId} onClose={handleCloseModal}>
+            <AntdModal
+                open={!!selectedId}
+                onCancel={handleCloseModal}
+                footer={null}
+                title={null}
+                centered
+                width={1000}
+                bodyStyle={{
+                    padding: 0,
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                }}
+                destroyOnClose
+            >
                 {loadingNewsDetails ? (
                     <div className="p-6 text-center">
                         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
                         <p className="mt-2">Yuklanmoqda...</p>
                     </div>
                 ) : selectedNews?.result ? (
-                    <div>
-                        {/* Image Slider in Modal */}
-                        <div className="rounded-lg overflow-hidden mb-4">
-                            <Swiper
-                                modules={[Navigation, Pagination]}
-                                spaceBetween={10}
-                                slidesPerView={1}
-                                navigation
-                                pagination={{ clickable: true }}
-                                className="h-[300px] md:h-[400px] modal-swiper"
-                            >
-                                <SwiperSlide>
-                                    <img
-                                        src={
-                                            selectedNews.result.imgUrl ||
-                                            "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
-                                        }
-                                        alt={selectedNews.result.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </SwiperSlide>
-                                {/* Agar qo'shimcha rasmlar bo'lsa */}
-                                {selectedNews.result.additionalImages?.map((img: string, idx: number) => (
-                                    <SwiperSlide key={idx}>
-                                        <img
-                                            src={img}
-                                            alt={`${selectedNews.result.title} - ${idx + 1}`}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
+                    <div className="p-6">
+                        {/* Single Image(s) in Modal, no Swiper */}
+                        <div className="rounded-lg overflow-hidden mb-4 flex flex-wrap gap-4 flex justify-center items-center">
+                            <div className="aspect-[5/4] max-w-[60%] overflow-hidden rounded-lg">
+                                <Image
+                                    src={
+                                        selectedNews.result.imgUrl ||
+                                        "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+                                    }
+                                    alt={selectedNews.result.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            {/* If there are additional images, render them below the main image */}
+                            {selectedNews.result.additionalImages?.length > 0 && (
+                                <div className="flex gap-4 flex-wrap mt-4 w-full">
+                                    {selectedNews.result.additionalImages.map((img: string, idx: number) => (
+                                        <div
+                                            key={idx}
+                                            className="overflow-hidden rounded-md aspect-[5/4] min-w-[120px] max-w-[200px] flex-1"
+                                            style={{ maxHeight: 160 }}
+                                        >
+                                            <Image
+                                                src={img}
+                                                alt={`${selectedNews.result.title} - ${idx + 1}`}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <h3 className="text-2xl md:text-3xl font-bold mb-4">{selectedNews.result.title}</h3>
@@ -175,18 +175,20 @@ export default function NewsForAdmin() {
                                         day: "numeric",
                                     })}
                             </div>
-                            <button
+                            <Button
                                 onClick={handleCloseModal}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                type="primary"
+                                className="px-4 py-2 rounded-lg"
+                                style={{ background: '#2563eb', borderColor: '#2563eb' }}
                             >
-                                Yopish
-                            </button>
+                                {t('successModalCloseButton')}
+                            </Button>
                         </div>
                     </div>
                 ) : (
-                    <div className="p-6 text-center text-gray-500">Ma'lumot topilmadi</div>
+                    <div className="p-6 text-center text-gray-500">{tr('noData')}</div>
                 )}
-            </Modal>
+            </AntdModal>
 
             <style jsx global>{`
                 .news-swiper .swiper-button-next,

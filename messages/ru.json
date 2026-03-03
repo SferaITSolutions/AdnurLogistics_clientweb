@@ -114,6 +114,7 @@
   "login": {
     "title": "Вход",
     "otpCode": "Код подтверждения",
+    "forgotPassword": "Забыли пароль?",
     "otpConfirm": "Подтвердить",
     "phone": "Ваш номер телефона",
     "otpRequired": "Введите код OTP!",
@@ -316,6 +317,7 @@
     "savedOrder": "Принятые заказы"
   },
   "calculationPage": {
+    "fromLabel": "Место отправления",
     "title": "Расчет Стоимости Заказа",
     "productLabel": "Тип услуги",
     "volumeRequired": "Введите объем!",
@@ -559,5 +561,20 @@
   },
   "Pending_Approval": "Ожидается одобрение",
   "Closed": "Закрыт",
-  "Pending_Billing": "Ожидается оплата"
+  "Pending_Billing": "Ожидается оплата",
+  "forgotPassword": {
+    "verifyTitle": "Подтверждение кода",
+    "resetTitle": "Установка нового пароля",
+    "otpLabel": "Код подтверждения",
+    "otpRequired": "Введите код подтверждения!",
+    "verifyButton": "Подтвердить",
+    "newPasswordLabel": "Новый пароль",
+    "newPasswordPlaceholder": "••••••",
+    "newPasswordRequired": "Введите новый пароль!",
+    "passwordMinLength": "Пароль должен содержать минимум 4 символа.",
+    "confirmPasswordLabel": "Подтвердите новый пароль",
+    "confirmPasswordRequired": "Введите пароль еще раз!",
+    "passwordsNotMatch": "Пароли не совпадают!",
+    "saveButton": "Сохранить новый пароль"
+  }
 }

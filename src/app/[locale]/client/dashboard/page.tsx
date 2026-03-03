@@ -25,7 +25,7 @@ export default function DashboardClient() {
       <title>
         Sales orders
       </title>
-      <h1 className="text-2xl !font-bold">{t('title')}</h1>
+      <h1 className="text-2xl !font-bold text-gray-900 mb-2">{t('title')}</h1>
       {/* <h1 className="text-2xl !font-bold">{t('News')}</h1> */}
 
       <NewsForAdmin />

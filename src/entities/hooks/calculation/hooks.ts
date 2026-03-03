@@ -23,14 +23,16 @@ export const useCalculation = (onSuccess?: (data: any) => void) => {
   });
 };
 export const useGetProductsList = () => {
+  const lang = localStorage.getItem("lang");
   return useQuery({
-    queryKey: ["productsList"],
+    queryKey: ["productsList", lang],
     queryFn: () => CalculationService.getProductsList(),
   });
 };
 export const useGetPetitionList = (ProductId: string) => {
+  const lang = localStorage.getItem("lang");
   return useQuery({
-    queryKey: ["petitionList", ProductId],
+    queryKey: ["petitionList", ProductId, lang],
     queryFn: () => CalculationService.getDirectionList(ProductId),
     enabled: !!ProductId,
   });

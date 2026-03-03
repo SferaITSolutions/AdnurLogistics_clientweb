@@ -560,5 +560,20 @@
   },
   "Pending_Approval": "Pending Approval",
   "Closed": "Closed",
-  "Pending_Billing": "Pending Billing"
+  "Pending_Billing": "Pending Billing",
+  "forgotPassword": {
+    "verifyTitle": "Verify Code",
+    "resetTitle": "Set New Password",
+    "otpLabel": "Verification Code",
+    "otpRequired": "Please enter verification code!",
+    "verifyButton": "Verify",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "••••••",
+    "newPasswordRequired": "Please enter new password!",
+    "passwordMinLength": "Password must be at least 4 characters.",
+    "confirmPasswordLabel": "Confirm New Password",
+    "confirmPasswordRequired": "Please confirm your password!",
+    "passwordsNotMatch": "Passwords do not match!",
+    "saveButton": "Save New Password"
+  }
 }
