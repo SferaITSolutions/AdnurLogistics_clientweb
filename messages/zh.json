@@ -13,13 +13,13 @@
           "label": "我同意处理我的个人信息"
         },
         "fullname": {
-          "label": "您的姓名",
-          "placeholder": "您的姓名",
+          "label": "全名",
+          "placeholder": "输入全名",
           "required": "请输入您的姓名！",
           "pattern": "只使用字母！"
         },
         "phone": {
-          "label": "您的电话号码",
+          "label": "手机号码",
           "placeholderUz": "90 123 45 67",
           "placeholderTr": "123 123 1234",
           "required": "请输入您的电话号码！",
@@ -27,29 +27,29 @@
           "patternTr": "电话格式:"
         },
         "fromLocation": {
-          "label": "从哪里",
+          "label": "出发地",
           "placeholder": "从哪里",
           "required": "请选择起点！"
         },
         "toLocation": {
-          "label": "到哪里",
+          "label": "目的地",
           "placeholder": "到哪里",
           "required": "请选择目的地！"
         },
         "bulk": {
-          "label": "体积 (m3)",
+          "label": "体积（立方米）",
           "placeholder": "体积 (m3)",
           "required": "请输入体积！"
         },
         "density": {
-          "label": "重量 (KG)",
-          "placeholder": "重量 (KG)",
-          "required": "请输入重量！"
-        },
-        "weight": {
-          "label": "密度 (Kg/m3)",
+          "label": "产品密度（千克/立方米）",
           "placeholder": "密度 (Kg/m3)",
           "required": "请输入密度！"
+        },
+        "weight": {
+          "label": "货物重量（公斤）",
+          "placeholder": "重量 (KG)",
+          "required": "请输入重量！"
         },
         "description": {
           "label": "留言",
@@ -62,8 +62,8 @@
       }
     },
     "hero": {
-      "title": "Adnur 物流",
-      "subtitle": "Adnur 物流是拥有多年经验的专业物流服务提供商。我们为您提供最佳的物流解决方案，并以最优惠的条件交付您的货物。",
+      "title": "安努物流",
+      "subtitle": "分秒必争。Adnur助您领先一步！",
       "applyButton": "立即申请"
     },
     "stats": {
@@ -102,7 +102,7 @@
       "transport": "按运输方式分类："
     },
     "contact": {
-      "address": "塔什干, 奇尔奇克区, O'qchi - 6. (塔什干城市大道附近)",
+      "address": "亚什诺博德区库伊-塔拉里克街36号",
       "phone": "+7 980 470 00958",
       "getInTouch": "联系我们"
     },
@@ -115,19 +115,19 @@
     "title": "退出系统",
     "cancelText": "否",
     "okText": "是",
-    "confirmationMessage": "您确认要退出系统吗?"
+    "confirmationMessage": "确定要退出登录？"
   },
   "login": {
     "title": "登录",
-    "phone": "您的电话号码",
+    "phone": "手机号码",
     "otpCode": "验证码",
     "forgotPassword": "忘记密码？",
     "otpRequired": "请输入验证码",
     "otpConfirm": "确认",
-    "phonePlaceholder": "请输入电话号码！",
+    "phonePlaceholder": "输入手机号码",
     "phoneFormat": "电话格式",
     "password": "密码",
-    "passwordPlaceholder": "请输入密码",
+    "passwordPlaceholder": "输入密码",
     "button": "登录",
     "register": "注册"
   },
@@ -141,7 +141,7 @@
     "required": "此字段为必填项",
     "numberRequired": "请输入您的电话号码！",
     "minString": "字段必须至少包含 {min} 个字符",
-    "passwordMismatch": "密码必须匹配",
+    "passwordMismatch": "密码与确认密码不一致！",
     "passwordUppercase": "密码必须包含至少一个大写字母",
     "passwordLowercase": "密码必须包含至少一个小写字母",
     "passwordNumber": "密码必须包含至少一个数字",
@@ -260,7 +260,7 @@
       "step3": "验证"
     },
     "name": "姓名",
-    "phone": "您的电话号码",
+    "phone": "手机号码",
     "password": "密码",
     "repeatPassword": "重复密码",
     "getId": "注册",
@@ -281,10 +281,10 @@
   "clientDashboard": {
     "title": "客户仪表板",
     "News": "新闻",
-    "all": "所有",
-    "inDelivery": "正在派送中",
+    "all": "全部",
+    "inDelivery": "配送中",
     "pendingDelivery": "等待派送",
-    "pendingPayment": "等待付款",
+    "pendingPayment": "待付款",
     "dashboard": "仪表板",
     "calculation": "计算",
     "itemsBeingCollected": "货物正在集货中",
@@ -292,26 +292,26 @@
     "orderDetails": "订单详情",
     "from": "从",
     "to": "到",
-    "eta": "到达时间:",
+    "eta": "预计到达时间",
     "WarehousePendingArrival": "仓库待到货",
     "countOfProducts": "件",
-    "orderId": "订单编号:",
+    "orderId": "订单ID：",
     "unpaid": "未付款",
     "noProductsFound": "未找到服务类型",
     "noOrderSelected": "未选择订单",
-    "invoiceNumber": "发票号码",
-    "status": "状态",
+    "invoiceNumber": "发票编号：",
+    "status": "配送状态",
     "totalAmount": "总金额",
-    "paidAmount": "已付金额",
-    "remainingAmount": "债务金额",
-    "logout": "退出",
-    "activeOrder": "活跃订单",
-    "savedOrder": "已接受订单"
+    "paidAmount": "已付款金额：",
+    "remainingAmount": "剩余余额",
+    "logout": "注销",
+    "activeOrder": "有效",
+    "savedOrder": "已接受"
   },
   "calculationPage": {
     "title": "计算订单价格",
     "valueGreaterThanZero": "值必须大于 0",
-    "fromLabel": "从哪里",
+    "fromLabel": "出发地",
     "fromPlaceholder": "选择起点",
     "volumeRequired": "请输入体积！",
     "productLabel": "服务类型",
@@ -322,30 +322,30 @@
     "directionPlaceholder": "请选择路线",
     "directionRequired": "必须选择路线！",
     "weightRequired": "重量是必填项！",
-    "toLabel": "到哪里",
+    "toLabel": "目的地",
     "fromRequiredError": "请输入起始地点！",
     "toRequiredError": "请输入目的地！",
     "weightRequiredError": "请输入重量！",
     "weightMinError": "重量必须大于 0",
-    "bulkLabel": "体积 (m³)",
+    "bulkLabel": "体积（立方米）",
     "bulkPlaceholder": "输入以 m³ 为单位的体积",
     "bulkRequiredError": "请输入体积！",
     "bulkMinError": "体积必须大于 0",
-    "customsCheckbox": "需要报关",
+    "customsCheckbox": "计算含清关税费",
     "submitButton": "提交",
     "successModalTitle": "成功",
     "successModalText": "您的请求已成功提交。",
     "successModalCloseButton": "关闭",
     "toPlaceholder": "选择目的地",
-    "weightLabel": "重量 (KG)",
+    "weightLabel": "重量（公斤）",
     "weightPlaceholder": "请输入以公斤为单位的重量",
-    "densityLabel": "密度 (KG/m³)",
+    "densityLabel": "产品密度（千克/立方米）",
     "densityPlaceholder": "请输入 1 立方米对应的重量",
-    "volumeLabel": "体积 (m³)",
+    "volumeLabel": "体积（立方米）",
     "volumePlaceholder": "请输入以立方米为单位的体积",
     "typeLabel": "类型",
-    "typeIcl": "LCL (拼箱/部分集装箱)",
-    "typeFcl": "FCL (整箱/满集装箱)",
+    "typeIcl": "拼箱（LCL）",
+    "typeFcl": "整箱（FCL）",
     "containerTypePlaceholder": "选择集装箱类型",
     "customsLabel": "包含报关服务费计算",
     "customsAgreement": "计算需要同意包含报关价格",
@@ -357,19 +357,19 @@
   },
   "calculationResult": {
     "loading": "正在加载...",
-    "customsLabel": "包含报关服务费计算",
+    "customsLabel": "计算含清关税费",
     "modalTitleSuccess": "您的请求已被接受！",
     "modalMessageSuccess": "请求已发送给管理员。他们将尽快与您联系。",
     "modalButtonOk": "确定",
     "calculatedPriceTitle": "计算价格:",
     "priceSuffix": "USD",
-    "disclaimer": "在海关清关时，每件商品可能需要支付额外费用。以上价格不含报关费用。",
-    "sendRequestButton": "提交服务申请",
+    "disclaimer": "清关时每件商品可能产生附加费用。上述价格不含关税。",
+    "sendRequestButton": "发送请求",
     "errorNeedCalculationTitle": "要提交请求，请先进行计算！",
     "errorNeedCalculationMessage": "请先填写表格中的所有字段并进行计算，才能获取计算结果。"
   },
   "orderInfo": {
-    "orderNumber": "订单编号:",
+    "orderNumber": "订单号",
     "productName": "产品名称:",
     "description": "描述/分类:",
     "quantity": "数量:",
@@ -377,12 +377,12 @@
     "totalAmount": "总金额 (苏姆):"
   },
   "regions": {
-    "horgos": "霍尔果斯",
-    "yiwu": "义乌",
-    "foshan": "佛山"
+    "horgos": "中国霍尔果斯",
+    "yiwu": "中国义乌",
+    "foshan": "中国佛山"
   },
   "toRegions": {
-    "tashkent": "塔什干"
+    "tashkent": "乌兹别克斯坦，塔什干"
   },
   "editNameModal": {
     "title": "编辑资料",
@@ -393,21 +393,21 @@
     "cancelText": "取消"
   },
   "applyForm": {
-    "fromLabel": "起始地点",
-    "fromPlaceholder": "输入起始地点",
+    "fromLabel": "出发地",
+    "fromPlaceholder": "从哪里",
     "fromRequiredError": "请输入起始地点！",
     "toLabel": "目的地",
-    "toPlaceholder": "输入目的地",
+    "toPlaceholder": "到哪里",
     "toRequiredError": "请输入目的地！",
-    "weightLabel": "重量 (公斤)",
-    "weightPlaceholder": "输入以公斤为单位的重量",
+    "weightLabel": "货物重量（公斤）",
+    "weightPlaceholder": "请输入以公斤为单位的重量",
     "weightRequiredError": "请输入重量！",
     "weightMinError": "重量必须大于 0",
-    "bulkLabel": "体积 (m³)",
+    "bulkLabel": "体积（立方米）",
     "bulkPlaceholder": "输入以 m³ 为单位的体积",
     "bulkRequiredError": "请输入体积！",
     "bulkMinError": "体积必须大于 0",
-    "customsCheckbox": "需要报关",
+    "customsCheckbox": "计算含清关税费",
     "submitButton": "提交",
     "successModalTitle": "成功",
     "successModalText": "您的请求已成功提交。",
@@ -417,30 +417,30 @@
     "loginSuccess": "成功登录系统 ✅"
   },
   "resetPasswordPage": {
-    "pageTitle": "更改密码",
-    "oldPasswordLabel": "旧密码",
+    "pageTitle": "修改密码",
+    "oldPasswordLabel": "当前密码",
     "oldPasswordPlaceholder": "输入旧密码",
     "newPasswordLabel": "新密码",
     "newPasswordPlaceholder": "输入新密码",
     "confirmNewPasswordLabel": "确认新密码",
-    "confirmNewPasswordPlaceholder": "重新输入新密码",
+    "confirmNewPasswordPlaceholder": "输入重复密码",
     "submitButton": "更改密码",
     "minLength": "至少 5 个字符",
     "validation": {
       "oldPasswordRequired": "需要旧密码。",
       "newPasswordRequired": "需要新密码。",
       "confirmPasswordRequired": "需要确认密码。",
-      "passwordsDoNotMatch": "新密码不匹配。"
+      "passwordsDoNotMatch": "密码与确认密码不一致！"
     },
     "success": {
-      "message": "您的密码已成功更改!"
+      "message": "密码更改成功！"
     }
   },
   "deliveryTracking": {
     "distance": "总距离",
     "speed": "速度",
     "progress": "进度",
-    "status": "状态",
+    "status": "配送状态",
     "eta": "预计到达时间",
     "delivered": "已送达"
   },
@@ -448,23 +448,23 @@
     "prices": "价格",
     "locations": "地点",
     "users": "用户",
-    "logout": "退出",
+    "logout": "注销",
     "personalNumber": "您的个人号码:",
     "deliveryRates": "运费价格",
     "fromTo": "从 → 到",
-    "weight": "重量 (公斤)",
-    "volume": "体积 (立方米)",
+    "weight": "重量（公斤）",
+    "volume": "体积（立方米）",
     "add": "添加",
     "priceSum": "价格 (苏姆)",
     "actions": "操作",
-    "noData": "暂无数据"
+    "noData": "无数据"
   },
   "deliveryPrices": {
     "columns": {
       "number": "#",
       "route": "出发地 → 目的地",
-      "weight": "重量 (公斤)",
-      "volume": "体积 (立方米)",
+      "weight": "重量（公斤）",
+      "volume": "体积（立方米）",
       "price": "价格 (苏姆)",
       "actions": "操作"
     },
@@ -537,7 +537,7 @@
   "yandexMap": {
     "totalDistance": "总距离",
     "remainingDistance": "剩余距离",
-    "status": "状态",
+    "status": "配送状态",
     "deliveredDate": "送达日期",
     "deliveryDate": "送达日期",
     "delivered": "已送达",
@@ -545,13 +545,13 @@
     "onWay": "已完成 {percent}%",
     "speed": "速度: {speed} 公里/小时",
     "truck": "货车",
-    "pendingConfirmation": "等待批准",
-    "pendingFulfillment": "等待履约",
+    "pendingConfirmation": "待审核",
+    "pendingFulfillment": "待履行",
     "partiallyFulfilled": "部分完成",
-    "pendingBillingPartially": "等待开票 / 部分完成",
-    "pendingPayment": "等待开票",
-    "billed": "已发送发票",
-    "closedDelivered": "已关闭",
+    "pendingBillingPartially": "待结算/部分完成",
+    "pendingPayment": "待付款",
+    "billed": "已开票",
+    "closedDelivered": "已关闭/已交付",
     "Delivered": "已送达",
     "toBePaid": "订单金额"
   },
@@ -559,9 +559,9 @@
     "userId": "用户ID号",
     "salesManager": "销售经理面板"
   },
-  "Pending_Approval": "待批准",
+  "Pending_Approval": "待审核",
   "Closed": "已关闭",
-  "Pending_Billing": "待付款",
+  "Pending_Billing": "待结算",
   "forgotPassword": {
     "verifyTitle": "验证验证码",
     "resetTitle": "设置新密码",
@@ -574,7 +574,7 @@
     "passwordMinLength": "密码长度至少为 4 个字符。",
     "confirmPasswordLabel": "确认新密码",
     "confirmPasswordRequired": "请再次输入密码！",
-    "passwordsNotMatch": "密码不匹配！",
+    "passwordsNotMatch": "密码与确认密码不一致！",
     "saveButton": "保存新密码"
   }
 }
