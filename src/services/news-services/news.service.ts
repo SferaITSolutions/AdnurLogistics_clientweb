@@ -7,7 +7,7 @@ class NewsService {
   async getNewsListForAdmin() {
     return await axiosWithAuth.get("/news/get/list");
   }
-  async getNewsOneForAdmin(id: number) {
+  async getNewsOneForAdmin(id: string | number | null) {
     return await axiosWithAuth.get(`/news/get/one?uid=${id}`);
   }
   async deleteNews(id: string) {

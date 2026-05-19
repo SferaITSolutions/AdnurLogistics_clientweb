@@ -4,7 +4,7 @@ import NewsService from '@/services/news-services/news.service'; // o'zingizning
 const newsKeys = {
     all: ['news'] as const,
     list: () => [...newsKeys.all, 'list'] as const,
-    detail: (id: string | number) => [...newsKeys.all, 'detail', id] as const,
+    detail: (id: string | number | null) => [...newsKeys.all, 'detail', id] as const,
 } as const;
 
 // 1. Ro'yxatni olish (pagination bilan, lekin hozircha page=1, size=katta son ishlatilmoqda)
@@ -19,7 +19,7 @@ export const useNewsList = () => {
     });
 };
 
-export const useNewsOneForAdmin = (id: number) => {
+export const useNewsOneForAdmin = (id: string | number | null) => {
     return useQuery({
         queryKey: newsKeys.detail(id),
         queryFn: async () => {
